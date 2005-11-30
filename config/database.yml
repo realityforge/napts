@@ -9,8 +9,8 @@ development:
   adapter: mysql
   database: napts_development
   username: root
-  password:
-  socket: /path/to/your/mysql.sock
+  password: peterpan
+  host: 127.0.0.1
 
   # Connect on a TCP socket.  If omitted, the adapter will connect on the
   # domain socket given by socket instead.
@@ -24,15 +24,15 @@ test:
   adapter: mysql
   database: napts_test
   username: root
-  password:
-  socket: /path/to/your/mysql.sock
+  password: peterpan
+  host: 127.0.0.1
 
 production:
   adapter: mysql
   database: napts_production
   username: root
-  password: 
-  socket: /path/to/your/mysql.sock
+  password: peterpan
+  host: 127.0.0.1
 
 
 # PostgreSQL versions 7.4 - 8.1
