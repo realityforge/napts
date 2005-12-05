@@ -1,0 +1,10 @@
+<h1>Editing question</h1>
+
+<%= start_form_tag :action => 'update', :id => @question %>
+  <%= render :partial => 'form' %>
+  <%= link_to('Create answer', :controller => 'answer', :action => 'new', :question_id => @question.id ) %>
+  <%= submit_tag 'Edit' %>
+<%= end_form_tag %>
+
+<%= link_to 'Show', :action => 'show', :id => @question %> |
+<%= link_to 'Back', :action => 'list' %>

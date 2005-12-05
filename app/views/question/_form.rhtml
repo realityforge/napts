@@ -1,0 +1,11 @@
+<%= error_messages_for 'question' %>
+
+<!--[form:question]-->
+<p><label for="question_content">Content</label><br/>
+<%= text_area 'question', 'content'  %></p>
+
+<p><label for="question_is_on_test">Is on test</label><br/>
+<select id="question_is_on_test" name="question[is_on_test]"><option value="false" selected>False</option><option value="true">True</option></select></p>
+
+<!--[eoform:question]-->
+

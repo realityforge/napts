@@ -54,9 +54,9 @@ CREATE TABLE questions (
   content TEXT NOT NULL,
   type VARCHAR(20) NOT NULL,
   is_on_test TINYINT(1) NOT NULL,
-  quiz_id INT NOT NULL REFERENCES quizzes(id),
-  PRIMARY KEY (id),
-  FOREIGN KEY (quiz_id) REFERENCES quizzes(id)
+  /*quiz_id INT NOT NULL REFERENCES quizzes(id),*/
+  PRIMARY KEY (id)/*,
+  FOREIGN KEY (quiz_id) REFERENCES quizzes(id)*/
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE answers (
