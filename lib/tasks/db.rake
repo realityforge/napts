@@ -1,3 +1,9 @@
+desc "Reset Database data to that in fixtures"
+task :reset_db_data => :environment do
+  require 'active_record/fixtures'
+  Fixtures.create_fixtures('test/fixtures',['questions','answers'])
+end
+
 desc "Reset Database structure"
 task :reset_db_structure => :environment do
   require 'active_record/fixtures'
@@ -12,5 +18,9 @@ task :reset_db_structure => :environment do
   IO.readlines("db/create.mysql.sql").join.split(";").each do |command|
     ActiveRecord::Base.connection.execute("#{command};") unless command.gsub(/\s*/, '') .empty?
   end
+end
+
+desc "Reset Database"
+task :reset_db => [:reset_db_structure, :reset_db_data] do
 end
 

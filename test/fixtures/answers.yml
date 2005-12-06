@@ -1,5 +1,83 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-first_answer:
+q1_a1:
   id: 1
-another_answer:
+  content: "Yes, for sure!"
+  is_correct: true
+  question_id: 1
+q1_a2:
   id: 2
+  content: "Absolutely"
+  is_correct: true
+  question_id: 1
+q1_a3:
+  id: 3
+  content: "Of course not!"
+  is_correct: false
+  question_id: 1
+q1_a4:
+  id: 4
+  content: "Not sure"
+  is_correct: false
+  question_id: 1
+q2_a1:
+  id: 5
+  content: "twelve"
+  is_correct: true
+  question_id: 2
+q2_a2:
+  id: 6
+  content: "six?"
+  is_correct: false
+  question_id: 2
+q2_a3:
+  id: 7
+  content: "twice"
+  is_correct: false
+  question_id: 2
+q2_a4:
+  id: 8
+  content: "pineapple"
+  is_correct: false
+  question_id: 2
+q3_a1:
+  id: 9
+  content: "To get to the other side"
+  is_correct: true
+  question_id: 3
+q3_a2:
+  id: 10
+  content: "To show his girlfriend he had guts"
+  is_correct: true
+  question_id: 3
+q3_a3:
+  id: 11
+  content: "two"
+  is_correct: false
+  question_id: 3
+q3_a4:
+  id: 12
+  content: "he felt like it"
+  is_correct: false
+  question_id: 3
+q4_a1:
+  id: 13
+  content: "Hay, get down!"
+  is_correct: true
+  question_id: 4
+q4_a2:
+  id: 14
+  content: "Hiya"
+  is_correct: false
+  question_id: 3
+q4_a3:
+  id: 15
+  content: "Yo dude"
+  is_correct: false
+  question_id: 3
+q4_a4:
+  id: 16
+  content: "Cowabunga"
+  is_correct: false
+  question_id: 4
+
+
