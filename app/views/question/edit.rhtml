@@ -1,8 +1,7 @@
 <h1>Editing question</h1>
 
-<%= start_form_tag :action => 'update', :id => @question %>
+<%= start_form_tag :action => 'edit', :id => @question %>
   <%= render :partial => 'form' %>
-  <%= link_to('Create answer', :controller => 'answer', :action => 'new', :question_id => @question.id ) %>
   <%= submit_tag 'Edit' %>
 <%= end_form_tag %>
 

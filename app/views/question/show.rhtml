@@ -1,15 +1,22 @@
 <% for column in Question.content_columns %>
 <p>
-  <b><%= column.human_name %>:</b> <%=h @question.send(column.name) %>
-  <% @answers
-  <% for answer in @answers %>
-    <tr>
-    <% for column in Answer.content_columns %>
-      <td><%=h answer.send(column.name) %></td>
-    <% end %>
-  <% end %>
+  <b><%= column.human_name %>:</b> <%= h(@question.send(column.name)) %>
 </p>
 <% end %>
-
+<p><b>Answers:</b></p>
+<table>
+  <tr>
+    <% for column in Answer.content_columns %>
+      <th><%= column.human_name %></th>
+    <% end %>
+  </tr>
+  <% for answer in @question.answers %>
+  <tr>
+    <% for column in Answer.content_columns %>  
+      <td><%= h(answer.send(column.name)) %></td>
+    <% end %>
+  </tr>
+  <% end %>
+</table>
 <%= link_to 'Edit', :action => 'edit', :id => @question %> |
 <%= link_to 'Back', :action => 'list' %>

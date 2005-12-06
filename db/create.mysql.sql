@@ -52,7 +52,7 @@ CREATE TABLE testruns (
 CREATE TABLE questions (
   id INT NOT NULL AUTO_INCREMENT,
   content TEXT NOT NULL,
-  type VARCHAR(20) NOT NULL,
+  question_type INT NOT NULL,
   is_on_test TINYINT(1) NOT NULL,
   /*quiz_id INT NOT NULL REFERENCES quizzes(id),*/
   PRIMARY KEY (id)/*,

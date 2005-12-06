@@ -1,9 +1,4 @@
 class QuestionController < ApplicationController
-  def index
-    list
-    render :action => 'list'
-  end
-
   def list
     @question_pages, @questions = paginate :question, :per_page => 10
   end
@@ -27,16 +22,15 @@ class QuestionController < ApplicationController
   end
 
   def edit
+  
     @question = Question.find(params[:id])
-  end
-
-  def update
-    @question = Question.find(params[:id])
-    if @question.update_attributes(params[:question])
-      flash[:notice] = 'Question was successfully updated.'
-      redirect_to :action => 'show', :id => @question
-    else
-      render :action => 'edit'
+    if request.post?
+      if( @question.update_attributes(params[:question]) &&
+          Answer.update(params[:answer].keys, params[:answer].values) )
+        flash[:notice] = 'Question was successfully updated.'
+        redirect_to :action => 'show', :id => @question
+        return
+      end
     end
   end
 

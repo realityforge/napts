@@ -68,12 +68,12 @@ q4_a2:
   id: 14
   content: "Hiya"
   is_correct: false
-  question_id: 3
+  question_id: 4
 q4_a3:
   id: 15
   content: "Yo dude"
   is_correct: false
-  question_id: 3
+  question_id: 4
 q4_a4:
   id: 16
   content: "Cowabunga"
