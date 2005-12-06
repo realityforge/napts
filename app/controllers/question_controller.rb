@@ -13,17 +13,17 @@ class QuestionController < ApplicationController
   end
 
   def new
-    @question = Question.new
-  end
-
-  def create
-    @question = Question.new(params[:question])
-    if @question.save
-      flash[:notice] = 'Question was successfully created.'
-      redirect_to :action => 'list'
-    else
-      render :action => 'new'
+    if request.get?
+      @question = Question.new
+    else # Assume request.post?
+      @question = Question.new(params[:question])
+      if @question.save
+      	flash[:notice] = 'Question was successfully created.'
+	redirect_to :action => 'list'
+	return
+      end
     end
+    @answers = [Answer.new,Answer.new,Answer.new,Answer.new]
   end
 
   def edit

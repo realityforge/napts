@@ -7,5 +7,12 @@
 <p><label for="question_is_on_test">Is on test</label><br/>
 <select id="question_is_on_test" name="question[is_on_test]"><option value="false" selected>False</option><option value="true">True</option></select></p>
 
-<!--[eoform:question]-->
+<p><label for="question_type">Type</label><br/>
+<select id="question_type" name="question[type]"><option value="multiple answers" selected>Multiple answers</option><option value="single answer">Single answer</option></select></p>
+<p><label for="answer_content">Answers</label><br/>
+<% for @answer in @answers do %>
+  Answer <br /> 
+  <%= text_area('answer[]', 'content') %></p>
+<% end %>
+  
 
