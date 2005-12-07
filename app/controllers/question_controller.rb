@@ -22,13 +22,25 @@ class QuestionController < ApplicationController
   end
 
   def edit
-  
     @question = Question.find(params[:id])
     if request.post?
+      for id in params[:answer].keys
+        answer = @question.answers.detect { |x| x.id.to_s == id.to_s }
+	if( answer.nil? )
+	  flash[:alert] = "Update not successful"
+	  return
+	else
+	  answer.attributes = params[:answer][id]
+	  if !answer.valid?
+	    return
+	  end
+	end	  
+      end
+      @question.answers
       if( @question.update_attributes(params[:question]) &&
-          Answer.update(params[:answer].keys, params[:answer].values) )
+          Answer.update( params[:answer].keys, params[:answer].values ) )
         flash[:notice] = 'Question was successfully updated.'
-        redirect_to :action => 'show', :id => @question
+        redirect_to( :action => 'show', :id => @question )
         return
       end
     end

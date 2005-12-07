@@ -1,5 +1,5 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-q1:
+question_1:
   id: 1
   content: "Is chocolate good?"
   question_type: 1
