@@ -10,7 +10,7 @@ class QuestionController < ApplicationController
   def new
     if request.get?
       @question = Question.new
-    else # Assume request.post?
+    elsif request.post?
       @question = Question.new(params[:question])
       if @question.save
       	flash[:notice] = 'Question was successfully created.'
