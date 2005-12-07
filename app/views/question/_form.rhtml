@@ -10,11 +10,13 @@
 <p><label for="question_type">Type</label><br/>
 <select id="question_type" name="question[type]"><option value="multiple answers" selected>Multiple answers</option><option value="single answer">Single answer</option></select></p>
 <p><label for="answer_content">Answers</label><br/></p>
-
+<% i = 0 %>
 <% for @answer in @question.answers do %>
-  Answer 
+  <% i = i + 1 %>
+  Answer <%= i %>
   <br />
   <%= error_messages_for('answer') %>
   <%= text_area('answer[]', 'content') %>
+  <br />
 <% end %>
 
