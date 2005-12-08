@@ -1,10 +1,10 @@
 <h1>Editing question</h1>
 
-<%= start_form_tag :action => 'edit', :id => @question %>
+<%= start_form_tag({:action => 'edit', :id => @question},{:id => 'edit_form'}) %>
   <%= render :partial => 'form' %>
   <br/>
-  <%= submit_tag 'Edit' %>
+  <button onclick="edit_form.submit(); result false;">Edit</button>
+  <%= link_to_button("Cancel", {:action => 'show', :id => @question.id}) %>
 <%= end_form_tag %>
 
-<%= link_to 'Show', :action => 'show', :id => @question %> |
-<%= link_to 'Back', :action => 'list' %>
+

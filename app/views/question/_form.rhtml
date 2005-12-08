@@ -1,22 +1,42 @@
 <%= error_messages_for('question') %>
 
-<!--[form:question]-->
-<p><label for="question_content">Content</label><br/>
-<%= text_area 'question', 'content'  %></p>
-
-<p><label for="question_is_on_test">Is on test</label><br/>
-<%= check_box('question','is_on_test') %></p>
-
-<p><label for="question_type">Type</label><br/>
-<select id="question_type" name="question[type]"><option value="multiple answers" selected>Multiple answers</option><option value="single answer">Single answer</option></select></p>
-<p><label for="answer_content">Answers</label><br/></p>
-<% i = 0 %>
-<% for @answer in @question.answers do %>
-  <% i = i + 1 %>
-  Answer <%= i %>
-  <br />
-  <%= error_messages_for('answer') %>
-  <%= text_area('answer[]', 'content') %>
-  <br />
+<h2>Question <%= @question.id %></h2>
+<div class="question">
+  <div class="question_header">
+    <div class="qn_type">
+      <label for="question_type">Type</label>
+      <select id="question_type" name="question[type]"><option value="multiple answers" selected>Multiple answers</option>
+              <option value="single answer">Single answer</option></select>
+    </div>
+    <div class="options">
+      <label for="question_is_on_test">Is on test</label>
+      <%= check_box('question','is_on_test') %>
+    </div>
+  </div>
+  <div class="content">
+    <%= text_area('question', 'content', :class => 'question_content') %></p>
+  </div>
+</div>   
+<% 
+   i = 0
+   for @answer in @question.answers do
+     i = i + 1
+%>
+  <div class="answer">
+    <div class="answer_header">
+      <div class="answer_number">
+        Answer <%= i %>
+      </div>
+      <div class="options">
+        <label for="answer_is_correct">Is correct</label>
+        <%= check_box('answer', 'is_correct') %>
+      </div>
+    </div>
+    <div class="content">
+      <%= error_messages_for('answer') %>
+      <%= text_area('answer[]', 'content', :class => 'answer_content' ) %>
+    </div>
+  </div>
 <% end %>
+
 
