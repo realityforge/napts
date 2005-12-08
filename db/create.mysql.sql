@@ -36,7 +36,7 @@ CREATE TABLE quizzes (
   FOREIGN KEY (subject_id) REFERENCES subjects(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE testruns (
+CREATE TABLE test_runs (
   id INT NOT NULL AUTO_INCREMENT,
   start_time timestamp(14) NOT NULL,
   end_time timestamp(14) NOT NULL,
@@ -56,7 +56,7 @@ CREATE TABLE questions (
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE questionitems (
+CREATE TABLE quiz_items (
   id INT NOT NULL AUTO_INCREMENT,
   is_on_test TINYINT(1) NOT NULL,
   quiz_id INT NOT NULL REFERENCES quizzes(id),
@@ -64,7 +64,7 @@ CREATE TABLE questionitems (
   PRIMARY KEY (id),
   FOREIGN KEY (quiz_id) REFERENCES quizzes(id),
   FOREIGN KEY (question_id) REFERENCES questions(id)
-} ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE answers (
   id INT NOT NULL AUTO_INCREMENT,
@@ -88,11 +88,11 @@ CREATE TABLE responses (
   id INT NOT NULL AUTO_INCREMENT,
   input TEXT,
   time timestamp(14) NOT NULL,
-  testrun_id INT NOT NULL REFERENCES testruns(id),
+  testrun_id INT NOT NULL REFERENCES test_runs(id),
   question_id INT NOT NULL REFERENCES questions(id),
   answer_id INT NOT NULL REFERENCES answers(id),
   PRIMARY KEY (id),
-  FOREIGN KEY (testrun_id) REFERENCES testruns(id),
+  FOREIGN KEY (testrun_id) REFERENCES test_runs(id),
   FOREIGN KEY (question_id) REFERENCES questions(id),
   FOREIGN KEY (answer_id) REFERENCES answers(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
