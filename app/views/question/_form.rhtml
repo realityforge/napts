@@ -8,10 +8,6 @@
       <select id="question_type" name="question[type]"><option value="multiple answers" selected>Multiple answers</option>
               <option value="single answer">Single answer</option></select>
     </div>
-    <div class="question_options">
-      <label for="question_is_on_test">Is on test</label>
-      <%= check_box('question','is_on_test') %>
-    </div>
   </div>
   <div class="question_content">
     <%= text_area('question', 'content', :class => 'question_content') %></p>

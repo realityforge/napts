@@ -53,11 +53,18 @@ CREATE TABLE questions (
   id INT NOT NULL AUTO_INCREMENT,
   content TEXT NOT NULL,
   question_type INT NOT NULL,
-  is_on_test TINYINT(1) NOT NULL,
-  /*quiz_id INT NOT NULL REFERENCES quizzes(id),*/
-  PRIMARY KEY (id)/*,
-  FOREIGN KEY (quiz_id) REFERENCES quizzes(id)*/
+  PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE questionitems (
+  id INT NOT NULL AUTO_INCREMENT,
+  is_on_test TINYINT(1) NOT NULL,
+  quiz_id INT NOT NULL REFERENCES quizzes(id),
+  question_id INT NOT NULL REFERENCES questions(id),
+  PRIMARY KEY (id),
+  FOREIGN KEY (quiz_id) REFERENCES quizzes(id),
+  FOREIGN KEY (question_id) REFERENCES questions(id)
+} ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE answers (
   id INT NOT NULL AUTO_INCREMENT,
