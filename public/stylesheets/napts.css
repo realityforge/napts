@@ -1,41 +1,60 @@
-body { background-color: #fff; color: #333 }
+body { background-color: #fff; color: #333; }
 
-table {
+table
+{
   border: "1";
   width: 100%;
-  border-style: double;
+  border-style: solid;
 }
 
-body, p, ol, ul, td {
+body, p, ol, ul, td
+{
   font-family: verdana, arial, helvetica, sans-serif;
   font-size:   13px;
   line-height: 18px;
 }
 
-textarea.question_content {
+textarea.question_content
+{
   width: 100%;
   height: 160px;
 }
 
-textarea.answer_content {
+textarea.answer_content
+{
   width: 100%;
   height: 40px;
 }
 
-div.question, div.answer, div.question_header, div.answer_header {
+div.question, div.answer
+{
   width: 100%;
+  margin-top: 10px;
+  margin: 0px 0px 0px 0px;
+  _background-color: red;
+}
+
+div.question_header, div.answer_header
+{
+  width: 100%;
+  margin: 0px 0px 0px 0px;
+  _background-color: blue;
 }
 
 div.question_type, div.answer_number 
 {
   float: left;
   width: 25%;
+  margin: 0px 0px 0px 0px;
+  _background-color: green;
 }
 
 div.question_options, div.answer_options
 {
   float: right;
   width: 25%;
+  margin: 0px 0px 0px 0px;
+  _background-color: purple;
 }
 
 div.question_content, div.answer_content
@@ -43,33 +62,44 @@ div.question_content, div.answer_content
   width: 100%;
 }
 
-div.question_display, div.answer_display
+div.question_display
 {
-  border-style: double;
-  border-width: 5px;
+  clear: both;
+  border: 5px double black;
   width: 100%;
-  padding: 10px;
-  margin: 5px;
+  margin: 0px 0px 0px 0px;
+  min-height: 160px;
+  padding: 2px;
 }
 
+td.question_cont
+{
+  width: 100%;
+  min-height: 160px;
+}
 
-pre {
-  background-color: #eeeeee;
-  padding: 10px;
-  font-size: 11px;
+div.answer_display
+{
+  clear: both;
+  border: 1px solid black;
+  width: 100%;
+  margin: 0px 0px 0px 0px;
+  padding: 2px;
 }
 
 a { color: #000; }
 a:visited { color: #666; }
 a:hover { color: #fff; background-color:#000; }
 
-.fieldWithErrors {
+.fieldWithErrors
+{
   padding: 2px;
   background-color: red;
   display: table;
 }
 
-#ErrorExplanation {
+#ErrorExplanation
+{
   width: 400px;
   border: 2px solid 'red';
   padding: 7px;
@@ -78,7 +108,8 @@ a:hover { color: #fff; background-color:#000; }
   background-color: #f0f0f0;
 }
 
-#ErrorExplanation h2 {
+#ErrorExplanation h2
+{
   text-align: left;
   font-weight: bold;
   padding: 5px 5px 5px 15px;
@@ -88,34 +119,16 @@ a:hover { color: #fff; background-color:#000; }
   color: #fff;
 }
 
-#ErrorExplanation p {
+#ErrorExplanation p 
+{
   color: #333;
   margin-bottom: 0;
   padding: 5px;
 }
 
-#ErrorExplanation ul li {
+#ErrorExplanation ul li
+{
   font-size: 12px;
   list-style: square;
-}
-
-div.uploadStatus {
-  margin: 5px;
-}
-
-div.progressBar {
-  margin: 5px;
-}
-
-div.progressBar div.border {
-  background-color: #fff;
-  border: 1px solid grey;
-  width: 100%;
-}
-
-div.progressBar div.background {
-  background-color: #333;
-  height: 18px;
-  width: 0%;
 }
 
