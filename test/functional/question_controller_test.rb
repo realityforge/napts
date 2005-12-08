@@ -75,7 +75,6 @@ class QuestionControllerTest < Test::Unit::TestCase
     question = Question.find( 1 )
     assert_equal( "Is chocolate good?", question.content )
     assert_equal( 1, question.question_type )
-    assert_equal( true, question.is_on_test )
     assert_response( :success )
     assert_nil( flash[:notice] )
     assert_nil( flash[:alert] )
