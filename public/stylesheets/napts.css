@@ -1,8 +1,5 @@
 body { background-color: #fff; color: #333 }
 
-body {
-}
-
 table {
   border: "1";
   width: 100%;
@@ -25,47 +22,34 @@ textarea.answer_content {
   height: 40px;
 }
 
-div.question
-{
+div.question, div.answer, div.question_header, div.answer_header {
   width: 100%;
 }
 
-div.question_header
-{
-  width: 100%;
-}
-
-div.qn_type
+div.question_type, div.answer_number 
 {
   float: left;
   width: 25%;
 }
 
-div.answer
-{
-  width: 100%;
-}
-
-div.answer_header
-{
-  width: 100%;
-}
-
-div.answer_number
-{
-  float: left;
-  width: 40%;
-}
-
-div.options
+div.question_options, div.answer_options
 {
   float: right;
   width: 25%;
 }
 
-div.content
+div.question_content, div.answer_content
 {
   width: 100%;
+}
+
+div.question_display, div.answer_display
+{
+  border-style: double;
+  border-width: 5px;
+  width: 100%;
+  padding: 10px;
+  margin: 5px;
 }
 
 

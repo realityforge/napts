@@ -1,4 +1,39 @@
-<% for column in Question.content_columns %>
+<h2>Question <%= @question.id %></h2>
+<div class="question">
+  <div class="question_header">
+    <div class="question_type">
+      Type: <%= @question.question_type %>
+    </div>
+    <div class="question_options">
+      Is on test: <%= @question.is_on_test %>
+    </div>
+  </div>
+  <div class="question_display">
+    <%= @question.content %>
+  </div>
+</div>
+<% if false %>
+<% 
+   i = 0
+   for @answer in @question.answers do
+     i = i + 1
+%>
+  <div class="answer">
+    <div class="answer_header">
+      <div class="answer_number">
+        Answer <%= i %>
+      </div>
+      <div class="answer_options">
+        Is correct: <%= @answer.is_correct %>
+      </div>
+    </div>
+    <div class="answer_display">
+      <%= @answer.content %>
+    </div>
+  </div>
+<% end %>
+
+<!--<% for column in Question.content_columns %>
 <p>
   <b><%= column.human_name %>:</b> <%= h(@question.send(column.name)) %>
 </p>
@@ -20,4 +55,6 @@
 </table>
 
 <%= link_to 'Edit', :action => 'edit', :id => @question %> |
-<%= link_to 'Back', :action => 'list' %>
+<%= link_to 'Back', :action => 'list' %> -->
+
+<% end %>

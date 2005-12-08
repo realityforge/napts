@@ -36,7 +36,6 @@ class QuestionController < ApplicationController
 	  end
 	end	  
       end
-      @question.answers
       if( @question.update_attributes(params[:question]) &&
           Answer.update( params[:answer].keys, params[:answer].values ) )
         flash[:notice] = 'Question was successfully updated.'

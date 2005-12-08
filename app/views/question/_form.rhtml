@@ -3,17 +3,17 @@
 <h2>Question <%= @question.id %></h2>
 <div class="question">
   <div class="question_header">
-    <div class="qn_type">
+    <div class="question_type">
       <label for="question_type">Type</label>
       <select id="question_type" name="question[type]"><option value="multiple answers" selected>Multiple answers</option>
               <option value="single answer">Single answer</option></select>
     </div>
-    <div class="options">
+    <div class="question_options">
       <label for="question_is_on_test">Is on test</label>
       <%= check_box('question','is_on_test') %>
     </div>
   </div>
-  <div class="content">
+  <div class="question_content">
     <%= text_area('question', 'content', :class => 'question_content') %></p>
   </div>
 </div>   
@@ -27,12 +27,12 @@
       <div class="answer_number">
         Answer <%= i %>
       </div>
-      <div class="options">
+      <div class="answer_options">
         <label for="answer_is_correct">Is correct</label>
-        <%= check_box('answer', 'is_correct') %>
+        <%= check_box('answer[]', 'is_correct') %>
       </div>
     </div>
-    <div class="content">
+    <div class="answer_content">
       <%= error_messages_for('answer') %>
       <%= text_area('answer[]', 'content', :class => 'answer_content' ) %>
     </div>
