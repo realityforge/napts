@@ -1,3 +1,11 @@
+CREATE TABLE sessions (
+  id INT NOT NULL AUTO_INCREMENT,
+  sessid VARCHAR(32) NOT NULL,
+  data TEXT NOT NULL,
+  PRIMARY KEY(id),
+  UNIQUE KEY(sessid)
+) ENGINE= InnoDB DEFAULT CHARSET=utf8;
+    
 CREATE TABLE users (
   id INT NOT NULL AUTO_INCREMENT,
   studentid VARCHAR(10) NOT NULL,
@@ -31,9 +39,9 @@ CREATE TABLE subjects (
 CREATE TABLE quizzes (
   id INT NOT NULL AUTO_INCREMENT,
   duration INT NOT NULL,
-  subject_id INT NOT NULL REFERENCES subjects(id),
-  PRIMARY KEY (id),
-  FOREIGN KEY (subject_id) REFERENCES subjects(id)
+--  subject_id INT NOT NULL REFERENCES subjects(id),
+  PRIMARY KEY (id)
+--  FOREIGN KEY (subject_id) REFERENCES subjects(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE test_runs (

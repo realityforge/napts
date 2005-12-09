@@ -16,7 +16,7 @@ Rails::Initializer.run do |config|
 
   # Force all environments to use the same logger level 
   # (by default production uses :info, the others :debug)
-  # config.log_level = :debug
+  config.log_level = :debug
 
   # Use the database for sessions instead of the file system
   # (create the session table with 'rake create_sessions_table')
@@ -36,6 +36,7 @@ Rails::Initializer.run do |config|
   # (enables use of different database adapters for development and test environments)
   # config.active_record.schema_format = :ruby
 
+  config.active_record.colorize_logging = false
   # See Rails::Configuration for more options
 end
 
@@ -49,3 +50,6 @@ end
 # end
 
 # Include your application configuration below
+ActionController::CgiRequest::DEFAULT_SESSION_OPTIONS.update(
+ :database_manager => CGI::Session::ActiveRecordStore
+)

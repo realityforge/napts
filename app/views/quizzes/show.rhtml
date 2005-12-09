@@ -1,0 +1,11 @@
+<% for column in Quiz.content_columns %>
+<p>
+  <b>Quiz ID: </b><%= @quiz.id %> 
+  <b><%= column.human_name %>:</b> <%=h @quiz.send(column.name) %>
+</p>
+<% end %>
+
+
+<%= link_to 'Add questions', :action => 'add_questions', :id => @quiz %>
+<%= link_to 'Edit', :action => 'edit', :id => @quiz %> |
+<%= link_to 'Back', :action => 'list' %>
