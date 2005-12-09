@@ -1,10 +1,27 @@
-<% for column in Quiz.content_columns %>
-<p>
-  <b>Quiz ID: </b><%= @quiz.id %> 
-  <b><%= column.human_name %>:</b> <%=h @quiz.send(column.name) %>
-</p>
-<% end %>
+<%= start_form_tag({:action => 'show', :id => @quiz},{:id => 'show_form'}) %>
+<h1>Quiz ID: <%= @quiz.id %></h1>
 
+<table>
+  <tr>
+    <th>Is on test</th>
+    <th>Questions</th>
+    <th>Remove</th>
+  </tr>
+  
+  <% for question in @questions %>
+  <tr>
+    <td><input type="checkbox"  name="is_on_test[]" value="false"></td>
+    <td><%= question.content %></td>
+    <td></td>
+  </tr>
+  <% end %>
+</table>
+  
+<button onclick="show_form.submit(); return false;">Put qn on quiz</button>
+<%= end_form_tag %>
+
+<%= link_to_button("Cancel", {:action => 'show', :id => @quiz.id}) %>
+  
 
 <%= link_to 'Add questions', :action => 'add_questions', :id => @quiz %>
 <%= link_to 'Edit', :action => 'edit', :id => @quiz %> |

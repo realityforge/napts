@@ -10,6 +10,25 @@ class QuizzesController < ApplicationController
 
   def show
     @quiz = Quiz.find(params[:id])
+     
+    @questions = Question.find(:all, 
+                             :conditions => ['quiz_items.quiz_id = ?', @quiz.id],
+			     :joins => 'LEFT OUTER JOIN quiz_items ON quiz_items.question_id = questions.id ')
+    if request.post?
+    @quiz_item.id = QuizItem.find(:all, 
+                             :conditions => ['quiz_items.quiz_id = ?', @quiz.id],
+			     :joins => 'LEFT OUTER JOIN questions ON quiz_items.question_id = questions.id ')
+    
+
+    for question in [:is_on_test]
+        
+        quiz_item = QuizItem.update(@quiz_item.id, {:is_on_test => question, :question_id => @questions[].id })
+        if ! quiz_item.valid?
+	  flash[:notice] = "not updated"
+	end
+      end
+       
+    end
   end
 
   def new
@@ -39,7 +58,21 @@ class QuizzesController < ApplicationController
       render :action => 'edit'
     end
   end
-
+  
+#  def question_on_quiz
+#    @quiz = Quiz.find(params[:id])
+#    @questions = Question.find(:all, 
+#                             :conditions => ['quiz_items.quiz_id = ?', @quiz.id],
+#			     :joins => 'LEFT OUTER JOIN quiz_items ON quiz_items.question_id = questions.id ')
+#    if request.post?
+#    
+#    for question in [:is_on_test]
+#        
+#      QuizItem.update(12, {:is_on_test => question })
+#      end
+#    end
+#  end
+  
   def destroy
     Quiz.find(params[:id]).destroy
     redirect_to :action => 'list'
@@ -47,13 +80,19 @@ class QuizzesController < ApplicationController
   
   def add_questions
     @quiz = Quiz.find(params[:id])
-    @questions = Question.find(:all)
-    if request.post?
     
-#    if( QuizItem.update( params[:quiz_item].keys, params[:answer].values ) )
-#      flash[:notice] = 'Questions were successfully added'
-#      redirect_to( :action => 'show', :id => @quiz )
-#    end
+    @questions = Question.find(:all, 
+        		       :conditions => ['id NOT IN (SELECT questions.id FROM questions RIGHT OUTER JOIN quiz_items ON quiz_items.question_id = questions.id WHERE quiz_items.quiz_id = ?)', @quiz.id] )
+   # @questions = Question.find(:all)
+    if request.post?
+      for question in params[:question_ids]
+        quiz_item = QuizItem.create( {:quiz_id => params[:id], :question_id => question } )
+	if ! quiz_item.valid?
+	flash[:alert] = "Some questions not added as they were already in quiz"
+	end
+      end
+      redirect_to( :action => 'add_questions', :id => @quiz )
+    end
   end
   
 end
