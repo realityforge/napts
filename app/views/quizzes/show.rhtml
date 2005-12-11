@@ -1,27 +1,26 @@
-<%= start_form_tag({:action => 'show', :id => @quiz},{:id => 'show_form'}) %>
+<%= start_form_tag({:action => 'put_on_quiz', :id => @quiz},{:id => 'put_on_quiz_form'}) %>
 <h1>Quiz ID: <%= @quiz.id %></h1>
 
 <table>
   <tr>
-    <th>Is on test</th>
+    <th></th>
     <th>Questions</th>
-    <th>Remove</th>
+    <th>Will be on test</th>
   </tr>
   
-  <% for question in @questions %>
+  <% 
+    for quiz_item in @quiz.quiz_items
+  %>
   <tr>
-    <td><input type="checkbox"  name="is_on_test[]" value="false"></td>
-    <td><%= question.content %></td>
-    <td></td>
+    <td><input type="checkbox"  name="quiz_item_ids[]" value="<%= quiz_item.id %>"></td>
+    <td><%= quiz_item.question.content %></td>
+    <td><%= quiz_item.is_on_test %></td>
   </tr>
   <% end %>
 </table>
   
-<button onclick="show_form.submit(); return false;">Put qn on quiz</button>
+<button onclick="put_on_quiz_form.submit(); return false;">Put qn on quiz</button>
 <%= end_form_tag %>
-
-<%= link_to_button("Cancel", {:action => 'show', :id => @quiz.id}) %>
-  
 
 <%= link_to 'Add questions', :action => 'add_questions', :id => @quiz %>
 <%= link_to 'Edit', :action => 'edit', :id => @quiz %> |

@@ -5,30 +5,25 @@ class QuizzesController < ApplicationController
   end
 
   def list
-    @quiz_pages, @quizzes = paginate :quizzes, :per_page => 10
+    @quiz_pages, @quizzes = paginate( :quizzes, :per_page => 10 )
   end
 
   def show
     @quiz = Quiz.find(params[:id])
-     
     @questions = Question.find(:all, 
                              :conditions => ['quiz_items.quiz_id = ?', @quiz.id],
 			     :joins => 'LEFT OUTER JOIN quiz_items ON quiz_items.question_id = questions.id ')
-    if request.post?
-    @quiz_item.id = QuizItem.find(:all, 
-                             :conditions => ['quiz_items.quiz_id = ?', @quiz.id],
-			     :joins => 'LEFT OUTER JOIN questions ON quiz_items.question_id = questions.id ')
-    
-
-    for question in [:is_on_test]
-        
-        quiz_item = QuizItem.update(@quiz_item.id, {:is_on_test => question, :question_id => @questions[].id })
-        if ! quiz_item.valid?
-	  flash[:notice] = "not updated"
-	end
-      end
-       
-    end
+  end
+			     
+  def put_on_quiz
+     @quiz = Quiz.find(params[:id])
+     for quiz_item_id in params[:quiz_item_ids]
+       quiz_item = QuizItem.find(quiz_item_id)
+       if ! quiz_item.update_attributes( :is_on_test => "true" )
+         flash[:alert] = "not updated"
+       end
+     end
+     redirect_to( :action => 'show', :id => @quiz.id )
   end
 
   def new
@@ -39,9 +34,9 @@ class QuizzesController < ApplicationController
     @quiz = Quiz.new(params[:quiz])
     if @quiz.save
       flash[:notice] = 'Quiz was successfully created.'
-      redirect_to :action => 'list'
+      redirect_to( :action => 'list' )
     else
-      render :action => 'new'
+      render( :action => 'new' )
     end
   end
 
@@ -53,29 +48,15 @@ class QuizzesController < ApplicationController
     @quiz = Quiz.find(params[:id])
     if @quiz.update_attributes(params[:quiz])
       flash[:notice] = 'Quiz was successfully updated.'
-      redirect_to :action => 'show', :id => @quiz
+      redirect_to( :action => 'show', :id => @quiz.id )
     else
-      render :action => 'edit'
+      render( :action => 'edit' )
     end
   end
   
-#  def question_on_quiz
-#    @quiz = Quiz.find(params[:id])
-#    @questions = Question.find(:all, 
-#                             :conditions => ['quiz_items.quiz_id = ?', @quiz.id],
-#			     :joins => 'LEFT OUTER JOIN quiz_items ON quiz_items.question_id = questions.id ')
-#    if request.post?
-#    
-#    for question in [:is_on_test]
-#        
-#      QuizItem.update(12, {:is_on_test => question })
-#      end
-#    end
-#  end
-  
   def destroy
     Quiz.find(params[:id]).destroy
-    redirect_to :action => 'list'
+    redirect_to( :action => 'list' )
   end
   
   def add_questions
@@ -91,7 +72,7 @@ class QuizzesController < ApplicationController
 	flash[:alert] = "Some questions not added as they were already in quiz"
 	end
       end
-      redirect_to( :action => 'add_questions', :id => @quiz )
+      redirect_to( :action => 'add_questions', :id => @quiz.id )
     end
   end
   
