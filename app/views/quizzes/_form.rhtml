@@ -1,7 +1,13 @@
 <%= error_messages_for 'quiz' %>
 
 <!--[form:quiz]-->
+<p><label for="quiz_name">Name</label><br/>
+<%= text_field 'quiz', 'name' %></p>
+
 <p><label for="quiz_duration">Duration</label><br/>
 <%= text_field 'quiz', 'duration'  %></p>
+
+<p><label for="quiz_description">Description</label><br/>
+<%= text_field 'quiz', 'description' %></p>
 <!--[eoform:quiz]-->
 

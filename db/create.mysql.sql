@@ -39,6 +39,8 @@ CREATE TABLE subjects (
 CREATE TABLE quizzes (
   id INT NOT NULL AUTO_INCREMENT,
   duration INT NOT NULL,
+  name VARCHAR(50) NOT NULL,
+  description TEXT NOT NULL,
 --  subject_id INT NOT NULL REFERENCES subjects(id),
   PRIMARY KEY (id)
 --  FOREIGN KEY (subject_id) REFERENCES subjects(id)

@@ -11,27 +11,28 @@ class QuestionController < ApplicationController
     if request.get?
       @question = Question.new
       @question.answers = [Answer.new,Answer.new,Answer.new,Answer.new]
-      i = 1 
-      for answer in @question.answers
-          answer.id = i
-	  i = i + 1
-      end
     elsif request.post?
       @question = Question.new(params[:question])
-      
-      if @question.save
-        for answer_id in params[:answer].keys
+      is_valid = @question.valid?
+      for answer_id in params[:answer].keys
 	  data = params[:answer][answer_id].dup
-	  data[:question_id] = @question.id
           answer = Answer.new(data)
-	  if ! answer.save
-	    flash[:alert] = "Answer could not be saved"
+	  @question.answers << answer 
+	  if ! answer.valid?
+	    is_valid = false
 	  end
 	end
+      if is_valid && @question.save
+        @question.answers.each {|answer| answer.save}
       	flash[:notice] = 'Question was successfully created.'
 	redirect_to( :action => 'list' )
 	return
       end
+    end
+    i = 1 
+    for answer in @question.answers
+        answer.id = i
+	i = i + 1
     end
   end    
 
@@ -48,7 +49,7 @@ class QuestionController < ApplicationController
 	  if !answer.valid?
 	    return
 	  end
-	end	  
+	end
       end
       if( @question.update_attributes(params[:question]) &&
           Answer.update( params[:answer].keys, params[:answer].values ) )
@@ -60,7 +61,12 @@ class QuestionController < ApplicationController
   end
 
   def destroy
-    Question.find(params[:id]).destroy
+    @question = Question.find(params[:id])
+    if @question.quiz_items.length > 0
+      flash[:alert] = 'Question in quiz so cannot be destroyed'
+    else
+      Question.find(params[:id]).destroy
+    end
     redirect_to( :action => 'list' )
   end
 end

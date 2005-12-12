@@ -17,7 +17,7 @@ qi_3:
   quiz_id: 2
   question_id: 3
 
- qi_4:
+qi_4:
   id: 4
   is_on_test: 1
   quiz_id: 2

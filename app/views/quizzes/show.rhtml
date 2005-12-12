@@ -1,6 +1,7 @@
 <%= start_form_tag({:action => 'change', :id => @quiz},{:id => 'change_form'}) %>
 
-<h1>Quiz ID: <%= @quiz.id %></h1>
+<h1>Quiz Name: <%= @quiz.name %></h1>
+<h2>Description: <%= @quiz.description %></h2>
 
 <table>
   <tr>

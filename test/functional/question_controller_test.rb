@@ -42,14 +42,20 @@ class QuestionControllerTest < Test::Unit::TestCase
   def test_new_post_with_failed_save
     num_questions = Question.count
     content = ''
+    answer_content = 'answer content'
+    is_correct = 'true'
     post( :new, :question => {:content => content,
-                              :question_type => 1 }
+                              :question_type => 1 },
+			      :answer => {'this_is_ignored' => 
+			      	{:content => answer_content,
+				 :is_correct => is_correct}
+			      }
 	)
     assert_response( :success )
     assert_template( 'new' )
     assert_equal(1,assigns(:question).errors.count)
     assert_not_nil(assigns(:question).errors.on(:content))
-    assert_equal( 0, assigns(:question).answers.length )
+    assert_equal( 1, assigns(:question).answers.length )
     assert_equal( num_questions, Question.count )
   end
 
@@ -58,7 +64,7 @@ class QuestionControllerTest < Test::Unit::TestCase
     num_questions = Question.count
 
     content = 'My new content'
-    question_type = '1'
+    question_type = 1
     answer_content = 'answer content'
     is_correct = 'true'
     post( :new, :question => {:content => content,
@@ -69,7 +75,7 @@ class QuestionControllerTest < Test::Unit::TestCase
 			      }
 	)
     assert_equal( content, assigns(:question).content )
-    assert_equal( 1 , assigns(:question).question_type )
+    assert_equal( question_type, assigns(:question).question_type )
     assert_equal( 1, assigns(:question).answers.length )
     assert_equal( answer_content, assigns(:question).answers[0].content )
     assert_equal( is_correct, assigns(:question).answers[0].is_correct.to_s )
