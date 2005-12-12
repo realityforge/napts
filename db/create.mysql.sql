@@ -8,10 +8,10 @@ CREATE TABLE sessions (
     
 CREATE TABLE users (
   id INT NOT NULL AUTO_INCREMENT,
-  studentid VARCHAR(10) NOT NULL,
+  username VARCHAR(10) NOT NULL,
   name VARCHAR(50) NOT NULL,
   -- staffid
-  password VARCHAR(20) NOT NULL,
+  hashed_password CHAR(20) NOT NULL,
   PRIMARY KEY(id)
 ) ENGINE= InnoDB DEFAULT CHARSET=utf8;
 

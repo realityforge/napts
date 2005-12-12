@@ -67,7 +67,7 @@ class QuestionControllerTest < Test::Unit::TestCase
     content = 'My new content'
     question_type = 1
     answer_content = 'answer content'
-    is_correct = 'true'
+    is_correct = true
     post( :new, :question => {:content => content,
                               :question_type => question_type},
 			      :answer => {'this_is_ignored' => 
@@ -79,7 +79,7 @@ class QuestionControllerTest < Test::Unit::TestCase
     assert_equal( question_type, assigns(:question).question_type )
     assert_equal( 1, assigns(:question).answers.length )
     assert_equal( answer_content, assigns(:question).answers[0].content )
-    assert_equal( is_correct, assigns(:question).answers[0].is_correct.to_s )
+    assert_equal( "true", assigns(:question).answers[0].is_correct.to_s )
     assert_equal( 'Question was successfully created.', flash[:notice] )
     assert_redirected_to( :action => 'list' )
     assert_equal( num_questions + 1 , Question.count )
