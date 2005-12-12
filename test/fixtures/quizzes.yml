@@ -1,5 +1,12 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-first:
+quiz_1:
   id: 1
-another:
+  duration: 10
+  
+quiz_2:
   id: 2
+  duration: 15
+  
+quiz_3:
+  id: 3
+  duration: 5

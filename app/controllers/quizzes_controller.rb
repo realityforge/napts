@@ -25,6 +25,32 @@ class QuizzesController < ApplicationController
      end
      redirect_to( :action => 'show', :id => @quiz.id )
   end
+  
+  def change
+    @quiz = Quiz.find(params[:id])
+    if params[:quiz_item_ids] == nil
+      flash[:alert] = 'must select something'
+    else
+    if params[:change] == '3'
+      for quiz_item_id in params[:quiz_item_ids]
+        QuizItem.delete(quiz_item_id)
+      end
+    else
+      if params[:change] == '1'
+        value = 'true'
+      elsif params[:change] == '2'
+        value = 'false'
+      end
+      for quiz_item_id in params[:quiz_item_ids]
+        quiz_item = QuizItem.find(quiz_item_id)
+        if ! quiz_item.update_attributes( :is_on_test => value )
+          flash[:alert] = "not updated"
+        end
+      end
+    end
+    end
+    redirect_to( :action => 'show', :id => @quiz.id )
+  end
 
   def new
     @quiz = Quiz.new

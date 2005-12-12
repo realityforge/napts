@@ -1,4 +1,5 @@
-<%= start_form_tag({:action => 'put_on_quiz', :id => @quiz},{:id => 'put_on_quiz_form'}) %>
+<%= start_form_tag({:action => 'change', :id => @quiz},{:id => 'change_form'}) %>
+
 <h1>Quiz ID: <%= @quiz.id %></h1>
 
 <table>
@@ -13,13 +14,17 @@
   %>
   <tr>
     <td><input type="checkbox"  name="quiz_item_ids[]" value="<%= quiz_item.id %>"></td>
-    <td><%= quiz_item.question.content %></td>
+    <td><%= link_to( "#{quiz_item.question.content}", :controller => 'question', :action => 'show', :id => quiz_item.question_id ) %></td>
     <td><%= quiz_item.is_on_test %></td>
   </tr>
   <% end %>
 </table>
-  
-<button onclick="put_on_quiz_form.submit(); return false;">Put qn on quiz</button>
+<br />
+
+<input id="change" type="hidden" name="change" value="true"/>
+<button onclick="change.value = '1'; change_form.submit(); return false;">put on quiz</button>
+<button onclick="change.value = '2'; change_form.submit(); return false;">take off quiz</button>
+<button onclick="change.value = '3'; change_form.submit(); return false;">remove</button>
 <%= end_form_tag %>
 
 <%= link_to 'Add questions', :action => 'add_questions', :id => @quiz %>

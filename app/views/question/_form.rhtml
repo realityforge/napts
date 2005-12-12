@@ -12,12 +12,14 @@
   <div class="question_content">
     <%= text_area('question', 'content', :class => 'question_content') %></p>
   </div>
-</div>   
+</div>
+
 <% 
    i = 0
    for @answer in @question.answers do
      i = i + 1
 %>
+
   <div class="answer">
     <div class="answer_header">
       <div class="answer_number">

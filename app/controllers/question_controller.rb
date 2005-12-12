@@ -1,6 +1,6 @@
 class QuestionController < ApplicationController
   def list
-    @question_pages, @questions = paginate :question, :per_page => 10
+    @question_pages, @questions = paginate( :question, :per_page => 10 )
   end
 
   def show
@@ -10,16 +10,30 @@ class QuestionController < ApplicationController
   def new
     if request.get?
       @question = Question.new
+      @question.answers = [Answer.new,Answer.new,Answer.new,Answer.new]
+      i = 1 
+      for answer in @question.answers
+          answer.id = i
+	  i = i + 1
+      end
     elsif request.post?
       @question = Question.new(params[:question])
+      
       if @question.save
+        for answer_id in params[:answer].keys
+	  data = params[:answer][answer_id].dup
+	  data[:question_id] = @question.id
+          answer = Answer.new(data)
+	  if ! answer.save
+	    flash[:alert] = "Answer could not be saved"
+	  end
+	end
       	flash[:notice] = 'Question was successfully created.'
-	redirect_to :action => 'list'
+	redirect_to( :action => 'list' )
 	return
       end
     end
-    @answers = [Answer.new,Answer.new,Answer.new,Answer.new]
-  end
+  end    
 
   def edit
     @question = Question.find(params[:id])
@@ -47,6 +61,6 @@ class QuestionController < ApplicationController
 
   def destroy
     Question.find(params[:id]).destroy
-    redirect_to :action => 'list'
+    redirect_to( :action => 'list' )
   end
 end
