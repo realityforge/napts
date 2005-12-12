@@ -42,10 +42,11 @@ class QuestionControllerTest < Test::Unit::TestCase
   def test_new_post_with_failed_save
     num_questions = Question.count
     content = ''
+    question_type = 1
     answer_content = 'answer content'
     is_correct = 'true'
     post( :new, :question => {:content => content,
-                              :question_type => 1 },
+                              :question_type => question_type },
 			      :answer => {'this_is_ignored' => 
 			      	{:content => answer_content,
 				 :is_correct => is_correct}
@@ -85,10 +86,12 @@ class QuestionControllerTest < Test::Unit::TestCase
   end
 
   def test_edit_get
-    get( :edit, :id => 1 )
-    question = Question.find( 1 )
-    assert_equal( "Is chocolate good?", question.content )
-    assert_equal( 1, question.question_type )
+    get( :edit, :id => @q1.id )
+    question = Question.find( @q1.id )
+    content = "Is chocolate good?"
+    question_type = 1
+    assert_equal( content, question.content )
+    assert_equal( question_type , question.question_type )
     assert_response( :success )
     assert_nil( flash[:notice] )
     assert_nil( flash[:alert] )
@@ -97,15 +100,15 @@ class QuestionControllerTest < Test::Unit::TestCase
   def test_edit_post
     question = 'Is chocolate great?'
     answer = 'Maybe, or maybe not'
-    post(:edit, :id => 1, 
+    post(:edit, :id => @q1.id, 
                 :question => {:content => question}, 
-		:answer => {1 => { :content => answer }}
+		:answer => {@q1_a1.id => { :content => answer }}
 	)
     assert_equal( 'Question was successfully updated.', flash[:notice] )
     assert_response( :redirect )
     assert_redirected_to( :action => 'show', :id => 1 )
-    a1 = Answer.find( 1 )
-    q1 = Question.find( 1 )
+    a1 = Answer.find( @q1_a1.id )
+    q1 = Question.find( @q1.id )
     assert_equal( answer, a1.content ) 
     assert_equal( question, q1.content )
   end
@@ -113,9 +116,9 @@ class QuestionControllerTest < Test::Unit::TestCase
   def test_edit_post_with_invalid_question
     question = ''
     answer = 'Maybe, maybe not'
-    post(:edit, :id => 1, 
+    post(:edit, :id => @q1.id, 
                 :question => {:content => question}, 
-		:answer => {1 => { :content => answer }}
+		:answer => {@q1_a1.id => { :content => answer }}
 	)
     assert_response( :success )
     assert_template( 'edit' )
@@ -127,9 +130,9 @@ class QuestionControllerTest < Test::Unit::TestCase
     question = 'Yo dude'
     answer = ''
     
-    post(:edit, :id => 1, 
+    post(:edit, :id => @q1.id, 
                 :question => {:content => question}, 
-		:answer => {1 => { :content => answer }}
+		:answer => {@q1_a1.id => { :content => answer }}
 	)
     assert_response( :success )
     assert_template( 'edit' )
@@ -141,9 +144,9 @@ class QuestionControllerTest < Test::Unit::TestCase
   def test_edit_post_with_answer_not_associated_with_question
     question = 'Yo dude'
     answer = 'Hiya'
-    post( :edit, :id => 1,
+    post( :edit, :id => @q2.id,
                  :question => {:content => question},
-                 :answer => {12 => {:content => answer}}
+                 :answer => { @q4_a1.id=> {:content => answer}}
 	)
     assert_response( :success )
     assert_equal( "Update not successful", flash[:alert] )
@@ -151,10 +154,10 @@ class QuestionControllerTest < Test::Unit::TestCase
   end
   
   def test_destroy
-    assert_not_nil( Question.find(1) )
-    post( :destroy, :id => 1 )
+    assert_not_nil( Question.find(@q3.id) )
+    post( :destroy, :id => @q3.id )
     assert_response( :redirect )
     assert_redirected_to( :action => 'list' )
-    assert_raise(ActiveRecord::RecordNotFound) { Question.find(1) }
+    assert_raise(ActiveRecord::RecordNotFound) { Question.find(@q3.id) }
   end
 end
