@@ -9,9 +9,9 @@ CREATE TABLE sessions (
 CREATE TABLE users (
   id INT NOT NULL AUTO_INCREMENT,
   username VARCHAR(10) NOT NULL,
-  name VARCHAR(50) NOT NULL,
+  name VARCHAR(50),
   -- staffid
-  hashed_password CHAR(20) NOT NULL,
+  hashed_password CHAR(20) NULL,
   PRIMARY KEY(id)
 ) ENGINE= InnoDB DEFAULT CHARSET=utf8;
 
@@ -41,9 +41,9 @@ CREATE TABLE quizzes (
   duration INT NOT NULL,
   name VARCHAR(50) NOT NULL,
   description TEXT NOT NULL,
---  subject_id INT NOT NULL REFERENCES subjects(id),
-  PRIMARY KEY (id)
---  FOREIGN KEY (subject_id) REFERENCES subjects(id)
+  subject_id INT NOT NULL REFERENCES subjects(id),
+  PRIMARY KEY (id),
+  FOREIGN KEY (subject_id) REFERENCES subjects(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE test_runs (
