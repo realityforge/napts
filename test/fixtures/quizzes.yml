@@ -1,19 +1,15 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 quiz_1:
   id: 1
   duration: 10
   name: "first"
   description: "introductory test"
-  
 quiz_2:
   id: 2
   duration: 15
   name: "billy goat"
   description: "gruff"
-  
 quiz_3:
   id: 3
   duration: 5
   name: "stan"
   description: "he drives to work"
-  
