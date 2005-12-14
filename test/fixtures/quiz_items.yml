@@ -1,31 +1,26 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 qi_1:
   id: 1
-  is_on_test: 1
+  is_on_test: true
   quiz_id: 1
   question_id: 1
-
 qi_2:
   id: 2
-  is_on_test: 0
+  is_on_test: false
   quiz_id: 1
   question_id: 2
-
 qi_3:
   id: 3
-  is_on_test: 1
+  is_on_test: true
   quiz_id: 2
   question_id: 3
-
 qi_4:
   id: 4
-  is_on_test: 1
+  is_on_test: true
   quiz_id: 2
   question_id: 1
-
 qi_5:
   id: 5
-  is_on_test: 0
+  is_on_test: false
   quiz_id: 2
   question_id: 4
 
