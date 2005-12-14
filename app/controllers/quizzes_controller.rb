@@ -58,6 +58,7 @@ class QuizzesController < ApplicationController
 
   def create
     @quiz = Quiz.new(params[:quiz])
+    @quiz.subject = Subject.new
     if @quiz.save
       flash[:notice] = 'Quiz was successfully created.'
       redirect_to( :action => 'list' )

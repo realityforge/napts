@@ -1,0 +1,21 @@
+<h2>Subject Code: <%= @subject.code %></h2>
+<table>
+  <tr>
+    <th>Quiz id</th>
+    <th>Description</th>
+  </tr>
+  <% i = 0
+     for quiz in @subject.quizzes
+     i = i + 1
+  %>
+  <tr>
+    <td><%= quiz.id %></td>
+    <td><%= quiz.description %></td>
+  </tr>
+  <% end %>
+</table>
+<br />
+
+<%= link_to( 'Add quizzes', :action => 'add_quizzes', :id => @subject ) %> 
+<%= link_to( 'Edit', :action => 'edit', :id => @subject ) %> |
+<%= link_to( 'Back', :action => 'list' ) %>

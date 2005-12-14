@@ -1,0 +1,26 @@
+<%= start_form_tag( {:action => 'add_quizzes', :id => @subject}, {:id => 'add_quizzes_form'} ) %>
+
+<h1>Adding Quizzes</h1>
+<h2>Subject code: <%= @subject.subject_code %></h2>
+
+<table>
+  <tr>
+    <th>Add to Subject</th>
+    <th>Quiz Id</th>
+    <th>Quiz Description</th>
+  </tr>
+  
+  <% for quiz in @quizzes %>
+    <tr>
+      <td><input type="checkbox" name="quiz_ids[]" value="<%= quiz.id %>"></td>
+      <td><%= quiz.id %></td>
+      <td><%= quiz.description %>
+    </tr>
+  <% end %>
+</table>
+<br />
+<button onclick="add_quizzes_form.submit(); return false;">Add quiz</button>
+<%= end_form_tag %>
+
+<%= link_to_button("Cancel", {:action => 'show', :id => @subject.id}) %>
+  
