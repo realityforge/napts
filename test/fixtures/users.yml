@@ -1,5 +1,15 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-first:
+peter_user:
   id: 1
-another:
+  username: 'peter'
+  hashed_password: <%= Digest::SHA1::hexdigest('retep') %> 
+  name: 'Peter Donald'
+mr_fancy_pants_user:
   id: 2
+  username: 'MrFancyPants'
+  hashed_password: <%= Digest::SHA1::hexdigest('secret') %> 
+  name: 'Stan Driver'
+sleepy_user:
+  id: 3
+  username: 'sleepy'
+  hashed_password: <%= Digest::SHA1::hexdigest('letmein') %> 
+  name: 'SnoozeMaster 5000'
