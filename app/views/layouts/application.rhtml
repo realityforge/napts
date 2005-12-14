@@ -10,5 +10,11 @@
 
 <%= @content_for_layout %>
 
+
+<% if RAILS_ENV == 'development' %>
+<center><button onclick="show_debug_popup(); return false;">Show debug popup</button></center>
+<%= debug_popup %>
+<% end %>
+
 </body>
 </html>
