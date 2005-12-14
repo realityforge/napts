@@ -46,7 +46,7 @@ class CreateInitialSchema < ActiveRecord::Migration
       t.column "duration", :integer, :null => false
       t.column "subject_id", :integer, :null => false
     end
-    add_index("quizzes", ["name", "subject_id"], :name => "users_name_subject_id_index", :unique => true)
+    add_index("quizzes", ["name", "subject_id"], :name => "quizzes_name_subject_id_index", :unique => true)
     add_foreign_key_constraint("quizzes", "subject_id", "subjects", "id", :name => "quizzes_subject_id_fk")    
 
     # TestRuns
