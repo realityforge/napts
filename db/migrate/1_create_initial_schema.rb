@@ -74,7 +74,7 @@ class CreateInitialSchema < ActiveRecord::Migration
       t.column "question_id", :integer, :null => false
     end
     add_foreign_key_constraint("quiz_items", "quiz_id", "quizzes", "id", :name => "quiz_items_quiz_id_fk")
-    add_foreign_key_constraint("quiz_items", "question_id", "quizzes", "id", :name => "quiz_items_question_id_fk")
+    add_foreign_key_constraint("quiz_items", "question_id", "questions", "id", :name => "quiz_items_question_id_fk")
 
     # Answers
     create_table("answers", :force => true) do |t|
