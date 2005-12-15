@@ -36,7 +36,6 @@ module MenuHelper
   def get_user_links
     links = []
     links << gen_user_link.freeze
-    links << gen_settings_link.freeze
     links << SignOutLink
     links
   end
@@ -44,12 +43,6 @@ module MenuHelper
   def gen_user_link
     link = UserLink.dup
     link.name += @user.name
-    link
-  end
-
-  def gen_settings_link
-    link = SettingsLink.dup
-    link.link_options.update(:id => @user.id)
     link
   end
 end
