@@ -20,7 +20,7 @@ class LoginController < ApplicationController
       user = User.authenticate(params[:username],params[:password])
       if user
         session[:user_id] = user.id
-	redirect_to( :controller => 'quizzes', :action => 'list' )
+	redirect_to( :controller => 'subjects', :action => 'list' )
       else
         flash[:alert] = "invalid username/password combination"
       end
