@@ -16,17 +16,6 @@ class SubjectsController < ApplicationController
     @subject = Subject.new
   end
 
-  def add_quizzes
-    @subject = Subject.find(params[:id])
-    @quizzes = Quiz.find(:all)
-    if request.post?
-      for quiz in params[:quiz_ids]
-        updatequiz = Quiz.update( :quiz_id => quiz, :subject_id => params[:id] )
-      end
-    end
-  end
-    
-    
   def create
     @subject = Subject.new(params[:subject])
     if @subject.save
