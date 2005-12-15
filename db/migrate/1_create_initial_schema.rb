@@ -36,7 +36,7 @@ class CreateInitialSchema < ActiveRecord::Migration
       t.column "name", :string, :limit => 50, :null => false
       t.column "code", :string, :limit => 10, :null => false
     end
-    add_index("subjects", ["name"], :name => "subjects_name_index", :unique => true)
+    add_index("subjects", ["name"], :name => "subjects_name_index" )
     add_index("subjects", ["code"], :name => "subjects_code_index", :unique => true)
     
     # Quizzes
