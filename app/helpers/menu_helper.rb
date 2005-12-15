@@ -7,11 +7,6 @@ module MenuHelper
                nil,
                {:title => 'Currently logged in user'},
                {}).freeze
-    SettingsLink = 
-      Link.new('Settings', 
-               {:controller => 'user', :action => 'show'},
-               {:title => 'View your profile'},
-               {}).freeze
     SignOutLink = 
       Link.new('Sign Out', 
                {:controller => 'login', :action => 'logout'},
