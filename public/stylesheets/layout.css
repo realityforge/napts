@@ -1,0 +1,155 @@
+body
+{
+  font-family: verdana, tahoma, arial, helvetica, sans-serif;
+  line-height: 1.166;
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+  background-color: #e0e0e0;
+}
+
+#main
+{
+  min-width: 60em;
+  background-color: #FFFFFF;
+  border: 1px solid black;
+  margin: 10px 10px 10px 10px;
+  padding: 0px 0px 0px 0px;
+}
+
+#header
+{
+  position: relative;
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+  background: #036;
+  color: white;
+  width: 100%;
+  min-width: 60em;
+}
+
+#content-panel
+{
+  position: relative;
+  display: block;
+  min-height: 400px;
+  vertical-align: top;
+  clear: both;
+}
+
+#content
+{
+  margin: 0px 15px 5px 15px;
+  vertical-align: top;
+}
+
+#menu
+{ 
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+  background-color: #FFFFED;
+  border: 2px solid #ccc;
+  width: 200px;
+}
+
+#flash 
+{ 
+  margin: 2px 0px 2px 0px;
+  font-weight: bold;
+  clear: both;
+  display: block;
+  position: relative;
+  height: 1em;
+  text-align: center;
+}
+
+#flash.alert { color: red; }
+#flash.notice { color: green; }
+
+ul.usermenu 
+{ 
+  position: relative;
+  display: block;
+  text-align: right;
+  font-size: small;
+  padding: 10px 5px 5px 10px;
+  margin: 0px 0px 0px 0px;
+}
+
+ul.usermenu li
+{ 
+  display: inline;
+  margin: 0px 4px 0px 2px;
+}
+ul.usermenu li a {color: white;}
+
+ul.menu
+{
+  font-size: small;
+  position: relative;
+  clear: both;
+  font-weight: bold;
+  background-color: #369;
+  display: block;
+  min-width: 49.9em;
+  clear: both;
+  float: left;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+ul.menu li
+{ 
+  display: inline;
+  list-style: none;
+}
+
+ul.menu li a
+{
+  float: left;
+  display: block;
+  width: 11em;
+  text-decoration: none;
+  color: black;
+  text-align: center;
+  padding: 0.2em 0.6em;
+  border-right:1px solid white;
+}
+ul.menu li a.selected:first-letter {text-decoration: underline;}
+ul.menu li a.selected {color: white; background-color: #036;}
+ul.menu li a:first-letter {text-decoration: underline;}
+ul.menu li a:hover {color: white; background-color: #46525E;}
+
+#menu, #menu input, #menu select, #menu button
+{
+  font-size: x-small; 
+}
+
+.details
+{
+  margin: 0px 0px 10px 0px;
+  padding: 0px 5px 0px 5px;
+}
+
+#menu h2
+{
+  font-size: small; 
+  display: block; 
+  width: 100%;
+  font-weight: bold;
+  padding: 0px 0px 0px 0px;
+  margin: 0px 0px 4px 0px;
+  background-color: #EEE;
+  border-bottom: 1px solid black;
+}
+
+#menu h3
+{
+  font-size: x-small; 
+  display: block; 
+  width: 100%;
+  font-weight: bold;
+  padding: 0px 0px 0px 0px;
+  margin: 0px 0px 0px 0px;
+}

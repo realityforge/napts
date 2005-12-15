@@ -1,18 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
-  <title>Question: <%= controller.action_name %></title>
+  <title><%= @page_title if @page_title %></title>
+  <meta http-equiv="Content-Language" content="en-us" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <%= stylesheet_link_tag('layout') %>
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+  <%= @content_for_head if @content_for_head %>
   <%= stylesheet_link_tag( 'napts' ) %>
 </head>
 <body>
 
-<p style="color: red"><%= flash[:alert] %></p>
-<p style="color: green"><%= flash[:notice] %></p>
+<div id="main">
+<div id="header">
+<% if false %>
+    <%= render_links(get_user_links,:class =>'usermenu') %>
+    <%= render_links(get_navigation_links,:class => 'menu') %>
+<% end %>
+</div>
 
-<%= @content_for_layout %>
+<% style = flash[:alert] ? " alert" : (flash[:notice] ? " notice" : "") -%>
+<div id="flash" class="<%= style %>">&nbsp;<%= flash[:alert] ? h(flash[:alert]) : h(flash[:notice]) -%></div>
 
+<table>
+<tr>
+<% if @content_for_menu %>
+<td id="menu"><%= @content_for_menu %></td>
+<% end %>
+<td id="content"><%= @content_for_layout %></td>
+</tr>
+</table>
+
+</div>
 
 <% if RAILS_ENV == 'development' %>
-<center><button onclick="show_debug_popup(); return false;">Show debug popup</button></center>
+<center>
+<button onclick="show_debug_popup(); return false;">Show debug popup</button></center>
 <%= debug_popup %>
 <% end %>
 

@@ -1,17 +1,8 @@
-body { background-color: #fff; color: #333; }
-
-table
+#content table
 {
   border: "1";
   width: 100%;
   border-style: solid;
-}
-
-body, p, ol, ul, td
-{
-  font-family: verdana, arial, helvetica, sans-serif;
-  font-size:   13px;
-  line-height: 18px;
 }
 
 textarea.question_content
