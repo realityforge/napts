@@ -2,7 +2,7 @@ require "digest/sha1"
 
 class User < ActiveRecord::Base
   attr_accessor( :password )
-  attr_accessible( :username, :password )
+  attr_accessible( :username, :password, :name )
   validates_uniqueness_of( :username )
   validates_presence_of( :username, :password )
   

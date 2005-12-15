@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  def add_user
+  def new
     if request.get?
       @user = User.new
     else
@@ -13,12 +13,12 @@ class UsersController < ApplicationController
     end
   end
   
-  def list_users
+  def list
     @users = User.find_all
   end
   
    def delete
     User.find(params[:id]).destroy
-    redirect_to( :controller => 'users', :action => 'list_users' )
+    redirect_to( :controller => 'users', :action => 'list' )
   end
 end
