@@ -13,12 +13,12 @@
 <body>
 
 <div id="main">
+<% if authenticated? %>
 <div id="header">
-<% if false %>
     <%= render_links(get_user_links,:class =>'usermenu') %>
-    <%= render_links(get_navigation_links,:class => 'menu') %>
-<% end %>
+    <%= render_links(get_navigation_links,:class => 'menu') if false %>
 </div>
+<% end %>
 
 <% style = flash[:alert] ? " alert" : (flash[:notice] ? " notice" : "") -%>
 <div id="flash" class="<%= style %>">&nbsp;<%= flash[:alert] ? h(flash[:alert]) : h(flash[:notice]) -%></div>
