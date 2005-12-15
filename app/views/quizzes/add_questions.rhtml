@@ -19,7 +19,9 @@
     </tr>
   <% end %>
 </table>
-<button onclick="add_questions_form.submit(); return false;">Add question</button>
+<br />
+
+<button onclick=" add_questions_form.submit(); return false;">Add question</button>
 <%= end_form_tag %>
 
 <%= link_to_button("Cancel", {:action => 'show', :id => @quiz.id}) %>

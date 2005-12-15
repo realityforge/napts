@@ -5,7 +5,9 @@ class QuizzesController < ApplicationController
   end
 
   def list
-    @quiz_pages, @quizzes = paginate( :quizzes, :per_page => 10 )
+    @subject = Subject.find(params[:subject_id])
+    @quiz_pages, @quizzes = 
+       paginate( :quizzes, :conditions => [ 'subject_id = ?', @subject.id ], :per_page => 10 )
   end
 
   def show
@@ -31,37 +33,37 @@ class QuizzesController < ApplicationController
     if params[:quiz_item_ids] == nil
       flash[:alert] = 'must select something'
     else
-    if params[:change] == '3'
-      for quiz_item_id in params[:quiz_item_ids]
-        QuizItem.delete(quiz_item_id)
-      end
-    else
-      if params[:change] == '1'
-        value = 'true'
-      elsif params[:change] == '2'
-        value = 'false'
-      end
-      for quiz_item_id in params[:quiz_item_ids]
-        quiz_item = QuizItem.find(quiz_item_id)
-        if ! quiz_item.update_attributes( :is_on_test => value )
-          flash[:alert] = "not updated"
+      if params[:change] == '3'
+        for quiz_item_id in params[:quiz_item_ids]
+          QuizItem.delete(quiz_item_id)
+        end
+      else
+        if params[:change] == '1'
+          value = 'true'
+        elsif params[:change] == '2'
+          value = 'false'
+        end
+        for quiz_item_id in params[:quiz_item_ids]
+          quiz_item = QuizItem.find(quiz_item_id)
+          if ! quiz_item.update_attributes( :is_on_test => value )
+            flash[:alert] = "not updated"
+          end
         end
       end
-    end
     end
     redirect_to( :action => 'show', :id => @quiz.id )
   end
 
   def new
     @quiz = Quiz.new
+    @quiz.subject_id = params[:subject_id]    
   end
 
   def create
     @quiz = Quiz.new(params[:quiz])
-    @quiz.subject = Subject.new
     if @quiz.save
       flash[:notice] = 'Quiz was successfully created.'
-      redirect_to( :action => 'list' )
+      redirect_to( :action => 'show' , :id => @quiz.id )
     else
       render( :action => 'new' )
     end
@@ -82,24 +84,30 @@ class QuizzesController < ApplicationController
   end
   
   def destroy
-    Quiz.find(params[:id]).destroy
-    redirect_to( :action => 'list' )
+    @quiz = Quiz.find(params[:id])
+    @subject = @quiz.subject_id
+    @quiz.destroy
+    redirect_to( :action => 'list', :subject_id => @subject )
   end
   
   def add_questions
     @quiz = Quiz.find(params[:id])
-    
-    @questions = Question.find(:all, 
-        		       :conditions => ['id NOT IN (SELECT questions.id FROM questions RIGHT OUTER JOIN quiz_items ON quiz_items.question_id = questions.id WHERE quiz_items.quiz_id = ?)', @quiz.id] )
-   # @questions = Question.find(:all)
-    if request.post?
-      for question in params[:question_ids]
-        quiz_item = QuizItem.create( {:quiz_id => params[:id], :question_id => question } )
-	if ! quiz_item.valid?
-	flash[:alert] = "Some questions not added as they were already in quiz"
-	end
+    if request.get?
+      @questions = Question.find(:all, 
+        	         :conditions => ['id NOT IN (SELECT questions.id FROM questions RIGHT OUTER JOIN quiz_items ON quiz_items.question_id = questions.id WHERE quiz_items.quiz_id = ?)', @quiz.id] )
+    else
+      if params[:question_ids] == nil
+        flash[:alert] = "Must select something"
+      else
+        for question in params[:question_ids]
+          quiz_item = QuizItem.create( {:quiz_id => params[:id], :question_id => question } )
+	  if ! quiz_item.valid?
+	    flash[:alert] = "Some questions not added as they were already in quiz"
+	  end
+        end
       end
       redirect_to( :action => 'add_questions', :id => @quiz.id )
+      return
     end
   end
   
