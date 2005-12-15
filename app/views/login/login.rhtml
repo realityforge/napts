@@ -1,6 +1,21 @@
-<h1>Login</h1>
+<% @page_title = "Sign in to NAPTS" %>
+<fieldset>
+  <legend>Login</legend>
+<%= form_tag({:action => "login"}, {:id => "login_form"}) %>
+  <label for="user_name">Name</label>
+  <input id="user_name" name="username" size="20" type="text" value="" />
+  <br/>
 
-<%= start_form_tag( :action => 'login' ) %>
-  <%= render( :partial => 'form' ) %>
-  <%= submit_tag( "Login" ) %>
+  <label for="user_password">Password</label>
+  <input id="user_password" name="password" size="20" type="password" value="" />
+  <br/>
+  <button onclick="login_form.submit(); return false;">Login</button>
 <%= end_form_tag %>
+</fieldset>
+<% content_for :head do %>
+  <style type="text/css">
+  label {width: 90px; display: block; float: left; clear: both;}
+  input {width: 190px; display: block; float: left;}
+  button {display: block; clear: both;}
+  </style>
+<% end %>

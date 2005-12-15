@@ -16,13 +16,10 @@ class LoginController < ApplicationController
   def login
     if request.get?
       reset_session
-      session[:user_id] = nil
-      @user = User.new
     else
-      @user = User.new(params[:user])
-      logged_in_user = @user.try_to_login
-      if logged_in_user
-        session[:user_id] = logged_in_user.id
+      user = User.authenticate(params[:username],params[:password])
+      if user
+        session[:user_id] = user.id
 	redirect_to( :controller => 'quizzes', :action => 'list' )
       else
         flash[:alert] = "invalid username/password combination"
@@ -32,7 +29,6 @@ class LoginController < ApplicationController
   
   def logout
     reset_session
-    session
     flash[:notice] = "Logged out"
     redirect_to( :action => 'login' )
   end

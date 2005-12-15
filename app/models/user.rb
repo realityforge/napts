@@ -1,4 +1,5 @@
 require "digest/sha1"
+
 class User < ActiveRecord::Base
   attr_accessor( :password )
   attr_accessible( :username, :password )
@@ -13,16 +14,8 @@ class User < ActiveRecord::Base
     @password = nil
   end
   
-  def self.login( username, password )
-    hashed_password = hash_password( password || "" )
-    find( :first, 
-          :conditions => ["username = ? and hashed_password =?", 
-	                   username, hashed_password]
-	)
-  end
-  
-  def try_to_login
-    User.login( self.username, self.password )
+  def self.authenticate(username, password)
+    find_first( [ 'username = ? AND hashed_password = ?', username, User.hash_password(password) ] )
   end
   
   private
