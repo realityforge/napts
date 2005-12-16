@@ -3,7 +3,7 @@
 <%= start_form_tag({:action => 'edit', :id => @question},{:id => 'edit_form'}) %>
   <%= render :partial => 'form' %>
   <br/>
-  <button onclick="edit_form.submit(); result false;">Edit</button>
+  <button onclick="edit_form.submit(); return false;">Edit</button>
   <%= link_to_button("Cancel", {:action => 'show', :id => @question.id}) %>
 <%= end_form_tag %>
 

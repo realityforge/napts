@@ -51,6 +51,11 @@ class QuestionController < ApplicationController
 	  end
 	end
       end
+      for answer in @question.answers
+        if ! params[:answer][answer.id.to_s]
+	  @question.answers.delete(answer)
+	end
+      end
       if( @question.update_attributes(params[:question]) &&
           Answer.update( params[:answer].keys, params[:answer].values ) )
         flash[:notice] = 'Question was successfully updated.'
@@ -59,7 +64,7 @@ class QuestionController < ApplicationController
       end
     end
   end
-
+  
   def destroy
     @question = Question.find(params[:id])
     if @question.quiz_items.length > 0
