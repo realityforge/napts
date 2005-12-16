@@ -13,7 +13,7 @@
     <%= text_area('question', 'content', :class => 'question_content') %></p>
   </div>
 </div>
-<div class="allanswers">
+<div id="allanswers">
 <% 
    i = 0
    for @answer in @question.answers do
@@ -22,10 +22,10 @@
   <div class="answer">
     <div class="answer_header">
       <div class="answer_number">
-        Answer <%= i %>
+        <label for="answer_<%= @answer.id %>_content">Answer <%= i %></label>
       </div>
       <div class="answer_options">
-        <label for="answer_is_correct">Is correct</label>
+        <label for="answer_<%= @answer.id %>_is_correct">Is correct</label>
         <%= check_box('answer[]', 'is_correct') %>
 	<a onclick="delete_answer(this); return false;" href="#">
 		delete
@@ -39,3 +39,6 @@
   </div>
 <% end %>
 </div>
+<br/>
+<a onclick="another_answer(); return false;" href="#">another answer</a>
+<br/>

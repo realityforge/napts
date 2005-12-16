@@ -101,9 +101,9 @@ class QuestionControllerTest < Test::Unit::TestCase
   def test_edit_post
     question = 'Is chocolate great?'
     answer = 'Maybe, or maybe not'
-    post(:edit, {:id => @q1.id, 
-                :question => {:content => question}, 
-		:answer => {@q1_a1.id => { :content => answer }}},
+    post(:edit, {'id' => @q1.id, 
+                'question' => {'content' => question}, 
+		'answer' => {@q1_a1.id.to_s => { 'content' => answer }}},
 		{ :user_id => @peter_user.id }
 	)
     assert_equal( 'Question was successfully updated.', flash[:notice] )
