@@ -11,7 +11,7 @@ class QuestionController < ApplicationController
     if request.get?
       @question = Question.new
       @question.answers = [Answer.new,Answer.new,Answer.new,Answer.new]
-      @answers = @question.answers
+      
     elsif request.post?
       @question = Question.new(params[:question])
       is_valid = @question.valid?
@@ -35,6 +35,7 @@ class QuestionController < ApplicationController
         answer.id = i
 	i = i + 1
     end
+    @answers = @question.answers
   end    
 
   def edit
