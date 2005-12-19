@@ -11,6 +11,7 @@ class QuestionController < ApplicationController
     if request.get?
       @question = Question.new
       @question.answers = [Answer.new,Answer.new,Answer.new,Answer.new]
+      @answers = @question.answers
     elsif request.post?
       @question = Question.new(params[:question])
       is_valid = @question.valid?
@@ -37,28 +38,50 @@ class QuestionController < ApplicationController
   end    
 
   def edit
+  
     @question = Question.find(params[:id])
-    if request.post?
+    if request.get?
+      @answers = @question.answers
+    elsif request.post?
+      @answers = []
+      if params[:answer]
       for id in params[:answer].keys
-        answer = @question.answers.detect { |x| x.id.to_s == id.to_s }
-	if( answer.nil? )
-	  flash[:alert] = "Update not successful"
-	  return
-	else
-	  answer.attributes = params[:answer][id]
-	  if !answer.valid?
-	    return
+	if ! id.index('new')
+          answer = @question.answers.detect { |x| x.id.to_s == id.to_s }
+	  if answer.nil?
+	    flash[:alert] = "Update not successful"
+	  else
+	    answer.attributes = params[:answer][id]
+	    @answers << answer
 	  end
+        else
+	  answer = Answer.new( params[:answer][id] )
+	  # This is just a temporary id used prior to saving to database 
+	  answer.id = id.to_s
+	  answer.question_id = @question.id
+	  @answers << answer
 	end
       end
-      for answer in @question.answers
-        if ! params[:answer][answer.id.to_s]
-	  @question.answers.delete(answer)
-	end
       end
-      if( @question.update_attributes(params[:question]) &&
-          Answer.update( params[:answer].keys, params[:answer].values ) )
-        flash[:notice] = 'Question was successfully updated.'
+      
+      @question.attributes = params[:question]
+
+      is_valid = true
+      @answers.each do |x| 
+      	is_valid = x.valid? && is_valid
+      end
+      is_valid &&= @question.valid?
+      return unless is_valid && ! flash[:alert]
+      
+      Answer.transaction do
+        for answer in @question.answers
+	  if params[:answer] && ! params[:answer][answer.id.to_s]
+	    @question.answers.delete(answer)
+	  end
+        end
+	@question.save!
+	@answers.each {|x| x.save!}
+	flash[:notice] = 'Question was successfully updated.'
         redirect_to( :action => 'show', :id => @question )
         return
       end
