@@ -5,14 +5,6 @@ function delete_answer(node)
 
 function another_answer()
 {
-  /* <div class="answer_options">
-        <label for="answer_is_correct">Is correct</label>
-        <input id="answer_14_is_correct" 
-	  name="answer[14][is_correct]" 
-	  value="1" type="checkbox">
-	<input name="answer[14][is_correct]" 
-	   value="0" type="hidden">
-  */
   var randomnumber= 'new' + Math.floor(Math.random()*101);
   answer = document.createElement('div');
   answer.setAttribute('class','answer');
