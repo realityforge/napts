@@ -49,17 +49,17 @@ class CreateInitialSchema < ActiveRecord::Migration
     add_index("quizzes", ["name", "subject_id"], :name => "quizzes_name_subject_id_index", :unique => true)
     add_foreign_key_constraint("quizzes", "subject_id", "subjects", "id", :name => "quizzes_subject_id_fk")    
 
-    # TestRuns
-    create_table("test_runs", :force => true) do |t|
+    # QuizAttempts
+    create_table("quiz_attemps", :force => true) do |t|
       t.column "start_time", :datetime, :null => false
       t.column "end_time", :datetime, :null => false
       t.column "computer_id", :integer, :null => false
       t.column "quiz_id", :integer, :null => false
       t.column "user_id", :integer, :null => false
     end
-    add_foreign_key_constraint("test_runs", "computer_id", "computers", "id", :name => "test_runs_computer_id_fk")
-    add_foreign_key_constraint("test_runs", "quiz_id", "quizzes", "id", :name => "test_runs_quiz_id_fk")
-    add_foreign_key_constraint("test_runs", "user_id", "users", "id", :name => "test_runs_user_id_fk")
+    add_foreign_key_constraint("quiz_attemps", "computer_id", "computers", "id", :name => "quiz_attemps_computer_id_fk")
+    add_foreign_key_constraint("quiz_attemps", "quiz_id", "quizzes", "id", :name => "quiz_attemps_quiz_id_fk")
+    add_foreign_key_constraint("quiz_attemps", "user_id", "users", "id", :name => "quiz_attemps_user_id_fk")
 
     # Questions
     create_table("questions", :force => true) do |t|
@@ -85,7 +85,7 @@ class CreateInitialSchema < ActiveRecord::Migration
     add_foreign_key_constraint("answers", "question_id", "questions", "id", :name => "answers_question_id_fk")
     
     # Resources
-    create_table("resources", :id => false, :force => true) do |t|
+    create_table("resources", :force => true) do |t|
       t.column "type", :string, :limit => 25, :null => false
       t.column "resource", :string, :limit => 125, :null => false
       t.column "question_id", :integer, :null => false
@@ -93,24 +93,24 @@ class CreateInitialSchema < ActiveRecord::Migration
     add_foreign_key_constraint("resources", "question_id", "questions", "id", 
                                :name => "resources_iquestion_id_fk")
 
-    # Responses
-    create_table("responses", :id => false, :force => true) do |t|
+    # QuizResponses
+    create_table("quiz_responses", :force => true) do |t|
       t.column "input", :string, :limit => 125
       t.column "created_at", :datetime, :null => false
-      t.column "test_run_id", :integer, :null => false
+      t.column "quiz_attemps_id", :integer, :null => false
       t.column "question_id", :integer, :null => false
       t.column "answer_id", :integer, :null => false
     end
-    add_foreign_key_constraint("responses", "test_run_id", "test_runs", "id", 
-                               :name => "responses_test_run_id_fk")
-    add_foreign_key_constraint("responses", "question_id", "questions", "id", 
-                               :name => "responses_question_id_fk")
-    add_foreign_key_constraint("responses", "answer_id", "answers", "id", 
-                               :name => "responses_answer_id_fk")
+    add_foreign_key_constraint("quiz_responses", "quiz_attemps_id", "quiz_attemps", "id", 
+                               :name => "quiz_responses_quiz_attemps_id_fk")
+    add_foreign_key_constraint("quiz_responses", "question_id", "questions", "id", 
+                               :name => "quiz_responses_question_id_fk")
+    add_foreign_key_constraint("quiz_responses", "answer_id", "answers", "id", 
+                               :name => "quiz_responses_answer_id_fk")
   end
 
   def self.down
-    drop_table("responses")
+    drop_table("quiz_responses")
     drop_table("resources")
     drop_table("answers")
     drop_table("quiz_items")
