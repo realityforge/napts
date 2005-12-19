@@ -1,4 +1,4 @@
-OrderedTables = [ :users, :subjects, :quizzes, :questions, :quiz_items, :answers ].collect {|x| x.to_s }
+OrderedTables = [ :users, :subjects, :quizzes, :questions, :quiz_items, :answers, :quiz_attempts, :quiz_responses ].collect {|x| x.to_s }
 
 desc "Reset Database data to that in fixtures"
 task :reset_db_data => :environment do

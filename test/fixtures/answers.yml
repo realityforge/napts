@@ -47,12 +47,12 @@ q3_a1:
 q3_a2:
   id: 10
   content: "To show his girlfriend he had guts"
-  is_correct: true
+  is_correct: false
   question_id: 3
 q3_a3:
   id: 11
   content: "two"
-  is_correct: false
+  is_correct: true
   question_id: 3
 q3_a4:
   id: 12

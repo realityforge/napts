@@ -118,9 +118,9 @@ class QuestionControllerTest < Test::Unit::TestCase
   def test_edit_post_with_invalid_question
     question = ''
     answer = 'Maybe, maybe not'
-    post(:edit, {:id => @q1.id, 
+    post(:edit, {:id => "#{@q1.id}", 
                 :question => {:content => question}, 
-		:answer => {@q1_a1.id => { :content => answer }}},
+		:answer => {"#{@q1_a1.id}" => { :content => answer }}},
 		{ :user_id => @peter_user.id }
 	)
     assert_response( :success )
@@ -133,9 +133,9 @@ class QuestionControllerTest < Test::Unit::TestCase
     question = 'Yo dude'
     answer = ''
     
-    post(:edit, {:id => @q1.id, 
+    post(:edit, {:id => "#{@q1.id}", 
                 :question => {:content => question}, 
-		:answer => {@q1_a1.id => { :content => answer }}},
+		:answer => {"#{@q1_a1.id}" => { :content => answer }}},
 		  { :user_id => @peter_user.id }
 	)
     assert_response( :success )
@@ -148,9 +148,9 @@ class QuestionControllerTest < Test::Unit::TestCase
   def test_edit_post_with_answer_not_associated_with_question
     question = 'Yo dude'
     answer = 'Hiya'
-    post( :edit, { :id => @q2.id,
+    post( :edit, { :id => "#{@q2.id}",
                   :question => {:content => question},
-                  :answer => { @q4_a1.id=> {:content => answer}} },
+                  :answer => { "#{@q4_a1.id}" => {:content => answer}} },
 		  { :user_id => @peter_user.id } 
 	)
     assert_response( :success )
