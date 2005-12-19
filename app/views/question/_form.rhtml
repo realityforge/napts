@@ -5,8 +5,10 @@
   <div class="question_header">
     <div class="question_type">
       <label for="question_type">Type</label>
-      <select id="question_type" name="question[type]"><option value="multiple answers" selected>Multiple answers</option>
-              <option value="single answer">Single answer</option></select>
+      <%= options = Question::QUESTION_TYPE
+          select("question", "question_type", options )
+      %>
+
     </div>
   </div>
   <div class="question_content">
@@ -16,7 +18,7 @@
 <div id="allanswers">
 <% 
    i = 0
-   for @answer in @question.answers do
+   for @answer in @answers do
      i = i + 1
 %>
   <div class="answer">
@@ -33,7 +35,7 @@
       </div>
     </div>
     <div class="answer_content">
-      <%= error_messages_for('answer') %>
+      <%= error_messages_for('answer') if false %>
       <%= text_area('answer[]', 'content', :class => 'answer_content' ) %>
     </div>
   </div>

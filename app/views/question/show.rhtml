@@ -38,7 +38,7 @@
 <h2>Question <%= @question.id %></h2>
 <table border="1">
   <tr>
-    <td>Type: <%= @question.question_type %></td>
+    <td>Type: <%= Question::QUESTION_TYPE.index( @question.question_type ) %></td>
   </tr>
   <tr>
     <td class="question_cont"><%= @question.content %></td>
