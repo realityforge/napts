@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+qa_1:
+  id: 1
+  start_time: '2005-11-7 00:00:00'
+  end_time: '2005-11-7 00:10:00'
+  quiz_id: 1
+  user_id: 2
+another:
+  id: 2
+  start_time: '2005-11-7 00:00:00'
+  end_time: '2005-11-7 00:05:12'
+  quiz_id: 2
+  user_id: 1

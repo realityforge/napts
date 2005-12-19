@@ -1,0 +1,14 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+qr_1:
+  id: 1
+  input: ""
+  created_at: '2005-11-7 00:00:00'
+  quiz_attempts_id: 1
+  question_id: 3
+
+qr_2:
+  id: 2
+  input: ""
+  created_at: '2005-11-7 00:00:00'
+  quiz_attempts_id: 2
+  question_id: 2
