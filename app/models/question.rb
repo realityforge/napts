@@ -2,6 +2,7 @@ class Question < ActiveRecord::Base
   validates_presence_of( :content )
   has_many( :answers, :dependent => true )
   has_many( :quiz_items )
+  has_many( :quiz_responses )
   
   QUESTION_TYPE = {
     "Multiple answers" => 1,

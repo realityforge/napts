@@ -1,6 +1,7 @@
 require "digest/sha1"
 
 class User < ActiveRecord::Base
+  has_many( :quiz_attempts )
   attr_accessor( :password )
   attr_accessible( :username, :password, :name )
   validates_uniqueness_of( :username )

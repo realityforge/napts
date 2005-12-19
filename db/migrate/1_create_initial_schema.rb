@@ -105,19 +105,19 @@ class CreateInitialSchema < ActiveRecord::Migration
     add_foreign_key_constraint("quiz_responses", "question_id", "questions", "id", 
                                :name => "quiz_responses_question_id_fk")
   
-    # Answer_QuizResponses
-    create_table("answer_quiz_responses", :id => false, :force => true ) do |t|
-      t.column "quiz_responses_id", :integer, :null => false
+    # Answers_QuizResponses
+    create_table("answers_quiz_responses", :id => false, :force => true ) do |t|
+      t.column "quiz_response_id", :integer, :null => false
       t.column "answer_id", :integer, :null => false
     end
-    add_foreign_key_constraint("answer_quiz_responses", "quiz_responses_id", "quiz_responses", "id",
+    add_foreign_key_constraint("answers_quiz_responses", "quiz_response_id", "quiz_responses", "id",
                                 :name => "quiz_response_id_fk")
-    add_foreign_key_constraint("answer_quiz_responses", "answer_id", "answers", "id",
+    add_foreign_key_constraint("answers_quiz_responses", "answer_id", "answers", "id",
     				:name => "answer_id_fk")
   
   end
   def self.down
-    drop_table("answer_quiz_responses")
+    drop_table("answers_quiz_responses")
     drop_table("quiz_responses")
     drop_table("resources")
     drop_table("answers")

@@ -1,5 +1,6 @@
 class Quiz < ActiveRecord::Base
   has_many( :quiz_items, :dependent => true )
+  has_many( :quiz_attempts )
   belongs_to( :subject )
   validates_presence_of( :subject_id )
   validates_numericality_of( :duration )
