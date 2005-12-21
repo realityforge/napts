@@ -41,9 +41,8 @@ class QuizAttemptController < ApplicationController
   end
   
   def results
-    @quiz_response = QuizResponse.find( :all, conditions => ['quiz_attempt_id = ?', :quiz_attempt_id] )
-    for qr in @quiz_response
-      
-        
+    
+    @quiz_response = QuizResponse.find( :all, :conditions => ['quiz_attempt_id = ?', :quiz_attempt_id] )
+    
   end
 end

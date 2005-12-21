@@ -1,0 +1,20 @@
+<% for question_id in @quiz_response %>
+ <% responses = [] %>
+ <% for qr in question_id.answers %>
+   <% responses << answer_id %>
+ <% end %>
+    
+ <% correct = [] %>
+ <% for q in question_id.question.answers %>
+   <% if q.is_correct %>
+     <% correct << q.id %>
+   <% end %>
+ <% end %>
+ <% if responses == correct %>
+   <p><%= question_id.question_id %>correct</p>
+ <% else %>
+   <p><%= question_id.question_id %>incorrect</p>
+ <% end %>
+  <br/>
+  
+<% end %>
