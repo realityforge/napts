@@ -1,16 +1,49 @@
 class QuizAttemptController < ApplicationController
   def intro
-    @user = User.find(params[:user_id])
     @quiz = Quiz.find(:all)
   end
   
-  def take_test
-    @user = User.find(params[:user_id])
+  def start_quiz
     @quiz = Quiz.find(params[:quiz_id])
+    @quiz_attempt = QuizAttempt.create( :start_time => Time.now, 
+                                        :quiz_id => @quiz.id, 
+                                        :user_id => @user.id )
 
-    @questions = Question.find(:all, 
-                             :conditions => ['quiz_items.quiz_id = ?', @quiz.id],
-			     :joins => 'LEFT OUTER JOIN quiz_items ON quiz_items.question_id = questions.id ')
-#    @quiz_pages, @quizitems = paginate( :quiz_items, :conditions => ['quiz_id = ? ', @qi.id ], :per_page => 1 )
+    for quiz_item in @quiz.quiz_items
+      QuizResponse.create( :created_at => Time.now, 
+                           :question_id => quiz_item.question.id,
+			   :position => quiz_item.position,
+			   :quiz_attempt_id => @quiz_attempt.id )
+    end
+    redirect_to( :action => 'show',
+                 :quiz_attempt_id => @quiz_attempt.id,
+		 :quiz_response_position => 1 )
+  end
+  
+  def show
+    position = params[:quiz_response_position]
+    attempt_id = params[:quiz_attempt_id]
+    @quiz_response = QuizResponse.find( :first, 
+                                   :conditions => [ 'position = ? AND quiz_attempt_id =?', 
+				                    position, 
+				                    attempt_id ] 
+  				 )
+    if request.get? && !@quiz_response
+      redirect_to( :action => 'results', :quiz_attempt_id => attempt_id )
+    elsif request.post?
+      for answer in params[:answers]
+        @quiz_response.answers << Answer.find(answer)
+      end
+      redirect_to( :action => 'show',
+	           :quiz_attempt_id => attempt_id,
+		   :quiz_response_position => position.to_i + 1 )
+    end
+  end
+  
+  def results
+    @quiz_response = QuizResponse.find( :all, conditions => ['quiz_attempt_id = ?', :quiz_attempt_id] )
+    for qr in @quiz_response
+      
+        
   end
 end

@@ -52,7 +52,7 @@ class CreateInitialSchema < ActiveRecord::Migration
     # QuizAttempts
     create_table("quiz_attempts", :force => true) do |t|
       t.column "start_time", :datetime, :null => false
-      t.column "end_time", :datetime, :null => false
+      t.column "end_time", :datetime
  #     t.column "computer_id", :integer, :null => false
       t.column "quiz_id", :integer, :null => false
       t.column "user_id", :integer, :null => false
@@ -72,6 +72,7 @@ class CreateInitialSchema < ActiveRecord::Migration
       t.column "is_on_test", :boolean, :null => false
       t.column "quiz_id", :integer, :null => false
       t.column "question_id", :integer, :null => false
+      t.column "position", :integer, :null => false
     end
     add_foreign_key_constraint("quiz_items", "quiz_id", "quizzes", "id", :name => "quiz_items_quiz_id_fk")
     add_foreign_key_constraint("quiz_items", "question_id", "questions", "id", :name => "quiz_items_question_id_fk")
@@ -96,12 +97,13 @@ class CreateInitialSchema < ActiveRecord::Migration
     # QuizResponses
     create_table("quiz_responses", :force => true) do |t|
       t.column "input", :string, :limit => 125
-      t.column "created_at", :datetime, :null => false
-      t.column "quiz_attempts_id", :integer, :null => false
+      t.column "created_at", :datetime
+      t.column "position", :integer
+      t.column "quiz_attempt_id", :integer, :null => false
       t.column "question_id", :integer, :null => false
     end
-    add_foreign_key_constraint("quiz_responses", "quiz_attempts_id", "quiz_attempts", "id", 
-                               :name => "quiz_responses_quiz_attempts_id_fk")
+    add_foreign_key_constraint("quiz_responses", "quiz_attempt_id", "quiz_attempts", "id", 
+                               :name => "quiz_responses_quiz_attempt_id_fk")
     add_foreign_key_constraint("quiz_responses", "question_id", "questions", "id", 
                                :name => "quiz_responses_question_id_fk")
   

@@ -12,7 +12,7 @@
     <tr>
       <td><%= quiz.id %></td>
       <td><%= quiz.name %></td>
-      <td><%= link_to 'Take test', :action => 'take_test', :quiz_id => quiz.id, :user_id => @user.id %></td>
+      <td><%= link_to 'Start Quiz', :action => 'start_quiz', :quiz_id => quiz.id, :user_id => @user.id %></td>
     </tr>
   <% end %>
 </table>
