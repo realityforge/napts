@@ -28,4 +28,40 @@ qi_5:
   quiz_id: 2
   question_id: 4
   position: 3
+qi_6:
+  id: 6
+  is_on_test: false
+  quiz_id: 3
+  question_id: 1
+  position: 1
+qi_7:
+  id: 7
+  is_on_test: false
+  quiz_id: 3
+  question_id: 2
+  position: 2
+qi_8:
+  id: 8
+  is_on_test: true
+  quiz_id: 3
+  question_id: 3
+  position: 3
+qi_9:
+  id: 9
+  is_on_test: true
+  quiz_id: 3
+  question_id: 4
+  position: 4
+qi_10:
+  id: 10
+  is_on_test: false
+  quiz_id: 1
+  question_id: 3
+  position: 3
+qi_11:
+  id: 11
+  is_on_test: true
+  quiz_id: 1
+  question_id: 4
+  position: 4
 

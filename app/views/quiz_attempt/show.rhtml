@@ -1,34 +1,11 @@
+<% @question = @quiz_response.question %>
+<h3>Question <%= @quiz_response.position %></h3>
 <%= start_form_tag( {:action => 'show',
                      :quiz_response_position => @quiz_response.position, 
                      :quiz_attempt_id => @quiz_response.quiz_attempt_id },
                     {:id => 'show_form'} ) %>
-<% @question = @quiz_response.question %>
-<h2><%= @question.content %></h2>
-<% if @question.question_type == 1 %>
-  <p>please select all correct answers</p>
-  <table>
-    <% for answer in @question.answers %>
-      <tr>
-        <td>
-	  <input type="checkbox" name="answers[]" value="<%= answer.id %>">
-        </td>
-        <td><%= answer.content %></td>
-      </tr>
-    <% end %>
-  </table>
-<% elsif @question.question_type == 2 %>
-  <p>please select one correct answer</p>
-  <table>
-    <% for answer in @question.answers %>
-      <tr>
-        <td>
-	  <input type="radio" name="answers[]" value="<%= answer.id %>">
-	</td>
-	<td><%= answer.content %></td>
-      </tr>
-    <% end %>
-  </table>
-<% end %>
 
-<button onclick="show_form.submit(); return false;">Submit Answer</button>
+  <%= render( :partial => 'form' ) %>
+  <%= submit_tag( "submit question" ) %>
 <%= end_form_tag %>
+

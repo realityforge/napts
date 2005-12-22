@@ -1,20 +1,12 @@
-<% for question_id in @quiz_response %>
- <% responses = [] %>
- <% for qr in question_id.answers %>
-   <% responses << answer_id %>
- <% end %>
-    
- <% correct = [] %>
- <% for q in question_id.question.answers %>
-   <% if q.is_correct %>
-     <% correct << q.id %>
-   <% end %>
- <% end %>
- <% if responses == correct %>
-   <p><%= question_id.question_id %>correct</p>
- <% else %>
-   <p><%= question_id.question_id %>incorrect</p>
- <% end %>
-  <br/>
-  
+<h1>User: <%= @user.name %></h1>
+
+<% if ! @results.empty? %>
+  <p>You got these questions wrong: </p>
+  <% for q_id in @results %>
+    <p><%= q_id %></p>
+  <% end %>
+<% else %>
+   <p>You answered all questions correctly</p>
 <% end %>
+
+<%= link_to( 'home', :action => 'intro' ) %>

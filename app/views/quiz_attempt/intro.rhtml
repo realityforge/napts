@@ -12,7 +12,8 @@
     <tr>
       <td><%= quiz.id %></td>
       <td><%= quiz.name %></td>
-      <td><%= link_to 'Start Quiz', :action => 'start_quiz', :quiz_id => quiz.id, :user_id => @user.id %></td>
+      <td><%= link_to( 'Start Quiz', :action => 'start_quiz', :quiz_id => quiz.id, :user_id => @user.id ) %></td>
+      <td><%= link_to( 'View Prelim', :action => 'prelim', :quiz_id => quiz.id, :quiz_item_position => 1 ) %></td>
     </tr>
   <% end %>
 </table>
