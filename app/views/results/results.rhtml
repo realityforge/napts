@@ -1,0 +1,11 @@
+<% numqns = @quiz_responses.length %>
+<% correct = numqns - @results.length %>
+<p>You got <%= correct %> out of <%= numqns %> questions correct.</p>
+<% if ! @results.empty? %>
+  <p>These questions were answered wrong: </p>
+  <% for q_id in @results %>
+    <p><%= q_id %></p>
+  <% end %>
+<% end %>
+
+<%= link_to( 'home', :action => 'index' ) %>

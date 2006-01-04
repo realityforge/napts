@@ -1,0 +1,17 @@
+<table>
+  <tr>
+    <th>Quiz name</th>
+    <th>Number correct answers</th>
+    <th>Total number questions</th>
+  </tr>
+  <% numquizzes = @quiz_attempt.length %>
+  <% for i in 0..numquizzes %>
+    <tr>
+      <td><%= @quiz_name[i] %></td>
+      <td><%= @numcorrect[i].to_s %></td>
+      <td><%= @numqns[i].to_s %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to( "back", :action => 'index' ) %>

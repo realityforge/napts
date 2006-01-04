@@ -1,6 +1,6 @@
 class QuizAttemptController < ApplicationController
   def intro
-    @quiz = Quiz.find(:all)
+    @quiz = Quiz.find( :all, :conditions => ['id NOT IN (SELECT quiz_id FROM quiz_attempts WHERE quiz_attempts.user_id = ?) AND enable = ?' , @user.id, true ] )
   end
   
   def start_quiz
@@ -21,25 +21,7 @@ class QuizAttemptController < ApplicationController
                  :quiz_attempt_id => @quiz_attempt.id,
 		 :quiz_response_position => 1 )
   end
-  
-  def prelim
-    @quiz = Quiz.find(params[:quiz_id])
-    position = params[:quiz_item_position]
-    @quiz_item = QuizItem.find( :first, 
-                                :conditions => ['quiz_id = ? AND position = ?',
-	                        @quiz.id , position ] )
-    if @quiz_item
-      @question = @quiz_item.question
-      if request.post?
-       redirect_to( :action => 'prelim', 
-                    :quiz_item_position => position.to_i + 1,
-		    :quiz_id => @quiz.id )
-      end
-    else
-      redirect_to( :action => 'intro' )
-    end
-  end
-  
+
   def show
     position = params[:quiz_response_position]
     attempt_id = params[:quiz_attempt_id]

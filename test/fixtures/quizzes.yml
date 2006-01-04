@@ -4,15 +4,21 @@ quiz_1:
   name: "first"
   description: "introductory test"
   subject_id: 1
+  enable: true
+  prelim_enable: true
 quiz_2:
   id: 2
   duration: 15
   name: "billy goat"
   description: "gruff"
   subject_id: 1
+  enable: true
+  prelim_enable: true
 quiz_3:
   id: 3
   duration: 5
   name: "stan"
   description: "he drives to work"
   subject_id: 2
+  enable: true
+  prelim_enable: false
