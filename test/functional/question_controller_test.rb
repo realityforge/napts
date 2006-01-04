@@ -17,6 +17,7 @@ class QuestionControllerTest < Test::Unit::TestCase
   get(:list, {}, { :user_id => @peter_user.id } )
     assert_response(:success)
     assert_template('list')
+    assert_valid_markup
     assert_not_nil assigns(:questions)
   end
 
@@ -24,6 +25,7 @@ class QuestionControllerTest < Test::Unit::TestCase
     get(:show, {:id => 1}, { :user_id => @peter_user.id } )
     assert_response(:success)
     assert_template('show')
+    assert_valid_markup
     assert_not_nil assigns(:question)
     assert assigns(:question).valid?
   end
@@ -34,6 +36,7 @@ class QuestionControllerTest < Test::Unit::TestCase
     get(:new, {}, { :user_id => @peter_user.id } )
     assert_response( :success )
     assert_template( 'new' )
+    assert_valid_markup
     assert_nil( flash[:notice] )
     assert_equal( 4, assigns(:question).answers.length )
     assert_equal( num_questions, Question.count )
@@ -54,6 +57,7 @@ class QuestionControllerTest < Test::Unit::TestCase
 	)
     assert_response( :success )
     assert_template( 'new' )
+    assert_valid_markup
     assert_equal(1,assigns(:question).errors.count)
     assert_not_nil(assigns(:question).errors.on(:content))
     assert_equal( 1, assigns(:question).answers.length )
@@ -123,8 +127,9 @@ class QuestionControllerTest < Test::Unit::TestCase
 		:answer => {"#{@q1_a1.id}" => { :content => answer }}},
 		{ :user_id => @peter_user.id }
 	)
-    assert_response( :success )
-    assert_template( 'edit' )
+    assert_response(:success)
+    assert_template('edit')
+    assert_valid_markup
     assert_equal( 1, assigns(:question).errors.count )
     assert_not_nil( assigns(:question).errors.on(:content) )
   end
@@ -139,7 +144,8 @@ class QuestionControllerTest < Test::Unit::TestCase
 		  { :user_id => @peter_user.id }
 	)
     assert_response( :success )
-    assert_template( 'edit' )
+    assert_template('edit')
+    assert_valid_markup
     answer = assigns(:question).answers.detect {|x| x.id == 1}
     assert_equal( 1, answer.errors.count )
     assert_not_nil( answer.errors.on(:content) )
@@ -156,6 +162,7 @@ class QuestionControllerTest < Test::Unit::TestCase
     assert_response( :success )
     assert_equal( "Update not successful", flash[:alert] )
     assert_template( 'edit' )
+    assert_valid_markup
   end
   
   def test_destroy
