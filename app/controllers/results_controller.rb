@@ -53,7 +53,7 @@ class ResultsController < ApplicationController
       						  
       @quiz_name << attempt.quiz.name
       @numqns << @quiz_responses.length
-      results = 0
+      @results = 3
       for quiz_response in @quiz_responses
         responses = []
         correct = []
@@ -64,11 +64,11 @@ class ResultsController < ApplicationController
 	  correct << q.id.to_s if q.is_correct
         end
         if ! (responses == correct)
-	  results += 1
+	  @results = @results + 1
         end
       end
       
-      @numcorrect << results
+      @numcorrect << @results
     end
   end
 end
