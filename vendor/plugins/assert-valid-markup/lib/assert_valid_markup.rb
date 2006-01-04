@@ -18,15 +18,28 @@ class Test::Unit::TestCase
   #   end
   #
   def assert_valid_markup(fragment=@response.body)
+    fragment_md5 = MD5.md5(fragment).to_s
+    file_md5 = nil
+
     output_dir = "#{RAILS_ROOT}/temp"
-    output_filename = File.join(output_dir, 'output.' + MD5.md5(fragment).to_s + '.html')
-    File.open(output_filename, 'w+') do |f| f.write(fragment); end
-    filename = File.join(output_dir, 'markup.' + MD5.md5(fragment).to_s + '.yml')
+    content_filename = File.join(output_dir, self.class.name + '.' + method_name + '.html')
+
+    File.open(content_filename, 'r') do |f| 
+      file_md5 = MD5.md5(f.read(f.stat.size)).to_s
+    end if File.exists?(content_filename)
+
+    results_filename = File.join(output_dir, self.class.name + '.' + method_name + '-results.yml')
+
+    if file_md5 != fragment_md5
+      File.open(content_filename, 'w+') do |f| f.write(fragment); end
+      File.delete(results_filename) if File.exists?(results_filename)
+    end
+
     begin
-      response = File.open filename do |f| Marshal.load(f) end
+      response = File.open(results_filename) do |f| Marshal.load(f) end
     rescue
       response = http.start('validator.w3.org').post2('/check', "fragment=#{CGI.escape(fragment)}&output=xml")
-      File.open(filename, 'w+') do |f| Marshal.dump(response, f) end
+      File.open(results_filename, 'w+') do |f| Marshal.dump(response, f) end
     end
     markup_is_valid = response['x-w3c-validator-status'] == 'Valid'
     message = markup_is_valid ? '' :  XmlSimple.xml_in(response.body)['messages'][0]['msg'].collect{ |m| "Invalid markup: line #{m['line']}: #{CGI.unescapeHTML(m['content'])}" }.join("\n")
