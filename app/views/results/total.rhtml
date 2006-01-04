@@ -4,8 +4,7 @@
     <th>Number correct answers</th>
     <th>Total number questions</th>
   </tr>
-  <% numquizzes = @quiz_attempt.length %>
-  <% for i in 0..numquizzes %>
+  <% for i in 0..@quiz_attempts.length %>
     <tr>
       <td><%= @quiz_name[i] %></td>
       <td><%= @numcorrect[i].to_s %></td>

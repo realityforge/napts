@@ -43,18 +43,15 @@ class ResultsController < ApplicationController
   end
   
   def total
-    @quiz_attempt = QuizAttempt.find( :all, :conditions => ['user_id = ?', @user.id] )
+    @quiz_attempts = QuizAttempt.find( :all, :conditions => ['user_id = ?', @user.id] )
     @quiz_name = []
     @numqns = []
     @numcorrect = []
-    for attempt in @quiz_attempt
-      @quiz_responses = QuizResponse.find( :all, :conditions => ['quiz_attempt_id = ?',
-                                                                  @quiz_attempt.id] )
-      						  
+    for attempt in @quiz_attempts
       @quiz_name << attempt.quiz.name
-      @numqns << @quiz_responses.length
-      @results = 3
-      for quiz_response in @quiz_responses
+      @numqns << attempt.quiz_responses.length
+      @results = 0
+      for quiz_response in attempt.quiz_responses
         responses = []
         correct = []
         for qr in quiz_response.answers
