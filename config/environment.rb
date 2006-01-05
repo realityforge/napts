@@ -50,3 +50,5 @@ end
 # end
 
 # Include your application configuration below
+
+OrderedTables = [ :users, :subjects, :quizzes, :questions, :quiz_items, :answers, :quiz_attempts, :quiz_responses ].collect {|x| x.to_s }
