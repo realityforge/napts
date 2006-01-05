@@ -56,22 +56,7 @@ class QuizAttemptController < ApplicationController
   end
   
   def results
-    @quiz_responses = 
-      QuizResponse.find( :all, :conditions => ['quiz_attempt_id = ?', 
-                                                params[:quiz_attempt_id]] )
-    @results = []
-      for quiz_response in @quiz_responses
-        responses = [] 
-        correct = []
-        for qr in quiz_response.answers
-          responses << qr.answer_id.to_s
-        end
-        for q in quiz_response.question.answers
-          correct << q.id.to_s if q.is_correct
-        end
-        if ! (responses == correct)
-          @results << quiz_response.position.to_s
-        end
-      end
+    @quiz_attempt = QuizAttempt.find(params[:quiz_attempt_id])
+    @results = @quiz_attempt.score
   end
 end

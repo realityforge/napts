@@ -3,6 +3,8 @@ class QuizAttempt < ActiveRecord::Base
   belongs_to( :user )
   has_many( :quiz_responses )
   
+  # stores the question number of all the incorrect 
+  # questions in an array and returns it
   def score
     results = []
     for quiz_response in self.quiz_responses
@@ -14,7 +16,9 @@ class QuizAttempt < ActiveRecord::Base
       for question in quiz_response.question.answers
         correct << question.id.to_s if question.is_correct
       end
-      if ! ( responses == correct )
+      correct.sort!
+      responses.sort!
+      if responses != correct
         results << quiz_response.position.to_s
       end
     end
