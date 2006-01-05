@@ -16,10 +16,15 @@
   <% end %>
 </table>
 <br/>
-<%= link_to_button("previous question", :action => 'view_quiz',
-                                        :quiz_item_position => ( params[:quiz_item_position].to_i - 1 ),
-					:quiz_id => @quiz.id ) %>
+<% if params[:quiz_item_position].to_i != 1 %>
+  <%= link_to_button("previous question", :action => 'view_quiz',
+                                          :quiz_item_position => ( params[:quiz_item_position].to_i - 1 ),
+					  :quiz_id => @quiz.id ) %>
+<% end %>
+<% if params[:quiz_item_position].to_i !=  @quiz.quiz_items.length %>
 <%= link_to_button("next question", :action => 'view_quiz', 
                                     :quiz_item_position => ( params[:quiz_item_position].to_i + 1 ), 
 				    :quiz_id => @quiz.id ) %>
+<% end %>
 <%= link_to_button("exit preview", :action => 'intro') %>
+

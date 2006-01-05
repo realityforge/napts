@@ -12,10 +12,9 @@ class PreviewQuizController < ApplicationController
     if @quiz_item
       @question = @quiz_item.question
       if request.post?
-        
-         redirect_to( :action => 'view_quiz', 
-                    :quiz_item_position => position.to_i + 1,
-		    :quiz_id => @quiz.id )
+        redirect_to( :action => 'view_quiz', 
+                     :quiz_item_position => position.to_i + 1,
+	       	     :quiz_id => @quiz.id )
       end
     else
       redirect_to( :action => 'intro' )
