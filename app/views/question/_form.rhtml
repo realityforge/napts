@@ -4,7 +4,7 @@
 <div class="question">
   <div class="question_header">
     <div class="question_type">
-      <label for="question_type">Type</label>
+      <label for="question_question_type">Type</label>
       <%= options = Question::QUESTION_TYPE
           select("question", "question_type", options )
       %>
@@ -12,7 +12,7 @@
     </div>
   </div>
   <div class="question_content">
-    <%= text_area('question', 'content', :class => 'question_content') %></p>
+    <%= text_area('question', 'content', :class => 'question_content') %>
   </div>
 </div>
 <div id="allanswers">
@@ -41,6 +41,4 @@
   </div>
 <% end %>
 </div>
-<br/>
-<a onclick="another_answer(); return false;" href="#">another answer</a>
-<br/>
+<p><a onclick="another_answer(); return false;" href="#">another answer</a></p>

@@ -1,4 +1,4 @@
-<%= start_form_tag({:action => 'add_questions', :id => @quiz},{:id => 'add_questions_form'}) %>
+<%= start_form_tag(:action => 'add_questions', :id => @quiz) %>
 
 <h1>Adding questions</h1>
 <h2>Quiz ID: <%= @quiz.id %></h2>
@@ -21,7 +21,7 @@
 </table>
 <br />
 
-<button onclick=" add_questions_form.submit(); return false;">Add question</button>
+<button type="submit">Add question</button>
 <%= end_form_tag %>
 
 <%= link_to_button("Cancel", {:action => 'show', :id => @quiz.id}) %>

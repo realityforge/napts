@@ -28,6 +28,6 @@
 <button onclick="change.value = '3'; change_form.submit(); return false;">remove</button>
 <%= end_form_tag %>
 
-<%= link_to 'Add questions', :action => 'add_questions', :id => @quiz %>
-<%= link_to 'Edit', :action => 'edit', :id => @quiz %> |
-<%= link_to 'Back', :action => 'list', :subject_id => @quiz.subject_id %>
+<%= link_to( 'Add questions', :action => 'add_questions', :id => @quiz ) %>
+<%= link_to( 'Edit', :action => 'edit', :id => @quiz ) %>
+<%= link_to( 'Back', :action => 'list', :subject_id => @quiz.subject_id ) %>

@@ -12,16 +12,16 @@
   <% for column in Subject.content_columns %>
     <td><%=h subject.send(column.name) %></td>
   <% end %>
-    <td><%= link_to 'Show', :action => 'show', :id => subject %></td>
-    <td><%= link_to 'Edit', :action => 'edit', :id => subject %></td>
-    <td><%= link_to 'Destroy', { :action => 'destroy', :id => subject }, :confirm => 'Are you sure?' %></td>
+    <td><%= link_to( 'Show', :action => 'show', :id => subject ) %></td>
+    <td><%= link_to( 'Edit', :action => 'edit', :id => subject ) %></td>
+    <td><%= link_to( 'Destroy', { :action => 'destroy', :id => subject }, :confirm => 'Are you sure?' ) %></td>
   </tr>
 <% end %>
 </table>
 
-<%= link_to 'Previous page', { :page => @subject_pages.current.previous } if @subject_pages.current.previous %>
-<%= link_to 'Next page', { :page => @subject_pages.current.next } if @subject_pages.current.next %> 
+<%= link_to( 'Previous page', { :page => @subject_pages.current.previous } ) if @subject_pages.current.previous %>
+<%= link_to( 'Next page', { :page => @subject_pages.current.next } ) if @subject_pages.current.next %> 
 
 <br />
 
-<%= link_to 'New subject', :action => 'new' %>
+<%= link_to( 'New subject', :action => 'new' ) %>

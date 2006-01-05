@@ -1,40 +1,3 @@
-<!--<h2>Question <%= @question.id %></h2>
-<div class="question">
-  <div class="question_header">
-    <div class="question_type">
-      Type: <%= @question.question_type %>
-    </div>
-
-  </div>
-  <div class="question_display">
-    <%= @question.content %>
-  </div>
-</div>
-
-<% 
-   i = 0
-   for @answer in @question.answers do
-     i = i + 1
-%>
-  <div class="answer">
-    <div class="answer_header">
-      <div class="answer_number">
-        Answer <%= i %>
-      </div>
-      <div class="answer_options">
-        Is correct: <%= @answer.is_correct %>
-      </div>
-    </div>
-    <div class="answer_display">
-      <%= @answer.content %>
-    </div>
-  </div>
-<% end %>
-<br />
-
-<%= link_to_button( "Edit", {:action => 'edit', :id => @question.id} ) %>
-<%= link_to_button( "Cancel", {:action => 'list', :id => @question.id} ) %>
--->
 <h2>Question <%= @question.id %></h2>
 <table border="1">
   <tr>
@@ -57,7 +20,7 @@
     </tr>
     <tr>
       <td colspan="2"><pre><%= answer.content %></pre></td>
-    <tr>
+    </tr>
   <% end %>
 </table>
 <br />
