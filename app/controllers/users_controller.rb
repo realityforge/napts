@@ -17,7 +17,7 @@ class UsersController < ApplicationController
     @users = User.find_all
   end
   
-   def delete
+  def delete
     User.find(params[:id]).destroy
     redirect_to( :controller => 'users', :action => 'list' )
   end
