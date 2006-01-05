@@ -1,11 +1,11 @@
-<% numqns = @quiz_responses.length %>
-<% correct = numqns - @results.length %>
+<% numqns = @quiz_attempt.quiz_responses.length %>
+<% correct = numqns - @quiz_attempt.score.length %>
 <p>You got <%= correct %> out of <%= numqns %> questions correct.</p>
-<% if ! @results.empty? %>
+<% if ! @quiz_attempt.score.empty? %>
   <p>These questions were answered wrong: </p>
-  <% for q_id in @results %>
+  <% for q_id in @quiz_attempt.score %>
     <p><%= q_id %></p>
   <% end %>
 <% end %>
 
-<%= link_to( 'home', :action => 'index' ) %>
+<%= link_to( 'home', :action => 'statistics' ) %>
