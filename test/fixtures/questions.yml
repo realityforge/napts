@@ -1,16 +1,23 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+#multiple choice
 q1:
   id: 1
   content: "Is chocolate good?"
   question_type: 1
+  
+#single answer
 q2:
   id: 2
   content: "how many people does it take to change a lightbulb?"
   question_type: 2
+  
+#multiple choice
 q3:
   id: 3
   content: "Why did the chicken cross the road?"
   question_type: 1
+  
+#single answer
 q4:
   id: 4
   content: "What did the farmer say when he saw the hay on the roof?"

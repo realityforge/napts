@@ -1,0 +1,44 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+#quiz attempt 1
+#correct response for multichoice
+a1_qr1:
+  quiz_response_id: 1
+  answer_id: 1
+a2_qr1:
+  quiz_response_id: 1
+  answer_id: 2
+  
+#incorrect single answer
+a1_qr2:
+  quiz_response_id: 2
+  answer_id: 6
+  
+#incorrect multi
+a1_qr3:
+  quiz_response_id: 3
+  answer_id: 9
+a2_qr3:
+  quiz_response_id: 3
+  answer_id: 10
+a3_qr3:
+  quiz_response_id: 3
+  answer_id: 11
+  
+#correct single
+a1_qr4:
+  quiz_response_id: 4
+  answer_id: 13
+  
+  
+  
+#quiz attempt 2
+#multi choice with incorrect answer 
+a1_qr6:
+  quiz_response_id: 6
+  answer_id: 6
+  
+#single answer correct
+a1_qr7:
+  quiz_response_id: 7
+  answer_id: 13
+

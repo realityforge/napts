@@ -1,4 +1,6 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+#is chocolate good?   multichoice
 q1_a1:
   id: 1
   content: "Yes, for sure!"
@@ -19,6 +21,8 @@ q1_a4:
   content: "Not sure"
   is_correct: false
   question_id: 1
+  
+#how many ppl does it take to change a lightbulb?  single answer
 q2_a1:
   id: 5
   content: "twelve"
@@ -39,6 +43,8 @@ q2_a4:
   content: "pineapple"
   is_correct: false
   question_id: 2
+
+#why did the chicken cross the road? multi  
 q3_a1:
   id: 9
   content: "To get to the other side"
@@ -59,6 +65,8 @@ q3_a4:
   content: "he felt like it"
   is_correct: false
   question_id: 3
+  
+#what did the farmer say when he saw the hay on the roof? single
 q4_a1:
   id: 13
   content: "Hay, get down!"

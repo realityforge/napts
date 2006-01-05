@@ -10,6 +10,8 @@ qi_2:
   quiz_id: 1
   question_id: 2
   position: 2
+
+  
 qi_3:
   id: 3
   is_on_test: true
@@ -24,19 +26,21 @@ qi_4:
   position: 2
 qi_5:
   id: 5
-  is_on_test: false
+  is_on_test: true
   quiz_id: 2
   question_id: 4
   position: 3
+  
+  
 qi_6:
   id: 6
-  is_on_test: false
+  is_on_test: true
   quiz_id: 3
   question_id: 1
   position: 1
 qi_7:
   id: 7
-  is_on_test: false
+  is_on_test: true
   quiz_id: 3
   question_id: 2
   position: 2
@@ -52,6 +56,7 @@ qi_9:
   quiz_id: 3
   question_id: 4
   position: 4
+  
 qi_10:
   id: 10
   is_on_test: false
