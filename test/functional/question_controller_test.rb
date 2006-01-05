@@ -5,7 +5,7 @@ require 'question_controller'
 class QuestionController; def rescue_action(e) raise e end; end
 
 class QuestionControllerTest < Test::Unit::TestCase
-  fixtures :users, :questions, :answers
+  fixtures OrderedTables
 
   def setup
     @controller = QuestionController.new
@@ -169,6 +169,8 @@ class QuestionControllerTest < Test::Unit::TestCase
     assert_not_nil( Question.find(@q3.id) )
     post( :destroy, {:id => @q3.id}, { :user_id => @peter_user.id } )
     assert_response( :redirect )
+    assert_nil( flash[:notice] )
+    assert_nil( flash[:alert] )
     assert_redirected_to( :action => 'list' )
     assert_raise(ActiveRecord::RecordNotFound) { Question.find(@q3.id) }
   end
