@@ -13,6 +13,7 @@ class CreateInitialSchema < ActiveRecord::Migration
     # Users
     create_table("users", :force => true) do |t|
       t.column "username", :string, :limit => 25, :null => false
+      t.column "staffmember", :boolean, :null => false
       t.column "name", :string, :limit => 50, :null => false
       t.column "hashed_password", :string, :limit => 50, :null => false
     end
