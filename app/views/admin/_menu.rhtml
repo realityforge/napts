@@ -1,0 +1,23 @@
+<% content_for :menu do %>
+<h2>Subject settings</h2>
+<ul>
+  <li><%= link_to('Create Subject', :controller => 'subjects', :action => 'new') %></li>
+  <li><%= link_to('Manage Subjects', :controller => 'subjects', :action => 'list') %></li>
+</ul>
+<h2>User Settings</h2>
+<ul>
+  <li><%= link_to('Create User', :controller => 'users', :action => 'new' ) %></li>
+  <li><%= link_to('Manage Users', :controller => 'users', :action => 'list' ) %></li>
+</ul>
+<h2>Quiz Settings</h2>
+<ul>
+  <li><%= link_to('Create New Quiz', :controller => 'quizzes', :action => 'new' ) %></li>
+  <li><%= link_to('Manage Quizzes', :controller => 'quizzes', :action => 'list' ) %></li>
+</ul>
+<h2>Question Settings</h2>
+<ul>
+  <li><%= link_to('Create Question', :controller => 'question', :action => 'new' ) %></li>
+  <li><%= link_to('Manage Questions', :controller => 'question', :action => 'list' ) %></li>
+</ul>
+
+<% end %>

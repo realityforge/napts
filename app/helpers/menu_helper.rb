@@ -18,6 +18,10 @@ module MenuHelper
       {:controller => 'preview_quiz', :action => 'intro'},
       {:title => 'Preview tests'},
       {}).freeze
+    CreateQuestionsLink = Link.new('Create Questions',
+      {:controller => 'question', :action => 'new'},
+      {:title => 'add a new question to the database'},
+      {}).freeze
     UserLink = Link.new('User: ', 
       nil, 
       {:title => 'Currently logged in user'},
@@ -67,6 +71,7 @@ module MenuHelper
     links << gen_past_quizzes_link.freeze
     links << gen_current_quizzes_link.freeze
     links << gen_preview_quizzes_link.freeze
+    links << gen_create_questions_link.freeze
     links
   end
   
@@ -83,6 +88,11 @@ module MenuHelper
   def gen_past_quizzes_link
     is_selected = get_controller_name == 'results' && @action_name == 'statistics'
     dup_link_with_select( PastQuizzesLink, is_selected )
+  end
+  
+  def gen_create_questions_link
+    is_selected = get_controller_name == 'question' && @action_name == 'new'
+    dup_link_with_select( CreateQuestionsLink, is_selected )
   end
   
   def gen_current_quizzes_link
