@@ -57,6 +57,6 @@ class QuizAttemptController < ApplicationController
   
   def results
     @quiz_attempt = QuizAttempt.find(params[:quiz_attempt_id])
-    @results = @quiz_attempt.score
+    @results = @quiz_attempt.incorrect_answers
   end
 end

@@ -1,9 +1,9 @@
 <% numqns = @quiz_attempt.quiz_responses.length %>
-<% correct = numqns - @quiz_attempt.score.length %>
+<% correct = numqns - @quiz_attempt.incorrect_answers.length %>
 <p>You got <%= correct %> out of <%= numqns %> questions correct.</p>
-<% if ! @quiz_attempt.score.empty? %>
+<% if ! @quiz_attempt.incorrect_answers.empty? %>
   <p>These questions were answered wrong: </p>
-  <% for q_id in @quiz_attempt.score %>
+  <% for q_id in @quiz_attempt.incorrect_answers %>
     <p><%= q_id %></p>
   <% end %>
 <% end %>

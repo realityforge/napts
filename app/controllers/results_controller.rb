@@ -12,7 +12,7 @@ class ResultsController < ApplicationController
     for attempt in @user.quiz_attempts
       @quiz_name << attempt.quiz.name
       @numqns = attempt.quiz_responses.length
-      @score << @numqns - attempt.score.length
+      @score << @numqns - attempt.incorrect_answers.length
       @subject << attempt.quiz.subject.code
       @date << attempt.start_time
     end

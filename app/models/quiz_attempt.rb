@@ -5,7 +5,7 @@ class QuizAttempt < ActiveRecord::Base
   
   # stores the question number of all the incorrect 
   # questions in an array and returns it
-  def score
+  def incorrect_answers
     results = []
     for quiz_response in self.quiz_responses
       responses = []
