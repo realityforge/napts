@@ -22,3 +22,13 @@ quiz_3:
   subject_id: 2
   enable: true
   prelim_enable: false
+  
+#only multiple choice questions
+quiz_4:
+  id: 4
+  duration: 5
+  name: "multi"
+  description: "multi questions only"
+  subject_id: 3
+  enable: true
+  prelim_enable: true

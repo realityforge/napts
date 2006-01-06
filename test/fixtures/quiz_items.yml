@@ -69,4 +69,18 @@ qi_11:
   quiz_id: 1
   question_id: 4
   position: 4
+  
+qi_12:
+  id: 12
+  is_on_test: true
+  quiz_id: 4
+  question_id: 1
+  position: 1
+qi_13:
+  id: 13
+  is_on_test: true
+  quiz_id: 4
+  question_id: 3
+  position: 2
+  
 
