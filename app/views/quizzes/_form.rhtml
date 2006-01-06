@@ -5,6 +5,9 @@
 <p><label for="quiz_name">Name</label><br/>
 <%= text_field( 'quiz', 'name' ) %></p>
 
+<p><label for="quiz_subject_id">Subject code</label><br/>
+<%= collection_select("quiz", "subject_id", @subjects, :id, :code ) %>
+
 <p><label for="quiz_duration">Duration</label><br/>
 <%= text_field( 'quiz', 'duration' ) %></p>
 

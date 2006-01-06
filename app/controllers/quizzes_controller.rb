@@ -56,7 +56,7 @@ class QuizzesController < ApplicationController
 
   def new
     @quiz = Quiz.new
-    @quiz.subject_id = params[:subject_id]    
+    @subjects = Subject.find(:all)    
   end
 
   def create
