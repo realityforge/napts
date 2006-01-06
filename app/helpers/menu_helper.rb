@@ -1,17 +1,44 @@
 module MenuHelper
-  if ! const_defined?(:Link)
+  if true || ! const_defined?(:Link)
     Link = Struct.new( "Link", :name, :link_options, :html_options, :options )
     
-    UserLink = 
-      Link.new('User: ', 
-               nil,
-               {:title => 'Currently logged in user'},
-               {}).freeze
-    SignOutLink = 
-      Link.new('Sign Out', 
-               {:controller => 'login', :action => 'logout'},
-               {:title => 'Logout', :post => true},
-               {}).freeze
+    HomeLink = Link.new('Home',
+      {:controller => 'welcome', :action => 'index'},
+      {:title => 'Return to Home page'},
+      {}).freeze
+    PastQuizzesLink = Link.new('Results',
+      {:controller => 'results', :action => 'statistics'},
+      {:title => 'Results for completed OnLine Tests'},
+      {}).freeze
+    CurrentQuizzesLink = Link.new('Take Test',
+      {:controller => 'quiz_attempt', :action => 'intro'},
+      {:title => 'Sit enabled online test'},
+      {}).freeze
+    PreviewQuizzesLink = Link.new('Preview Tests',
+      {:controller => 'preview_quiz', :action => 'intro'},
+      {:title => 'Preview tests'},
+      {}).freeze
+    UserLink = Link.new('User: ', 
+      nil, 
+      {:title => 'Currently logged in user'},
+      {}).freeze
+    SignOutLink = Link.new('Sign Out', 
+      {:controller => 'login', :action => 'logout'},
+      {:title => 'Logout', :post => true},
+      {}).freeze
+  end
+  
+  def get_user_links
+    links = []
+    links << gen_user_link.freeze
+    links << SignOutLink
+    links
+  end
+  
+  def gen_user_link
+    link = UserLink.dup
+    link.name += @user.name
+    link
   end
 
   def render_links(links,html_options)
@@ -24,6 +51,7 @@ module MenuHelper
 
   def render_link(link)
     html_options = link.html_options.dup
+    STDERR.puts html_options.inspect 
     html_options['class'] = 'selected' if link.options[:selected]
     if link.link_options
       text = link_to(link.name, link.link_options, html_options)
@@ -32,17 +60,38 @@ module MenuHelper
     end
     text
   end
-
-  def get_user_links
+  
+  def get_navigation_links
     links = []
-    links << gen_user_link.freeze
-    links << SignOutLink
+    links << HomeLink
+    links << gen_past_quizzes_link.freeze
+    links << gen_current_quizzes_link.freeze
+    links << gen_preview_quizzes_link.freeze
     links
   end
-
-  def gen_user_link
-    link = UserLink.dup
-    link.name += @user.name
-    link
+  
+  def get_controller_name
+    controller.controller_name
+  end
+  
+  def dup_link_with_select( link, is_selected )
+    result = link.dup
+    result.options.update(:selected => is_selected )
+    result
+  end
+ 
+  def gen_past_quizzes_link
+    is_selected = get_controller_name == 'results' && @action_name == 'statistics'
+    dup_link_with_select( PastQuizzesLink, is_selected )
+  end
+  
+  def gen_current_quizzes_link
+    is_selected = get_controller_name == 'quiz_attempt' && @action_name == 'intro'
+    dup_link_with_select( CurrentQuizzesLink, is_selected )
+  end
+  
+  def gen_preview_quizzes_link
+    is_selected = get_controller_name == 'preview_quiz' && @action_name == 'intro'
+    dup_link_with_select( PreviewQuizzesLink, is_selected )
   end
 end
