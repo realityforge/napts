@@ -1,18 +1,22 @@
-<table>
-  <tr>
-    <th>Subject</th>
-    <th>Quiz</th>
-    <th>Score</th>
-    <th>Date</th>
-  </tr>
-  <% for i in 0..(@user.quiz_attempts.length - 1) %>
+<% if @user.quiz_attempts.length == 0 %>
+  <h1>No results available</h1>
+<% else %>
+  <h1>Results</h1>
+  <table>
     <tr>
-      <td><%= @subject[i] %></td>
-      <td><%= link_to( "#{@quiz_name[i]}", :action => 'results', :quiz_attempt => @user.quiz_attempts[i].id ) %>
-      <td><%= @score[i].to_s %>/<%= @user.quiz_attempts[i].quiz_responses.length %></td>
-      <td><%= @date[i].strftime("%d/%m/%Y") %></td>
+      <th>Subject</th>
+      <th>Quiz</th>
+      <th>Score</th>
+      <th>Date</th>
     </tr>
-  <% end %>
-</table>
+    <% for i in 0..(@user.quiz_attempts.length - 1) %>
+      <tr>
+        <td><%= @subject[i] %></td>
+        <td><%= link_to( "#{@quiz_name[i]}", :action => 'results', :quiz_attempt => @user.quiz_attempts[i].id ) %>
+        <td><%= @score[i].to_s %>/<%= @user.quiz_attempts[i].quiz_responses.length %></td>
+        <td><%= @date[i].strftime("%d/%m/%Y") %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
 
-<%= link_to( "back", :controller => 'welcome', :action => 'index' ) %>
