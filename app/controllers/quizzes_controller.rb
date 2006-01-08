@@ -5,9 +5,7 @@ class QuizzesController < ApplicationController
   end
 
   def list
-    @subject = Subject.find(params[:subject_id])
-    @quiz_pages, @quizzes = 
-       paginate( :quizzes, :conditions => [ 'subject_id = ?', @subject.id ], :per_page => 10 )
+    @quiz_pages, @quizzes = paginate( :quizzes, :per_page => 10 )
   end
 
   def show
@@ -60,7 +58,7 @@ class QuizzesController < ApplicationController
   end
 
   def create
-    @quiz = Quiz.new(params[:quiz])
+    @quiz = Quiz.new( params[:quiz] )
     if @quiz.save
       flash[:notice] = 'Quiz was successfully created.'
       redirect_to( :action => 'show' , :id => @quiz.id )
@@ -71,6 +69,7 @@ class QuizzesController < ApplicationController
 
   def edit
     @quiz = Quiz.find(params[:id])
+    @subjects = Subject.find(:all)
   end
 
   def update
