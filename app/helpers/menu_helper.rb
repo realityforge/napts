@@ -18,10 +18,23 @@ module MenuHelper
       {:controller => 'preview_quiz', :action => 'intro'},
       {:title => 'Preview tests'},
       {}).freeze
-    CreateQuestionsLink = Link.new('Create Questions',
-      {:controller => 'question', :action => 'new'},
-      {:title => 'add a new question to the database'},
+    ManageSubjectsLink = Link.new('Manage Subjects',
+      {:controller => 'subjects', :action => 'list'},
+      {:title => 'Add, edit or delete subjects'},
       {}).freeze
+    ManageUsersLink = Link.new('Manage Users',
+      {:controller => 'users', :action => 'list'},
+      {:title => 'Add or remove users'},
+      {}).freeze
+    ManageQuizzesLink = Link.new('Manage Quizzes',
+      {:controller => 'quizzes', :action => 'list'},
+      {:title => 'Create new quizzes or add and remove questions from existing quizzes'},
+      {}).freeze
+    ManageQuestionsLink = Link.new('Manage Questions',
+      {:controller => 'question', :action => 'list'},
+      {:title => 'Add, remove or edit questions and answers'},
+      {}).freeze
+    
     UserLink = Link.new('User: ', 
       nil, 
       {:title => 'Currently logged in user'},
@@ -67,11 +80,18 @@ module MenuHelper
   
   def get_navigation_links
     links = []
-    links << HomeLink
-    links << gen_past_quizzes_link.freeze
-    links << gen_current_quizzes_link.freeze
-    links << gen_preview_quizzes_link.freeze
-    links << gen_create_questions_link.freeze
+    if session[:role] == "Student"
+      links << HomeLink
+      links << gen_past_quizzes_link.freeze
+      links << gen_current_quizzes_link.freeze
+      links << gen_preview_quizzes_link.freeze
+    elsif session[:role] == "Educator"
+      links << gen_manage_quizzes_link.freeze
+      links << gen_manage_questions_link.freeze
+    elsif session[:role] == "Administrator"
+      links << gen_manage_subjects_link.freeze
+      links << gen_manage_users_link.freeze
+    end
     links
   end
   
@@ -90,11 +110,6 @@ module MenuHelper
     dup_link_with_select( PastQuizzesLink, is_selected )
   end
   
-  def gen_create_questions_link
-    is_selected = get_controller_name == 'question' && @action_name == 'new'
-    dup_link_with_select( CreateQuestionsLink, is_selected )
-  end
-  
   def gen_current_quizzes_link
     is_selected = get_controller_name == 'quiz_attempt' && @action_name == 'intro'
     dup_link_with_select( CurrentQuizzesLink, is_selected )
@@ -103,5 +118,25 @@ module MenuHelper
   def gen_preview_quizzes_link
     is_selected = get_controller_name == 'preview_quiz' && @action_name == 'intro'
     dup_link_with_select( PreviewQuizzesLink, is_selected )
+  end
+  
+  def gen_manage_quizzes_link
+    is_selected = get_controller_name == 'quizzes' && @action_name == 'list'
+    dup_link_with_select( ManageQuizzesLink, is_selected )
+  end
+  
+   def gen_manage_questions_link
+    is_selected = get_controller_name == 'question' && @action_name == 'list'
+    dup_link_with_select( ManageQuestionsLink, is_selected )
+  end
+  
+   def gen_manage_subjects_link
+    is_selected = get_controller_name == 'subjects' && @action_name == 'list'
+    dup_link_with_select( ManageSubjectsLink, is_selected )
+  end
+  
+  def gen_manage_users_link
+    is_selected = get_controller_name == 'users' && @action_name == 'list'
+    dup_link_with_select( ManageUsersLink, is_selected )
   end
 end

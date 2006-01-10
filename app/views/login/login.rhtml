@@ -9,13 +9,24 @@
   <label for="user_password">Password</label>
   <input id="user_password" name="password" size="20" type="password" value="" />
   <br/>
+  
+  <label for="user_type">Role</label>
+  <select id="user_type" name="type">
+    <option value="Student">Student</option>
+    <option value="Demonstrator">Demonstrator</option>
+    <option value="Educator">Educator</option>
+    <option value="Administrator">Administrator</option>
+  </select>
+  <br/>
+
+
   <button type="submit">Login</button>
 <%= end_form_tag %>
 </fieldset>
 <% content_for :head do %>
   <style type="text/css">
   label {width: 90px; display: block; float: left; clear: both;}
-  input {width: 190px; display: block; float: left;}
+  input, select {width: 190px; display: block; float: left;}
   button {display: block; clear: both;}
   </style>
 <% end %>

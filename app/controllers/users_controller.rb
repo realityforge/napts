@@ -21,4 +21,5 @@ class UsersController < ApplicationController
     User.find(params[:id]).destroy
     redirect_to( :controller => 'users', :action => 'list' )
   end
+  
 end
