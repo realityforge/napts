@@ -1,17 +1,15 @@
-<table border="1">
-  <tr>
-    <td width="40%"><p align="center"><i><b>User name</b></i></td>
-  </tr>
-  
+<table>
+  <tr><th>User name</th></tr>
+  <tr></tr>
   <% @users.each do |user| %>
     <tr>
-      <td>
-        <%= user.username %>
-   
-	<%= link_to( "(delete)",
+      <td><%= user.username %></td>
+      <td><%= link_to( "delete",
 		     {:action => "delete", :id => user.id},
 		     :confirm => "Really delete #{user.name}?") %>
       </td>
     </tr>
   <% end %>
 </table>
+<%= link_to('New User', :action => 'new' ) %>
+

@@ -13,7 +13,7 @@ class CreateInitialSchema < ActiveRecord::Migration
     # Users
     create_table("users", :force => true) do |t|
       t.column "username", :string, :limit => 25, :null => false
-      t.column "staffmember", :boolean, :null => false
+      t.column "administrator", :boolean, :null => false
       t.column "name", :string, :limit => 50, :null => false
       t.column "hashed_password", :string, :limit => 50, :null => false
     end
@@ -119,9 +119,32 @@ class CreateInitialSchema < ActiveRecord::Migration
                                 :name => "quiz_response_id_fk")
     add_foreign_key_constraint("answers_quiz_responses", "answer_id", "answers", "id",
     				:name => "answer_id_fk")
-  
+    
+    #Demonstrators
+    create_table("demonstrators", :id => false, :force => true ) do |t|
+      t.column "subject_id", :integer, :null => false
+      t.column "user_id", :integer, :null => false
+    end
+    add_foreign_key_constraint("demonstrators", "subject_id", "subjects", "id",
+                                :name => "demonstrators_subject_id_fk")
+    add_foreign_key_constraint("demonstrators", "user_id", "users", "id",
+                                :name => "demonstrators_user_id_fk")
+    
+    #Educators
+    create_table("educators", :id => false, :force => true ) do |t|
+      t.column "subject_id", :integer, :null => false
+      t.column "user_id", :integer, :null => false
+    end
+    add_foreign_key_constraint("educators", "subject_id", "subjects", "id",
+                                :name => "educators_subject_id_fk")
+    add_foreign_key_constraint("educators", "user_id", "users", "id",
+                                :name => "educators_user_id_fk")
+    
   end
+  
   def self.down
+    drop_table("educators")
+    drop_table("demonstrators")
     drop_table("answers_quiz_responses")
     drop_table("quiz_responses")
     drop_table("resources")

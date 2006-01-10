@@ -1,0 +1,14 @@
+#pete and ads
+demonstrator_1:
+  subject_id: 1
+  user_id: 1
+
+#pete and db
+demonstrator_2:
+  subject_id: 3
+  user_id: 1
+
+#stan and sys
+demonstrator_3:
+  subject_id: 2
+  user_id: 2

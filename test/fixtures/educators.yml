@@ -1,0 +1,9 @@
+educator_one:
+  subject_id: 1
+  user_id: 4
+educator_two:
+  subject_id: 2
+  user_id: 4
+educator_three:
+  subject_id: 3
+  user_id: 5
