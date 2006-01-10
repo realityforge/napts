@@ -14,7 +14,7 @@ class QuestionControllerTest < Test::Unit::TestCase
   end
   
   def test_list
-  get(:list, {}, { :user_id => @peter_user.id } )
+  get(:list, {}, { :user_id => @peter_user.id, :role => "Student"} )
     assert_response(:success)
     assert_template('list')
     assert_valid_markup
@@ -22,7 +22,7 @@ class QuestionControllerTest < Test::Unit::TestCase
   end
 
   def test_show
-    get(:show, {:id => 1}, { :user_id => @peter_user.id } )
+    get(:show, {:id => 1}, { :user_id => @peter_user.id, :role => "Student" } )
     assert_response(:success)
     assert_template('show')
     assert_valid_markup
@@ -33,7 +33,7 @@ class QuestionControllerTest < Test::Unit::TestCase
   #test get, and answers
   def test_new_get
     num_questions = Question.count
-    get(:new, {}, { :user_id => @peter_user.id } )
+    get(:new, {}, { :user_id => @peter_user.id, :role => "Student" } )
     assert_response( :success )
     assert_template( 'new' )
     assert_valid_markup
@@ -53,7 +53,7 @@ class QuestionControllerTest < Test::Unit::TestCase
 			      :answer => {'this_is_ignored' => 
 			      	{:content => answer_content,
 				 :is_correct => is_correct}}},
-		{ :user_id => @peter_user.id }
+		{ :user_id => @peter_user.id, :role => "Student" }
 	)
     assert_response( :success )
     assert_template( 'new' )
@@ -78,7 +78,7 @@ class QuestionControllerTest < Test::Unit::TestCase
 			:answer => {'this_is_ignored' => 
 			      	  {:content => answer_content,
 				   :is_correct => is_correct }}},
-	                { :user_id => @peter_user.id }
+	                { :user_id => @peter_user.id, :role => "Student" }
 	)
     assert_equal( content, assigns(:question).content )
     assert_equal( question_type, assigns(:question).question_type )
@@ -91,7 +91,8 @@ class QuestionControllerTest < Test::Unit::TestCase
   end
 
   def test_edit_get
-    get( :edit, {:id => @q1.id},{ :user_id => @peter_user.id } )
+    get( :edit, {:id => @q1.id},
+                {:user_id => @peter_user.id, :role => "Student"} )
     question = Question.find( @q1.id )
     content = "Is chocolate good?"
     question_type = 1
@@ -108,7 +109,7 @@ class QuestionControllerTest < Test::Unit::TestCase
     post(:edit, {'id' => @q1.id, 
                 'question' => {'content' => question}, 
 		'answer' => {@q1_a1.id.to_s => { 'content' => answer }}},
-		{ :user_id => @peter_user.id }
+		{ :user_id => @peter_user.id, :role => "Student" }
 	)
     assert_equal( 'Question was successfully updated.', flash[:notice] )
     assert_response( :redirect )
@@ -125,7 +126,7 @@ class QuestionControllerTest < Test::Unit::TestCase
     post(:edit, {:id => "#{@q1.id}", 
                 :question => {:content => question}, 
 		:answer => {"#{@q1_a1.id}" => { :content => answer }}},
-		{ :user_id => @peter_user.id }
+		{ :user_id => @peter_user.id, :role => "Student" }
 	)
     assert_response(:success)
     assert_template('edit')
@@ -141,7 +142,7 @@ class QuestionControllerTest < Test::Unit::TestCase
     post(:edit, {:id => "#{@q1.id}", 
                 :question => {:content => question}, 
 		:answer => {"#{@q1_a1.id}" => { :content => answer }}},
-		  { :user_id => @peter_user.id }
+		  { :user_id => @peter_user.id, :role => "Student" }
 	)
     assert_response( :success )
     assert_template('edit')
@@ -157,7 +158,7 @@ class QuestionControllerTest < Test::Unit::TestCase
     post( :edit, { :id => "#{@q2.id}",
                   :question => {:content => question},
                   :answer => { "#{@q4_a1.id}" => {:content => answer}} },
-		  { :user_id => @peter_user.id } 
+		  { :user_id => @peter_user.id, :role => "Student" } 
 	)
     assert_response( :success )
     assert_equal( "Update not successful", flash[:alert] )
