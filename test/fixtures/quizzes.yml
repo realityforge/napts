@@ -16,7 +16,7 @@ quiz_2:
   prelim_enable: true
 quiz_3:
   id: 3
-  duration: 5
+  duration: 1
   name: "stan"
   description: "he drives to work"
   subject_id: 2
