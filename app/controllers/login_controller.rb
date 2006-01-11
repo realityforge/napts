@@ -10,7 +10,7 @@ class LoginController < ApplicationController
       	if @role == "Administrator"
 	  if user.administrator
 	    session[:role] = @role
-	    redirect_to( :controller => 'admin', :action => 'home' )
+	    redirect_to( :controller => 'welcome', :action => 'index' )
 	  else
 	    flash[:alert] = "Access denied"
 	    redirect_to( :action => 'login' )
@@ -18,7 +18,7 @@ class LoginController < ApplicationController
 	elsif @role == "Educator"
 	  if user.educator?
 	    session[:role] = @role
-	    redirect_to( :controller => 'quizzes', :action => 'list' )
+	    redirect_to( :controller => 'welcome', :action => 'index' )
 	  else
 	    flash[:alert] = "Access denied"
 	    redirect_to( :action => 'login' )
@@ -26,7 +26,7 @@ class LoginController < ApplicationController
 	elsif @role == "Demonstrator"
 	  if user.demonstrator?
 	    session[:role] = @role
-	    redirect_to( :controller => 'subjects', :action => 'list' )
+	    redirect_to( :controller => 'welcome', :action => 'index' )
 	  else
 	    flash[:alert] = "Access Denied"
 	    redirect_to( :action => 'login' )

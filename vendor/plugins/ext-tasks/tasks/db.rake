@@ -13,6 +13,12 @@ task :reset_db => :environment do
 end
 
 def do_reset_db_structure(env)
+
+  database = ActiveRecord::Base.configurations[env.to_s]['database']
+  ActiveRecord::Base.establish_connection(env)
+  ActiveRecord::Base.connection.execute("DROP DATABASE #{database}")
+  ActiveRecord::Base.connection.execute("CREATE DATABASE #{database}")
+  
   ActiveRecord::Base.establish_connection(env)
   ActiveRecord::Migrator.migrate("db/migrate/",0)
   ActiveRecord::Migrator.migrate("db/migrate/",nil)
