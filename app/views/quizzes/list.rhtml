@@ -6,7 +6,8 @@
     <th>Description</th>
     <th>Duration</th>
     <th>Subject ID</th>
-    <th></th><th></th><th></th>
+    <th>Prelim Enabled</th>
+    <th></th><th></th><th></th><th></th>
   </tr>
   
 <% for quiz in @quizzes %>
@@ -16,6 +17,12 @@
     <td><%= quiz.description %></td>
     <td><%= quiz.duration %></td>
     <td><%= quiz.subject.code %></td>
+    <td><%= quiz.prelim_enable %></td>
+    <% if quiz.prelim_enable %>
+      <td><%= link_to( 'Disable Prelim', :action => 'prelim', :id => quiz ) %></td>
+    <% else %>
+      <td><%= link_to( 'Enable Prelim', :action => 'prelim', :id => quiz ) %></td>
+    <% end %>
     <td><%= link_to( 'Show', :action => 'show', :id => quiz ) %></td>
     <td><%= link_to( 'Edit', :action => 'edit', :id => quiz ) %></td>
     <td><%= link_to( 'Destroy', { :action => 'destroy', :id => quiz }, :confirm => 'Are you sure?' ) %></td>

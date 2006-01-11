@@ -18,6 +18,11 @@ module MenuHelper
       {:controller => 'preview_quiz', :action => 'intro'},
       {:title => 'Preview tests'},
       {}).freeze
+    EnableQuizLink = Link.new('Enable Tests',
+      {:controller => 'quizzes', :action => 'enable_quiz'},
+      {:title => 'Enable and disable tests'},
+      {}).freeze
+    
     ManageSubjectsLink = Link.new('Manage Subjects',
       {:controller => 'subjects', :action => 'list'},
       {:title => 'Add, edit or delete subjects'},
@@ -85,6 +90,8 @@ module MenuHelper
       links << gen_past_quizzes_link.freeze
       links << gen_current_quizzes_link.freeze
       links << gen_preview_quizzes_link.freeze
+    elsif session[:role] == "Demonstrator"
+      links << gen_enable_quiz_link.freeze
     elsif session[:role] == "Educator"
       links << gen_manage_quizzes_link.freeze
       links << gen_manage_questions_link.freeze
@@ -118,6 +125,11 @@ module MenuHelper
   def gen_preview_quizzes_link
     is_selected = get_controller_name == 'preview_quiz' && @action_name == 'intro'
     dup_link_with_select( PreviewQuizzesLink, is_selected )
+  end
+  
+   def gen_enable_quiz_link
+    is_selected = get_controller_name == 'quizzes' && @action_name == 'enable_quiz'
+    dup_link_with_select( EnableQuizLink, is_selected )
   end
   
   def gen_manage_quizzes_link
