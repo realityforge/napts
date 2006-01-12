@@ -1,7 +1,7 @@
 class QuizAttempt < ActiveRecord::Base
   belongs_to( :quiz )
   belongs_to( :user )
-  has_many( :quiz_responses, :dependent => true )
+  has_many( :quiz_responses, :order => :position, :dependent => true )
   
   # stores the question number of all the incorrect 
   # questions in an array and returns it
@@ -29,6 +29,11 @@ class QuizAttempt < ActiveRecord::Base
     length = self.quiz.duration * 60
     number = ( now.to_i - self.start_time.to_i )
     return number > length
+  end
+  
+  def get_response(position)
+    return nil if position > self.quiz_responses.length 
+    self.quiz_responses[position]
   end
   
 private

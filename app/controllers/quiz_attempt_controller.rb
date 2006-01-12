@@ -38,7 +38,7 @@ class QuizAttemptController < ApplicationController
     @quiz_response = QuizResponse.find( :first, 
                                         :conditions => [ 'position = ? AND quiz_attempt_id =?', 
 	    	                            position, @quiz_attempt.id ]
-				   )
+	          		      )
     if request.get? && !@quiz_response
       redirect_to( :action => 'end_quiz', :quiz_attempt_id => @quiz_attempt.id, :out_of_time => false )
     elsif request.post?

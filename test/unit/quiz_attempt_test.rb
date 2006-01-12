@@ -63,6 +63,27 @@ class QuizAttemptTest < Test::Unit::TestCase
     quiz_attempt.time = Time.local(*ParseDate.parsedate('2005-11-7 01:10:01'))
     assert_equal( true, quiz_attempt.time_up? )
   end
+  
+  def test_get_response
+    @quiz = Quiz.find( @quiz_1.id )
+    @quiz_attempt = QuizAttempt.new
+    @quiz_attempt.quiz_id = @quiz.id
+    @quiz_attempt.start_time = '2005-11-7 01:00:00'
+    @quiz_attempt.user_id = 1
+    count = 1
+    for quiz_item in @quiz.quiz_items
+      if quiz_item.is_on_test
+        @quiz_attempt.quiz_responses.create( :created_at => Time.now,
+	                                    :question_id => quiz_item.question.id,
+					    :position => count, 
+					    :quiz_attempt_id => @quiz_attempt.id )
+	count += count
+      end
+    end
+    assert_equal( 1, @quiz_attempt.get_response(0).position )
+    assert_equal( 2, @quiz_attempt.get_response(1).position ) 
+    assert_equal( nil, @quiz_attempt.get_response(2) )
+  end
  
   
 end

@@ -16,7 +16,7 @@ class Test::Unit::TestCase
   # don't care one way or the other, switching from MyISAM to InnoDB tables
   # is recommended.
   self.use_transactional_fixtures = true
-
+  
   # Instantiated fixtures are slow, but give you @david where otherwise you
   # would need people(:david).  If you don't want to migrate your existing
   # test cases which use the @david style and don't mind the speed hit (each
@@ -25,4 +25,19 @@ class Test::Unit::TestCase
   self.use_instantiated_fixtures  = true
 
   # Add more helper methods to be used by all tests here...
+  def start_quiz
+    @user = User.find( @peter_user.id )
+    get( :start_quiz, 
+        {:quiz_id => @quiz_1.id },
+	{:user_id => @user.id, :role => "Student"} )
+    assert_not_nil( assigns(:quiz_attempt) )
+    assigns(:quiz_attempt).reload
+    STDERR.puts assigns(:quiz_attempt).inspect
+    STDERR.puts assigns(:quiz_attempt).id
+    assert_equal( 2, assigns(:quiz_attempt).quiz_responses.length )
+    assert_equal( 'peter', @user.username )
+    assert_redirected_to( :action => 'show', 
+                          :quiz_attempt_id => assigns(:quiz_attempt).id,
+                          :quiz_response_position => 1 )
+  end
 end
