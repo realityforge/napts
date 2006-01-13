@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   attr_accessor( :password )
   attr_accessible( :username, :password, :name )
   validates_uniqueness_of( :username )
-  validates_presence_of( :username, :password )
+  validates_presence_of( :username, :hashed_password )
   
   USER_ROLE = [ "Student", "Demonstrator", "Educator", "Administrator" ].freeze
   

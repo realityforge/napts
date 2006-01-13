@@ -1,0 +1,21 @@
+<%= start_form_tag( :action => 'update_role', :id => @other_user ) %>
+  <h3>Please select subjects <%= @other_user.username %> demonstrates for</h3>
+  <table>
+    <tr>
+      <th>Subject Code</th>
+      <th></th><th></th><th></th>
+    </tr>
+    <% for subject in @subjects %>
+      <tr>
+        <td><%= subject.code %></td>
+	<td><%= link_to( 'Make Demonstrator', :action => 'make_demonstrator', 
+	                                      :id => @other_user.id, 
+					      :subject_id => subject.id ) %></td>
+	<td><%= link_to( 'Make Educator', :action => 'make_educator', 
+	                                  :id => @other_user.id,
+					  :subject_id => subject.id ) %></td>
+      <tr>
+    <% end %>
+  </table>
+  <%= submit_tag( 'submit' ) %>
+<%= end_form_tag %>
