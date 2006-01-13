@@ -1,42 +1,23 @@
 class LoginController < ApplicationController
+  include AuthHelper
+
   def login
     if request.get?
       reset_session
     else
       user = User.authenticate(params[:username],params[:password])
-      if user
-        session[:user_id] = user.id
-        @role = params[:type]
-      	if @role == "Administrator"
-	  if user.administrator
-	    session[:role] = @role
-	    redirect_to( :controller => 'welcome', :action => 'index' )
-	  else
-	    flash[:alert] = "Access denied"
-	    redirect_to( :action => 'login' )
-	  end
-	elsif @role == "Educator"
-	  if user.educator?
-	    session[:role] = @role
-	    redirect_to( :controller => 'welcome', :action => 'index' )
-	  else
-	    flash[:alert] = "Access denied"
-	    redirect_to( :action => 'login' )
-	  end
-	elsif @role == "Demonstrator"
-	  if user.demonstrator?
-	    session[:role] = @role
-	    redirect_to( :controller => 'welcome', :action => 'index' )
-	  else
-	    flash[:alert] = "Access Denied"
-	    redirect_to( :action => 'login' )
-	  end
-	else
-	  session[:role] = @role
-	  redirect_to( :controller => 'welcome', :action => 'index' )
-	end
+      if user.nil?
+        flash[:alert] = "Invalid user or password"
       else
-        flash[:alert] = "invalid username/password combination"
+        role = get_verified_role(user,params[:type])
+        if role.nil?
+          flash[:alert] = "Access Denied"
+          redirect_to( :action => 'login' )
+        else
+          session[:user_id] = user.id
+          session[:role] = role
+          redirect_to( :controller => 'welcome', :action => 'index' )
+        end
       end
     end
   end

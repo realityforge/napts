@@ -1,5 +1,5 @@
 module MenuHelper
-  if true || ! const_defined?(:Link)
+  if ! const_defined?(:Link)
     Link = Struct.new( "Link", :name, :link_options, :html_options, :options )
     
     HomeLink = Link.new('Home',
@@ -76,7 +76,6 @@ module MenuHelper
 
   def render_link(link)
     html_options = link.html_options.dup
-    STDERR.puts html_options.inspect 
     html_options['class'] = 'selected' if link.options[:selected]
     if link.link_options
       text = link_to(link.name, link.link_options, html_options)
@@ -88,18 +87,18 @@ module MenuHelper
   
   def get_navigation_links
     links = []
-    if session[:role] == "Student"
+    if session[:role] == :student
       links << HomeLink
       links << gen_past_quizzes_link.freeze
       links << gen_current_quizzes_link.freeze
       links << gen_preview_quizzes_link.freeze
-    elsif session[:role] == "Demonstrator"
+    elsif session[:role] == :demonstrator
       links << gen_enable_quiz_link.freeze
       links << gen_restart_quiz_link.freeze
-    elsif session[:role] == "Educator"
+    elsif session[:role] == :educator
       links << gen_manage_quizzes_link.freeze
       links << gen_manage_questions_link.freeze
-    elsif session[:role] == "Administrator"
+    elsif session[:role] == :administrator
       links << gen_manage_subjects_link.freeze
       links << gen_manage_users_link.freeze
     end
