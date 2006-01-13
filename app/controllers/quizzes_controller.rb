@@ -151,4 +151,10 @@ class QuizzesController < ApplicationController
     redirect_to( :action => 'enable_quiz', :id => @quiz.id )
   end
 
+protected
+
+  def current_subject_id
+    @quiz ? @quiz.subject_id : nil
+  end
+
 end

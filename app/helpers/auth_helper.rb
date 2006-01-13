@@ -23,4 +23,23 @@ module AuthHelper
   def verify_admin
     raise Napts::SecurityError unless current_user.administrator?
   end
+
+  def verify_demonstrator
+    raise Napts::SecurityError unless current_user.demonstrator?
+    subject_id = current_subject_id
+    if subject_id
+      raise Napts::SecurityError unless 
+        current_user.demonstrates_for.find(:first, ['id = ?', subject_id])
+    end
+  end
+
+  def verify_educator
+    raise Napts::SecurityError unless current_user.educator?
+    subject_id = current_subject_id
+    if subject_id
+      raise Napts::SecurityError unless 
+        current_user.educates_for.find(:first, ['id = ?', subject_id])
+    end
+  end
+
 end

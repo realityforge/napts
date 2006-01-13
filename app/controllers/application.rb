@@ -23,6 +23,10 @@ protected
     @current_user
   end
 
+  def current_subject_id
+    nil
+  end
+
   def rescue_action(e) 
     if e.is_a?(Napts::SecurityError)
       redirect_to(:controller => 'security', :action => 'access_denied')
