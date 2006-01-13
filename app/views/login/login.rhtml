@@ -2,6 +2,7 @@
 <fieldset>
   <legend>Login</legend>
 <%= form_tag({:action => "login"}, {:id => "login_form"}) %>
+  <div>
   <label for="user_name">Name</label>
   <input id="user_name" name="username" size="20" type="text" value="" />
   <br/>
@@ -21,6 +22,7 @@
 
 
   <button type="submit">Login</button>
+  </div>
 <%= end_form_tag %>
 </fieldset>
 <% content_for :head do %>

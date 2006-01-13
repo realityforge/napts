@@ -2,21 +2,21 @@ class LoginController < ApplicationController
   include AuthHelper
 
   def login
-    if request.get?
-      reset_session
-    else
+    reset_session
+    if request.post?
       user = User.authenticate(params[:username],params[:password])
       if user.nil?
-        flash[:alert] = "Invalid user or password"
+        flash[:alert] = 'Invalid user or password'
+        redirect_to( :action => 'login' )
       else
         role = get_verified_role(user,params[:type])
         if role.nil?
-          flash[:alert] = "Access Denied"
+          flash[:alert] = 'Access Denied'
           redirect_to( :action => 'login' )
         else
           session[:user_id] = user.id
           session[:role] = role
-          redirect_to( :controller => 'welcome', :action => 'index' )
+          redirect_to(:controller => 'welcome', :action => 'index')
         end
       end
     end
@@ -24,7 +24,7 @@ class LoginController < ApplicationController
   
   def logout
     reset_session
-    flash[:notice] = "Logged out"
+    flash[:notice] = 'Logged out'
     redirect_to( :action => 'login' )
   end
     
