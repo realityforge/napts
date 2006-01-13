@@ -9,7 +9,7 @@ class ResultsController < ApplicationController
     @score = []
     @subject = []
     @date = []
-    for attempt in @user.quiz_attempts
+    for attempt in current_user.quiz_attempts
       @quiz_name << attempt.quiz.name
       @numqns = attempt.quiz_responses.length
       @score << @numqns - attempt.incorrect_answers.length

@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   helper :view_debug
   helper :menu
   helper_method :authenticated?
+  helper_method :current_user
 
   before_filter :check_authentication
   before_filter :force_no_cache
@@ -18,9 +19,9 @@ protected
     nil != session[:user_id]
   end
 
-private
-
-protected
+  def current_user
+    @current_user
+  end
 
   def rescue_action(e) 
     if e.is_a?(Napts::SecurityError)
@@ -29,6 +30,8 @@ protected
       super
     end
   end
+
+private
 
   def force_no_cache
     # set modify date to current timestamp
@@ -53,7 +56,7 @@ protected
   
   def authorize
     if session[:user_id]
-      @user = User.find(session[:user_id])
+      @current_user = User.find(session[:user_id])
     else 
       flash[:notice] = 'Please log in'
       redirect_to(:controller => "login", :action => "login")

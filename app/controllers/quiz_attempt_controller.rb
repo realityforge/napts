@@ -1,17 +1,17 @@
 class QuizAttemptController < ApplicationController
   def intro
-    @quiz = Quiz.find( :all, :conditions => ['id NOT IN (SELECT quiz_id FROM quiz_attempts WHERE quiz_attempts.user_id = ?) AND enable = ?' , @user.id, true ] )
+    @quiz = Quiz.find( :all, :conditions => ['id NOT IN (SELECT quiz_id FROM quiz_attempts WHERE quiz_attempts.user_id = ?) AND enable = ?' , current_user.id, true ] )
   end
-  
+
   def start_quiz
     @quiz = Quiz.find(params[:quiz_id])
-    @quiz_attempt = QuizAttempt.create( :start_time => Time.now, 
-                                        :quiz_id => @quiz.id, 
-                                        :user_id => @user.id )
+    @quiz_attempt = QuizAttempt.create( :start_time => Time.now,
+                                        :quiz_id => @quiz.id,
+                                        :user_id => current_user.id )
 
     for quiz_item in @quiz.quiz_items
       if quiz_item.is_on_test
-        QuizResponse.create( :created_at => Time.now, 
+        QuizResponse.create( :created_at => Time.now,
                              :question_id => quiz_item.question.id,
 	         	     :position => quiz_item.position,
 			     :quiz_attempt_id => @quiz_attempt.id )
@@ -21,7 +21,7 @@ class QuizAttemptController < ApplicationController
                  :quiz_attempt_id => @quiz_attempt.id,
 		 :quiz_response_position => 1 )
   end
-  
+
   def restart
     if request.post?
       @other_user = User.find( :first, :conditions => ['username = ? ', params[:username]] )
@@ -31,12 +31,12 @@ class QuizAttemptController < ApplicationController
       redirect_to( :controller => 'welcome', :action => 'index' )
     end
   end
-  
+
   def show
     position = params[:quiz_response_position]
     @quiz_attempt = QuizAttempt.find( params[:quiz_attempt_id] )
-    @quiz_response = QuizResponse.find( :first, 
-                                        :conditions => [ 'position = ? AND quiz_attempt_id =?', 
+    @quiz_response = QuizResponse.find( :first,
+                                        :conditions => [ 'position = ? AND quiz_attempt_id =?',
 	    	                            position, @quiz_attempt.id ]
 	          		      )
     if request.get? && !@quiz_response
@@ -61,7 +61,7 @@ class QuizAttemptController < ApplicationController
       end
     end
   end
-  
+
   def end_quiz
     if :out_of_time
       flash[:alert] = "Sorry, your time is up"
@@ -70,7 +70,7 @@ class QuizAttemptController < ApplicationController
     @quiz_attempt.update_attributes( :end_time => Time.now )
     redirect_to( :action => 'results', :quiz_attempt_id => @quiz_attempt.id )
   end
-  
+
   def results
     @quiz_attempt = QuizAttempt.find(params[:quiz_attempt_id])
     @results = @quiz_attempt.incorrect_answers

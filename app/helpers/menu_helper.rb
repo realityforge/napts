@@ -1,7 +1,7 @@
 module MenuHelper
   if ! const_defined?(:Link)
     Link = Struct.new( "Link", :name, :link_options, :html_options, :options )
-    
+
     HomeLink = Link.new('Home',
       {:controller => 'welcome', :action => 'index'},
       {:title => 'Return to Home page'},
@@ -42,27 +42,27 @@ module MenuHelper
       {:controller => 'question', :action => 'list'},
       {:title => 'Add, remove or edit questions and answers'},
       {}).freeze
-    
-    UserLink = Link.new('User: ', 
-      nil, 
+
+    UserLink = Link.new('User: ',
+      nil,
       {:title => 'Currently logged in user'},
       {}).freeze
-    SignOutLink = Link.new('Sign Out', 
+    SignOutLink = Link.new('Sign Out',
       {:controller => 'login', :action => 'logout'},
       {:title => 'Logout', :post => true},
       {}).freeze
   end
-  
+
   def get_user_links
     links = []
     links << gen_user_link.freeze
     links << SignOutLink
     links
   end
-  
+
   def gen_user_link
     link = UserLink.dup
-    link.name += @user.name
+    link.name += current_user.name
     link
   end
 
@@ -84,7 +84,7 @@ module MenuHelper
     end
     text
   end
-  
+
   def get_navigation_links
     links = []
     if session[:role] == :student
@@ -104,57 +104,57 @@ module MenuHelper
     end
     links
   end
-  
+
   def get_controller_name
     controller.controller_name
   end
-  
+
   def dup_link_with_select( link, is_selected )
     result = link.dup
     result.options.update(:selected => is_selected )
     result
   end
- 
+
   def gen_past_quizzes_link
     is_selected = get_controller_name == 'results' && @action_name == 'statistics'
     dup_link_with_select( PastQuizzesLink, is_selected )
   end
-  
+
   def gen_current_quizzes_link
     is_selected = get_controller_name == 'quiz_attempt' && @action_name == 'intro'
     dup_link_with_select( CurrentQuizzesLink, is_selected )
   end
-  
+
   def gen_preview_quizzes_link
     is_selected = get_controller_name == 'preview_quiz' && @action_name == 'intro'
     dup_link_with_select( PreviewQuizzesLink, is_selected )
   end
-  
+
   def gen_enable_quiz_link
     is_selected = get_controller_name == 'quizzes' && @action_name == 'enable_quiz'
     dup_link_with_select( EnableQuizLink, is_selected )
   end
-  
+
   def gen_restart_quiz_link
     is_selected = get_controller_name == 'quiz_attempt' && @action_name == 'restart'
     dup_link_with_select( RestartQuizLink, is_selected )
   end
-  
+
   def gen_manage_quizzes_link
     is_selected = get_controller_name == 'quizzes' && @action_name == 'list'
     dup_link_with_select( ManageQuizzesLink, is_selected )
   end
-  
+
    def gen_manage_questions_link
     is_selected = get_controller_name == 'question' && @action_name == 'list'
     dup_link_with_select( ManageQuestionsLink, is_selected )
   end
-  
+
    def gen_manage_subjects_link
     is_selected = get_controller_name == 'subjects' && @action_name == 'list'
     dup_link_with_select( ManageSubjectsLink, is_selected )
   end
-  
+
   def gen_manage_users_link
     is_selected = get_controller_name == 'users' && @action_name == 'list'
     dup_link_with_select( ManageUsersLink, is_selected )
