@@ -129,6 +129,7 @@ class CreateInitialSchema < ActiveRecord::Migration
                                 :name => "demonstrators_subject_id_fk")
     add_foreign_key_constraint("demonstrators", "user_id", "users", "id",
                                 :name => "demonstrators_user_id_fk")
+     add_index("demonstrators", ["subject_id", "user_id"], :name => "demonstrators_subject_id_user_id_index", :unique => true)
     
     #Educators
     create_table("educators", :id => false, :force => true ) do |t|
@@ -139,7 +140,7 @@ class CreateInitialSchema < ActiveRecord::Migration
                                 :name => "educators_subject_id_fk")
     add_foreign_key_constraint("educators", "user_id", "users", "id",
                                 :name => "educators_user_id_fk")
-    
+     add_index("educators", ["subject_id", "user_id"], :name => "educators_subject_id_user_id_index", :unique => true)
   end
   
   def self.down

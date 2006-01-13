@@ -27,8 +27,30 @@ class User < ActiveRecord::Base
     self.demonstrates_for.size > 0
   end
   
+  def demonstrator_for?( subject_id )
+      i = 0
+      for s in self.demonstrates_for
+        if s.id == subject_id
+          return true
+        end
+	i = i + 1
+      end
+      return false
+  end
+  
    def educator?
     self.educates_for.size > 0
+  end
+  
+  def educator_for?( subject_id )
+      i = 0
+      for s in self.educates_for
+        if s.id == subject_id
+          return true
+        end
+	i = i + 1
+      end
+      return false
   end
   
   private

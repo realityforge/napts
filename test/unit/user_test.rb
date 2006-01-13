@@ -28,4 +28,13 @@ class UserTest < Test::Unit::TestCase
     assert_equal( false, User.find( @admin_user.id ).demonstrator? )
   end
   
+  def test_demonstrator_for?
+    assert_equal( true, User.find( @peter_user.id ).demonstrator_for?( 1 ) )
+    assert_equal( false, User.find( @mr_fancy_pants_user.id).demonstrator_for?(1) )
+  end
+  
+  def test_educator_for?
+    assert_equal( true, User.find( @admin_user.id ).educator_for?(Subject.find(@subject_3.id).id ) )
+    assert_equal( false, User.find(@peter_user.id ).educator_for?( 2 ) )
+  end
 end
