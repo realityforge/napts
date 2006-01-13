@@ -19,4 +19,8 @@ module AuthHelper
     end
     return nil
   end
+
+  def verify_admin
+    raise Napts::SecurityError unless @user.administrator?
+  end
 end

@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
+  include AuthHelper
   def new
+    verify_admin
     if request.get?
       @user = User.new
     else

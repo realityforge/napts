@@ -20,6 +20,16 @@ protected
 
 private
 
+protected
+
+  def rescue_action(e) 
+    if e.is_a?(Napts::SecurityError)
+      redirect_to(:controller => 'security', :action => 'access_denied')
+    else
+      super
+    end
+  end
+
   def force_no_cache
     # set modify date to current timestamp
     response.headers["Last-Modified"] = Time.now.utc.strftime("%a, %d %b %Y %H:%M:%S GMT")
@@ -48,5 +58,13 @@ private
       flash[:notice] = 'Please log in'
       redirect_to(:controller => "login", :action => "login")
     end
+  end
+end
+
+module Napts
+  # Security error. Controllers throw these in situations where a user is trying to access a
+  # function that he is not authorized to access. 
+  # Normally, RForum does not show URLs that would allow the user to access such features.
+  class SecurityError < StandardError
   end
 end
