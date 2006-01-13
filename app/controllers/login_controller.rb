@@ -30,6 +30,6 @@ class LoginController < ApplicationController
     
 protected
   def is_secure?
-    return !( action_name == 'login' || action_name == 'logout' )
+    return !(action_name == 'login' || action_name == 'logout')
   end
 end
