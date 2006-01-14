@@ -39,7 +39,7 @@ private
 
   def force_no_cache
     # set modify date to current timestamp
-    response.headers["Last-Modified"] = Time.now.utc.strftime("%a, %d %b %Y %H:%M:%S GMT")
+    response.headers["Last-Modified"] = CGI::rfc1123_date(Time.now)
     
     # set expiry to back in the past (makes us a bad candidate for caching)
     response.headers["Expires"] = 0
