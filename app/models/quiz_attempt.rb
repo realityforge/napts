@@ -32,8 +32,8 @@ class QuizAttempt < ActiveRecord::Base
   end
   
   def get_response(position)
-    return nil if position > self.quiz_responses.length 
-    self.quiz_responses[position]
+    return nil if (position - 1) > self.quiz_responses.length
+    self.quiz_responses[position - 1]
   end
   
 private

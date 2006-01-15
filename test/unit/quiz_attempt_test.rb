@@ -80,9 +80,39 @@ class QuizAttemptTest < Test::Unit::TestCase
 	count += count
       end
     end
-    assert_equal( 1, @quiz_attempt.get_response(0).position )
-    assert_equal( 2, @quiz_attempt.get_response(1).position ) 
-    assert_equal( nil, @quiz_attempt.get_response(2) )
+    assert_equal( 1, @quiz_attempt.get_response(1).position )
+    assert_equal( 2, @quiz_attempt.get_response(2).position ) 
+    assert_equal( nil, @quiz_attempt.get_response(3) )
+  end
+  
+  def test_get_response_2
+     @quiz = Quiz.find( @quiz_2.id )
+    @quiz_attempt = QuizAttempt.create( :quiz_id => @quiz.id,
+                                        :start_time => '2005-11-7 01:00:00',
+                                        :user_id => 1 )
+    @count = 1
+    for quiz_item in @quiz.quiz_items
+      if quiz_item.is_on_test
+        @quiz_attempt.quiz_responses.create( :created_at => Time.now,
+	                                    :question_id => quiz_item.question.id,
+					    :position => @count, 
+					    :quiz_attempt_id => @quiz_attempt.id )
+	@count += @count
+      end
+    end
+    assert_equal( 1, @quiz_attempt.get_response(1).position )
+    STDERR.puts @quiz_attempt.get_response(1).inspect
+    assert_equal( 2, @quiz_attempt.get_response(2).position )
+    STDERR.puts @quiz_attempt.get_response(2).inspect
+    assert_equal( 3, @quiz_attempt.get_response(3).position )
+     STDERR.puts @quiz_attempt.get_response(3).inspect
+    assert_equal( nil, @quiz_attempt.get_response(4) )
+    @qi = QuizItem.create( :quiz_id => @quiz_2.id, :position => 4, :question_id => 2, :is_on_test => true )
+    @quiz_attempt.quiz_responses.create( :created_at => Time.now,
+	                                 :question_id => 2,
+					 :position => @count, 
+					 :quiz_attempt_id => @quiz_attempt.id )
+    assert_equal( 4, @quiz_attempt.get_response(4).position )
   end
  
   

@@ -9,12 +9,14 @@ class QuizAttemptController < ApplicationController
                                         :quiz_id => @quiz.id,
                                         :user_id => current_user.id )
 
+    count = 1
     for quiz_item in @quiz.quiz_items
       if quiz_item.is_on_test
         QuizResponse.create( :created_at => Time.now,
                              :question_id => quiz_item.question.id,
-	         	     :position => quiz_item.position,
+	         	     :position => count,
 			     :quiz_attempt_id => @quiz_attempt.id )
+	count += count
       end
     end
     redirect_to( :action => 'show',
@@ -35,35 +37,30 @@ class QuizAttemptController < ApplicationController
   def show
     position = params[:quiz_response_position]
     @quiz_attempt = QuizAttempt.find( params[:quiz_attempt_id] )
-    @quiz_response = QuizResponse.find( :first,
-                                        :conditions => [ 'position = ? AND quiz_attempt_id =?',
-	    	                            position, @quiz_attempt.id ]
-	          		      )
-    if request.get? && !@quiz_response
+    @quiz_response = @quiz_attempt.get_response( position.to_i )
+    if request.get? && ! @quiz_response
       redirect_to( :action => 'end_quiz', :quiz_attempt_id => @quiz_attempt.id, :out_of_time => false )
+    elsif @quiz_attempt.time_up?
+      redirect_to( :action => 'end_quiz', :quiz_attempt_id => @quiz_attempt.id, :out_of_time => true )
     elsif request.post?
       if (( @quiz_response.question.question_type == 2 ) && ( params[:answers] == nil ))
 	flash[:alert] = "Must select an answer"
       else
-        if ! ( @quiz_attempt.time_up? )
-          if ! (params[:answers] == nil)
-            for answer in params[:answers]
-              @quiz_response.answers << Answer.find(answer)
-            end
-	  end
-	  @quiz_response.update_attributes( :created_at => Time.now )
-          redirect_to( :action => 'show',
-	               :quiz_attempt_id => @quiz_attempt.id,
-		       :quiz_response_position => position.to_i + 1 )
-	else
-	  redirect_to( :action => 'end_quiz', :quiz_attempt_id => @quiz_attempt.id, :out_of_time => true )
+        if ! (params[:answers] == nil)
+          for answer in params[:answers]
+            @quiz_response.answers << Answer.find(answer)
+          end
 	end
+	@quiz_response.update_attributes( :created_at => Time.now )
+        redirect_to( :action => 'show',
+	             :quiz_attempt_id => @quiz_attempt.id,
+	             :quiz_response_position => position.to_i + 1 )
       end
     end
   end
 
   def end_quiz
-    if :out_of_time
+    if params[:out_of_time]
       flash[:alert] = "Sorry, your time is up"
     end
     @quiz_attempt =  QuizAttempt.find(params[:quiz_attempt_id])

@@ -2,7 +2,10 @@ require File.dirname(__FILE__) + '/../test_helper'
 require 'quiz_attempt_controller'
 
 #Re-raise errors caught by the controller.
-class QuizAttemptController; def rescue_action(e) raise e end; end
+class QuizAttemptController; def rescue_action(e) raise e end; 
+  attr_accessor :time
+  def now; @time; end
+end
 
 class QuizAttemptControllerTest < Test::Unit::TestCase
   fixtures OrderedTables
@@ -86,20 +89,76 @@ class QuizAttemptControllerTest < Test::Unit::TestCase
     @quiz_attempt = QuizAttempt.create( :start_time => Time.now, 
                                         :quiz_id => @quiz_2.id, 
 					:user_id => @peter_user.id )
-    for quiz_item in @quiz.quiz_items
+    @count = 1
+    for quiz_item in @quiz_2.quiz_items
       if quiz_item.is_on_test
-        @quiz_response = QuizResponse.create( :created_at => Time.now, 
-                             :question_id => quiz_item.question_id,
-	         	     :position => quiz_item.position,
-			     :quiz_attempt_id => @quiz_attempt.id )
+        @quiz_attempt.quiz_responses.create( :created_at => Time.now,
+	                                    :question_id => quiz_item.question.id,
+					    :position => @count, 
+					    :quiz_attempt_id => @quiz_attempt.id )
+	@count += @count
       end
     end
-
     get( :show, {:quiz_attempt_id => @quiz_attempt.id, 
-                  :quiz_response_position => @quiz_response.position},
+                  :quiz_response_position => 4 },
 		 {:user_id => @peter_user.id, :role => "Student"} )
     assert_redirected_to( :action => 'end_quiz',
                           :quiz_attempt_id => @quiz_attempt.id,
 			  :out_of_time => false )
   end
+  
+  def test_show_get_out_of_time
+    @quiz_attempt = QuizAttempt.create( :start_time => '2005-11-7 12:00:00', 
+                                        :quiz_id => @quiz_2.id, 
+					:user_id => @peter_user.id )
+    @count = 1
+    for quiz_item in @quiz_2.quiz_items
+      if quiz_item.is_on_test
+        @quiz_attempt.quiz_responses.create( :created_at => Time.now,
+	                                    :question_id => quiz_item.question.id,
+					    :position => @count, 
+					    :quiz_attempt_id => @quiz_attempt.id )
+	@count += @count
+      end
+    end
+    @quiz_attempt.time = Time.local(*ParseDate.parsedate('2005-11-7 12:20:10'))
+    get( :show, {:quiz_attempt_id => @quiz_attempt.id,
+                 :quiz_response_position => 2},
+		 {:user_id => @peter_user.id, :role => "Student" } )
+    assert_equal( 15, @quiz_attempt.quiz.duration )
+    assert_redirected_to( :action => 'end_quiz', :quiz_attempt_id => @quiz_attempt.id, :out_of_time => true )
+  end
+  
+  def test_end_quiz_out_of_time
+    @quiz_attempt = QuizAttempt.create( :start_time => Time.now, 
+                                        :quiz_id => @quiz_2.id, 
+					:user_id => @peter_user.id )
+  
+    get( :end_quiz,
+        {:quiz_attempt_id => @quiz_attempt.id, :out_of_time => true },
+        {:user_id => @peter_user.id, :role => "Student"} )
+
+    assert_equal( "Sorry, your time is up", flash[:alert] )
+    assert_not_nil( assigns(:quiz_attempt).end_time )
+    assert_redirected_to( :action => 'results', :quiz_attempt_id => @quiz_attempt.id )
+  end
+
+  def test_end_quiz_not_out_of_time
+    @quiz_attempt = QuizAttempt.create( :start_time => Time.now, 
+                                        :quiz_id => @quiz_2.id, 
+					:user_id => @peter_user.id )
+  
+    get( :end_quiz,
+        {:quiz_attempt_id => @quiz_attempt.id, :out_of_time => false },
+        {:user_id => @peter_user.id, :role => "Student"} )
+    assert_nil( flash[:alert] )
+    assert_not_nil( assigns(:quiz_attempt).end_time )
+    assert_redirected_to( :action => 'results', :quiz_attempt_id => @quiz_attempt.id )
+  end
+  
+#  def test_results
+#    @quiz_attempt = QuizAttempt.find( )
+#    assert_valid_markup
+#  end
+  
 end
