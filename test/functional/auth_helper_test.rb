@@ -5,8 +5,19 @@ class AuthHelperObject
   include AuthHelper
 end
 
+class FakeUser
+  def initialize(administrator, educator, demonstrator)
+    @administrator = administrator
+    @educator = educator
+    @demonstrator = demonstrator
+  end
+  def administrator?; @administrator; end
+  def educator?; @educator; end
+  def demonstrator?; @demonstrator; end
+end
+
 class AuthHelperTest < Test::Unit::TestCase
-  FakeUser = Struct.new( "FakeUser", :administrator?, :educator?, :demonstrator? ) 
+  #FakeUser = Struct.new( "FakeUser", :administrator?, :educator?, :demonstrator? ) 
 
   def test_to_role
     h = AuthHelperObject.new
