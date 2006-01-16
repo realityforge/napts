@@ -1,6 +1,4 @@
 class LoginController < ApplicationController
-  include AuthHelper
-
   def login
     reset_session
     if request.post?

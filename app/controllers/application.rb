@@ -3,6 +3,9 @@
 class ApplicationController < ActionController::Base
   helper :view_debug
   helper :menu
+  helper :auth
+  include AuthHelper
+  
   helper_method :authenticated?
   helper_method :current_user
 

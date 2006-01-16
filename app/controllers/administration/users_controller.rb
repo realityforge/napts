@@ -1,7 +1,6 @@
 class Administration::UsersController < Administration::BaseController
   include AuthHelper
   def new
-    verify_admin
     if request.get?
       @user = User.new
     else
@@ -16,18 +15,15 @@ class Administration::UsersController < Administration::BaseController
   end
   
   def list
-    verify_admin
     @users = User.find_all
   end
   
   def update_role
-    verify_admin
     @other_user = User.find(params[:id])
     @subjects = Subject.find(:all)
   end
   
   def make_demonstrator
-    verify_admin
     @other_user = User.find(params[:id])
     @subject = Subject.find(params[:subject_id])
     if params[:value]
@@ -39,7 +35,6 @@ class Administration::UsersController < Administration::BaseController
   end
   
   def make_admin
-    verify_admin
     @other_user = User.find(params[:id])
     @other_user.administrator = params[:admin]
     if ! @other_user.save
@@ -49,7 +44,6 @@ class Administration::UsersController < Administration::BaseController
   end
   
   def make_educator
-    verify_admin
     @other_user = User.find(params[:id])
     @subject = Subject.find(params[:subject_id])
     if params[:value]
@@ -61,9 +55,7 @@ class Administration::UsersController < Administration::BaseController
   end
   
   def delete
-    verify_admin
     User.find(params[:id]).destroy
     redirect_to( :controller => 'users', :action => 'list' )
   end
-  
 end
