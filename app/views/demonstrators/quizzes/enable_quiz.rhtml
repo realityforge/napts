@@ -13,7 +13,7 @@
       <td><%= quiz.description %></td>
       <td><%= quiz.duration %></td>
       <% if quiz.enable %>
-        <td><%= link_to( 'Disable Test', :action => 'enable', :id => quiz.id ) %></td>
+        <td><%= link_to( 'Disable Test', :action => 'disable', :id => quiz.id ) %></td>
       <% else %>
         <td><%= link_to( 'Enable Test', :action => 'enable', :id => quiz.id ) %></td>
       <% end %>
