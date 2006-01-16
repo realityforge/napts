@@ -101,11 +101,8 @@ class QuizAttemptTest < Test::Unit::TestCase
       end
     end
     assert_equal( 1, @quiz_attempt.get_response(1).position )
-    STDERR.puts @quiz_attempt.get_response(1).inspect
     assert_equal( 2, @quiz_attempt.get_response(2).position )
-    STDERR.puts @quiz_attempt.get_response(2).inspect
     assert_equal( 3, @quiz_attempt.get_response(3).position )
-     STDERR.puts @quiz_attempt.get_response(3).inspect
     assert_equal( nil, @quiz_attempt.get_response(4) )
     @qi = QuizItem.create( :quiz_id => @quiz_2.id, :position => 4, :question_id => 2, :is_on_test => true )
     @quiz_attempt.quiz_responses.create( :created_at => Time.now,
