@@ -1,0 +1,11 @@
+<% numqns = @quiz_attempt.quiz_responses.length %>
+<% correct = numqns - @quiz_attempt.incorrect_answers.length %>
+<p>You got <%= correct %> out of <%= numqns %> questions correct.</p>
+<% if ! @quiz_attempt.incorrect_answers.empty? %>
+  <p>These questions were answered wrong: </p>
+  <% for q_id in @quiz_attempt.incorrect_answers %>
+    <p><%= q_id %></p>
+  <% end %>
+<% end %>
+
+<%= link_to( 'back', :action => 'statistics' ) %>

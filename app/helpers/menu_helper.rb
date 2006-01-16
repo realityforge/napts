@@ -7,15 +7,15 @@ module MenuHelper
       {:title => 'Return to Home page'},
       {}).freeze
     PastQuizzesLink = Link.new('Results',
-      {:controller => 'results', :action => 'statistics'},
+      {:controller => '/students/results', :action => 'statistics'},
       {:title => 'Results for completed OnLine Tests'},
       {}).freeze
     CurrentQuizzesLink = Link.new('Take Test',
-      {:controller => 'quiz_attempt', :action => 'intro'},
+      {:controller => '/students/quiz_attempt', :action => 'intro'},
       {:title => 'Sit enabled online test'},
       {}).freeze
     PreviewQuizzesLink = Link.new('Preview Tests',
-      {:controller => 'preview_quiz', :action => 'intro'},
+      {:controller => '/students/preview_quiz', :action => 'intro'},
       {:title => 'Preview tests'},
       {}).freeze
     EnableQuizLink = Link.new('Enable Quizzes',
@@ -116,17 +116,17 @@ module MenuHelper
   end
 
   def gen_past_quizzes_link
-    is_selected = get_controller_name == 'results' && @action_name == 'statistics'
+    is_selected = get_controller_name == '/students/results' && @action_name == 'statistics'
     dup_link_with_select( PastQuizzesLink, is_selected )
   end
 
   def gen_current_quizzes_link
-    is_selected = get_controller_name == 'quiz_attempt' && @action_name == 'intro'
+    is_selected = get_controller_name == '/students/quiz_attempt' && @action_name == 'intro'
     dup_link_with_select( CurrentQuizzesLink, is_selected )
   end
 
   def gen_preview_quizzes_link
-    is_selected = get_controller_name == 'preview_quiz' && @action_name == 'intro'
+    is_selected = get_controller_name == '/students/preview_quiz' && @action_name == 'intro'
     dup_link_with_select( PreviewQuizzesLink, is_selected )
   end
 
