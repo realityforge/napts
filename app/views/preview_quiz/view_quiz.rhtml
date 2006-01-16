@@ -10,7 +10,7 @@
 <table>
   <% for answer in @question.answers %>
     <tr>
-      <td><input type="<%= button_type %>"></td>
+      <td><input type="<%= button_type %>" name="answers[]" value="<%= answer.id %>"></td>
       <td><%= answer.content %></td>
     </tr>
   <% end %>

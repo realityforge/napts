@@ -4,14 +4,13 @@
   <tr>
     <th>Content</th>
     <th>Question Type</th>
-    <th></th> <th></th> <th></th>
+    <th></th> <th></th>
   </tr>
   
 <% for question in @questions %>
   <tr>
-    <td><%= question.content %></td>
+    <td><%= link_to( "#{question.content}", :action => 'show', :id => question ) %></td>
     <td><%= Question::QUESTION_TYPE.index( question.question_type ) %></td>
-    <td><%= link_to( 'Show', :action => 'show', :id => question ) %></td>
     <td><%= link_to( 'Edit', :action => 'edit', :id => question ) %></td>
     <td><%= link_to( 'Destroy', { :action => 'destroy', :id => question }, :confirm => 'Are you sure?' ) %></td>
   </tr>

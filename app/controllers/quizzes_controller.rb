@@ -72,15 +72,14 @@ class QuizzesController < ApplicationController
   def new
     @quiz = Quiz.new
     @subjects = Subject.find(:all)
-  end
-
-  def create
+    if request.post?
     @quiz = Quiz.new( params[:quiz] )
-    if @quiz.save
-      flash[:notice] = 'Quiz was successfully created.'
-      redirect_to( :action => 'show' , :id => @quiz.id )
-    else
-      render( :action => 'new' )
+      if ! @quiz.save
+        flash[:alert] = "Quiz could not be created"
+      else
+        flash[:notice] = 'Quiz was successfully created.'
+        redirect_to( :action => 'show' , :id => @quiz.id )
+      end
     end
   end
 

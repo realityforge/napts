@@ -2,9 +2,13 @@ require File.dirname(__FILE__) + '/../test_helper'
 require 'quiz_attempt_controller'
 
 #Re-raise errors caught by the controller.
-class QuizAttemptController; def rescue_action(e) raise e end; 
-  attr_accessor :time
-  def now; @time; end
+class QuizAttemptController; def rescue_action(e) raise e end; end
+
+require 'quiz_attempt'
+
+class QuizAttempt < ActiveRecord::Base
+  cattr_accessor :time
+  def now; @@time; end
 end
 
 class QuizAttemptControllerTest < Test::Unit::TestCase
@@ -23,7 +27,7 @@ class QuizAttemptControllerTest < Test::Unit::TestCase
   end
   
   def test_restart_get
-    get(:restart, {}, {:user_id => @mr_fancy_pants_user.id, :role => "Demonstrator"} )
+    get(:restart, {}, {:user_id => @mr_fancy_pants_user.id, :role => :demonstrator} )
     assert_template( 'restart' )
     assert_valid_markup
   end
@@ -31,7 +35,7 @@ class QuizAttemptControllerTest < Test::Unit::TestCase
   def test_restart_post
     @quiz_attempt_temp = QuizAttempt.create(:start_time => Time.now, :quiz_id => @quiz_1.id, :user_id => @peter_user.id )
     @id = @quiz_attempt_temp.id
-    post( :restart, {:username => "peter"}, {:user_id => @mr_fancy_pants_user.id, :role => "Demonstrator"} )
+    post( :restart, {:username => "peter"}, {:user_id => @mr_fancy_pants_user.id, :role => :demonstrator} )
     assert_equal( @quiz_attempt_temp, assigns(:quiz_attempt) )  
     assert_response( :redirect )
     assert_raise(ActiveRecord::RecordNotFound){QuizAttempt.find(@id)}
@@ -40,7 +44,7 @@ class QuizAttemptControllerTest < Test::Unit::TestCase
   def test_show_get_questions_left
     start_quiz
     get( :show, { :quiz_attempt_id => assigns(:quiz_attempt).id, :quiz_response_position => 1 },
-        {:user_id => @peter_user.id, :role => "Student"} )
+        {:user_id => @peter_user.id, :role => :student} )
     assert_equal( 1, assigns(:quiz_response).position )
     assert_response( :success )
     assert_template( 'show' )
@@ -59,7 +63,7 @@ class QuizAttemptControllerTest < Test::Unit::TestCase
     post( :show, {:quiz_attempt_id => @quiz_attempt.id, 
                   :quiz_response_position => @quiz_response.position,
                   :answers => [ @q1_a1.id, @q1_a2.id ]},
-		 {:user_id => @peter_user.id, :role => "Student"} )
+		 {:user_id => @peter_user.id, :role => :student} )
 
     assert_nil( flash[:alert] )
     assert_equal( 1, @quiz_response.question.question_type )
@@ -79,7 +83,7 @@ class QuizAttemptControllerTest < Test::Unit::TestCase
 			     :quiz_attempt_id => @quiz_attempt.id )
      post( :show, {:quiz_attempt_id => @quiz_attempt.id, 
                   :quiz_response_position => @quiz_response.position},
-		 {:user_id => @peter_user.id, :role => "Student"} )
+		 {:user_id => @peter_user.id, :role => :student} )
      assert_equal( 2, @quiz_response.question.question_type )
      assert_equal( "Must select an answer", flash[:alert] )
      assert_response( :success )
@@ -101,7 +105,7 @@ class QuizAttemptControllerTest < Test::Unit::TestCase
     end
     get( :show, {:quiz_attempt_id => @quiz_attempt.id, 
                   :quiz_response_position => 4 },
-		 {:user_id => @peter_user.id, :role => "Student"} )
+		 {:user_id => @peter_user.id, :role => :student} )
     assert_redirected_to( :action => 'end_quiz',
                           :quiz_attempt_id => @quiz_attempt.id,
 			  :out_of_time => false )
@@ -123,10 +127,14 @@ class QuizAttemptControllerTest < Test::Unit::TestCase
     end
     @quiz_attempt.time = Time.local(*ParseDate.parsedate('2005-11-7 12:20:10'))
     get( :show, {:quiz_attempt_id => @quiz_attempt.id,
-                 :quiz_response_position => 2},
-		 {:user_id => @peter_user.id, :role => "Student" } )
+                 :quiz_response_position => 1},
+		 {:user_id => @peter_user.id, :role => :student } )
+    assert_equal( 3, @quiz_attempt.quiz_responses.size )
     assert_equal( 15, @quiz_attempt.quiz.duration )
-    assert_redirected_to( :action => 'end_quiz', :quiz_attempt_id => @quiz_attempt.id, :out_of_time => true )
+    assert_equal( true, @quiz_attempt.time_up? )
+    assert_redirected_to( :action => 'end_quiz', 
+                          :quiz_attempt_id => @quiz_attempt.id,
+			  :out_of_time => true )
   end
   
   def test_end_quiz_out_of_time
@@ -136,7 +144,7 @@ class QuizAttemptControllerTest < Test::Unit::TestCase
   
     get( :end_quiz,
         {:quiz_attempt_id => @quiz_attempt.id, :out_of_time => true },
-        {:user_id => @peter_user.id, :role => "Student"} )
+        {:user_id => @peter_user.id, :role => :student} )
 
     assert_equal( "Sorry, your time is up", flash[:alert] )
     assert_not_nil( assigns(:quiz_attempt).end_time )
@@ -150,15 +158,17 @@ class QuizAttemptControllerTest < Test::Unit::TestCase
   
     get( :end_quiz,
         {:quiz_attempt_id => @quiz_attempt.id, :out_of_time => false },
-        {:user_id => @peter_user.id, :role => "Student"} )
+        {:user_id => @peter_user.id, :role => :student} )
     assert_nil( flash[:alert] )
     assert_not_nil( assigns(:quiz_attempt).end_time )
     assert_redirected_to( :action => 'results', :quiz_attempt_id => @quiz_attempt.id )
   end
   
-#  def test_results
-#    @quiz_attempt = QuizAttempt.find( )
-#    assert_valid_markup
-#  end
+  def test_results
+    @quiz_attempt = QuizAttempt.find( @qa_2.id )
+    get( :results, {:quiz_attempt_id => @quiz_attempt.id }, {:user_id => @peter_user.id, :role => :student } )
+    assert_equal( ["1", "2"]  , assigns(:results) )
+    assert_valid_markup
+  end
   
 end
