@@ -26,7 +26,7 @@ class Teachers::QuestionController < Teachers::BaseController
       if is_valid && @question.save
         @question.answers.each {|answer| answer.save}
       	flash[:notice] = 'Question was successfully created.'
-	redirect_to( :action => 'list' )
+	redirect_to( :action => 'show', :id => @question )
 	return
       end
     end

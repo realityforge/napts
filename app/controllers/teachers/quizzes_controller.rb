@@ -8,27 +8,22 @@ class Teachers::QuizzesController < Teachers::BaseController
                                       :per_page => 10 )
   end
   
-   def prelim
-    @quiz = Quiz.find(params[:id])
-    if @quiz.prelim_enable
-      change = false
-    else
-      change = true
-    end
-    if ! @quiz.update_attributes( :prelim_enable => change )
-      flash[:alert] = "Not Updated"
-    end
-    redirect_to( :action => 'list', :id => @quiz.id )
+  def disable_preview
+    update_preview(false)
   end
   
-   def show
+  def enable_preview
+    update_preview(true)
+  end
+  
+  def show
     @quiz = Quiz.find(params[:id])
     @questions = Question.find(:all,
                              :conditions => ['quiz_items.quiz_id = ?', @quiz.id],
 			     :joins => 'LEFT OUTER JOIN quiz_items ON quiz_items.question_id = questions.id ')
   end
   
-   def change
+  def change
     @quiz = Quiz.find(params[:id])
     if params[:quiz_item_ids] == nil
       flash[:alert] = 'must select something'
@@ -109,6 +104,15 @@ class Teachers::QuizzesController < Teachers::BaseController
       redirect_to( :action => 'add_questions', :id => @quiz.id )
       return
     end
+  end
+  
+private 
+  def update_preview(value)
+    @quiz = Quiz.find(params[:id])
+    if ! @quiz.update_attributes( :prelim_enable => value )
+      flash[:alert] = "Failed to update quiz."
+    end
+    redirect_to( :action => 'list', :id => @quiz.id )
   end
   
 end

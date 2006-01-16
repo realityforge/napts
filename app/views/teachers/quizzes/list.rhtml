@@ -5,7 +5,7 @@
     <th>Name</th>
     <th>Description</th>
     <th>Duration</th>
-    <th>Prelim Enabled</th>
+    <th>Preview Enabled</th>
     <th></th><th></th><th></th>
   </tr>
   
@@ -17,9 +17,9 @@
     <td><%= quiz.duration %></td>
     <td><%= quiz.prelim_enable %></td>
     <% if quiz.prelim_enable %>
-      <td><%= link_to( 'Disable Prelim', :action => 'prelim', :id => quiz ) %></td>
+      <td><%= link_to( 'Disable Preview', :action => 'disable_preview', :id => quiz ) %></td>
     <% else %>
-      <td><%= link_to( 'Enable Prelim', :action => 'prelim', :id => quiz ) %></td>
+      <td><%= link_to( 'Enable Preview', :action => 'enable_preview', :id => quiz ) %></td>
     <% end %>
     <td><%= link_to( 'Destroy', { :action => 'destroy', :id => quiz }, :confirm => 'Are you sure?' ) %></td>
   </tr>
