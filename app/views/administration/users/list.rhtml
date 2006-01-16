@@ -1,0 +1,28 @@
+<table>
+  <tr>
+    <th>User name</th>
+    <th></th><th></th><th></th>
+  </tr>
+  
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.username %></td>
+      <td><%= link_to('Update Role', :action => 'update_role', :id => user.id ) %></td>
+      <% if ! user.administrator %>
+        <td><%= link_to( 'Make Admin', :action => 'make_admin', 
+	                               :id => user.id,
+				       :admin => 'true' ) %></td>
+      <% else %>
+        <td><%= link_to( 'Revoke Admin', :action => 'make_admin',
+	                                 :id => user.id,
+					 :admin => 'false' ) %></td>
+      <% end %>
+      <td><%= link_to( "delete",
+		     {:action => "delete", :id => user.id},
+		     :confirm => "Really delete #{user.name}?") %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+<%= link_to('New User', :action => 'new' ) %>
+

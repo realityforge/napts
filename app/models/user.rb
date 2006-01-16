@@ -7,9 +7,8 @@ class User < ActiveRecord::Base
   attr_accessor( :password )
   attr_accessible( :username, :password, :name )
   validates_uniqueness_of( :username )
-  validates_presence_of( :username, :hashed_password )
-  
-  USER_ROLE = [ "Student", "Demonstrator", "Educator", "Administrator" ].freeze
+  validates_presence_of( :username )
+  validates_presence_of( :password, :on => :create )
   
   def before_create
     self.hashed_password = User.hash_password( self.password )

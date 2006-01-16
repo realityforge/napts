@@ -29,7 +29,7 @@ protected
 
   def rescue_action(e) 
     if e.is_a?(Napts::SecurityError)
-      redirect_to(:controller => 'security', :action => 'access_denied')
+      redirect_to(:controller => '/security', :action => 'access_denied')
     else
       super
     end

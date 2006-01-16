@@ -31,7 +31,7 @@ module MenuHelper
       {:title => 'Add, edit or delete subjects'},
       {}).freeze
     ManageUsersLink = Link.new('Manage Users',
-      {:controller => 'users', :action => 'list'},
+      {:controller => '/administration/users', :action => 'list'},
       {:title => 'Add or remove users'},
       {}).freeze
     ManageQuizzesLink = Link.new('Manage Quizzes',
@@ -156,7 +156,7 @@ module MenuHelper
   end
 
   def gen_manage_users_link
-    is_selected = get_controller_name == 'users' && @action_name == 'list'
+    is_selected = get_controller_name == '/administration/users' && @action_name == 'list'
     dup_link_with_select( ManageUsersLink, is_selected )
   end
 end
