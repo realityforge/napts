@@ -1,8 +1,8 @@
 require File.dirname(__FILE__) + '/../test_helper'
-require 'quiz_attempt_controller'
+require 'students/quiz_attempt_controller'
 
 #Re-raise errors caught by the controller.
-class QuizAttemptController; def rescue_action(e) raise e end; end
+class Students::QuizAttemptController; def rescue_action(e) raise e end; end
 
 require 'quiz_attempt'
 
@@ -15,7 +15,7 @@ class QuizAttemptControllerTest < Test::Unit::TestCase
   fixtures OrderedTables
   
   def setup
-    @controller = QuizAttemptController.new
+    @controller = Students::QuizAttemptController.new
     @request = ActionController::TestRequest.new
     @response = ActionController::TestResponse.new
   end
@@ -24,21 +24,6 @@ class QuizAttemptControllerTest < Test::Unit::TestCase
     get( :start_quiz, {:start_time => Time.now, :quiz_id => @quiz_1.id}, {:user_id =>  @peter_user.id, :role => "Student"})
     assert_equal( 2, assigns(:quiz_attempt).quiz_responses.length )
     assert_response( :redirect )
-  end
-  
-  def test_restart_get
-    get(:restart, {}, {:user_id => @mr_fancy_pants_user.id, :role => :demonstrator} )
-    assert_template( 'restart' )
-    assert_valid_markup
-  end
-  
-  def test_restart_post
-    @quiz_attempt_temp = QuizAttempt.create(:start_time => Time.now, :quiz_id => @quiz_1.id, :user_id => @peter_user.id )
-    @id = @quiz_attempt_temp.id
-    post( :restart, {:username => "peter"}, {:user_id => @mr_fancy_pants_user.id, :role => :demonstrator} )
-    assert_equal( @quiz_attempt_temp, assigns(:quiz_attempt) )  
-    assert_response( :redirect )
-    assert_raise(ActiveRecord::RecordNotFound){QuizAttempt.find(@id)}
   end
   
   def test_show_get_questions_left

@@ -32,8 +32,6 @@ class Test::Unit::TestCase
 	{:user_id => @user.id, :role => "Student"} )
     assert_not_nil( assigns(:quiz_attempt) )
     assigns(:quiz_attempt).reload
-    STDERR.puts assigns(:quiz_attempt).inspect
-    STDERR.puts assigns(:quiz_attempt).id
     assert_equal( 2, assigns(:quiz_attempt).quiz_responses.length )
     assert_equal( 'peter', @user.username )
     assert_redirected_to( :action => 'show', 

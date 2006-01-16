@@ -1,14 +1,14 @@
 require File.dirname(__FILE__) + '/../test_helper'
-require 'question_controller'
+require 'teachers/question_controller'
 
 # Re-raise errors caught by the controller.
-class QuestionController; def rescue_action(e) raise e end; end
+class Teachers::QuestionController; def rescue_action(e) raise e end; end
 
 class QuestionControllerTest < Test::Unit::TestCase
   fixtures OrderedTables
 
   def setup
-    @controller = QuestionController.new
+    @controller = Teachers::QuestionController.new
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
   end
