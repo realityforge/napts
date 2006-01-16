@@ -19,11 +19,11 @@ module MenuHelper
       {:title => 'Preview tests'},
       {}).freeze
     EnableQuizLink = Link.new('Enable Quizzes',
-      {:controller => 'quizzes', :action => 'enable_quiz'},
+      {:controller => '/demonstrators/quizzes', :action => 'enable_quiz'},
       {:title => 'Enable and disable tests'},
       {}).freeze
     RestartQuizLink = Link.new('Restart Quiz',
-      {:controller => 'quiz_attempt', :action => 'restart'},
+      {:controller => '/demonstrators/quizzes', :action => 'restart'},
       {:title => 'Restart an individual quiz'},
       {}).freeze
     ManageSubjectsLink = Link.new('Manage Subjects',
@@ -48,7 +48,7 @@ module MenuHelper
       {:title => 'Currently logged in user'},
       {}).freeze
     SignOutLink = Link.new('Sign Out',
-      {:controller => 'login', :action => 'logout'},
+      {:controller => '/login', :action => 'logout'},
       {:title => 'Logout', :post => true},
       {}).freeze
   end
@@ -131,12 +131,12 @@ module MenuHelper
   end
 
   def gen_enable_quiz_link
-    is_selected = get_controller_name == 'quizzes' && @action_name == 'enable_quiz'
+    is_selected = get_controller_name == '/demonstrators/quizzes' && @action_name == 'enable_quiz'
     dup_link_with_select( EnableQuizLink, is_selected )
   end
 
   def gen_restart_quiz_link
-    is_selected = get_controller_name == 'quiz_attempt' && @action_name == 'restart'
+    is_selected = get_controller_name == '/demonstrators/quizzes' && @action_name == 'restart'
     dup_link_with_select( RestartQuizLink, is_selected )
   end
 

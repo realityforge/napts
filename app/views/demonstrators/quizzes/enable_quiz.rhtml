@@ -1,0 +1,24 @@
+<table>
+  <tr>
+    <th>Subject ID</th>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Duration</th>
+    <th></th>
+  </tr>
+  <% for quiz in @quizzes %>
+    <tr>
+      <td><%= quiz.subject.code %></td>
+      <td><%= quiz.name %></td>
+      <td><%= quiz.description %></td>
+      <td><%= quiz.duration %></td>
+      <% if quiz.enable %>
+        <td><%= link_to( 'Disable Test', :action => 'enable', :id => quiz.id ) %></td>
+      <% else %>
+        <td><%= link_to( 'Enable Test', :action => 'enable', :id => quiz.id ) %></td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
+<%= link_to( 'Previous page', { :page => @quiz_pages.current.previous } ) if @quiz_pages.current.previous  %>
+<%= link_to( 'Next page', { :page => @quiz_pages.current.next } ) if @quiz_pages.current.next %> 
