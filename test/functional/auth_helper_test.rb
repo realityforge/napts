@@ -17,8 +17,6 @@ class FakeUser
 end
 
 class AuthHelperTest < Test::Unit::TestCase
-  #FakeUser = Struct.new( "FakeUser", :administrator?, :educator?, :demonstrator? ) 
-
   def test_to_role
     h = AuthHelperObject.new
     assert_equal(:administrator, h.to_role("Administrator"))
