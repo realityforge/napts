@@ -39,7 +39,6 @@ class QuestionController < ApplicationController
   end    
 
   def edit
-  
     @question = Question.find(params[:id])
     if request.get?
       @answers = @question.answers
