@@ -27,7 +27,7 @@ module MenuHelper
       {:title => 'Restart an individual quiz'},
       {}).freeze
     ManageSubjectsLink = Link.new('Manage Subjects',
-      {:controller => 'subjects', :action => 'list'},
+      {:controller => '/administration/subjects', :action => 'list'},
       {:title => 'Add, edit or delete subjects'},
       {}).freeze
     ManageUsersLink = Link.new('Manage Users',
@@ -35,11 +35,11 @@ module MenuHelper
       {:title => 'Add or remove users'},
       {}).freeze
     ManageQuizzesLink = Link.new('Manage Quizzes',
-      {:controller => 'quizzes', :action => 'list'},
+      {:controller => '/teachers/quizzes', :action => 'list'},
       {:title => 'Create new quizzes or add and remove questions from existing quizzes'},
       {}).freeze
     ManageQuestionsLink = Link.new('Manage Questions',
-      {:controller => 'question', :action => 'list'},
+      {:controller => '/teachers/question', :action => 'list'},
       {:title => 'Add, remove or edit questions and answers'},
       {}).freeze
 
@@ -141,17 +141,17 @@ module MenuHelper
   end
 
   def gen_manage_quizzes_link
-    is_selected = get_controller_name == 'quizzes' && @action_name == 'list'
+    is_selected = get_controller_name == '/teachers/quizzes' && @action_name == 'list'
     dup_link_with_select( ManageQuizzesLink, is_selected )
   end
 
    def gen_manage_questions_link
-    is_selected = get_controller_name == 'question' && @action_name == 'list'
+    is_selected = get_controller_name == '/teachers/question' && @action_name == 'list'
     dup_link_with_select( ManageQuestionsLink, is_selected )
   end
 
    def gen_manage_subjects_link
-    is_selected = get_controller_name == 'subjects' && @action_name == 'list'
+    is_selected = get_controller_name == '/administration/subjects' && @action_name == 'list'
     dup_link_with_select( ManageSubjectsLink, is_selected )
   end
 

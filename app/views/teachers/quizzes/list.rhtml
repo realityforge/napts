@@ -1,0 +1,33 @@
+<h1>Listing quizzes</h1>
+<table>
+  <tr>
+    <th>Subject ID</th>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Duration</th>
+    <th>Prelim Enabled</th>
+    <th></th><th></th><th></th>
+  </tr>
+  
+<% for quiz in @quizzes %>
+  <tr>
+    <td><%= quiz.subject.code %></td>
+    <td><%= link_to( "#{quiz.name}", :action => 'show', :id => quiz ) %></td>
+    <td><%= quiz.description %></td>
+    <td><%= quiz.duration %></td>
+    <td><%= quiz.prelim_enable %></td>
+    <% if quiz.prelim_enable %>
+      <td><%= link_to( 'Disable Prelim', :action => 'prelim', :id => quiz ) %></td>
+    <% else %>
+      <td><%= link_to( 'Enable Prelim', :action => 'prelim', :id => quiz ) %></td>
+    <% end %>
+    <td><%= link_to( 'Destroy', { :action => 'destroy', :id => quiz }, :confirm => 'Are you sure?' ) %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to( 'Previous page', { :page => @quiz_pages.current.previous } ) if @quiz_pages.current.previous  %>
+<%= link_to( 'Next page', { :page => @quiz_pages.current.next } ) if @quiz_pages.current.next %> 
+<br />
+<%= link_to( 'New quiz', :action => 'new' ) %>
+
