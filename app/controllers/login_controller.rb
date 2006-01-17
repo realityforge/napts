@@ -9,7 +9,7 @@ class LoginController < ApplicationController
         flash[:alert] = 'Invalid user or password'
         redirect_to( :action => 'login' )
       else
-        role = get_verified_role(user,params[:type],params[:subject_id])
+        role = get_verified_role(user,params[:type],params[:subject_id].to_i)
         if role.nil?
           flash[:alert] = 'Access Denied'
           redirect_to( :action => 'login' )
