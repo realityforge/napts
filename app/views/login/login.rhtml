@@ -21,11 +21,11 @@
   <br/>
 
   <label for="subject_id">Subject</label>
-  <select id="subject_id" name="subject_id" disabled="true">
+  <select id="subject_id" name="subject_id" disabled="disabled">
     <%= options_from_collection_for_select(@subjects, :id, :code) %>
   </select>
   <br/>
-  <script language="javascript" type="text/javascript"><!-- onSelectRole(); --></script>
+  <script type="text/javascript"><!-- onSelectRole(); --></script>
 
   <button type="submit">Login</button>
   </div>
@@ -37,7 +37,7 @@
   input, select {width: 190px; display: block; float: left;}
   button {display: block; clear: both;}
   </style>
-  <script language="javascript" type="text/javascript">
+  <script type="text/javascript">
 <!--
     function onSelectRole() {
       var role = $('role').value;
