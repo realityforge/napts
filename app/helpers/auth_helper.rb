@@ -33,7 +33,7 @@ module AuthHelper
     end
   end
 
-  def verify_educator
+  def verify_teacher
     raise Napts::SecurityError unless current_user.educator?
     subject_id = current_subject_id
     if subject_id
