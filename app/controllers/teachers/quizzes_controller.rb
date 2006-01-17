@@ -100,7 +100,7 @@ class Teachers::QuizzesController < Teachers::BaseController
       @questions = Question.find(:all,
         	         :conditions => ['id NOT IN (SELECT questions.id FROM questions RIGHT OUTER JOIN quiz_items ON quiz_items.question_id = questions.id WHERE quiz_items.quiz_id = ?)', @quiz.id] )
     else
-      if params[:question_ids] == nil
+      if params[:question_ids].nil?
         flash[:alert] = "Must select something"
       else
         for question in params[:question_ids]

@@ -1,3 +1,4 @@
 class Demonstrators::BaseController < ApplicationController
-  before_filter( :verify_demonstrator )
+protected
+  def verify_access; verify_demonstrator; end
 end
