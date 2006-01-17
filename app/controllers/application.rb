@@ -21,7 +21,6 @@ class ApplicationController < ActionController::Base
   end
 
 protected
-
   def current_subject_id
     nil
   end

@@ -1,3 +1,4 @@
 class Teachers::BaseController < ApplicationController
-  before_filter( :verify_teacher )
+protected 
+   def verify_access; verify_teacher; end
 end

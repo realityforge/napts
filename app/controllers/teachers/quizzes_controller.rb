@@ -1,6 +1,7 @@
 class Teachers::QuizzesController < Teachers::BaseController
 
   def list
+    verify_access
     @quiz_pages, @quizzes = paginate( :quizzes,
                                       :select => 'quizzes.*',
                                       :joins => ', educators',
@@ -9,15 +10,18 @@ class Teachers::QuizzesController < Teachers::BaseController
   end
   
   def disable_preview
+    verify_access
     update_preview(false)
   end
   
   def enable_preview
+    verify_access
     update_preview(true)
   end
   
   def show
     @quiz = Quiz.find(params[:id])
+    verify_access
     @questions = Question.find(:all,
                              :conditions => ['quiz_items.quiz_id = ?', @quiz.id],
 			     :joins => 'LEFT OUTER JOIN quiz_items ON quiz_items.question_id = questions.id ')
@@ -25,6 +29,7 @@ class Teachers::QuizzesController < Teachers::BaseController
   
   def change
     @quiz = Quiz.find(params[:id])
+    verify_access
     if params[:quiz_item_ids] == nil
       flash[:alert] = 'must select something'
     else
@@ -65,11 +70,13 @@ class Teachers::QuizzesController < Teachers::BaseController
   
   def edit
     @quiz = Quiz.find(params[:id])
+    verify_access
     @subjects = Subject.find(:all)
   end
   
   def update
     @quiz = Quiz.find(params[:id])
+    verify_access
     if @quiz.update_attributes(params[:quiz])
       flash[:notice] = 'Quiz was successfully updated.'
       redirect_to( :action => 'show', :id => @quiz.id )
@@ -80,6 +87,7 @@ class Teachers::QuizzesController < Teachers::BaseController
   
   def destroy
     @quiz = Quiz.find(params[:id])
+    verify_access
     @subject = @quiz.subject_id
     @quiz.destroy
     redirect_to( :action => 'list', :subject_id => @subject )
@@ -87,6 +95,7 @@ class Teachers::QuizzesController < Teachers::BaseController
   
   def add_questions
     @quiz = Quiz.find(params[:id])
+    verify_access
     if request.get?
       @questions = Question.find(:all,
         	         :conditions => ['id NOT IN (SELECT questions.id FROM questions RIGHT OUTER JOIN quiz_items ON quiz_items.question_id = questions.id WHERE quiz_items.quiz_id = ?)', @quiz.id] )
@@ -104,6 +113,11 @@ class Teachers::QuizzesController < Teachers::BaseController
       redirect_to( :action => 'add_questions', :id => @quiz.id )
       return
     end
+  end
+
+protected
+  def current_subject_id
+    @quiz ? @quiz.subject_id : nil 
   end
   
 private 
