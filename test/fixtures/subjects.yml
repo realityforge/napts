@@ -2,13 +2,13 @@
 subject_1:
   id: 1
   code: "CSE21ADS"
-  name: "Data Structures"
+  subject_group_id: 1
 subject_2:
   id: 2
   code: "CSE12SYS"
-  name: "C and C++"
+  subject_group_id: 2
 subject_3:
   id: 3
   code: "CSE21DB"
-  name: "Databases"
+  subject_group_id: 3
   

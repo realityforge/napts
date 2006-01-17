@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+sg_1:
+  id: 1
+  name: second
+sg_2:
+  id: 2
+  name: sys
+sg_3:
+  id: 3
+  name: databases

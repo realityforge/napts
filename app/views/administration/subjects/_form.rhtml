@@ -3,6 +3,5 @@
 <p><label for="subject_code">Subject code</label><br/>
 <%= text_field( 'subject', 'code' ) %></p>
 
-<p><label for="subject_name">Subject name</label><br/>
-<%= text_field( 'subject', 'name' ) %></p>
-
+<p><label for="subject_subject_group">Subject group</label><br/>
+<%= collection_select('subject', 'subject_group', @groups, :id, :name) %></p>

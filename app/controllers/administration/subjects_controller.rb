@@ -20,6 +20,7 @@ class Administration::SubjectsController < Administration::BaseController
   
   def edit
     @subject = Subject.find(params[:id])
+    @groups = SubjectGroup.find(:all)
   end
   
   def update

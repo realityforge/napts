@@ -32,13 +32,18 @@ class CreateInitialSchema < ActiveRecord::Migration
     end
     add_foreign_key_constraint("computers", "room_id", "rooms", "id", :name => "computers_room_id_fk")
     
+    # SubjectGroups
+    create_table("subject_groups", :force => true) do |t|
+      t.column "name", :string, :limit => 50, :null => false
+    end
+    
     # Subjects
     create_table("subjects", :force => true) do |t|
-      t.column "name", :string, :limit => 50, :null => false
       t.column "code", :string, :limit => 10, :null => false
+      t.column "subject_group_id", :integer, :null => false
     end
-    add_index("subjects", ["name"], :name => "subjects_name_index" )
     add_index("subjects", ["code"], :name => "subjects_code_index", :unique => true)
+    add_foreign_key_constraint("subjects", "subject_group_id", "subject_groups", "id", :name => "subjects_subject_group_id_fk")
     
     # Quizzes
     create_table("quizzes", :force => true) do |t|
@@ -155,6 +160,7 @@ class CreateInitialSchema < ActiveRecord::Migration
     drop_table("quiz_attempts")
     drop_table("quizzes")
     drop_table("subjects")
+    drop_table("subject_groups")
     drop_table("computers")
     drop_table("rooms")
     drop_table("users")
