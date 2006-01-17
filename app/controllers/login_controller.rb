@@ -14,7 +14,7 @@ class LoginController < ApplicationController
           flash[:alert] = 'Access Denied'
           redirect_to( :action => 'login' )
         else
-          session[:session_id] = Subject.find(params[:subject_id]).id if requires_subject?(role)
+          session[:subject_id] = Subject.find(params[:subject_id]).id if requires_subject?(role)
           session[:user_id] = user.id
           session[:role] = role
           redirect_to(:controller => 'welcome', :action => 'index')
