@@ -19,39 +19,39 @@ class Administration::UsersController < Administration::BaseController
   end
   
   def update_role
-    @other_user = User.find(params[:id])
+    @user = User.find(params[:id])
     @subjects = Subject.find(:all)
   end
   
   def make_demonstrator
-    @other_user = User.find(params[:id])
+    @user = User.find(params[:id])
     @subject = Subject.find(params[:subject_id])
     if params[:value]
-      @other_user.demonstrates_for << @subject
+      @user.demonstrates_for << @subject
     else
-      @other_user.demonstrates_for.delete( @subject )
+      @user.demonstrates_for.delete( @subject )
     end
-    redirect_to( :action => 'update_role', :id => @other_user.id )
+    redirect_to( :action => 'update_role', :id => @user.id )
   end
   
   def make_admin
-    @other_user = User.find(params[:id])
-    @other_user.administrator = params[:admin]
-    if ! @other_user.save
+    @user = User.find(params[:id])
+    @user.administrator = params[:admin]
+    if ! @user.save
       flash[:alert] = "Update not successful"
     end
     redirect_to( :action => 'list' )
   end
   
   def make_teacher
-    @other_user = User.find(params[:id])
+    @user = User.find(params[:id])
     @subject = Subject.find(params[:subject_id])
     if params[:value]
-      @other_user.teaches << @subject
+      @user.teaches << @subject
     else
-      @other_user.teaches.delete( @subject )
+      @user.teaches.delete( @subject )
     end
-    redirect_to( :action => 'update_role', :id => @other_user.id )
+    redirect_to( :action => 'update_role', :id => @user.id )
   end
   
   def delete

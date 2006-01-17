@@ -3,12 +3,12 @@ class Demonstrators::QuizzesController < Demonstrators::BaseController
 #  def restart
 #    @quizzes = Quiz.find( :all, :conditions => ['enable = ?', true] )
 #    if request.post?
-#      if ! @other_user = User.find( :first, :conditions => ['username = ? ', params[:username]] )
+#      if ! @user = User.find( :first, :conditions => ['username = ? ', params[:username]] )
 #        flash[:alert] = "Username not valid"
 #      else
 #        if ! @quiz_attempt = QuizAttempt.find( :first,
 #                                               :conditions => ['user_id = ? AND end_time IS NULL',
-#					                      @other_user.id ] )
+#					                      @user.id ] )
 #          flash[:alert] = "Cannot find an unfinished quiz to restart"
 #	else
 #          @quiz_attempt.destroy

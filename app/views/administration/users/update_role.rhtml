@@ -1,4 +1,4 @@
-<h3>Updating information for <%= @other_user.username %></h3>
+<h3>Updating information for <%= @user.username %></h3>
   <table>
     <tr>
       <th>Subject Code</th>
@@ -7,25 +7,25 @@
     <% for subject in @subjects %>
       <tr>
         <td><%= subject.code %></td>
-	<% if @other_user.demonstrator_for?(subject.id) %>
+	<% if @user.demonstrator_for?(subject.id) %>
 	  <td><%= link_to( 'Make not Demonstrator', :action => 'make_demonstrator', 
-	                                      :id => @other_user.id, 
+	                                      :id => @user.id, 
 					      :subject_id => subject.id,
 					      :value => false ) %></td>
         <% else %>
 	  <td><%= link_to( 'Make Demonstrator', :action => 'make_demonstrator', 
-	                                      :id => @other_user.id, 
+	                                      :id => @user.id, 
 					      :subject_id => subject.id,
 					      :value => true ) %></td>
 	<% end %>
-	<% if @other_user.teacher_for?(subject.id) %>
+	<% if @user.teaches?(subject.id) %>
           <td><%= link_to( 'Make not Teacher', :action => 'make_teacher', 
-	                                        :id => @other_user.id, 
+	                                        :id => @user.id, 
 					        :subject_id => subject.id,
 						:value => false ) %></td>
 	<% else %>
 	  <td><%= link_to( 'Make Teacher', :action => 'make_teacher', 
-	                                        :id => @other_user.id,
+	                                        :id => @user.id,
 					        :subject_id => subject.id,
 						:value => true ) %></td>
 	<% end %>
