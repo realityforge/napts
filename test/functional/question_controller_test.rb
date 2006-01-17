@@ -86,7 +86,7 @@ class QuestionControllerTest < Test::Unit::TestCase
     assert_equal( answer_content, assigns(:question).answers[0].content )
     assert_equal( "true", assigns(:question).answers[0].is_correct.to_s )
     assert_equal( 'Question was successfully created.', flash[:notice] )
-    assert_redirected_to( :action => 'list' )
+    assert_redirected_to( :action => 'show', :id => assigns(:question).id )
     assert_equal( num_questions + 1 , Question.count )
   end
 

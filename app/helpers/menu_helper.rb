@@ -47,6 +47,10 @@ module MenuHelper
       nil,
       {:title => 'Currently logged in user'},
       {}).freeze
+    RoleLink = Link.new('  Role: ',
+      nil,
+      {:title => 'Current Role'},
+      {}).freeze
     SignOutLink = Link.new('Sign Out',
       {:controller => '/login', :action => 'logout'},
       {:title => 'Logout', :post => true},
@@ -56,6 +60,7 @@ module MenuHelper
   def get_user_links
     links = []
     links << gen_user_link.freeze
+    links << gen_role_link.freeze
     links << SignOutLink
     links
   end
@@ -63,6 +68,12 @@ module MenuHelper
   def gen_user_link
     link = UserLink.dup
     link.name += current_user.name
+    link
+  end
+  
+  def gen_role_link
+    link = RoleLink.dup
+    link.name += session[:role].to_s
     link
   end
 
@@ -139,7 +150,7 @@ module MenuHelper
     is_selected = get_controller_name == '/demonstrators/quizzes' && @action_name == 'restart'
     dup_link_with_select( RestartQuizLink, is_selected )
   end
-
+  
   def gen_manage_quizzes_link
     is_selected = get_controller_name == '/teachers/quizzes' && @action_name == 'list'
     dup_link_with_select( ManageQuizzesLink, is_selected )
