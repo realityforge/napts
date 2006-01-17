@@ -51,11 +51,6 @@ class Demonstrators::QuizzesController < Demonstrators::BaseController
     update_quiz( true )
   end
   
-protected
-  def current_subject_id
-    @quiz ? @quiz.subject_id : nil
-  end
-  
 private
   def update_quiz(value)
     @quiz = Quiz.find(params[:id])

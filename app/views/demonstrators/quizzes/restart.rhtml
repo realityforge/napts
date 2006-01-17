@@ -1,7 +1,7 @@
 <%= start_form_tag( :action => 'restart' ) %>
   <p><label for="user_username">Enter username</label><br/>
   <input id="user_username" name="username" value="" ></input>
-  <p><label for="quiz_name">Select quiz</label><br/>
-  <%= collection_select("quiz", "name", @quizzes, :id, :name ) %></p>
-  <%= submit_tag( "submit" ) %>
+  <label for="quiz_name">Select quiz</label><br/>
+  <%= collection_select("quiz", "name", @quizzes, :id, :name ) %>
+  <button type="submit">Restart</button></p>
 <%= end_form_tag %>

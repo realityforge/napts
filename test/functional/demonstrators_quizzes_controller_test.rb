@@ -21,7 +21,7 @@ class QuizzesControllerTest < Test::Unit::TestCase
   end
   
   def test_restart_get
-    get(:restart, {}, {:user_id => @mr_fancy_pants_user.id, :role => :demonstrator} )
+    get(:restart, {}, {:user_id => @mr_fancy_pants_user.id, :role => :demonstrator, :subject_id => @subject_2.id} )
     assert_template( 'restart' )
     assert_valid_markup
   end
@@ -29,7 +29,9 @@ class QuizzesControllerTest < Test::Unit::TestCase
   def test_restart_post
     @quiz_attempt_temp = QuizAttempt.create(:start_time => Time.now, :quiz_id => @quiz_1.id, :user_id => @peter_user.id )
     @id = @quiz_attempt_temp.id
-    post( :restart, {:username => "peter"}, {:user_id => @mr_fancy_pants_user.id, :role => :demonstrator} )
+    post( :restart, 
+          {:username => "peter", :quiz => {:name => @quiz_1.id}}, 
+          {:user_id => @mr_fancy_pants_user.id, :role => :demonstrator, :subject_id => @subject_2.id} )
     assert_equal( @quiz_attempt_temp, assigns(:quiz_attempt) )  
     assert_response( :redirect )
     assert_raise(ActiveRecord::RecordNotFound){QuizAttempt.find(@id)}

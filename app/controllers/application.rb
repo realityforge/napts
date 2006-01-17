@@ -12,19 +12,7 @@ class ApplicationController < ActionController::Base
   before_filter :check_authentication
   before_filter :force_no_cache
 
-  hide_action :get_associated_subject
-
-  def get_associated_subject
-    subject_id = current_subject_id
-    session['subject_id'] = subject_id if subject_id
-    session['subject_id']
-  end
-
 protected
-  def current_subject_id
-    nil
-  end
-
   def is_secure?
     true
   end
@@ -35,10 +23,6 @@ protected
 
   def current_user
     @current_user
-  end
-
-  def current_subject_id
-    nil
   end
 
   def rescue_action(e) 
