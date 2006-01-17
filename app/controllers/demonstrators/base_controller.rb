@@ -1,4 +1,9 @@
 class Demonstrators::BaseController < ApplicationController
-protected
-  def verify_access; verify_demonstrator; end
+  before_filter :verify_demonstrator
+  include SubjectSystem
+
+private
+  def verify_demonstrator
+    raise Napts::SecurityError unless current_user.demonstrator_for?(current_subject_id)
+  end
 end
