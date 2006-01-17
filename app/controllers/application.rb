@@ -15,14 +15,14 @@ class ApplicationController < ActionController::Base
   hide_action :get_associated_subject
 
   def get_associated_subject
-    subject_id = determine_subject_id
+    subject_id = current_subject_id
     session['subject_id'] = subject_id if subject_id
     session['subject_id']
   end
 
 protected
 
-  def determine_subject_id
+  def current_subject_id
     nil
   end
 
