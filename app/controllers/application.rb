@@ -53,7 +53,7 @@ private
   end
 
   def check_authentication
-    authorize if is_secure?
+    is_secure? ? authorize : true
   end
   
   def authorize
@@ -61,7 +61,8 @@ private
       @current_user = User.find(session[:user_id])
     else 
       flash[:notice] = 'Please log in'
-      redirect_to(:controller => "login", :action => "login")
+      redirect_to(:controller => '/login', :action => 'login')
+      false
     end
   end
 end
