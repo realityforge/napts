@@ -1,25 +1,23 @@
-<h1>Listing subjects</h1>
+<h1>Browse Subjects</h1>
 
 <table>
   <tr>
-  <% for column in Subject.content_columns %>
-    <th><%= column.human_name %></th>
-  <% end %>
+    <th>Code</th>
+    <th>Name</th>
+    <th>Operations</th>
   </tr>
   
 <% for subject in @subjects %>
   <tr>
-  <% for column in Subject.content_columns %>
-    <td><%=h subject.send(column.name) %></td>
-  <% end %>
-    <td><%= link_to( 'Edit', :action => 'edit', :id => subject ) %></td>
-    <td><%= link_to( 'Destroy', { :action => 'destroy', :id => subject }, :confirm => 'Are you sure?' ) %></td>
+    <td><%= h(subject.code) %></td>
+    <td><%= h(subject.name) %></td>
+    <td>
+    <%= link_to( 'Edit', :action => 'edit', :id => subject ) %> |
+    <%= link_to( 'Destroy', { :action => 'destroy', :id => subject }, :confirm => 'Are you sure?' ) %>
+    </td>
   </tr>
 <% end %>
 </table>
-
-<%= link_to( 'Previous page', { :page => @subject_pages.current.previous } ) if @subject_pages.current.previous %>
-<%= link_to( 'Next page', { :page => @subject_pages.current.next } ) if @subject_pages.current.next %> 
 
 <br />
 

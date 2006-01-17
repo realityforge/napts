@@ -1,11 +1,7 @@
 class Administration::SubjectsController < Administration::BaseController
-  def index
-    list
-    render( :action => 'list' )
-  end
-  
-   def list
-    @subject_pages, @subjects = paginate( :subjects, :per_page => 10 )
+
+  def list
+    @subjects = Subject.find(:all)
   end
   
   def new
