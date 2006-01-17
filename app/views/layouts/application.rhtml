@@ -7,6 +7,8 @@
   <meta http-equiv="Pragma" content="no-cache" />
   <%= stylesheet_link_tag('layout') %>
   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+  <%= javascript_include_tag("prototype") %>
+  <%= javascript_include_tag("effects") %>
   <%= @content_for_head if @content_for_head %>
   <%= stylesheet_link_tag( 'napts' ) %>
   <%= javascript_include_tag( 'questions' ) %>

@@ -3,16 +3,16 @@
   <legend>Login</legend>
 <%= form_tag({:action => "login"}, {:id => "login_form"}) %>
   <div>
-  <label for="user_name">Name</label>
-  <input id="user_name" name="username" size="20" type="text" value="" />
+  <label for="username">Name</label>
+  <input id="username" name="username" size="20" type="text"/>
   <br/>
 
-  <label for="user_password">Password</label>
-  <input id="user_password" name="password" size="20" type="password" value="" />
+  <label for="password">Password</label>
+  <input id="password" name="password" size="20" type="password"/>
   <br/>
-  
-  <label for="user_type">Role</label>
-  <select id="user_type" name="type">
+
+  <label for="role">Role</label>
+  <select id="role" name="type" onchange="onSelectRole();">
     <option value="Student">Student</option>
     <option value="Demonstrator">Demonstrator</option>
     <option value="Educator">Educator</option>
@@ -20,6 +20,12 @@
   </select>
   <br/>
 
+  <label for="subject_id">Subject</label>
+  <select id="subject_id" name="subject_id" disabled="true">
+    <%= options_from_collection_for_select(@subjects, :id, :code) %>
+  </select>
+  <br/>
+  <script language="javascript" type="text/javascript"><!-- onSelectRole(); --></script>
 
   <button type="submit">Login</button>
   </div>
@@ -31,4 +37,19 @@
   input, select {width: 190px; display: block; float: left;}
   button {display: block; clear: both;}
   </style>
+  <script language="javascript" type="text/javascript">
+<!--
+    function onSelectRole() {
+      var role = $('role').value;
+      if(role == "Demonstrator" || role == "Educator" )
+      {
+        $('subject_id').disabled = false
+      }
+      else
+      {
+        $('subject_id').disabled = true
+      }
+    }
+-->
+  </script>
 <% end %>
