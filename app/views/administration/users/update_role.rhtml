@@ -18,13 +18,13 @@
 					      :subject_id => subject.id,
 					      :value => true ) %></td>
 	<% end %>
-	<% if @other_user.educator_for?(subject.id) %>
-          <td><%= link_to( 'Make not Educator', :action => 'make_educator', 
+	<% if @other_user.teacher_for?(subject.id) %>
+          <td><%= link_to( 'Make not Teacher', :action => 'make_teacher', 
 	                                        :id => @other_user.id, 
 					        :subject_id => subject.id,
 						:value => false ) %></td>
 	<% else %>
-	  <td><%= link_to( 'Make Educator', :action => 'make_educator', 
+	  <td><%= link_to( 'Make Teacher', :action => 'make_teacher', 
 	                                        :id => @other_user.id,
 					        :subject_id => subject.id,
 						:value => true ) %></td>

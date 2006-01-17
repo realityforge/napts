@@ -5,6 +5,6 @@ protected
 
 private
   def verify_teacher
-    raise Napts::SecurityError unless current_user.educates_for?(current_subject_id)
+    raise Napts::SecurityError unless current_user.teaches?(current_subject_id)
   end
 end

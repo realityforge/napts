@@ -131,20 +131,20 @@ class CreateInitialSchema < ActiveRecord::Migration
                                 :name => "demonstrators_user_id_fk")
      add_index("demonstrators", ["subject_id", "user_id"], :name => "demonstrators_subject_id_user_id_index", :unique => true)
     
-    #Educators
-    create_table("educators", :id => false, :force => true ) do |t|
+    #Teachers
+    create_table("teachers", :id => false, :force => true ) do |t|
       t.column "subject_id", :integer, :null => false
       t.column "user_id", :integer, :null => false
     end
-    add_foreign_key_constraint("educators", "subject_id", "subjects", "id",
-                                :name => "educators_subject_id_fk")
-    add_foreign_key_constraint("educators", "user_id", "users", "id",
-                                :name => "educators_user_id_fk")
-     add_index("educators", ["subject_id", "user_id"], :name => "educators_subject_id_user_id_index", :unique => true)
+    add_foreign_key_constraint("teachers", "subject_id", "subjects", "id",
+                                :name => "eteachers_subject_id_fk")
+    add_foreign_key_constraint("teachers", "user_id", "users", "id",
+                                :name => "teachers_user_id_fk")
+     add_index("teachers", ["subject_id", "user_id"], :name => "teachers_subject_id_user_id_index", :unique => true)
   end
   
   def self.down
-    drop_table("educators")
+    drop_table("teachers")
     drop_table("demonstrators")
     drop_table("answers_quiz_responses")
     drop_table("quiz_responses")

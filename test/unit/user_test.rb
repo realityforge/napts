@@ -11,16 +11,16 @@ class UserTest < Test::Unit::TestCase
     assert_equal( "CSE21DB" , user.demonstrates_for[1]. code )
   end
   
-  def test_educates_for
+  def test_teaches
     user = User.find( @lecturer_user.id )
-    assert_equal( 2, user.educates_for.size )
-    assert_equal( "2", user.educates_for[0].subject_id )
-    assert_equal( "1", user.educates_for[1].subject_id )
+    assert_equal( 2, user.teaches.size )
+    assert_equal( "2", user.teaches[0].subject_id )
+    assert_equal( "1", user.teaches[1].subject_id )
   end
   
-  def test_educator?
-    assert_equal( true , User.find( @lecturer_user.id ).educator? )
-    assert_equal( false, User.find( @mr_fancy_pants_user.id  ).educator? )
+  def test_teacher?
+    assert_equal( true , User.find( @lecturer_user.id ).teacher? )
+    assert_equal( false, User.find( @mr_fancy_pants_user.id  ).teacher? )
   end
   
   def test_demonstrator?
@@ -33,8 +33,8 @@ class UserTest < Test::Unit::TestCase
     assert_equal( false, User.find( @mr_fancy_pants_user.id).demonstrator_for?(1) )
   end
   
-  def test_educator_for?
-    assert_equal( true, User.find( @admin_user.id ).educator_for?(Subject.find(@subject_3.id).id ) )
-    assert_equal( false, User.find(@peter_user.id ).educator_for?( 2 ) )
+  def test_teacher_for?
+    assert_equal( true, User.find(@admin_user.id).teaches?(@subject_3.id) )
+    assert_equal( false, User.find(@peter_user.id).teaches?(@subject_2.id) )
   end
 end

@@ -15,7 +15,7 @@
   <select id="role" name="type" onchange="onSelectRole();">
     <option value="Student">Student</option>
     <option value="Demonstrator">Demonstrator</option>
-    <option value="Educator">Educator</option>
+    <option value="Teacher">Teacher</option>
     <option value="Administrator">Administrator</option>
   </select>
   <br/>
@@ -41,7 +41,7 @@
 <!--
     function onSelectRole() {
       var role = $('role').value;
-      if(role == "Demonstrator" || role == "Educator" )
+      if(role == "Demonstrator" || role == "Teacher" )
       {
         $('subject_id').disabled = false
       }

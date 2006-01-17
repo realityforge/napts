@@ -1,7 +1,7 @@
 module AuthHelper
   if ! const_defined?(:Roles)
-    RoleDescriptions = ["Administrator", "Educator", "Demonstrator", "Student"]
-    Roles = [:administrator, :educator, :demonstrator, :student]
+    RoleDescriptions = ["Administrator", "Teacher", "Demonstrator", "Student"]
+    Roles = [:administrator, :teacher, :demonstrator, :student]
   end
 
   def to_role(requested_role)
@@ -13,7 +13,7 @@ module AuthHelper
 
     case role
     when :administrator then return role if user.administrator?
-    when :educator then return role if user.educator? && user.educator_for?(subject_id)
+    when :teacher then return role if user.teacher? && user.teacher_for?(subject_id)
     when :demonstrator then return role if user.demonstrator? && user.demonstrator_for?(subject_id)
     when :student then return role
     end
@@ -21,6 +21,6 @@ module AuthHelper
   end
 
   def requires_subject?(role)
-    role == :demonstrator || role == :educator
+    role == :demonstrator || role == :teacher
   end
 end

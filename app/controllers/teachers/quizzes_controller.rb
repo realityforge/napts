@@ -4,8 +4,8 @@ class Teachers::QuizzesController < Teachers::BaseController
     verify_access
     @quiz_pages, @quizzes = paginate( :quizzes,
                                       :select => 'quizzes.*',
-                                      :joins => ', educators',
-                                      :conditions => ['quizzes.subject_id = educators.subject_id AND educators.user_id = ?', current_user.id],
+                                      :joins => ', teachers',
+                                      :conditions => ['quizzes.subject_id = teachers.subject_id AND teachers.user_id = ?', current_user.id],
                                       :per_page => 10 )
   end
   

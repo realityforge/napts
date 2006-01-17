@@ -43,13 +43,13 @@ class Administration::UsersController < Administration::BaseController
     redirect_to( :action => 'list' )
   end
   
-  def make_educator
+  def make_teacher
     @other_user = User.find(params[:id])
     @subject = Subject.find(params[:subject_id])
     if params[:value]
-      @other_user.educates_for << @subject
+      @other_user.teaches << @subject
     else
-      @other_user.educates_for.delete( @subject )
+      @other_user.teaches.delete( @subject )
     end
     redirect_to( :action => 'update_role', :id => @other_user.id )
   end

@@ -6,15 +6,15 @@ class AuthHelperObject
 end
 
 class FakeUser
-  def initialize(administrator, educator, demonstrator)
+  def initialize(administrator, teacher, demonstrator)
     @administrator = administrator
-    @educator = educator
+    @teacher = teacher
     @demonstrator = demonstrator
   end
   def administrator?; @administrator; end
-  def educator?; @educator; end
+  def teacher?; @teacher; end
   def demonstrator?; @demonstrator; end
-  def educator_for?(subject_id); 1 == subject_id; end
+  def teacher_for?(subject_id); 1 == subject_id; end
   def demonstrator_for?(subject_id); 1 == subject_id; end
 end
 
@@ -22,7 +22,7 @@ class AuthHelperTest < Test::Unit::TestCase
   def test_to_role
     h = AuthHelperObject.new
     assert_equal(:administrator, h.to_role("Administrator"))
-    assert_equal(:educator, h.to_role("Educator"))
+    assert_equal(:teacher, h.to_role("Teacher"))
     assert_equal(:demonstrator, h.to_role("Demonstrator"))
     assert_equal(:student, h.to_role("Student"))
     assert_nil(h.to_role("somethingelse"))
@@ -32,9 +32,9 @@ class AuthHelperTest < Test::Unit::TestCase
     h = AuthHelperObject.new
     assert_equal(:administrator, h.get_verified_role(FakeUser.new(true,true,true),"Administrator",nil))
     assert_nil( h.get_verified_role(FakeUser.new(false,false,false),"Administrator",nil))
-    assert_equal(:educator, h.get_verified_role(FakeUser.new(true,true,true),"Educator",1))
-    assert_nil( h.get_verified_role(FakeUser.new(true,true,true),"Educator",0))
-    assert_nil( h.get_verified_role(FakeUser.new(false,false,false),"Educator",0))
+    assert_equal(:teacher, h.get_verified_role(FakeUser.new(true,true,true),"Teacher",1))
+    assert_nil( h.get_verified_role(FakeUser.new(true,true,true),"Teacher",0))
+    assert_nil( h.get_verified_role(FakeUser.new(false,false,false),"Teacher",0))
     assert_equal(:demonstrator, h.get_verified_role(FakeUser.new(true,true,true),"Demonstrator",1))
     assert_nil( h.get_verified_role(FakeUser.new(true,true,true),"Demonstrator",0))
     assert_nil( h.get_verified_role(FakeUser.new(false,false,false),"Demonstrator",0))
@@ -45,7 +45,7 @@ class AuthHelperTest < Test::Unit::TestCase
   def test_requires_subject?
     h = AuthHelperObject.new
     assert_equal(false, h.requires_subject?(:administrator))
-    assert_equal(true, h.requires_subject?(:educator))
+    assert_equal(true, h.requires_subject?(:teacher))
     assert_equal(true, h.requires_subject?(:demonstrator))
     assert_equal(false, h.requires_subject?(:student))
   end

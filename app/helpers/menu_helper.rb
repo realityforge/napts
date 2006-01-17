@@ -106,7 +106,7 @@ module MenuHelper
     elsif session[:role] == :demonstrator
       links << gen_enable_quiz_link.freeze
       links << gen_restart_quiz_link.freeze
-    elsif session[:role] == :educator
+    elsif session[:role] == :teacher
       links << gen_manage_quizzes_link.freeze
       links << gen_manage_questions_link.freeze
     elsif session[:role] == :administrator
