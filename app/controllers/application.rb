@@ -12,7 +12,19 @@ class ApplicationController < ActionController::Base
   before_filter :check_authentication
   before_filter :force_no_cache
 
+  hide_action :get_associated_subject
+
+  def get_associated_subject
+    subject_id = determine_subject_id
+    session['subject_id'] = subject_id if subject_id
+    session['subject_id']
+  end
+
 protected
+
+  def determine_subject_id
+    nil
+  end
 
   def is_secure?
     true
