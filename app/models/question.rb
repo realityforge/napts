@@ -3,6 +3,7 @@ class Question < ActiveRecord::Base
   has_many( :answers, :dependent => true )
   has_many( :quiz_items )
   has_many( :quiz_responses )
+  belongs_to( :subject_group )
   
   QUESTION_TYPE = {
     "Multiple answers" => 1,

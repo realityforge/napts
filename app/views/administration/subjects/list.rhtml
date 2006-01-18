@@ -3,12 +3,14 @@
 <table>
   <tr>
     <th>Code</th>
+    <th>Group</th>
     <th>Operations</th>
   </tr>
   
 <% for subject in @subjects %>
   <tr>
     <td><%= h(subject.code) %></td>
+    <td><%= h(subject.subject_group.name ) %></td>
     <td>
     <%= link_to( 'Edit', :action => 'edit', :id => subject ) %> |
     <%= link_to( 'Destroy', { :action => 'destroy', :id => subject }, :confirm => 'Are you sure?' ) %>

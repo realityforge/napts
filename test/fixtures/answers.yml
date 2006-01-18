@@ -87,5 +87,34 @@ q4_a4:
   content: "Cowabunga"
   is_correct: false
   question_id: 4
+  
+#What day is it?
+q5_a1:
+  id: 17
+  content: "Friday"
+  is_correct: true
+  question_id: 5
+q5_a2:
+  id: 18
+  content: "good question"
+  is_correct: true
+  question_id: 5
+q5_a3:
+  id: 19
+  content: "purple?"
+  is_correct: false
+  question_id: 5
+
+#What's the time Mr Wolf?
+q6_a1:
+  id: 20
+  content: "Dinner Time!"
+  is_correct: true
+  question_id: 6
+q6_a2:
+  id: 21
+  content: "05:30"
+  is_correct: false
+  question_id: 6
 
 

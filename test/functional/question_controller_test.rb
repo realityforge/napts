@@ -70,11 +70,13 @@ class QuestionControllerTest < Test::Unit::TestCase
 
     content = 'My new content'
     question_type = 1
+    subject_group_id = 1
     answer_content = 'answer content'
     is_correct = true
     post( :new, 
          {:question => {:content => content,
-                        :question_type => question_type},
+                        :question_type => question_type,
+	                :subject_group_id => subject_group_id},
 			:answer => {'this_is_ignored' => 
 			      	  {:content => answer_content,
 				   :is_correct => is_correct }}},

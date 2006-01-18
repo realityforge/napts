@@ -5,16 +5,15 @@ class Administration::SubjectsController < Administration::BaseController
   end
   
   def new
-    @subject = Subject.new
-  end
-  
-  def create
+    @groups = SubjectGroup.find(:all)
     @subject = Subject.new(params[:subject])
-    if @subject.save
-      flash[:notice] = 'Subject was successfully created.'
-      redirect_to( :action => 'list' )
-    else
-      render( :action => 'new' )
+    if request.post?
+      if ! @subject.save
+        flash[:alert] = 'Subject could not be created'
+      else
+        flash[:notice] = 'Subject was successfully created.'
+        redirect_to( :action => 'list' )
+      end
     end
   end
   
