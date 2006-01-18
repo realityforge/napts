@@ -13,7 +13,7 @@ module AuthHelper
 
     case role
     when :administrator then return role if user.administrator?
-    when :teacher then return role if user.teacher? && user.teacher_for?(subject_id)
+    when :teacher then return role if user.teacher? && user.teaches?(subject_id)
     when :demonstrator then return role if user.demonstrator? && user.demonstrator_for?(subject_id)
     when :student then return role
     end
