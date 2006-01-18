@@ -1,6 +1,5 @@
 class Teachers::BaseController < ApplicationController
-protected 
-   def verify_access; verify_teacher; end
+  before_filter :verify_teacher
   include SubjectSystem
 
 private

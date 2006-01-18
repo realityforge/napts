@@ -14,7 +14,7 @@ class FakeUser
   def administrator?; @administrator; end
   def teacher?; @teacher; end
   def demonstrator?; @demonstrator; end
-  def teacher_for?(subject_id); 1 == subject_id; end
+  def teaches?(subject_id); 1 == subject_id; end
   def demonstrator_for?(subject_id); 1 == subject_id; end
 end
 

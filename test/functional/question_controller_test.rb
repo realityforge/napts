@@ -14,7 +14,7 @@ class QuestionControllerTest < Test::Unit::TestCase
   end
   
   def test_list
-  get(:list, {}, { :user_id => @peter_user.id, :role => :student} )
+  get(:list, {}, { :user_id => @peter_user.id, :role => :student, :subject_id => 1} )
     assert_response(:success)
     assert_template('list')
     assert_valid_markup
@@ -53,7 +53,7 @@ class QuestionControllerTest < Test::Unit::TestCase
 			      :answer => {'this_is_ignored' => 
 			      	{:content => answer_content,
 				 :is_correct => is_correct}}},
-		{ :user_id => @peter_user.id, :role => :student }
+		{ :user_id => @peter_user.id, :role => :student, :subject_id => 1 }
 	)
     assert_response( :success )
     assert_template( 'new' )
@@ -80,7 +80,7 @@ class QuestionControllerTest < Test::Unit::TestCase
 			:answer => {'this_is_ignored' => 
 			      	  {:content => answer_content,
 				   :is_correct => is_correct }}},
-	                { :user_id => @peter_user.id, :role => :student }
+	                { :user_id => @peter_user.id, :role => :student, :subject_id => 1 }
 	)
     assert_equal( content, assigns(:question).content )
     assert_equal( question_type, assigns(:question).question_type )
