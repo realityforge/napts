@@ -1,6 +1,8 @@
 class Teachers::QuestionController < Teachers::BaseController
   def list
-    @question_pages, @questions = paginate( :question, :per_page => 10 )
+    @question_pages, @questions = paginate( :question, 
+                                            :conditions => ['subject_group_id = ?', current_subject.subject_group.id],
+                                            :per_page => 10 )
   end
   
   def show
@@ -11,9 +13,9 @@ class Teachers::QuestionController < Teachers::BaseController
     if request.get?
       @question = Question.new
       @question.answers = [Answer.new,Answer.new,Answer.new,Answer.new]
-      
     elsif request.post?
       @question = Question.new(params[:question])
+      @question.subject_group_id = current_subject.subject_group_id
       is_valid = @question.valid?
       for answer_id in params[:answer].keys
 	  data = params[:answer][answer_id].dup
