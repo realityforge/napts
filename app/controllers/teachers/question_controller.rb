@@ -6,7 +6,7 @@ class Teachers::QuestionController < Teachers::BaseController
   end
   
   def show
-    @question = Question.find(params[:id])
+    @question = current_subject.subject_group.questions.find(params[:id])
   end
   
   def new
@@ -41,7 +41,7 @@ class Teachers::QuestionController < Teachers::BaseController
   end  
   
    def edit
-    @question = Question.find(params[:id])
+    @question = current_subject.subject_group.questions.find(params[:id])
     if request.get?
       @answers = @question.answers
     elsif request.post?
@@ -91,11 +91,11 @@ class Teachers::QuestionController < Teachers::BaseController
   end
   
   def destroy
-    @question = Question.find(params[:id])
+    @question = current_subject.subject_group.questions.find(params[:id])
     if @question.quiz_items.length > 0
       flash[:alert] = 'Question in quiz so cannot be destroyed'
     else
-      Question.find(params[:id]).destroy
+      current_subject.subject_group.questions.find(params[:id]).destroy
     end
     redirect_to( :action => 'list' )
   end
