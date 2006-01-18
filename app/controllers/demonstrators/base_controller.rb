@@ -1,6 +1,5 @@
 class Demonstrators::BaseController < ApplicationController
   before_filter :verify_demonstrator
-  include SubjectSystem
 
 private
   def verify_demonstrator

@@ -1,6 +1,5 @@
 class Teachers::BaseController < ApplicationController
   before_filter :verify_teacher
-  include SubjectSystem
 
 private
   def verify_teacher

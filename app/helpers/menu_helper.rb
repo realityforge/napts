@@ -47,6 +47,10 @@ module MenuHelper
       nil,
       {:title => 'Currently logged in user'},
       {}).freeze
+    SubjectLink = Link.new('Subject: ',
+      nil,
+      {:title => 'Currently logged in subject'},
+      {}).freeze
     RoleLink = Link.new('  Role: ',
       nil,
       {:title => 'Current Role'},
@@ -60,6 +64,9 @@ module MenuHelper
   def get_user_links
     links = []
     links << gen_user_link.freeze
+    if session[:role] == :teacher ||  session[:role] == :demonstrator 
+      links << gen_subject_link.freeze
+    end
     links << gen_role_link.freeze
     links << SignOutLink
     links
@@ -68,6 +75,12 @@ module MenuHelper
   def gen_user_link
     link = UserLink.dup
     link.name += current_user.name
+    link
+  end
+  
+  def gen_subject_link
+    link = SubjectLink.dup
+    link.name += current_subject.code
     link
   end
   

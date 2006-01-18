@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
   helper :menu
   helper :auth
   include AuthHelper
+  helper SubjectSystem 
+  include SubjectSystem
   
   helper_method :authenticated?
   helper_method :current_user

@@ -1,25 +1,6 @@
 class Demonstrators::QuizzesController < Demonstrators::BaseController
-  
-#  def restart
-#    @quizzes = Quiz.find( :all, :conditions => ['enable = ?', true] )
-#    if request.post?
-#      if ! @user = User.find( :first, :conditions => ['username = ? ', params[:username]] )
-#        flash[:alert] = "Username not valid"
-#      else
-#        if ! @quiz_attempt = QuizAttempt.find( :first,
-#                                               :conditions => ['user_id = ? AND end_time IS NULL',
-#					                      @user.id ] )
-#          flash[:alert] = "Cannot find an unfinished quiz to restart"
-#	else
-#          @quiz_attempt.destroy
-#	  redirect_to( :action => 'index' )
-#	end
-#      end
-#    end
-#  end
-  
   def restart
-    @quizzes = Quiz.find( :all, :conditions => ['enable = ? AND subject_id = ?', true, session[:subject_id]] )
+    @quizzes = current_subject.quizzes.find( :all, :conditions => ['enable = ? AND subject_id = ?', true, session[:subject_id]] )
     verify_demonstrator
     if request.post?
       if ! @user = User.find( :first, :conditions => ['username = ?', params[:username]] )
@@ -30,7 +11,7 @@ class Demonstrators::QuizzesController < Demonstrators::BaseController
 	  flash[:alert] = "Couldn't find quiz"
 	else
 	  @quiz_attempt.destroy
-	  redirect_to( :controller => 'welcome', :action => 'index' )
+	  redirect_to( :action => 'enable_quiz' )
 	end
       end
     end
@@ -55,7 +36,7 @@ class Demonstrators::QuizzesController < Demonstrators::BaseController
   
 private
   def update_quiz(value)
-    @quiz = Quiz.find(params[:id])
+    @quiz = current_subject.quizzes.find(params[:id])
     verify_demonstrator
     if ! @quiz.update_attributes( :enable => value )
       flash[:alert] = "Failed to update quiz status."
