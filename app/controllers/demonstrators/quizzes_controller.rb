@@ -1,19 +1,22 @@
 class Demonstrators::QuizzesController < Demonstrators::BaseController
   def restart
-    @quizzes = current_subject.quizzes.find( :all, :conditions => ['enable = ? AND subject_id = ?', true, session[:subject_id]] )
     if request.post?
+      @quiz = current_subject.quizzes.find(params[:quiz_id])
+      
       if ! @user = User.find( :first, :conditions => ['username = ?', params[:username]] )
         flash[:alert] = "Username invalid"
       else
-        if ! @quiz_attempt = QuizAttempt.find( :first, :conditions => ['user_id = ? AND quiz_id = ?',
-	                                                               @user.id, params[:quiz][:name]] )
-	  flash[:alert] = "Couldn't find quiz"
+        @quiz_attempt = @quiz.quiz_attempts.find(:first, :conditions => ['user_id = ?', @user.id])
+        if ! @quiz_attempt
+	  flash[:alert] = 'User had not attempted quiz'
 	else
 	  @quiz_attempt.destroy
-	  redirect_to( :action => 'enable_quiz' )
+	  redirect_to( :action => 'restart' )
+          return
 	end
       end
     end
+    @quizzes = current_subject.quizzes.find( :all, :conditions => ['enable = ?', true] )
   end
   
   def enable_quiz
