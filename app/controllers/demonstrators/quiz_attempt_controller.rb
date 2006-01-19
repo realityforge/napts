@@ -1,4 +1,6 @@
 class Demonstrators::QuizAttemptController < Demonstrators::BaseController
+  verify :method => :post, :only => %w( reset )
+
   def list
     @quiz = current_subject.quizzes.find(params[:quiz_id])
     @quiz_attempt_pages, @quiz_attempts = paginate( :quiz_attempt, 
