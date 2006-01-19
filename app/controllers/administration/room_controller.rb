@@ -35,10 +35,9 @@ class Administration::RoomController < Administration::BaseController
   def add_computers
     @room = Room.find(params[:id])
     if request.post?
-    computer = Computer.create( :room_id => Room.find(params[:id]).id, :ip_address => params[:ip_address])
-      
+    computer = @room.computers.create( :room_id => params[:id], 
+                                       :ip_address => params[:computer][:ip_address])
       if ! computer.valid?
-      STDERR.puts "computer= #{computer.to_yaml}"
         flash[:alert] = 'computer could not be saved'
       else
         flash[:notice] = 'Computer successfully created'
