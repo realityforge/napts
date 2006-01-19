@@ -13,7 +13,7 @@ protected
                       {:selected => is_selected}).freeze
     if @quiz
       is_selected = controller_name == 'quiz' && @action_name == 'show'
-      links << MenuHelper::Link.new('Quiz',
+      links << MenuHelper::Link.new('Browse Quiz',
                         {:controller => '/demonstrators/quiz', :action => 'show', :id => @quiz},
                         {:title => 'Browse Quiz'},
                         {:selected => is_selected}).freeze

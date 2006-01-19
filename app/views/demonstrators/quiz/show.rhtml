@@ -1,12 +1,9 @@
-<% page_title = "#{@quiz.subject.code}: #{@quiz.name}" %>
+<% @page_title = "#{@quiz.subject.code}: #{@quiz.name}" %>
+<h1><%= @quiz.subject.code %>: <%= @quiz.name %></h1>
 <dl>
-<dt>Subject</dt>
-<dd><%= @quiz.subject.code %></dd>
-<dt>Quiz</dt>
-<dd><%= @quiz.name %></dd>
 <dt>Description</dt>
 <dd><%= @quiz.description %></dd>
-<dt>Description</dt>
+<dt>Duration</dt>
 <dd><%= @quiz.duration %> mins</dd>
 </dl>
 

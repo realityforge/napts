@@ -17,7 +17,11 @@ class LoginController < ApplicationController
           session[:subject_id] = Subject.find(params[:subject_id]).id if requires_subject?(role)
           session[:user_id] = user.id
           session[:role] = role
-          redirect_to(:controller => 'welcome', :action => 'index')
+          if role == :demonstrator 
+            redirect_to(:controller => '/demonstrators/quiz', :action => 'list')
+          else
+            redirect_to(:controller => 'welcome', :action => 'index')
+          end
         end
       end
     end
