@@ -34,6 +34,10 @@ module MenuHelper
       {:controller => '/administration/users', :action => 'list'},
       {:title => 'Add or remove users'},
       {}).freeze
+    ManageSubjectGroupsLink = Link.new('Manage Subject Groups',
+      {:controller => '/administration/subject_group', :action => 'list' },
+      {:title => 'Create, edit or delete subject groups'},
+      {}).freeze
     ManageQuizzesLink = Link.new('Manage Quizzes',
       {:controller => '/teachers/quizzes', :action => 'list'},
       {:title => 'Create new quizzes or add and remove questions from existing quizzes'},
@@ -125,6 +129,7 @@ module MenuHelper
     elsif session[:role] == :administrator
       links << gen_manage_subjects_link.freeze
       links << gen_manage_users_link.freeze
+      links << gen_manage_subject_groups_link.freeze
     end
     links
   end
@@ -182,5 +187,10 @@ module MenuHelper
   def gen_manage_users_link
     is_selected = get_controller_name == '/administration/users' && @action_name == 'list'
     dup_link_with_select( ManageUsersLink, is_selected )
+  end
+  
+   def gen_manage_subject_groups_link
+    is_selected = get_controller_name == '/administration/subject_group' && @action_name == 'list'
+    dup_link_with_select( ManageSubjectGroupsLink, is_selected )
   end
 end

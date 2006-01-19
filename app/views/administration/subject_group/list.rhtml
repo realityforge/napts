@@ -1,0 +1,21 @@
+<h1>Browse Subject Groups</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Operations</th>
+  </tr>
+  
+  <% for subject_group in @subject_groups %>
+    <tr>
+      <td><%= subject_group.name %></td>
+      <td>
+        <%= link_to( 'Edit', :action => 'edit', :id => subject_group ) %> |
+	<%= link_to( 'Destroy', { :action => 'destroy', :id => subject_group }, 
+	                          :confirm => "Are you sure you want to delete #{subject_group.name} and all its associated subjects, quizzes and questions?" ) %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to( 'New subject group', :action => 'new' ) %>

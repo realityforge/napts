@@ -1,0 +1,7 @@
+<h1>New Subject Group</h1>
+
+<%= start_form_tag( :action => 'new' ) %>
+  <p><label for="subject_group_name">Subject group name</label><br/>
+  <%= text_field( 'subject_group', 'name' ) %></p>
+  <%= submit_tag( 'Create' ) %>
+<%= end_form_tag %>

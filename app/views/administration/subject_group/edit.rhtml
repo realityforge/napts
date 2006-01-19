@@ -1,0 +1,6 @@
+<h1>Editing Subject Group</h1>
+<%= start_form_tag( :action => 'edit', :id => @subject_group ) %>
+  <p><label for="subject_group_name">Subject group name</label><br/>
+  <%= text_field( 'subject_group', 'name' ) %></p>
+  <%= submit_tag( 'Edit' ) %>
+<%= end_form_tag %>

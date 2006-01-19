@@ -116,5 +116,72 @@ q6_a2:
   content: "05:30"
   is_correct: false
   question_id: 6
+  
+#is chocolate good?   multichoice
+q7_a1:
+  id: 22
+  content: "Yes, for sure!"
+  is_correct: true
+  question_id: 7
+q7_a2:
+  id: 23
+  content: "Absolutely"
+  is_correct: true
+  question_id: 7
+q7_a3:
+  id: 24
+  content: "Of course not!"
+  is_correct: false
+  question_id: 7
+q7_a4:
+  id: 25
+  content: "Not sure"
+  is_correct: false
+  question_id: 7
+  
+#how many ppl does it take to change a lightbulb?  single answer
+q8_a1:
+  id: 26
+  content: "twelve"
+  is_correct: true
+  question_id: 8
+q8_a2:
+  id: 27
+  content: "six?"
+  is_correct: false
+  question_id: 8
+q8_a3:
+  id: 28
+  content: "twice"
+  is_correct: false
+  question_id: 8
+q8_a4:
+  id: 29
+  content: "pineapple"
+  is_correct: false
+  question_id: 8
+
+#why did the chicken cross the road? multi  
+q9_a1:
+  id: 30
+  content: "To get to the other side"
+  is_correct: true
+  question_id: 9
+q9_a2:
+  id: 31
+  content: "To show his girlfriend he had guts"
+  is_correct: false
+  question_id: 9
+q9_a3:
+  id: 32
+  content: "two"
+  is_correct: true
+  question_id: 9
+q9_a4:
+  id: 33
+  content: "he felt like it"
+  is_correct: false
+  question_id: 9
+  
 
 

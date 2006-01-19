@@ -20,15 +20,13 @@ class Administration::SubjectsController < Administration::BaseController
   def edit
     @subject = Subject.find(params[:id])
     @groups = SubjectGroup.find(:all)
-  end
-  
-  def update
-    @subject = Subject.find(params[:id])
-    if @subject.update_attributes(params[:subject])
-      flash[:notice] = 'Subject was successfully updated.'
-      redirect_to( :action => 'list', :id => @subject )
-    else
-      render( :action => 'edit' )
+    if request.post?
+      if  ! @subject.update_attributes(params[:subject])
+        flash[:alert] = 'Subject could not be updated'
+      else
+        flash[:notice] = 'Subject was successfully updated.'
+        redirect_to( :action => 'list' )
+      end
     end
   end
 

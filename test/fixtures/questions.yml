@@ -40,3 +40,25 @@ q6:
   content: "What's the time Mr Wolf?"
   question_type: 2
   subject_group_id: 2
+  
+#multiple choice
+q7:
+  id: 7
+  content: "Is chocolate good?"
+  question_type: 1
+  subject_group_id: 3
+  
+#single answer
+q8:
+  id: 8
+  content: "how many people does it take to change a lightbulb?"
+  question_type: 2
+  subject_group_id: 3
+  
+#multiple choice
+q9:
+  id: 9
+  content: "Why did the chicken cross the road?"
+  question_type: 1
+  subject_group_id: 3
+  
