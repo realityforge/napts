@@ -1,4 +1,3 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 qa_1:
   id: 1
   start_time: '2005-11-7 00:00:00'
@@ -11,3 +10,15 @@ qa_2:
   end_time: '2005-11-7 00:05:12'
   quiz_id: 2
   user_id: 1
+qa_3:
+  id: 3
+  start_time: '2005-11-7 00:00:00'
+  end_time: '2005-11-7 00:05:12'
+  quiz_id: 2
+  user_id: 2
+qa_4:
+  id: 4
+  start_time: '2005-11-7 00:00:00'
+  end_time: '2005-11-7 00:05:12'
+  quiz_id: 2
+  user_id: 3
