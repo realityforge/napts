@@ -5,4 +5,6 @@ class Subject < ActiveRecord::Base
   has_and_belongs_to_many( :teachers, :class_name => "User", :join_table => "teachers" )
   validates_uniqueness_of( :code )
   validates_length_of( :code, :within => 1..10 )
+  validates_associated( :subject_group )
+  validates_presence_of( :subject_group_id )
 end

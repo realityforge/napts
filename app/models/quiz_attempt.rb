@@ -3,6 +3,10 @@ class QuizAttempt < ActiveRecord::Base
   belongs_to( :user )
   has_many( :quiz_responses, :order => :position, :dependent => true )
   validates_presence_of( :start_time )
+  validates_presence_of( :quiz_id )
+  validates_presence_of( :user_id )
+  validates_associated( :quiz )
+  validates_associated( :user )
   
   # stores the question number of all the incorrect 
   # questions in an array and returns it

@@ -1,9 +1,12 @@
 class Question < ActiveRecord::Base
   validates_presence_of( :content )
+  validates_presence_of( :question_type )
+  validates_presence_of( :subject_group_id )
   has_many( :answers, :dependent => true )
   has_many( :quiz_items )
   has_many( :quiz_responses )
   belongs_to( :subject_group )
+  validates_associated( :subject_group )
   
   QUESTION_TYPE = {
     "Multiple answers" => 1,
