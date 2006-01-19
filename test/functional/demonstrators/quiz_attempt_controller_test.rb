@@ -15,12 +15,27 @@ class QuizAttemptControllerTest < Test::Unit::TestCase
   
   def test_list
     get(:list, 
-        {:quiz_id => @quiz_3.id}, 
+        {:quiz_id => @quiz_2.id}, 
+        {:user_id => @peter_user.id, :role => :demonstrator, :subject_id => @subject_1.id} )
+    assert_response(:success)
+    assert_template('list')
+    assert_valid_markup
+    assert_not_nil(assigns(:quiz_attempts))
+    assert_equal(3,assigns(:quiz_attempts).length)
+    assert_nil(flash[:alert])
+    assert_nil(flash[:notice])
+  end
+
+   def test_list_with_query
+    get(:list, 
+        {:quiz_id => @quiz_3.id, :q => 'pet'}, 
         {:user_id => @mr_fancy_pants_user.id, :role => :demonstrator, :subject_id => @subject_2.id} )
     assert_response(:success)
     assert_template('list')
     assert_valid_markup
     assert_not_nil(assigns(:quiz_attempts))
+    assert_equal(1,assigns(:quiz_attempts).length)
+    assert_equal(@peter_user.id,assigns(:quiz_attempts)[0].id)
     assert_nil(flash[:alert])
     assert_nil(flash[:notice])
   end

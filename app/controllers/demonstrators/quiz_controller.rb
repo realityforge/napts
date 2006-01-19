@@ -1,4 +1,7 @@
 class Demonstrators::QuizController < Demonstrators::BaseController
+  verify :method => :post, :only => %w( disable enable )
+  verify :method => :get, :only => %w( list show )
+
   def list
     @quizzes = current_subject.quizzes.find(:all, :order => 'created_at')
   end

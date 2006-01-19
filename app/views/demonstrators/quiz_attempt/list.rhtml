@@ -1,5 +1,14 @@
 <% @page_title = "#{current_subject.code}: '#{@quiz.name}' Quiz Attempts" %>
 <h1><%= @quiz.subject.code %>: '<%= @quiz.name %>' Quiz Attempts</h1>
+
+<%= start_form_tag({:action => 'list'},{:method => :get}) %>
+<div>
+<input type="hidden" name="quiz_id" value="<%= params[:quiz_id] %>"/>
+<input type="text" name="q" value="<%= params[:q] %>"/>
+<button type="submit">Search</button>
+</div>
+<%= end_form_tag %>
+
 <table>
 <tr>
   <th>Name</th>
@@ -15,6 +24,8 @@
 <% end %>
 </table>
 <%= link_to( '< Previous', :page => @quiz_attempt_pages.current.previous, 
-                           :quiz_id => params[:quiz_id]) if @quiz_attempt_pages.current.previous %>
+                           :quiz_id => params[:quiz_id],
+			   :q => params[:q]) if @quiz_attempt_pages.current.previous %>
 <%= link_to( 'Next >', :page => @quiz_attempt_pages.current.next, 
-                           :quiz_id => params[:quiz_id]) if @quiz_attempt_pages.current.next %>
+                           :quiz_id => params[:quiz_id],
+			   :q => params[:q]) if @quiz_attempt_pages.current.next %>
