@@ -21,7 +21,9 @@ class QuizAttemptControllerTest < Test::Unit::TestCase
   end
   
   def test_start_quiz_creates_quiz_attempt
-    get( :start_quiz, {:start_time => Time.now, :quiz_id => @quiz_1.id}, {:user_id =>  @peter_user.id, :role => "Student"})
+    get( :start_quiz, 
+         {:start_time => Time.now, :quiz_id => @quiz_1.id}, 
+         {:user_id =>  @peter_user.id, :role => :student})
     assert_equal( 2, assigns(:quiz_attempt).quiz_responses.length )
     assert_response( :redirect )
   end
@@ -40,10 +42,11 @@ class QuizAttemptControllerTest < Test::Unit::TestCase
     @quiz_attempt = QuizAttempt.create( :start_time => Time.now, 
                                         :quiz_id => @quiz_1.id, 
 					:user_id => @peter_user.id )
-    @quiz_response = QuizResponse.create( :created_at => Time.now, 
-                             :question_id => @quiz_attempt.quiz.quiz_items[0].question_id,
-	         	     :position => 1,
-			     :quiz_attempt_id => @quiz_attempt.id )
+    @quiz_response = QuizResponse.create( :created_at => Time.now,
+                                          :input => "",
+                                          :question_id => @quiz_attempt.quiz.quiz_items[0].question_id,
+	         	                  :position => 1,
+			                  :quiz_attempt_id => @quiz_attempt.id )
 			     
     post( :show, {:quiz_attempt_id => @quiz_attempt.id, 
                   :quiz_response_position => @quiz_response.position,
@@ -62,7 +65,8 @@ class QuizAttemptControllerTest < Test::Unit::TestCase
     @quiz_attempt = QuizAttempt.create( :start_time => Time.now, 
                                         :quiz_id => @quiz_1.id, 
 					:user_id => @peter_user.id )
-    @quiz_response = QuizResponse.create( :created_at => Time.now, 
+    @quiz_response = QuizResponse.create( :created_at => Time.now,
+                             :input => "",
                              :question_id => @quiz_attempt.quiz.quiz_items[1].question_id,
 	         	     :position => 2,
 			     :quiz_attempt_id => @quiz_attempt.id )
@@ -82,6 +86,7 @@ class QuizAttemptControllerTest < Test::Unit::TestCase
     for quiz_item in @quiz_2.quiz_items
       if quiz_item.is_on_test
         @quiz_attempt.quiz_responses.create( :created_at => Time.now,
+	                                    :input => "",
 	                                    :question_id => quiz_item.question.id,
 					    :position => @count, 
 					    :quiz_attempt_id => @quiz_attempt.id )
@@ -104,6 +109,7 @@ class QuizAttemptControllerTest < Test::Unit::TestCase
     for quiz_item in @quiz_2.quiz_items
       if quiz_item.is_on_test
         @quiz_attempt.quiz_responses.create( :created_at => Time.now,
+	                                    :input => "",
 	                                    :question_id => quiz_item.question.id,
 					    :position => @count, 
 					    :quiz_attempt_id => @quiz_attempt.id )

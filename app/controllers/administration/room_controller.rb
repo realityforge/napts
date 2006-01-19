@@ -31,4 +31,18 @@ class Administration::RoomController < Administration::BaseController
     Room.find(params[:id]).destroy
     redirect_to( :action => 'list' )
   end
+  
+  def add_computers
+    @room = Room.find(params[:id])
+    if request.post?
+    computer = Computer.create( :room_id => Room.find(params[:id]).id, :ip_address => params[:ip_address])
+      
+      if ! computer.valid?
+      STDERR.puts "computer= #{computer.to_yaml}"
+        flash[:alert] = 'computer could not be saved'
+      else
+        flash[:notice] = 'Computer successfully created'
+      end
+    end
+  end
 end

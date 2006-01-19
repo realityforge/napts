@@ -18,13 +18,13 @@ class Teachers::QuestionController < Teachers::BaseController
       @question.subject_group_id = current_subject.subject_group_id
       is_valid = @question.valid?
       for answer_id in params[:answer].keys
-	  data = params[:answer][answer_id].dup
-          answer = Answer.new(data)
-	  @question.answers << answer 
-	  if ! answer.valid?
-	    is_valid = false
-	  end
+        data = params[:answer][answer_id].dup
+        answer = Answer.new(data)
+	@question.answers << answer 
+	if ! answer.valid?
+	  is_valid = false
 	end
+      end
       if is_valid && @question.save
         @question.answers.each {|answer| answer.save}
       	flash[:notice] = 'Question was successfully created.'

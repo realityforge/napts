@@ -89,23 +89,27 @@ class QuizAttemptTest < Test::Unit::TestCase
      @quiz = Quiz.find( @quiz_2.id )
     @quiz_attempt = QuizAttempt.create( :quiz_id => @quiz.id,
                                         :start_time => '2005-11-7 01:00:00',
-                                        :user_id => 1 )
+                                        :user_id => User.find( @sleepy_user.id ) )
     @count = 1
     for quiz_item in @quiz.quiz_items
       if quiz_item.is_on_test
         @quiz_attempt.quiz_responses.create( :created_at => Time.now,
+	                                     :input => "",
 	                                    :question_id => quiz_item.question.id,
 					    :position => @count, 
 					    :quiz_attempt_id => @quiz_attempt.id )
 	@count += @count
       end
     end
+
+    @quiz_attempt.reload
     assert_equal( 1, @quiz_attempt.get_response(1).position )
     assert_equal( 2, @quiz_attempt.get_response(2).position )
     assert_equal( 3, @quiz_attempt.get_response(3).position )
     assert_equal( nil, @quiz_attempt.get_response(4) )
     @qi = QuizItem.create( :quiz_id => @quiz_2.id, :position => 4, :question_id => 2, :is_on_test => true )
     @quiz_attempt.quiz_responses.create( :created_at => Time.now,
+                                         :input => "",
 	                                 :question_id => 2,
 					 :position => @count, 
 					 :quiz_attempt_id => @quiz_attempt.id )

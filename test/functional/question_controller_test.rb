@@ -77,15 +77,24 @@ class QuestionControllerTest < Test::Unit::TestCase
          {:question => {:content => content,
                         :question_type => question_type,
 	                :subject_group_id => subject_group_id},
-			:answer => {'this_is_ignored' => 
-			      	  {:content => answer_content,
-				   :is_correct => is_correct }}},
+			:answer => {'ignored1' => 
+			      	  {:content => 'forty two',
+				   :is_correct => is_correct }, 
+	                            'ignored2' => 
+				  {:content => 'arthur never could get the hang of thursdays',
+				   :is_correct => is_correct },
+	                            'ignored3' => 
+	                            {:content => 'digital watches are a pretty neat idea',
+				   :is_correct => is_correct },
+	                            'ignored4' => 
+	                            {:content => "he's a hoopy frood who really knows where his towel's at",
+	 :is_correct => is_correct }} },
 	                { :user_id => @lecturer_user.id, :role => :teacher, :subject_id => 1 }
 	)
     assert_equal( content, assigns(:question).content )
     assert_equal( question_type, assigns(:question).question_type )
-    assert_equal( 1, assigns(:question).answers.length )
-    assert_equal( answer_content, assigns(:question).answers[0].content )
+    assert_equal( 4, assigns(:question).answers.length )
+    assert_equal( 'forty two', assigns(:question).answers[0].content )
     assert_equal( "true", assigns(:question).answers[0].is_correct.to_s )
     assert_equal( 'Question was successfully created.', flash[:notice] )
     assert_redirected_to( :action => 'show', :id => assigns(:question).id )

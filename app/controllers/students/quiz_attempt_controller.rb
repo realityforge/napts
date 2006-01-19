@@ -8,14 +8,14 @@ class Students::QuizAttemptController < Students::BaseController
     @quiz_attempt = QuizAttempt.create( :start_time => Time.now,
                                         :quiz_id => @quiz.id,
                                         :user_id => current_user.id )
-
     count = 1
     for quiz_item in @quiz.quiz_items
-      if quiz_item.is_on_test
-        QuizResponse.create( :created_at => Time.now,
-                             :question_id => quiz_item.question.id,
-	         	     :position => count,
-			     :quiz_attempt_id => @quiz_attempt.id )
+      if quiz_item.is_on_test?
+        qr = QuizResponse.create( :created_at => Time.now,
+	                          :input => "",
+                                  :question_id => quiz_item.question.id,
+	         	          :position => count,
+			          :quiz_attempt_id => @quiz_attempt.id )
 	count += count
       end
     end

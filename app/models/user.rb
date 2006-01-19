@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   attr_accessor( :password )
   attr_accessible( :username, :password )
   validates_uniqueness_of( :username )
-  validates_presence_of( :username, :administrator )
+  validates_presence_of( :username )
   validates_presence_of( :password, :on => :create )
   
   def before_create

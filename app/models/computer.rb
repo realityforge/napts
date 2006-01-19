@@ -1,6 +1,7 @@
 class Computer < ActiveRecord::Base
   #need to write regular expression for validating ip address...
   #this one's just temporary
+  validates_format_of( :ip_address, :with => /^(\d{1,3}\.){3}\d{1,3}$/ )
   validates_length_of( :ip_address, :maximum => 16 )
   belongs_to( :room )
   validates_associated( :room )
