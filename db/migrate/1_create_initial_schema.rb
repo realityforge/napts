@@ -14,7 +14,6 @@ class CreateInitialSchema < ActiveRecord::Migration
     create_table("users", :force => true) do |t|
       t.column "username", :string, :limit => 25, :null => false
       t.column "administrator", :boolean, :null => false
-      t.column "name", :string, :limit => 50, :null => false
       t.column "hashed_password", :string, :limit => 50, :null => false
     end
     add_index("users", ["username"], :name => "users_username_index", :unique => true)

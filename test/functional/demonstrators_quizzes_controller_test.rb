@@ -30,8 +30,8 @@ class QuizzesControllerTest < Test::Unit::TestCase
     @quiz_attempt_temp = QuizAttempt.create(:start_time => Time.now, :quiz_id => @quiz_1.id, :user_id => @peter_user.id )
     @id = @quiz_attempt_temp.id
     post( :restart, 
-          {:username => "peter", :quiz => {:name => @quiz_1.id}}, 
-          {:user_id => @mr_fancy_pants_user.id, :role => :demonstrator, :subject_id => @subject_2.id} )
+          {:username => 'peter', :quiz_id => @quiz_1.id}, 
+          {:user_id => @peter_user.id, :role => :demonstrator, :subject_id => @subject_1.id} )
     assert_equal( @quiz_attempt_temp, assigns(:quiz_attempt) )  
     assert_response( :redirect )
     assert_raise(ActiveRecord::RecordNotFound){QuizAttempt.find(@id)}

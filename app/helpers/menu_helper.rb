@@ -68,7 +68,7 @@ module MenuHelper
   def get_user_links
     links = []
     links << gen_user_link.freeze
-    if session[:role] == :teacher ||  session[:role] == :demonstrator 
+    if session[:role] == :teacher ||  session[:role] == :demonstrator
       links << gen_subject_link.freeze
     end
     links << gen_role_link.freeze
@@ -78,16 +78,16 @@ module MenuHelper
 
   def gen_user_link
     link = UserLink.dup
-    link.name += current_user.name
+    link.name += current_user.username
     link
   end
-  
+
   def gen_subject_link
     link = SubjectLink.dup
     link.name += current_subject.code
     link
   end
-  
+
   def gen_role_link
     link = RoleLink.dup
     link.name += session[:role].to_s
@@ -168,7 +168,7 @@ module MenuHelper
     is_selected = get_controller_name == '/demonstrators/quizzes' && @action_name == 'restart'
     dup_link_with_select( RestartQuizLink, is_selected )
   end
-  
+
   def gen_manage_quizzes_link
     is_selected = get_controller_name == '/teachers/quizzes' && @action_name == 'list'
     dup_link_with_select( ManageQuizzesLink, is_selected )

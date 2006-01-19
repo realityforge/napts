@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many( :demonstrates_for, :class_name => "Subject", :order => "code", :join_table => "demonstrators" )
   has_and_belongs_to_many( :teaches, :class_name => "Subject", :order => "code", :join_table => "teachers" )
   attr_accessor( :password )
-  attr_accessible( :username, :password, :name )
+  attr_accessible( :username, :password )
   validates_uniqueness_of( :username )
   validates_presence_of( :username )
   validates_presence_of( :password, :on => :create )
