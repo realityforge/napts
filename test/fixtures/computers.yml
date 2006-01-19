@@ -1,0 +1,16 @@
+ip_1:
+  id: 1
+  ip_address: 255.255.255.255
+  room_id: 1
+ip_2:
+  id: 2
+  ip_address: 12.13.14.15
+  room_id: 1
+ip_3:
+  id: 3
+  ip_address: 123.432.345.654
+  room_id: 1
+ip_4:
+  id: 4
+  ip_address: 019.283.746.510
+  room_id: 2
