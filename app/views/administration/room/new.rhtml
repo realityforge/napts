@@ -1,0 +1,7 @@
+<%= error_messages_for('room') %>
+<h1>New Room</h1>
+<%= start_form_tag( :action => 'new' ) %>
+  <p><label for="room_name">Room name</label><br/>
+  <%= text_field( 'room', 'name' ) %></p>
+  <%= submit_tag( 'Create' ) %>
+<%= end_form_tag %>

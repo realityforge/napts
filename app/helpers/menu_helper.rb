@@ -38,6 +38,10 @@ module MenuHelper
       {:controller => '/administration/subject_group', :action => 'list' },
       {:title => 'Create, edit or delete subject groups'},
       {}).freeze
+    ManageRoomsLink = Link.new('Manage Rooms',
+      {:controller => '/administration/room', :action => 'list'},
+      {:title => 'Create, edit or delete rooms'},
+      {}).freeze
     ManageQuizzesLink = Link.new('Manage Quizzes',
       {:controller => '/teachers/quizzes', :action => 'list'},
       {:title => 'Create new quizzes or add and remove questions from existing quizzes'},
@@ -130,6 +134,7 @@ module MenuHelper
       links << gen_manage_subjects_link.freeze
       links << gen_manage_users_link.freeze
       links << gen_manage_subject_groups_link.freeze
+      links << gen_manage_rooms_link.freeze
     end
     links
   end
@@ -192,5 +197,10 @@ module MenuHelper
    def gen_manage_subject_groups_link
     is_selected = get_controller_name == '/administration/subject_group' && @action_name == 'list'
     dup_link_with_select( ManageSubjectGroupsLink, is_selected )
+  end
+  
+  def gen_manage_rooms_link
+    is_selected = get_controller_name == '/administration/room' && @action_name == 'list'
+    dup_link_with_select( ManageRoomsLink, is_selected )
   end
 end

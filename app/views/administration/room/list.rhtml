@@ -1,0 +1,19 @@
+<h1>Listing rooms</h1>
+
+<table>
+  <tr>
+    <th>Room Name</th>
+    <th>Operations</th>
+  </tr>
+  <% for room in @rooms %>
+    <tr>
+      <td><%= room.name %></td>
+      <td>
+        <%= link_to( 'Edit', :action => 'edit', :id => room ) %> |
+	<%= link_to( 'Destroy', {:action => 'destroy', :id => room }, :confirm => 'Are you sure?' ) %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to( 'New Room', :action => 'new' ) %>

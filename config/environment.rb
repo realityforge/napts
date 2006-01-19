@@ -51,4 +51,4 @@ end
 
 # Include your application configuration below
 
-OrderedTables = [ :users, :subject_groups, :subjects, :quizzes, :questions, :quiz_items, :answers, :quiz_attempts, :quiz_responses, :answers_quiz_responses, :demonstrators, :teachers ].collect {|x| x.to_s }
+OrderedTables = [ :users, :rooms,:subject_groups, :subjects, :quizzes, :questions, :quiz_items, :answers, :quiz_attempts, :quiz_responses, :answers_quiz_responses, :demonstrators, :teachers ].collect {|x| x.to_s }

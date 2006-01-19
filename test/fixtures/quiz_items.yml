@@ -10,12 +10,6 @@ qi_2:
   quiz_id: 1
   question_id: 2
   position: 2
-qi_13:
-  id: 13
-  is_on_test: true
-  quiz_id: 1
-  question_id: 3
-  position: 2
 
   
 qi_3:
