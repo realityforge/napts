@@ -16,15 +16,11 @@ class Demonstrators::QuizzesController < Demonstrators::BaseController
 	end
       end
     end
-    @quizzes = current_subject.quizzes.find( :all, :conditions => ['enable = ?', true] )
+    @quizzes = current_subject.quizzes.find(:all)
   end
   
   def enable_quiz
-    @quiz_pages, @quizzes = paginate( :quizzes,
-                                      :select => 'quizzes.*',
-				      :joins => ', demonstrators',
-				      :conditions => ['quizzes.subject_id = demonstrators.subject_id AND demonstrators.user_id = ?', current_user.id],
-				      :per_page => 10 )
+    @quizzes = current_subject.quizzes.find(:all)
   end
 
   def disable
