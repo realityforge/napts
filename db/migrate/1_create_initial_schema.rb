@@ -50,6 +50,7 @@ class CreateInitialSchema < ActiveRecord::Migration
       t.column "description", :text, :limit => 120, :null => false
       t.column "duration", :integer, :null => false
       t.column "subject_id", :integer, :null => false
+      t.column "created_at", :datetime
       t.column "enable", :boolean, :null => false
       t.column "prelim_enable", :boolean, :null => false
     end

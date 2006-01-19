@@ -4,13 +4,6 @@ require 'demonstrators/quiz_attempt_controller'
 #Re-raise errors caught by the controller.
 class Demonstrators::QuizAttemptController; def rescue_action(e) raise e end; end
 
-require 'quiz_attempt'
-
-class Quizzes < ActiveRecord::Base
-  cattr_accessor :time
-  def now; @@time; end
-end
-
 class QuizAttemptControllerTest < Test::Unit::TestCase
   fixtures OrderedTables
   
