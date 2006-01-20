@@ -1,4 +1,4 @@
-class Admins::UsersController < Admins::BaseController
+class Admins::UserController < Admins::BaseController
   include AuthHelper
   def new
     if request.get?
@@ -13,16 +13,16 @@ class Admins::UsersController < Admins::BaseController
       end
     end
   end
-  
+
   def list
     @users = User.find_all
   end
-  
+
   def update_role
     @user = User.find(params[:id])
     @subjects = Subject.find(:all)
   end
-  
+
   def make_demonstrator
     @user = User.find(params[:id])
     @subject = Subject.find(params[:subject_id])
@@ -33,7 +33,7 @@ class Admins::UsersController < Admins::BaseController
     end
     redirect_to( :action => 'update_role', :id => @user.id )
   end
-  
+
   def make_admin
     @user = User.find(params[:id])
     @user.administrator = params[:admin]
@@ -42,7 +42,7 @@ class Admins::UsersController < Admins::BaseController
     end
     redirect_to( :action => 'list' )
   end
-  
+
   def make_teacher
     @user = User.find(params[:id])
     @subject = Subject.find(params[:subject_id])
@@ -53,9 +53,9 @@ class Admins::UsersController < Admins::BaseController
     end
     redirect_to( :action => 'update_role', :id => @user.id )
   end
-  
+
   def delete
     User.find(params[:id]).destroy
-    redirect_to( :controller => 'users', :action => 'list' )
+    redirect_to( :action => 'list' )
   end
 end
