@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   end
   
   def self.authenticate(username, password)
-    find( :first, [ 'username = ? AND hashed_password = ?', username, User.hash_password(password) ] )
+    find_first( [ 'username = ? AND hashed_password = ?', username, User.hash_password(password) ] )
   end
     
   def demonstrator?
