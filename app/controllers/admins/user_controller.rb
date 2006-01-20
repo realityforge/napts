@@ -1,5 +1,4 @@
 class Admins::UserController < Admins::BaseController
-  include AuthHelper
   def new
     if request.get?
       @user = User.new
