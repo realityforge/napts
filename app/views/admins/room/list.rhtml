@@ -7,10 +7,9 @@
   </tr>
   <% for room in @rooms %>
     <tr>
-      <td><%= room.name %></td>
+      <td><%= link_to( "#{room.name}", :action => 'show', :id => room.id ) %></td>
       <td>
-        <%= link_to( 'Edit', :action => 'edit', :id => room ) %> |
-	<%= link_to( 'Destroy', {:action => 'destroy', :id => room }, :confirm => 'Are you sure?' ) %>
+       <%= link_to( 'Destroy', {:action => 'destroy', :id => room }, :confirm => 'Are you sure?' ) %>
       </td>
     </tr>
   <% end %>

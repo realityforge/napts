@@ -1,0 +1,9 @@
+<h1><%= @room.name %></h1>
+<table>
+  <tr><th>Computers</th></tr>
+  <% for computer in @room.computers %>
+    <tr><td><%= computer.ip_address %></td></tr>
+  <% end %>
+</table>
+<%= link_to( 'Edit', :action => 'edit', :id => @room ) %>
+    

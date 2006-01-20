@@ -7,4 +7,5 @@ class Computer < ActiveRecord::Base
   validates_associated( :room )
   validates_presence_of( :room )
   validates_presence_of( :ip_address )
+  validates_uniqueness_of( :ip_address, :scope => :room_id )
 end

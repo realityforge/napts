@@ -3,6 +3,8 @@
 <%= start_form_tag( :action => 'new' ) %>
   <p><label for="room_name">Room name</label><br/>
   <%= text_field( 'room', 'name' ) %></p>
+  <p><label for="computer_ip_address">Add IP Addresses</label><br/>
+  <%= text_area( 'computer', 'ip_address' ) %></p>
   <%= submit_tag( 'Create' ) %>
 <%= end_form_tag %>
 

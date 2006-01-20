@@ -1,7 +1,7 @@
 <h1>Add computers to <%= @room.name %></h1>
 <%= start_form_tag( :action => 'add_computers', :id => @room ) %>
   <p><label for="computer_ip_address">Add IP Addresses</label><br/>
-  <%= text_field( 'computer', 'ip_address' ) %></p>
+  <%= text_area( 'computer', 'ip_address' ) %></p>
   <%= submit_tag( 'Add' ) %>
 <%= end_form_tag %>
-
+<%= link_to( 'Cancel', :action => 'edit', :id => @room ) %>
