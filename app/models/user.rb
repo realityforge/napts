@@ -1,9 +1,9 @@
 require "digest/sha1"
 
 class User < ActiveRecord::Base
-  has_many( :quiz_attempts, :order => "start_time DESC" )
-  has_and_belongs_to_many( :demonstrates_for, :class_name => "Subject", :order => "code", :join_table => "demonstrators" )
-  has_and_belongs_to_many( :teaches, :class_name => "Subject", :order => "code", :join_table => "teachers" )
+  has_many( :quiz_attempts, :order => 'start_time DESC' )
+  has_and_belongs_to_many( :demonstrates_for, :class_name => 'Subject', :order => 'code', :join_table => 'demonstrators' )
+  has_and_belongs_to_many( :teaches, :class_name => 'Subject', :order => 'code', :join_table => 'teachers' )
   attr_accessor( :password )
   attr_accessible( :username, :password )
   validates_uniqueness_of( :username )
@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   end
   
   def self.authenticate(username, password)
-    find_first( [ 'username = ? AND hashed_password = ?', username, User.hash_password(password) ] )
+    find( :first, [ 'username = ? AND hashed_password = ?', username, User.hash_password(password) ] )
   end
     
   def demonstrator?
@@ -27,10 +27,10 @@ class User < ActiveRecord::Base
   end
   
   def demonstrator_for?( subject_id )
-      for s in self.demonstrates_for
-        return true if s.id == subject_id
-      end
-      return false
+    for s in self.demonstrates_for
+      return true if s.id == subject_id
+    end
+    return false
   end
   
   def teacher?
@@ -38,10 +38,10 @@ class User < ActiveRecord::Base
   end
   
   def teaches?( subject_id )
-      for s in self.teaches
-        return true if s.id == subject_id
-      end
-      return false
+    for s in self.teaches
+      return true if s.id == subject_id
+    end
+    return false
   end
   
 private
