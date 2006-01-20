@@ -3,7 +3,7 @@ class Admins::SubjectGroupController < Admins::BaseController
   verify :method => :get, :only => %w( list )
 
   def list
-    @subject_groups = SubjectGroup.find(:all, :order => 'name')
+    @subject_groups = SubjectGroup.find_all_sorted
   end
   
   def new

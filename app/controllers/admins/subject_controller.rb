@@ -5,7 +5,7 @@ class Admins::SubjectController < Admins::BaseController
   end
   
   def new
-    @groups = SubjectGroup.find(:all)
+    @groups = SubjectGroup.find_all_sorted
     @subject = Subject.new(params[:subject])
     if request.post?
       if ! @subject.save
@@ -19,7 +19,7 @@ class Admins::SubjectController < Admins::BaseController
   
   def edit
     @subject = Subject.find(params[:id])
-    @groups = SubjectGroup.find(:all)
+    @groups = SubjectGroup.find_all_sorted
     if request.post?
       if  ! @subject.update_attributes(params[:subject])
         flash[:alert] = 'Subject could not be updated'
