@@ -1,4 +1,4 @@
-class Administration::UsersController < Administration::BaseController
+class Admins::UsersController < Admins::BaseController
   include AuthHelper
   def new
     if request.get?

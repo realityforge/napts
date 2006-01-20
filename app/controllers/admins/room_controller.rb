@@ -1,4 +1,4 @@
-class Administration::RoomController < Administration::BaseController
+class Admins::RoomController < Admins::BaseController
   def list
     @rooms = Room.find(:all)
   end
