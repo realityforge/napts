@@ -1,4 +1,4 @@
-class Admins::SubjectsController < Admins::BaseController
+class Admins::SubjectController < Admins::BaseController
 
   def list
     @subjects = Subject.find(:all)

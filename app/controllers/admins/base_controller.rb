@@ -6,9 +6,9 @@ class Admins::BaseController < ApplicationController
 protected
   def get_navigation_links
     links = []
-    is_selected = controller_name == 'subjects' && @action_name == 'list'
+    is_selected = controller_name == 'subject' && @action_name == 'list'
     links << MenuHelper::Link.new('Subjects',
-                                  {:controller => '/admins/subjects', :action => 'list'},
+                                  {:controller => '/admins/subject', :action => 'list'},
                                   {:title => 'Add, modify or remove subjects'},
                                   {:selected => is_selected}).freeze
     is_selected = controller_name == 'subject_group' && @action_name == 'list'
