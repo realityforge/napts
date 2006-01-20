@@ -19,22 +19,6 @@ module MenuHelper
       {:title => 'Preview tests'},
       {}).freeze
 
-    ManageSubjectsLink = Link.new('Manage Subjects',
-      {:controller => '/admins/subjects', :action => 'list'},
-      {:title => 'Add, edit or delete subjects'},
-      {}).freeze
-    ManageUsersLink = Link.new('Manage Users',
-      {:controller => '/admins/users', :action => 'list'},
-      {:title => 'Add or remove users'},
-      {}).freeze
-    ManageSubjectGroupsLink = Link.new('Manage Subject Groups',
-      {:controller => '/admins/subject_group', :action => 'list' },
-      {:title => 'Create, edit or delete subject groups'},
-      {}).freeze
-    ManageRoomsLink = Link.new('Manage Rooms',
-      {:controller => '/admins/room', :action => 'list'},
-      {:title => 'Create, edit or delete rooms'},
-      {}).freeze
     ManageQuizzesLink = Link.new('Manage Quizzes',
       {:controller => '/teachers/quizzes', :action => 'list'},
       {:title => 'Create new quizzes or add and remove questions from existing quizzes'},
@@ -120,11 +104,6 @@ module MenuHelper
     elsif session[:role] == :teacher
       links << gen_manage_quizzes_link.freeze
       links << gen_manage_questions_link.freeze
-    elsif session[:role] == :administrator
-      links << gen_manage_subjects_link.freeze
-      links << gen_manage_users_link.freeze
-      links << gen_manage_subject_groups_link.freeze
-      links << gen_manage_rooms_link.freeze
     end
     links
   end
@@ -162,25 +141,5 @@ module MenuHelper
    def gen_manage_questions_link
     is_selected = get_controller_name == '/teachers/question' && @action_name == 'list'
     dup_link_with_select( ManageQuestionsLink, is_selected )
-  end
-
-   def gen_manage_subjects_link
-    is_selected = get_controller_name == '/admins/subjects' && @action_name == 'list'
-    dup_link_with_select( ManageSubjectsLink, is_selected )
-  end
-
-  def gen_manage_users_link
-    is_selected = get_controller_name == '/admins/users' && @action_name == 'list'
-    dup_link_with_select( ManageUsersLink, is_selected )
-  end
-  
-   def gen_manage_subject_groups_link
-    is_selected = get_controller_name == '/admins/subject_group' && @action_name == 'list'
-    dup_link_with_select( ManageSubjectGroupsLink, is_selected )
-  end
-  
-  def gen_manage_rooms_link
-    is_selected = get_controller_name == '/admins/room' && @action_name == 'list'
-    dup_link_with_select( ManageRoomsLink, is_selected )
   end
 end
