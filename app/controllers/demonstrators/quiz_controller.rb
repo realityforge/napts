@@ -8,6 +8,7 @@ class Demonstrators::QuizController < Demonstrators::BaseController
 
   def show
     @quiz = current_subject.quizzes.find(params[:id], :include => 'subject')
+    @rooms = Room.find(:all)
   end
 
   def disable

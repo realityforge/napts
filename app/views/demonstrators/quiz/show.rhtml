@@ -10,6 +10,9 @@
 <%= link_to('List Quiz Attempts', :controller => 'quiz_attempt', :action => 'list', :quiz_id => @quiz) %>
 <br/>
 
+<p><label for="room_name">Enable Quiz</label><br/>
+<%= collection_select( 'room', 'name', @rooms, :id, :name ) %></p>
+
 <!--
 <% if @quiz.enable? %>
 <%= link_to( 'Disable Quiz', :action => 'disable', :id => @quiz ) %>
