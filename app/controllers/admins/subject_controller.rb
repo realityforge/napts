@@ -8,9 +8,7 @@ class Admins::SubjectController < Admins::BaseController
     @groups = SubjectGroup.find_all_sorted
     @subject = Subject.new(params[:subject])
     if request.post?
-      if ! @subject.save
-        flash[:alert] = 'Subject could not be created'
-      else
+      if @subject.save
         flash[:notice] = 'Subject was successfully created.'
         redirect_to( :action => 'list' )
       end
@@ -21,9 +19,7 @@ class Admins::SubjectController < Admins::BaseController
     @subject = Subject.find(params[:id])
     @groups = SubjectGroup.find_all_sorted
     if request.post?
-      if  ! @subject.update_attributes(params[:subject])
-        flash[:alert] = 'Subject could not be updated'
-      else
+      if @subject.update_attributes(params[:subject])
         flash[:notice] = 'Subject was successfully updated.'
         redirect_to( :action => 'list' )
       end
@@ -32,6 +28,7 @@ class Admins::SubjectController < Admins::BaseController
 
   def destroy
     Subject.find(params[:id]).destroy
+    flash[:notice] = 'Subject was successfully deleted.'
     redirect_to( :action => 'list' )
   end
 end
