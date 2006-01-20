@@ -3,19 +3,9 @@
 <%= start_form_tag( :action => 'edit', :id => @room ) %>
   <p><label for="room_name">Room name</label><br/>
   <%= text_field( 'room', 'name' ) %></p>
-  <table>
-    <tr>
-      <th>Computer</th>
-      <th>Delete?</th>
-    </tr>
-    <% for computer in @room.computers %>
-      <tr>
-        <td><%= computer.ip_address %></td>
-	<td><input type="checkbox" name="computer_ip_addresses[]" value="<%= computer.id %>"></td>
-      </tr>
-    <% end %>
-  </table>
+  <p><label for="room_ip_addresses">IP Addresses</label><br/>
+  <textarea cols="40" id="room_ip_addresses" name="room_ip_addresses" 
+            rows="20"><%= @room.computers.collect {|c| c.ip_address}.join("\n") %></textarea></p>
   <%= submit_tag( 'Edit' ) %>
 <%= end_form_tag %>
-<%= link_to( 'Add computers', :action => 'add_computers', :id => @room ) %>
 <%= link_to( 'Cancel', :action => 'show', :id => @room ) %>

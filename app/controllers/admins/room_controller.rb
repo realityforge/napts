@@ -31,8 +31,20 @@ class Admins::RoomController < Admins::BaseController
   def edit
     @room = Room.find(params[:id])
     if request.post?
-      for computer in params[:computer_ip_addresses]
-        Computer.find(computer).destroy
+      #Computer.destroy_all( ['room_id = ?', @room.id] )
+      @room.computers.clear 
+      valid = true
+      addys = params[:room_ip_addresses].chomp.split(/\s/)
+      addys.each do |line|
+        computer = @room.computers.create(:ip_address => line)
+	if ! computer.valid?
+	  valid = false
+	end
+      end
+      if ! valid
+        flash[:alert] = 'Not all computers could be saved successfully'
+      else
+        flash[:notice] = 'Computers successfully created'
       end
       if ! @room.update_attributes(params[:room])
         flash[:alert] = 'Room update not successful'

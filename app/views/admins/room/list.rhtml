@@ -9,7 +9,7 @@
     <tr>
       <td><%= link_to( "#{room.name}", :action => 'show', :id => room.id ) %></td>
       <td>
-       <%= link_to( 'Destroy', {:action => 'destroy', :id => room }, :confirm => 'Are you sure?' ) %>
+       <%= link_to( 'delete', {:action => 'destroy', :id => room }, :confirm => 'Are you sure?' ) %>
       </td>
     </tr>
   <% end %>
