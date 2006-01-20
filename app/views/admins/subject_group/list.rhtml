@@ -1,21 +1,34 @@
-<h1>Browse Subject Groups</h1>
-
-<table>
+<% @page_title = "Browse Subject Groups" %>
+<table class="xlist">
+  <colgroup id="name-column"/>
+  <colgroup id="subjects-column"/>
+  <colgroup id="operations-column"/>
+  <thead>
   <tr>
     <th>Name</th>
+    <th>Subjects</th>
     <th>Operations</th>
   </tr>
-  
+  </thead>
+  <tbody>
   <% for subject_group in @subject_groups %>
     <tr>
       <td><%= subject_group.name %></td>
       <td>
+        <ul>
+        <% for subject in subject_group.subjects %>
+	  <li><%= subject.code %></li>
+        <% end %>
+        </ul>
+      </td>
+      <td>
         <%= link_to( 'Edit', :action => 'edit', :id => subject_group ) %> |
 	<%= link_to( 'Destroy', { :action => 'destroy', :id => subject_group }, 
-	                          :confirm => "Are you sure you want to delete #{subject_group.name} and all its associated subjects, quizzes and questions?" ) %>
+	                          :confirm => "Are you sure you want to delete #{subject_group.name} and all its associated subjects, quizzes and questions?", :post => true ) %>
       </td>
     </tr>
   <% end %>
+  </tbody>
 </table>
 
 <%= link_to( 'New subject group', :action => 'new' ) %>
