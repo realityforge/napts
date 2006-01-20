@@ -51,7 +51,6 @@ class CreateInitialSchema < ActiveRecord::Migration
       t.column "duration", :integer, :null => false
       t.column "subject_id", :integer, :null => false
       t.column "created_at", :datetime
-      t.column "enable", :boolean, :null => false
       t.column "prelim_enable", :boolean, :null => false
     end
     add_index("quizzes", ["name", "subject_id"], :name => "quizzes_name_subject_id_index", :unique => true)
@@ -148,7 +147,18 @@ class CreateInitialSchema < ActiveRecord::Migration
     add_foreign_key_constraint("teachers", "user_id", "users", "id",
                                 :name => "teachers_user_id_fk")
      add_index("teachers", ["subject_id", "user_id"], :name => "teachers_subject_id_user_id_index", :unique => true)
+     
+     #Quizzes_Rooms
+     create_table("quizzes_rooms", :id => false, :force => true ) do |t|
+       t.column "quiz_id", :integer, :null => false
+       t.column "room_id", :integer, :null => false
+     end
+     add_foreign_key_constraint( "quizzes_rooms", "quiz_id", "quizzes", "id",
+                                 :name => "quiz_id_fk" )
+     add_foreign_key_constraint( "quizzes_rooms", "room_id", "rooms", "id",
+                                 :name => "room_id_fk" )
   end
+  
   
   def self.down
     drop_table("teachers")

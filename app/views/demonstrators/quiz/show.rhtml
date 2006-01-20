@@ -9,8 +9,11 @@
 
 <%= link_to('List Quiz Attempts', :controller => 'quiz_attempt', :action => 'list', :quiz_id => @quiz) %>
 <br/>
+
+<!--
 <% if @quiz.enable? %>
 <%= link_to( 'Disable Quiz', :action => 'disable', :id => @quiz ) %>
 <% else %>
 <%= link_to( 'Enable Quiz', :action => 'enable', :id => @quiz ) %>
 <% end %>
+-->

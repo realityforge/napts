@@ -11,21 +11,21 @@ class Demonstrators::QuizController < Demonstrators::BaseController
   end
 
   def disable
-    update_quiz(false)
+#    update_quiz(false)
   end
   
   def enable
-    update_quiz(true)
+#    update_quiz(true)
   end
   
-private
-  def update_quiz(value)
-    quiz = current_subject.quizzes.find(params[:id])
-    quiz.enable = value
-    quiz.save!
-    if quiz.enable?
-      flash[:notice] = "Quiz #{quiz.name} enabled at #{Time.now.strftime("%H:%M")}"
-    end
-    redirect_to(:action => 'show', :id => quiz.id)
-  end
+#private
+#  def update_quiz(value)
+#    quiz = current_subject.quizzes.find(params[:id])
+#    quiz.enable = value
+#    quiz.save!
+#    if quiz.enable?
+#      flash[:notice] = "Quiz #{quiz.name} enabled at #{Time.now.strftime("%H:%M")}"
+#    end
+#    redirect_to(:action => 'show', :id => quiz.id)
+#  end
 end

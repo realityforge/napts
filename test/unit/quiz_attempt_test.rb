@@ -86,7 +86,7 @@ class QuizAttemptTest < Test::Unit::TestCase
   end
   
   def test_get_response_2
-     @quiz = Quiz.find( @quiz_2.id )
+    @quiz = Quiz.find( @quiz_2.id )
     @quiz_attempt = QuizAttempt.create( :quiz_id => @quiz.id,
                                         :start_time => '2005-11-7 01:00:00',
                                         :user_id => User.find( @sleepy_user.id ) )
