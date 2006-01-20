@@ -1,6 +1,9 @@
 class Admins::SubjectGroupController < Admins::BaseController
+  verify :method => :post, :only => %w( destroy )
+  verify :method => :get, :only => %w( list )
+
   def list
-    @subject_groups = SubjectGroup.find(:all)
+    @subject_groups = SubjectGroup.find(:all, :order => 'name')
   end
   
   def new
@@ -25,6 +28,7 @@ class Admins::SubjectGroupController < Admins::BaseController
   
   def destroy
     SubjectGroup.find(params[:id]).destroy
+    flash[:notice] = 'Subject group was successfully deleted.'
     redirect_to(:action => 'list')
   end
 end
