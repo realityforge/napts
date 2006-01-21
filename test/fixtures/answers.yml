@@ -1,5 +1,3 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
 #is chocolate good?   multichoice
 q1_a1:
   id: 1
