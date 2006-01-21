@@ -10,7 +10,7 @@ class Admins::SubjectGroupController < Admins::BaseController
     @subject_group = SubjectGroup.new(params[:subject_group])
     if request.post?
       if @subject_group.save
-        flash[:notice] = 'Subject group was successfully created'
+        flash[:notice] = 'Subject group was successfully created.'
         redirect_to(:action => 'list')
       end
     end
@@ -20,7 +20,7 @@ class Admins::SubjectGroupController < Admins::BaseController
     @subject_group = SubjectGroup.find(params[:id])
     if request.post?
       if @subject_group.update_attributes(params[:subject_group])
-        flash[:notice] = 'Subject group was successfully updated'
+        flash[:notice] = 'Subject group was successfully updated.'
         redirect_to(:action => 'list')
       end
     end

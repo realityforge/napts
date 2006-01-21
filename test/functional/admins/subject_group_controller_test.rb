@@ -64,16 +64,9 @@ class SubjectGroupControllerTest < Test::Unit::TestCase
     assert_not_nil(assigns(:subject_group))
     assert_nil(assigns(:subject_group).errors[:name])
     assert_nil(flash[:alert])
-    assert_equal('Subject group was successfully created',flash[:notice])
+    assert_equal('Subject group was successfully created.',flash[:notice])
   end
 
-
-
-
-
-
-
-  
   def test_edit_get
     get(:edit, 
         {:id => @sg_1.id}, 
@@ -110,7 +103,7 @@ class SubjectGroupControllerTest < Test::Unit::TestCase
     assert_equal(@sg_1.id,assigns(:subject_group).id)
     assert_nil(assigns(:subject_group).errors[:name])
     assert_nil(flash[:alert])
-    assert_equal('Subject group was successfully updated',flash[:notice])
+    assert_equal('Subject group was successfully updated.',flash[:notice])
   end
 
   def test_destroy
