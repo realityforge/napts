@@ -1,12 +1,16 @@
-<h1>Browse Subjects</h1>
-
-<table>
+<% @page_title = "Browse Subject Groups" %>
+<table class="xlist">
+  <colgroup id="name-column"/>
+  <colgroup id="group-column"/>
+  <colgroup id="operations-column"/>
+  <thead>
   <tr>
-    <th>Code</th>
+    <th>Name</th>
     <th>Group</th>
     <th>Operations</th>
   </tr>
-  
+  </thead>
+  <tbody>  
 <% for subject in @subjects %>
   <tr>
     <td><%= h(subject.code) %></td>
@@ -17,9 +21,8 @@
     </td>
   </tr>
 <% end %>
+  </tbody>
 </table>
-
-<br />
 
 <%= link_to( 'New subject', :action => 'new' ) %>
 
