@@ -23,6 +23,7 @@ protected
 
 private
   def verify_demonstrator
+    raise Napts::SecurityError unless session[:role] == :demonstrator
     raise Napts::SecurityError unless current_user.demonstrator_for?(current_subject_id)
   end
 end

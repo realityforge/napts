@@ -31,6 +31,7 @@ protected
 
 private
   def verify_admin
+    raise Napts::SecurityError unless session[:role] == :administrator
     raise Napts::SecurityError unless current_user.administrator?
   end
 end
