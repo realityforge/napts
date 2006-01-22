@@ -1,4 +1,4 @@
-<% @page_title = "#{@subject.code}: Teachers" %>
+<% @page_title = "#{@subject.name}: Teachers" %>
 <%= start_form_tag({:action => 'teachers', :id => @subject},{:method => :get}) %>
 <div>
 <input type="text" name="q" value="<%= params[:q] %>"/>

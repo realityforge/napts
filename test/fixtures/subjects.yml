@@ -1,13 +1,13 @@
 subject_1:
   id: 1
-  code: "CSE21ADS"
+  name: "CSE21ADS"
   subject_group_id: 1
 subject_2:
   id: 2
-  code: "CSE12SYS"
+  name: "CSE12SYS"
   subject_group_id: 2
 subject_3:
   id: 3
-  code: "CSE21DB"
+  name: "CSE21DB"
   subject_group_id: 3
   

@@ -38,10 +38,10 @@ class CreateInitialSchema < ActiveRecord::Migration
     
     # Subjects
     create_table('subjects', :force => true) do |t|
-      t.column 'code', :string, :limit => 10, :null => false
+      t.column 'name', :string, :limit => 10, :null => false
       t.column 'subject_group_id', :integer, :null => false
     end
-    add_index('subjects', ['code'], :name => 'subjects_code_index', :unique => true)
+    add_index('subjects', ['name'], :name => 'subjects_name_index', :unique => true)
     add_foreign_key_constraint('subjects', 'subject_group_id', 'subject_groups', 'id', :name => 'subjects_subject_group_id_fk')
     
     # Quizzes

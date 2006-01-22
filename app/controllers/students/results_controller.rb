@@ -12,7 +12,7 @@ class Students::ResultsController < Students::BaseController
       @quiz_name << attempt.quiz.name
       @numqns = attempt.quiz_responses.length
       @score << @numqns - attempt.incorrect_answers.length
-      @subject << attempt.quiz.subject.code
+      @subject << attempt.quiz.subject.name
       @date << attempt.start_time
     end
   end

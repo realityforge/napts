@@ -13,7 +13,7 @@
   <tbody>  
 <% for subject in @subjects %>
   <tr>
-    <td><%= h(subject.code) %></td>
+    <td><%= h(subject.name) %></td>
     <td><%= h(subject.subject_group.name ) %></td>
     <td>
     <%= link_to( 'Show', :action => 'show', :id => subject ) %> |

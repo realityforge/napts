@@ -8,7 +8,7 @@ class UserTest < Test::Unit::TestCase
     assert_equal( 'peter', user.username )
     assert_equal( 2 , user.demonstrates_for.size )
     assert_equal( "1" , user.demonstrates_for[0].subject_id )
-    assert_equal( "CSE21DB" , user.demonstrates_for[1]. code )
+    assert_equal( "CSE21DB" , user.demonstrates_for[1].name )
   end
   
   def test_teaches

@@ -1,5 +1,5 @@
-<% @page_title = "#{current_subject.code}: '#{@quiz.name}' Quiz Attempts" %>
-<h1><%= @quiz.subject.code %>: '<%= @quiz.name %>' Quiz Attempts</h1>
+<% @page_title = "#{current_subject.name}: '#{@quiz.name}' Quiz Attempts" %>
+<h1><%= @quiz.subject.name %>: '<%= @quiz.name %>' Quiz Attempts</h1>
 
 <%= start_form_tag({:action => 'list'},{:method => :get}) %>
 <div>

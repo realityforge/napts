@@ -65,7 +65,7 @@ module MenuHelper
 
   def gen_subject_link
     link = SubjectLink.dup
-    link.name += current_subject.code
+    link.name += current_subject.name
     link
   end
 

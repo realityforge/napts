@@ -6,7 +6,7 @@
     </tr>
     <% for subject in @subjects %>
       <tr>
-        <td><%= subject.code %></td>
+        <td><%= subject.name %></td>
 	<% if @user.demonstrator_for?(subject.id) %>
 	  <td><%= link_to( 'Make not Demonstrator', :action => 'make_demonstrator', 
 	                                      :id => @user.id, 
