@@ -1,7 +1,7 @@
-<% page_title = 'Add User' %>
+<% @page_title = 'New User' %>
 <%= start_form_tag(:action => 'new', :q => params[:q], :page => params[:page]) %>
 <div class="dataset">
-<h2>Add user</h2>
+<h2>New User</h2>
 <%= error_messages_for('user', :header_tag => 'h3' ) %>
 <table width="100%" cellpadding="3" cellspacing="0">
 <tr>
@@ -12,7 +12,7 @@
 </tr>
 </table>
 
-<button type="submit">Add</button>
+<button type="submit">Create</button>
  <%= link_to_button('Cancel', :action => 'list') %>
 </div>
 
