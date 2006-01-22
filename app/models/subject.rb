@@ -1,8 +1,8 @@
 class Subject < ActiveRecord::Base
   belongs_to( :subject_group )
   has_many( :quizzes, :dependent => true )
-  has_and_belongs_to_many( :demonstrators, :class_name => 'User', :join_table => 'demonstrators', :uniq => true )
-  has_and_belongs_to_many( :teachers, :class_name => 'User', :join_table => 'teachers', :uniq => true )
+  has_and_belongs_to_many( :demonstrators, :class_name => 'User', :join_table => 'demonstrators', :uniq => true, :order => 'username' )
+  has_and_belongs_to_many( :teachers, :class_name => 'User', :join_table => 'teachers', :uniq => true, :order => 'username' )
   validates_uniqueness_of( :code )
   validates_length_of( :code, :within => 1..10 )
   validates_associated( :subject_group )
