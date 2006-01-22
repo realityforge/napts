@@ -41,7 +41,7 @@ class LoginControllerTest < Test::Unit::TestCase
   end
 
   def test_login_post_with_invalid_role
-    post(:login, {:username => 'peter', :password => 'retep', :type => 'Administrator'}, {:data => 'blah'})
+    post(:login, {:username => 'peter', :password => 'peter', :type => 'Administrator'}, {:data => 'blah'})
     assert_redirected_to(:action => 'login')
     assert_nil(session[:data])
     assert_equal('Access Denied',flash[:alert])
@@ -50,7 +50,7 @@ class LoginControllerTest < Test::Unit::TestCase
   end
 
   def test_login_post_success
-    post(:login, {:username => 'peter', :password => 'retep', :type => 'Student'}, {:data => 'blah'})
+    post(:login, {:username => 'peter', :password => 'peter', :type => 'Student'}, {:data => 'blah'})
     assert_redirected_to(:controller => 'welcome', :action => 'index')
     assert_equal(users(:peter_user).id,session[:user_id])
     assert_equal(:student,session[:role])
