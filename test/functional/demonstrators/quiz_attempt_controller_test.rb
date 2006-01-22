@@ -4,7 +4,7 @@ require 'demonstrators/quiz_attempt_controller'
 #Re-raise errors caught by the controller.
 class Demonstrators::QuizAttemptController; def rescue_action(e) raise e end; end
 
-class QuizAttemptControllerTest < Test::Unit::TestCase
+class Demonstrators::QuizAttemptControllerTest < Test::Unit::TestCase
   fixtures OrderedTables
   
   def setup

@@ -4,7 +4,7 @@ require 'admins/subject_controller'
 #Re-raise errors caught by the controller.
 class Admins::SubjectController; def rescue_action(e) raise e end; end
 
-class SubjectControllerTest < Test::Unit::TestCase
+class Admins::SubjectControllerTest < Test::Unit::TestCase
   fixtures OrderedTables
 
   def setup
