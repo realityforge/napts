@@ -1,25 +1,20 @@
 peter_user:
   id: 1
   name: 'peter'
-  hashed_password: <%= Digest::SHA1::hexdigest('retep') %> 
   administrator: false
 mr_fancy_pants_user:
   id: 2
   name: 'MrFancyPants'
-  hashed_password: <%= Digest::SHA1::hexdigest('secret') %> 
   administrator: false
 sleepy_user:
   id: 3
   name: 'sleepy'
-  hashed_password: <%= Digest::SHA1::hexdigest('letmein') %> 
   administrator: false
 lecturer_user:
   id: 4
   name: 'lect'
-  hashed_password: <%= Digest::SHA1::hexdigest('teach') %>
   administrator: false
 admin_user:
   id: 5
   name: admin
-  hashed_password: <%= Digest::SHA1::hexdigest('admin') %>
   administrator: true

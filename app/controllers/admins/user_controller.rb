@@ -5,8 +5,6 @@ class Admins::UserController < Admins::BaseController
   def new
     @user = User.new(params[:user])
     if request.post?
-      # TODO: Remove ugly hack on nextline!!!!
-      @user.password = @user.name
       if @user.save
         flash[:notice] = 'User was successfully added.'
         redirect_to(:action => 'list', :q => params[:q], :page => params[:page])
