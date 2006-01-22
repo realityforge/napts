@@ -1,9 +1,15 @@
-<h1><%= @room.name %></h1>
 <table>
-  <tr><th>Computers</th></tr>
+  <tr><th>Name</th><td><%= @room.name %></td></tr>
+  <tr>
+    <th>Computers</th>
+    <td>
+      <ul>
   <% for computer in @room.computers %>
-    <tr><td><%= computer.ip_address %></td></tr>
+        <li><%= computer.ip_address %></li>
   <% end %>
+      </ul>
+    </td>
+  </tr>
 </table>
 <%= link_to( 'Edit', :action => 'edit', :id => @room ) %>
     

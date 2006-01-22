@@ -1,29 +1,25 @@
 class Admins::RoomController < Admins::BaseController
-  def list
-    @rooms = Room.find(:all)
+  verify :method => :post, :only => %w( destroy )
+  verify :method => :get, :only => %w( show list )
+
+  def show
+    @room = Room.find(params[:id])
   end
   
+  def list
+    conditions = params[:q] ? ['name LIKE ?', "%#{params[:q]}%"] : '1 = 1'
+    @room_pages, @rooms = paginate( :rooms, 
+                                    :conditions => conditions,
+                                    :order_by => 'name',
+                                    :per_page => 20 )
+  end
+
   def new
     @room = Room.new(params[:room])
     if request.post?
-      if ! @room.save
-        flash[:alert] = 'Room could not be created'
-      else
-        valid = true
-        addys = params[:computer][:ip_address].chomp.split(/\s/)
-        addys.each do |line|
-          computer = @room.computers.create(:ip_address => line)
-	  if ! computer.valid?
-	    valid = false
-	  end
-        end
-        if ! valid
-          flash[:alert] = 'Not all computers could be saved successfully'
-        else
-          flash[:notice] = 'Computers successfully created'
-        end
-        flash[:notice] = 'Room successfully created'
-	redirect_to( :action => 'list' )
+      if @room.save
+        flash[:notice] = 'Room was successfully created.'
+        redirect_to(:action => 'show', :id => @room)
       end
     end
   end
@@ -31,36 +27,17 @@ class Admins::RoomController < Admins::BaseController
   def edit
     @room = Room.find(params[:id])
     if request.post?
-      #Computer.destroy_all( ['room_id = ?', @room.id] )
-      @room.computers.clear 
-      valid = true
-      addys = params[:room_ip_addresses].chomp.split(/\s/)
-      addys.each do |line|
-        computer = @room.computers.create(:ip_address => line)
-	if ! computer.valid?
-	  valid = false
-	end
+      @room.attributes = params[:room]
+      if @room.save
+        flash[:notice] = 'Room was successfully updated.'
+        redirect_to(:action => 'show', :id => @room)
       end
-      if ! valid
-        flash[:alert] = 'Not all computers could be saved successfully'
-      else
-        flash[:notice] = 'Computers successfully created'
-      end
-      if ! @room.update_attributes(params[:room])
-        flash[:alert] = 'Room update not successful'
-      else
-        flash[:notice] = 'Update successful'
-      end
-      redirect_to( :action => 'list' )
     end
-  end
-  
-  def show
-    @room = Room.find(params[:id])
   end
   
   def destroy
     Room.find(params[:id]).destroy
-    redirect_to( :action => 'list' )
+    flash[:notice] = 'Room was successfully deleted.'
+    redirect_to(:action => 'list', :q => params[:q], :page => params[:page])
   end
 end

@@ -1,18 +1,35 @@
-<h1>Listing rooms</h1>
+<% @page_title = "Browse Rooms" %>
+<%= start_form_tag({:action => 'list'},{:method => :get}) %>
+<div>
+<input type="text" name="q" value="<%= params[:q] %>"/>
+<button type="submit">Search</button>
+</div>
+<%= end_form_tag %>
 
-<table>
+<table class="xlist">
+  <colgroup id="name-column"/>
+  <colgroup id="operations-column"/>
+  <thead>
   <tr>
     <th>Room Name</th>
     <th>Operations</th>
   </tr>
+  </thead>
+  <tbody>
   <% for room in @rooms %>
     <tr>
-      <td><%= link_to( "#{room.name}", :action => 'show', :id => room.id ) %></td>
+      <td><%= room.name %></td>
       <td>
-       <%= link_to( 'delete', {:action => 'destroy', :id => room }, :confirm => 'Are you sure?' ) %>
+       <%= link_to('Show', :action => 'show', :id => room ) %> |
+       <%= link_to('Delete', {:action => 'destroy', :id => room }, {:confirm => 'Are you sure?', :post => true} ) %>
       </td>
     </tr>
   <% end %>
+  </tbody>
 </table>
-
+<%= link_to('< Previous', :page => @room_pages.current.previous, 
+			  :q => params[:q]) if @room_pages.current.previous %>
+<%= link_to('Next >', :page => @room_pages.current.next, 
+		      :q => params[:q]) if @room_pages.current.next %>
+<br/>
 <%= link_to( 'New Room', :action => 'new' ) %>

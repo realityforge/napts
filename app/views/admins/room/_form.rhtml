@@ -1,0 +1,18 @@
+<%= start_form_tag(@form_action) %>
+<div class="dataset">
+    <h2><%= @form_title %></h2>
+    <%= error_messages_for('room', :header_tag => 'h3') %>
+<table width="100%" cellpadding="3" cellspacing="0">
+<tr>
+  <th><label for="room_name">Name</label></th>
+  <td><%= text_field( 'room', 'name' ) %></td>
+</tr>
+<tr>
+  <th><label for="room_addresses">IP Addresses</label></th>
+  <td><%= text_area("room", "addresses", "cols" => 40, "rows" => 20) %></td>
+</tr>
+</table>
+    <button type="submit"><%= @form_action_desc %></button>
+    <%= link_to_button('Cancel', @form_cancel_action) %>
+</div>
+<%= end_form_tag %>
