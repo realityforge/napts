@@ -36,7 +36,7 @@ class Admins::SubjectController < Admins::BaseController
     @subject = Subject.find(params[:id])
     if params[:q]
       conditions = 
-        ['id NOT IN (SELECT user_id FROM teachers WHERE subject_id = ?) AND users.username LIKE ?', 
+        ['id NOT IN (SELECT user_id FROM teachers WHERE subject_id = ?) AND users.name LIKE ?', 
         @subject.id, 
         "%#{params[:q]}%"]
     else
@@ -44,7 +44,7 @@ class Admins::SubjectController < Admins::BaseController
     end
     @user_pages, @users = paginate( :users, 
                                     :conditions => conditions,
-                                    :order_by => 'username',
+                                    :order_by => 'name',
                                     :per_page => 20 )
   end
 

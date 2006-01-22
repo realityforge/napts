@@ -5,7 +5,7 @@ class UserTest < Test::Unit::TestCase
    
   def test_demonstrates_for
     user = User.find( @peter_user.id )
-    assert_equal( 'peter', user.username )
+    assert_equal( 'peter', user.name )
     assert_equal( 2 , user.demonstrates_for.size )
     assert_equal( "1" , user.demonstrates_for[0].subject_id )
     assert_equal( "CSE21DB" , user.demonstrates_for[1].name )

@@ -5,8 +5,8 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many( :demonstrates_for, :class_name => 'Subject', :order => 'name', :join_table => 'demonstrators', :uniq => true )
   has_and_belongs_to_many( :teaches, :class_name => 'Subject', :order => 'name', :join_table => 'teachers', :uniq => true )
   attr_accessor( :password )
-  attr_accessible( :username, :password )
-  validates_uniqueness_of( :username )
+  attr_accessible( :name, :password )
+  validates_uniqueness_of( :name )
   validates_presence_of( :username )
   validates_presence_of( :password, :on => :create )
   
@@ -18,8 +18,8 @@ class User < ActiveRecord::Base
     @password = nil
   end
   
-  def self.authenticate(username, password)
-    find_first( [ 'username = ? AND hashed_password = ?', username, User.hash_password(password) ] )
+  def self.authenticate(name, password)
+    find_first( [ 'name = ? AND hashed_password = ?', name, User.hash_password(password) ] )
   end
     
   def demonstrator?

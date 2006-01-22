@@ -33,7 +33,7 @@ class Test::Unit::TestCase
     assert_not_nil( assigns(:quiz_attempt) )
     assigns(:quiz_attempt).reload
     assert_equal( 2, assigns(:quiz_attempt).quiz_responses.length )
-    assert_equal( 'peter', @user.username )
+    assert_equal( 'peter', @user.name )
     assert_redirected_to( :action => 'show', 
                           :quiz_attempt_id => assigns(:quiz_attempt).id,
                           :quiz_response_position => 1 )

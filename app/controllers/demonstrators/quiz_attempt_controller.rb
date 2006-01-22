@@ -5,7 +5,7 @@ class Demonstrators::QuizAttemptController < Demonstrators::BaseController
   def list
     @quiz = current_subject.quizzes.find(params[:quiz_id])
     if params[:q]
-      conditions = ['quiz_attempts.quiz_id = ? AND users.username LIKE ?', @quiz.id, "%#{params[:q]}%"]
+      conditions = ['quiz_attempts.quiz_id = ? AND users.name LIKE ?', @quiz.id, "%#{params[:q]}%"]
     else
       conditions = ['quiz_attempts.quiz_id = ?', @quiz.id]
     end
@@ -13,7 +13,7 @@ class Demonstrators::QuizAttemptController < Demonstrators::BaseController
                                                     :select => 'quiz_attempts.*',
                                                     :joins => 'LEFT OUTER JOIN users ON users.id = quiz_attempts.user_id',
                                                     :conditions => conditions,
-                                                    :order_by => 'users.username',
+                                                    :order_by => 'users.name',
                                                     :per_page => 20 )
   end
 

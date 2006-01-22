@@ -13,7 +13,7 @@
   <td>
     <ul>
     <% for user in @subject.teachers %>
-      <li><%= user.username %> [<%= link_to('Remove', {:action => 'remove_teacher', :id => @subject.id, :user_id => user.id},{:post => true}) %>]</li>
+      <li><%= user.name %> [<%= link_to('Remove', {:action => 'remove_teacher', :id => @subject.id, :user_id => user.id},{:post => true}) %>]</li>
     <% end %>
     </ul>
   </td>

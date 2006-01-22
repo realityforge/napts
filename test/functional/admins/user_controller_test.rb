@@ -46,24 +46,24 @@ class Admins::UserControllerTest < Test::Unit::TestCase
   
   def test_new_post_with_error
     post(:new, 
-        {:user_ => {:username => ''}}, 
+        {:user => {:name => ''}}, 
         {:user_id => @admin_user.id, :role => :administrator} )
     assert_response(:success)
     assert_template('new')
     assert_valid_markup
     assert_not_nil(assigns(:user))
-    assert_not_nil(assigns(:user).errors[:username])
+    assert_not_nil(assigns(:user).errors[:name])
     assert_nil(flash[:alert])
     assert_nil(flash[:notice])
   end
  
   def test_new_post
     post(:new, 
-        {:user => {:username => 'X'}, :q => 's', :page => '1'}, 
+        {:user => {:name => 'X'}, :q => 's', :page => '1'}, 
         {:user_id => @admin_user.id, :role => :administrator} )
     assert_not_nil(assigns(:user))
     assert_redirected_to(:action => 'list', :q => 's', :page => '1')
-    assert_nil(assigns(:user).errors[:username])
+    assert_nil(assigns(:user).errors[:name])
     assert_nil(flash[:alert])
     assert_equal('User was successfully added.',flash[:notice])
   end

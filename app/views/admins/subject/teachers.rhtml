@@ -13,7 +13,7 @@
 </tr>
 <% for user in @users %>
 <tr>
-  <td><%= user.username %></td>
+  <td><%= user.name %></td>
   <td><%= link_to('Add Teacher', {:action => 'add_teacher', :id => @subject.id, :user_id => user.id, :q => params[:q], :page => params[:page]}, {:post => true} ) %></td>
 </tr>
 <% end %>

@@ -59,7 +59,7 @@ module MenuHelper
 
   def gen_user_link
     link = UserLink.dup
-    link.name += current_user.username
+    link.name += current_user.name
     link
   end
 
