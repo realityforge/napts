@@ -3,7 +3,11 @@ class Admins::SubjectController < Admins::BaseController
   verify :method => :get, :only => %w( show list teachers )
 
   def list
-    @subjects = Subject.find_all_sorted
+    conditions = params[:q] ? ['name LIKE ?', "%#{params[:q]}%"] : '1 = 1'
+    @subject_pages, @subjects = paginate( :subjects, 
+                                          :conditions => conditions,
+                                          :order_by => 'name',
+                                          :per_page => 20 )
   end
   
   def new

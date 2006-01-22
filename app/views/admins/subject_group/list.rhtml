@@ -30,5 +30,9 @@
   <% end %>
   </tbody>
 </table>
-
-<%= link_to( 'New subject group', :action => 'new' ) %>
+<%= link_to('< Previous', :page => @subject_group_pages.current.previous, 
+			  :q => params[:q]) if @subject_group_pages.current.previous %>
+<%= link_to('Next >', :page => @subject_group_pages.current.next, 
+		      :q => params[:q]) if @subject_group_pages.current.next %>
+<br/>
+<%= link_to( 'New Subject Group', :action => 'new' ) %>

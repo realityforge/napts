@@ -3,7 +3,11 @@ class Admins::SubjectGroupController < Admins::BaseController
   verify :method => :get, :only => %w( list )
 
   def list
-    @subject_groups = SubjectGroup.find_all_sorted
+    conditions = params[:q] ? ['name LIKE ?', "%#{params[:q]}%"] : '1 = 1'
+    @subject_group_pages, @subject_groups = paginate( :subject_groups, 
+                                                      :conditions => conditions,
+                                                      :order_by => 'name',
+                                                      :per_page => 20 )
   end
   
   def new
