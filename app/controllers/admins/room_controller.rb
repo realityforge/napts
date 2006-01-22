@@ -63,23 +63,4 @@ class Admins::RoomController < Admins::BaseController
     Room.find(params[:id]).destroy
     redirect_to( :action => 'list' )
   end
-  
-  def add_computers
-    @room = Room.find(params[:id])
-    if request.post?
-       valid = true
-      addys = params[:computer][:ip_address].chomp.split(/\s/)
-      addys.each do |line|
-        computer = @room.computers.create(:ip_address => line)
-	if ! computer.valid?
-	  valid = false
-	end
-      end
-      if ! valid
-        flash[:alert] = 'Not all computers could be saved successfully'
-      else
-        flash[:notice] = 'Computers successfully created'
-      end
-    end
-  end
 end
