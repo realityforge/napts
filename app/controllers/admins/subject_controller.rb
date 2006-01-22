@@ -7,7 +7,7 @@ class Admins::SubjectController < Admins::BaseController
     @subject_pages, @subjects = paginate( :subjects, 
                                           :conditions => conditions,
                                           :order_by => 'name',
-                                          :per_page => 20 )
+                                          :per_page => 10 )
   end
   
   def new

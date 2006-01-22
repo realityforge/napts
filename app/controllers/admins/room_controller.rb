@@ -11,7 +11,7 @@ class Admins::RoomController < Admins::BaseController
     @room_pages, @rooms = paginate( :rooms, 
                                     :conditions => conditions,
                                     :order_by => 'name',
-                                    :per_page => 20 )
+                                    :per_page => 10 )
   end
 
   def new

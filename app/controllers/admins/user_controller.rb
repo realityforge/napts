@@ -21,7 +21,7 @@ class Admins::UserController < Admins::BaseController
     @user_pages, @users = paginate( :users, 
                                     :conditions => conditions,
                                     :order_by => 'name',
-                                    :per_page => 20 )
+                                    :per_page => 10 )
   end
 
   def toggle_admin_status
