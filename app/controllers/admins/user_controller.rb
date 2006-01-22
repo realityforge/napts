@@ -1,60 +1,42 @@
 class Admins::UserController < Admins::BaseController
+  verify :method => :post, :only => %w( destroy toggle_admin_status )
+  verify :method => :get, :only => %w( show list )
+
   def new
-    if request.get?
-      @user = User.new
-    else
-      @user = User.new(params[:user])
+    @user = User.new(params[:user])
+    if request.post?
+      # TODO: Remove ugly hack on nextline!!!!
+      @user.password = @user.username
       if @user.save
-        flash[:notice] = "User #{@user.username} created"
-        redirect_to( :action => 'list' )
-      else
-        flash[:alert] = "not created"
+        flash[:notice] = 'User was successfully added.'
+        redirect_to(:action => 'list', :q => params[:q], :page => params[:page])
       end
     end
   end
 
+  def show
+    @user = User.find(params[:id])
+  end
+
   def list
-    @users = User.find_all
+    conditions = params[:q] ? ['users.username LIKE ?', "%#{params[:q]}%"] : '1 = 1'
+    @user_pages, @users = paginate( :users, 
+                                    :conditions => conditions,
+                                    :order_by => 'username',
+                                    :per_page => 20 )
   end
 
-  def update_role
+  def toggle_admin_status
     @user = User.find(params[:id])
-    @subjects = Subject.Subject.find_all_sorted
+    @user.administrator = params[:admin_status] == 'true'
+    @user.save!
+    flash[:notice] = 'Admin status successfully updated for User.'
+    redirect_to(:action => 'list', :q => params[:q], :page => params[:page])
   end
 
-  def make_demonstrator
-    @user = User.find(params[:id])
-    @subject = Subject.find(params[:subject_id])
-    if params[:value]
-      @user.demonstrates_for << @subject
-    else
-      @user.demonstrates_for.delete( @subject )
-    end
-    redirect_to( :action => 'update_role', :id => @user.id )
-  end
-
-  def make_admin
-    @user = User.find(params[:id])
-    @user.administrator = params[:admin]
-    if ! @user.save
-      flash[:alert] = "Update not successful"
-    end
-    redirect_to( :action => 'list' )
-  end
-
-  def make_teacher
-    @user = User.find(params[:id])
-    @subject = Subject.find(params[:subject_id])
-    if params[:value]
-      @user.teaches << @subject
-    else
-      @user.teaches.delete( @subject )
-    end
-    redirect_to( :action => 'update_role', :id => @user.id )
-  end
-
-  def delete
+  def destroy
     User.find(params[:id]).destroy
-    redirect_to( :action => 'list' )
+    flash[:notice] = 'User was successfully deleted.'
+    redirect_to(:action => 'list', :q => params[:q], :page => params[:page])
   end
 end

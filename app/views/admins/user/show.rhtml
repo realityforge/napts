@@ -1,0 +1,37 @@
+<% @page_title = "Browse User '#{@user.username}'" %>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <td><%= @user.username %></td>
+  </tr>
+  <tr>
+    <th>Admin?</th>
+    <td><%= @user.administrator? ? 'Yes' : 'No' %></td>
+  </tr>
+<% if @user.teaches.length > 0 %>
+  <tr>
+    <th>Teaches</th>
+    <td>
+    <ul>
+      <% for subject in @user.teaches %>
+      <li><%= subject.name %></li>
+      <% end %>
+    </ul>
+    </td>
+  </tr>
+<% end %>
+<% if @user.demonstrates_for.length > 0 %>
+  <tr>
+    <th>Demonstrator For</th>
+    <td>
+    <ul>
+      <% for subject in @user.demonstrates_for %>
+      <li><%= subject.name %></li>
+      <% end %>
+    </ul>
+    </td>
+  </tr>
+<% end %>
+</table>
+

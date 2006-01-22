@@ -1,6 +1,19 @@
-<h1>Add user</h1>
-<%= start_form_tag( :action => 'new' ) %>
-  <%= render( :partial => 'form' ) %>
-  <%= submit_tag( "Add User" ) %>
-<%= end_form_tag %>
+<% page_title = 'Add User' %>
+<%= start_form_tag(:action => 'new', :q => params[:q], :page => params[:page]) %>
+<div class="dataset">
+<h2>Add user</h2>
+<%= error_messages_for('user', :header_tag => 'h3' ) %>
+<table width="100%" cellpadding="3" cellspacing="0">
+<tr>
+  <th><label for="user_username">Name</label></th>
+  <td>
+    <%= text_field('user', 'username', {"class" => "textfield", "maxlength" => 25})%>
+  </td>
+</tr>
+</table>
 
+<button type="submit">Add</button>
+ <%= link_to_button('Cancel', :action => 'list') %>
+</div>
+
+<%= end_form_tag %>
