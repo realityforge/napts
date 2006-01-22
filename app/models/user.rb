@@ -23,10 +23,12 @@ class User < ActiveRecord::Base
   end
   
   def demonstrator_for?( subject_id )
-    for s in self.demonstrates_for
-      return true if s.id == subject_id
+    begin
+      self.demonstrates_for.find(subject_id)
+      return true
+    rescue
+      return false
     end
-    return false
   end
   
   def teacher?
@@ -34,10 +36,12 @@ class User < ActiveRecord::Base
   end
   
   def teaches?( subject_id )
-    for s in self.teaches
-      return true if s.id == subject_id
+    begin
+      self.teaches.find(subject_id)
+      return true
+    rescue
+      return false
     end
-    return false
   end
 
 private 
