@@ -17,7 +17,7 @@ class Admins::UserController < Admins::BaseController
   end
 
   def list
-    conditions = params[:q] ? ['users.name LIKE ?', "%#{params[:q]}%"] : '1 = 1'
+    conditions = params[:q] ? ['name LIKE ?', "%#{params[:q]}%"] : '1 = 1'
     @user_pages, @users = paginate( :users, 
                                     :conditions => conditions,
                                     :order_by => 'name',
