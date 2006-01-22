@@ -30,8 +30,8 @@
       </td>
       <td>
         <%= link_to( 'Edit', :action => 'edit', :id => subject_group ) %> |
-	<%= link_to( 'Destroy', { :action => 'destroy', :id => subject_group }, 
-	                          :confirm => "Are you sure you want to delete #{subject_group.name} and all its associated subjects, quizzes and questions?", :post => true ) %>
+	<%= link_to( 'Destroy', {:action => 'destroy', :id => subject_group, :q => params[:q], :page => params[:page]}, 
+	                         :confirm => "Are you sure you want to delete #{subject_group.name} and all its associated subjects, quizzes and questions?", :post => true) %>
       </td>
     </tr>
   <% end %>

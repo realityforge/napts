@@ -21,7 +21,8 @@
       <td><%= room.name %></td>
       <td>
        <%= link_to('Show', :action => 'show', :id => room ) %> |
-       <%= link_to('Delete', {:action => 'destroy', :id => room }, {:confirm => 'Are you sure?', :post => true} ) %>
+       <%= link_to('Delete', {:action => 'destroy', :id => room, :q => params[:q], :page => params[:page]}, 
+                             {:confirm => 'Are you sure?', :post => true} ) %>
       </td>
     </tr>
   <% end %>

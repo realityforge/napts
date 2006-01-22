@@ -108,9 +108,9 @@ class Admins::SubjectGroupControllerTest < Test::Unit::TestCase
 
   def test_destroy
     post(:destroy, 
-        {:id => @sg_1.id}, 
+        {:id => @sg_1.id, :q => 's', :page => '1'},
         {:user_id => @admin_user.id, :role => :administrator} )
-    assert_redirected_to(:action => 'list')
+    assert_redirected_to(:action => 'list', :q => 's', :page => '1')
     assert_nil(flash[:alert])
     assert_equal('Subject group was successfully deleted.',flash[:notice])
     assert(!SubjectGroup.exists?(@sg_1.id))

@@ -128,9 +128,9 @@ class Admins::RoomControllerTest < Test::Unit::TestCase
 
   def test_destroy
     post(:destroy, 
-        {:id => @room_1.id}, 
+        {:id => @room_1.id, :q => 's', :page => '1'}, 
         {:user_id => @admin_user.id, :role => :administrator} )
-    assert_redirected_to(:action => 'list')
+    assert_redirected_to(:action => 'list', :q => 's', :page => '1')
     assert_nil(flash[:alert])
     assert_equal('Room was successfully deleted.',flash[:notice])
     assert(!Room.exists?(@room_1.id))

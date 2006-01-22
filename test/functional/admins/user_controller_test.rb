@@ -110,7 +110,7 @@ class Admins::UserControllerTest < Test::Unit::TestCase
   def test_destroy
     assert(User.exists?(@peter_user.id))
     post(:destroy, 
-        {:id => @peter_user.id, :q => 's', :page => '1'}, 
+        {:id => @peter_user.id, :q => 's', :page => '1'},
         {:user_id => @admin_user.id, :role => :administrator} )
     assert_redirected_to(:action => 'list', :q => 's', :page => '1')
     assert_nil(flash[:alert])

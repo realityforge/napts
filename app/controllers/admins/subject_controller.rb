@@ -71,6 +71,6 @@ class Admins::SubjectController < Admins::BaseController
   def destroy
     Subject.find(params[:id]).destroy
     flash[:notice] = 'Subject was successfully deleted.'
-    redirect_to(:action => 'list')
+    redirect_to(:action => 'list', :q => params[:q], :page => params[:page])
   end
 end

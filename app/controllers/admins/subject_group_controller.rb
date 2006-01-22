@@ -33,6 +33,6 @@ class Admins::SubjectGroupController < Admins::BaseController
   def destroy
     SubjectGroup.find(params[:id]).destroy
     flash[:notice] = 'Subject group was successfully deleted.'
-    redirect_to(:action => 'list')
+    redirect_to(:action => 'list', :q => params[:q], :page => params[:page])
   end
 end
