@@ -21,6 +21,24 @@ class Admins::SubjectControllerTest < Test::Unit::TestCase
     assert_template('list')
     assert_valid_markup
     assert_not_nil(assigns(:subjects))
+    assert_equal(3,assigns(:subjects).length)
+    assert_equal(@subject_2.id,assigns(:subjects)[0].id)
+    assert_equal(@subject_1.id,assigns(:subjects)[1].id)
+    assert_equal(@subject_3.id,assigns(:subjects)[2].id)
+    assert_nil(flash[:alert])
+    assert_nil(flash[:notice])
+  end
+
+  def test_list_with_query
+    get(:list, 
+        {:q => 'ADS'}, 
+        {:user_id => @admin_user.id, :role => :administrator} )
+    assert_response(:success)
+    assert_template('list')
+    assert_valid_markup
+    assert_not_nil(assigns(:subjects))
+    assert_equal(1,assigns(:subjects).length)
+    assert_equal(@subject_1.id,assigns(:subjects)[0].id)
     assert_nil(flash[:alert])
     assert_nil(flash[:notice])
   end

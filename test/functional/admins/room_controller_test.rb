@@ -29,6 +29,21 @@ class Admins::RoomControllerTest < Test::Unit::TestCase
     assert_nil(flash[:notice])
   end
   
+  def test_list_with_query
+    get(:list, 
+        {:q => '211'}, 
+        {:user_id => @admin_user.id, :role => :administrator} )
+    assert_response(:success)
+    assert_template('list')
+    assert_valid_markup
+    assert_not_nil(assigns(:rooms))
+    assert_not_nil(assigns(:room_pages))
+    assert_equal(1,assigns(:rooms).length)
+    assert_equal(@room_1.id,assigns(:rooms)[0].id)
+    assert_nil(flash[:alert])
+    assert_nil(flash[:notice])
+  end
+  
   def test_new_get
     get(:new, 
         {}, 

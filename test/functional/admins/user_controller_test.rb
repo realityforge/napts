@@ -32,6 +32,21 @@ class Admins::UserControllerTest < Test::Unit::TestCase
     assert_nil(flash[:notice])
   end
   
+  def test_list_with_query
+    get(:list, 
+        {:q => 'peter'}, 
+        {:user_id => @admin_user.id, :role => :administrator} )
+    assert_response(:success)
+    assert_template('list')
+    assert_valid_markup
+    assert_not_nil(assigns(:users))
+    assert_not_nil(assigns(:user_pages))
+    assert_equal(1,assigns(:users).length)
+    assert_equal(@peter_user.id,assigns(:users)[0].id)
+    assert_nil(flash[:alert])
+    assert_nil(flash[:notice])
+  end
+  
   def test_new_get
     get(:new, 
         {}, 
