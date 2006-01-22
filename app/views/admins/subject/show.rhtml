@@ -1,0 +1,28 @@
+<% @page_title = "#{@subject.code}" %>
+<table width="100%" cellpadding="3" cellspacing="0">
+<tr>
+  <th>Name</th>
+  <td><%= @subject.code %></td>
+</tr>
+<tr>
+  <th>Group</th>
+  <td><%= @subject.subject_group.name %></td>
+</tr>
+<tr>
+  <th>Teachers</th>
+  <td>
+    <ul>
+    <% for user in @subject.teachers %>
+      <li><%= user.username %> [<%= link_to('Remove', {:action => 'remove_teacher', :id => @subject.id, :user_id => user.id},{:post => true}) %>]</li>
+    <% end %>
+    </ul>
+  </td>
+</tr>
+<tr>
+  <td colspan="2">
+    <%= link_to('Add Teachers', :action => 'teachers', :id => @subject.id) %>
+  </td>
+</tr>
+</table>
+
+<%= link_to( 'Edit', :action => 'edit', :id => @subject ) %>

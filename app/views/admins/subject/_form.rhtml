@@ -6,15 +6,15 @@
 <% if @action_name == 'new' %>
 <tr>
   <th><label for="subject_subject_group_id">Subject Group</label></th>
-  <td><%= text_field( 'subject', 'code' ) %></td>
+  <td><%= collection_select('subject', 'subject_group_id', @groups, :id, :name) %></td>
 </tr>
 <% end %>
 <tr>
   <th><label for="subject_code">Subject code</label></th>
-  <td><%= collection_select('subject', 'subject_group_id', @groups, :id, :name) %></td>
+  <td><%= text_field( 'subject', 'code' ) %></td>
 </tr>
 </table>
     <button type="submit"><%= @form_action_desc %></button>
-    <%= link_to_button('Cancel', :action => 'list') %>
+    <%= link_to_button('Cancel', :action => 'show', :id => @subject) %>
 </div>
 <%= end_form_tag %>

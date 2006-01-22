@@ -1,0 +1,28 @@
+<% @page_title = "#{@subject.code}: Teachers" %>
+<%= start_form_tag({:action => 'teachers', :id => @subject},{:method => :get}) %>
+<div>
+<input type="text" name="q" value="<%= params[:q] %>"/>
+<button type="submit">Search</button>
+</div>
+<%= end_form_tag %>
+
+<table>
+<tr>
+  <th>Name</th>
+  <th>Operations</th>
+</tr>
+<% for user in @users %>
+<tr>
+  <td><%= user.username %></td>
+  <td><%= link_to('Add Teacher', {:action => 'add_teacher', :id => @subject.id, :user_id => user.id, :q => params[:q], :page => params[:page]}, {:post => true} ) %></td>
+</tr>
+<% end %>
+</table>
+<%= link_to( '< Previous', :page => @user_pages.current.previous, 
+                           :id => params[:id],
+			   :q => params[:q]) if @user_pages.current.previous %>
+<%= link_to( 'Next >', :page => @user_pages.current.next, 
+                           :id => params[:id],
+			   :q => params[:q]) if @user_pages.current.next %>
+<br/>
+<%= link_to( 'Return to Subject Page', :action => 'show', :id => @subject ) %>

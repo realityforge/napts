@@ -16,8 +16,8 @@
     <td><%= h(subject.code) %></td>
     <td><%= h(subject.subject_group.name ) %></td>
     <td>
-    <%= link_to( 'Edit', :action => 'edit', :id => subject ) %> |
-    <%= link_to( 'Destroy', { :action => 'destroy', :id => subject }, :confirm => 'Are you sure?' ) %>
+    <%= link_to( 'Show', :action => 'show', :id => subject ) %> |
+    <%= link_to( 'Destroy', { :action => 'destroy', :id => subject }, {:confirm => 'Are you sure?', :post => true} ) %>
     </td>
   </tr>
 <% end %>
