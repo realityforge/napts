@@ -10,5 +10,5 @@ class Subject < ActiveRecord::Base
 
   # Can not modify subject group unless willing to clone all associated quizzes
   # and questions from old subject group into new subject group
-  attr_accessible( :code )
+  #attr_accessible( :code )
 end
