@@ -19,7 +19,7 @@ class Admins::UserController < Admins::BaseController
 
   def update_role
     @user = User.find(params[:id])
-    @subjects = Subject.find(:all)
+    @subjects = Subject.Subject.find_all_sorted
   end
 
   def make_demonstrator

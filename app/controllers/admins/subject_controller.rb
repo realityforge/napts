@@ -3,7 +3,7 @@ class Admins::SubjectController < Admins::BaseController
   verify :method => :get, :only => %w( show list teachers )
 
   def list
-    @subjects = Subject.find(:all)
+    @subjects = Subject.find_all_sorted
   end
   
   def new
