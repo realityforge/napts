@@ -22,13 +22,18 @@ class Test::Unit::TestCase
     file_md5 = nil
 
     output_dir = "#{RAILS_ROOT}/temp"
-    content_filename = File.join(output_dir, self.class.name + '.' + method_name + '.html')
+    base_filename = File.join(output_dir, self.class.name.gsub(/\:\:/,'/').gsub(/Controllers\//,'') + '.' + method_name)
+
+    parent_dir = File.dirname(base_filename) 
+    Dir.mkdir(parent_dir) unless File.exists?(parent_dir)
+
+    content_filename = base_filename + '.html'
 
     File.open(content_filename, 'r') do |f| 
       file_md5 = MD5.md5(f.read(f.stat.size)).to_s
     end if File.exists?(content_filename)
 
-    results_filename = File.join(output_dir, self.class.name + '.' + method_name + '-results.yml')
+    results_filename =  base_filename + '-results.yml'
 
     if file_md5 != fragment_md5
       File.open(content_filename, 'w+') do |f| f.write(fragment); end
