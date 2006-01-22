@@ -2,7 +2,7 @@ class LoginController < ApplicationController
   def login
     reset_session
     if request.get?
-      @subjects = Subject.find(:all, :order => 'code')
+      @subjects = Subject.find_all_sorted
     elsif request.post?
       user = User.authenticate(params[:username],params[:password])
       if user.nil?
