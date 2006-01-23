@@ -2,7 +2,15 @@ class Demonstrators::QuizController < Demonstrators::BaseController
   verify :method => :get, :only => %w( list show )
 
   def list
-    @quizzes = current_subject.quizzes.find(:all, :order => 'created_at DESC')
+    if params[:q]
+      conditions = ['subject_id = ? AND name LIKE ?', current_subject.id, "%#{params[:q]}%"]
+    else
+      conditions = ['subject_id = ?', current_subject.id]
+    end
+    @quiz_pages, @quizzes = paginate( :quizzes, 
+                                      :conditions => conditions,
+                                      :order_by => 'created_at DESC',
+                                      :per_page => 10 )
   end
 
   def show

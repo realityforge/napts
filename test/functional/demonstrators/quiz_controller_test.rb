@@ -28,6 +28,20 @@ class Demonstrators::QuizControllerTest < Test::Unit::TestCase
     assert_nil(flash[:notice])
   end
   
+  def test_list_with_query
+    get(:list, 
+        {:q => 'oa'}, 
+        {:user_id => @peter_user.id, :role => :demonstrator, :subject_id => @subject_1.id} )
+    assert_response(:success)
+    assert_template('list')
+    assert_valid_markup
+    assert_not_nil(assigns(:quizzes))
+    assert_equal(1,assigns(:quizzes).length)
+    assert_equal(@quiz_2.id,assigns(:quizzes)[0].id)
+    assert_nil(flash[:alert])
+    assert_nil(flash[:notice])
+  end
+  
   def test_show
     get(:show, 
         {:id => @quiz_2.id}, 
