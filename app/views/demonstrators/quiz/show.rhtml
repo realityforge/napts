@@ -1,21 +1,42 @@
-<% @page_title = "#{@quiz.subject.name}: #{@quiz.name}" %>
-<h1><%= @quiz.subject.name %>: <%= @quiz.name %></h1>
-<dl>
-<dt>Description</dt>
-<dd><%= @quiz.description %></dd>
-<dt>Duration</dt>
-<dd><%= @quiz.duration %> mins</dd>
-<% if @quiz.active_in.size > 0 %>
-  <dt>Quiz Enabled in Rooms</dt>
+<% @page_title = "Browse Quiz #{@quiz.subject.name}: #{@quiz.name}" %>
+<table width="100%" cellpadding="3" cellspacing="0">
+<tr>
+  <th>Subject</th>
+  <td><%= @quiz.subject.name %></td>
+</tr>
+<tr>
+  <th>Name</th>
+  <td><%= @quiz.name %></td>
+</tr>
+<tr>
+  <th>Description</th>
+  <td><%= @quiz.description %></td>
+</tr>
+<tr>
+  <th>Duration</th>
+  <td><%= @quiz.duration %> mins</td>
+</tr>
+<tr>
+  <th>Enabled in Rooms</th>
+  <td>
+  <ul>
   <% for room in @quiz.active_in %>
-    <dd><%= room.name %></dd>
+    <li><%= room.name %></li>
   <% end %>
-<% else %>
-  <dt>Quiz not currently enabled</dt>
-<% end %>
-</dl>
+  </ul>
+  </td>
+</tr>
+<tr>
+  <th>Active Attempts</th>
+  <td>TODO</td>
+</tr>
+<tr>
+  <th>Completed Attempts</th>
+  <td>TODO</td>
+</tr>
+</table>
 <%= link_to('List Quiz Attempts', :controller => 'quiz_attempt', :action => 'list', :quiz_id => @quiz) %>
 <%= link_to('Enable Quiz in Rooms', :action => 'enable', :id => @quiz ) %>
-<br/>
+
 
 

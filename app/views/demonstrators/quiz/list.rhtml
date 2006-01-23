@@ -1,18 +1,36 @@
 <% @page_title = "#{current_subject.name}: Browse Quizzes" %>
-<h1>Browse Quizzes for <%= current_subject.name %></h1>
-<table>
+<%= start_form_tag({:action => 'list'},{:method => :get}) %>
+<div>
+<input type="text" name="q" value="<%= params[:q] %>"/>
+<button type="submit">Search</button>
+</div>
+<%= end_form_tag %>
+
+<table class="xlist">
+  <colgroup id="name-column"/>
+  <colgroup id="enabled-column"/>
+  <colgroup id="status-column"/>
+  <colgroup id="operations-column"/>
+  <thead>
   <tr>
     <th>Name</th>
     <th>Enabled?</th> 
     <th>Status</th>
     <th>Operations</th>
   </tr>
+  </thead>
+  <tbody>
   <% for quiz in @quizzes %>
     <tr>
       <td><%= quiz.name %></td>
-      <td><%= ( quiz.active_in.size > 0 )? true : false %></td> 
+      <td><%= ( quiz.active_in.size > 0 )? 'Yes' : 'No' %></td> 
       <td>TODO</td>
-      <td><%= link_to( 'View', :action => 'show', :id => quiz.id ) %></td>
+      <td><%= link_to( 'Show', :action => 'show', :id => quiz.id ) %></td>
     </tr>
   <% end %>
+  </tbody>
 </table>
+<%= link_to('< Previous', :page => @quiz_pages.current.previous, 
+			  :q => params[:q]) if @quiz_pages.current.previous %>
+<%= link_to('Next >', :page => @quiz_pages.current.next, 
+		      :q => params[:q]) if @quiz_pages.current.next %>
