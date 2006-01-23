@@ -3,6 +3,13 @@ require File.dirname(__FILE__) + '/../test_helper'
 class RoomTest < Test::Unit::TestCase
   fixtures OrderedTables
 
+  def test_find_all_sorted
+    rooms = Room.find_all_sorted
+    assert_equal(2, rooms.length)
+    assert_equal(@room_1.id, rooms[0].id)
+    assert_equal(@room_2.id, rooms[1].id)
+  end
+
   def test_addresses
     assert_equal("12.13.14.15\n123.123.145.154\n255.255.255.255", @room_1.addresses)
   end

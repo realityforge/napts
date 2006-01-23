@@ -4,6 +4,10 @@ class Room < ActiveRecord::Base
   has_many( :computers, :exclusively_dependent => true, :order => 'ip_address' )
   has_and_belongs_to_many( :quizzes )
 
+  def self.find_all_sorted
+    find(:all, :order => 'name')
+  end
+
   def addresses
     @addresses = self.computers.collect {|c| c.ip_address}.join("\n") unless @addresses
     @addresses
