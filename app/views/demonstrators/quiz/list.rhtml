@@ -3,14 +3,14 @@
 <table>
   <tr>
     <th>Name</th>
- <!--   <th>Enabled?</th> -->
+    <th>Enabled?</th> 
     <th>Status</th>
     <th>Operations</th>
   </tr>
   <% for quiz in @quizzes %>
     <tr>
       <td><%= quiz.name %></td>
-  <!--    <td><%= quiz.enable? %></td>  -->
+      <td><%= ( quiz.active_in.size > 0 )? true : false %></td> 
       <td>TODO</td>
       <td><%= link_to( 'View', :action => 'show', :id => quiz.id ) %></td>
     </tr>

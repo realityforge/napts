@@ -5,18 +5,17 @@
 <dd><%= @quiz.description %></dd>
 <dt>Duration</dt>
 <dd><%= @quiz.duration %> mins</dd>
+<% if @quiz.active_in.size > 0 %>
+  <dt>Enabled rooms</dt>
+  <% for room in @quiz.active_in %>
+    <dd><%= room.name %></dd>
+  <% end %>
+<% else %>
+  <dt>Quiz not currently enabled</dt>
+<% end %>
 </dl>
-
 <%= link_to('List Quiz Attempts', :controller => 'quiz_attempt', :action => 'list', :quiz_id => @quiz) %>
+<%= link_to('Enable Quizzes', :action => 'enable_quiz', :quiz_id => @quiz ) %>
 <br/>
 
-<p><label for="room_name">Enable Quiz</label><br/>
-<%= collection_select( 'room', 'name', @rooms, :id, :name ) %></p>
 
-<!--
-<% if @quiz.enable? %>
-<%= link_to( 'Disable Quiz', :action => 'disable', :id => @quiz ) %>
-<% else %>
-<%= link_to( 'Enable Quiz', :action => 'enable', :id => @quiz ) %>
-<% end %>
--->

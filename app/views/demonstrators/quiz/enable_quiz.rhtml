@@ -1,0 +1,12 @@
+<%= start_form_tag( :action => 'enable_quiz', :quiz_id => @quiz ) %>
+  <p><label for="room_id">Enable Quiz</label><br/>
+  <select name="room[id][]" multiple="multiple">
+    <% for room in @rooms %>
+      <option value="<%= room.id %>"<%= @quiz.active_in.find(:first, :conditions => ['id = ?', room.id]) ? ' selected="selected"' : '' %>>
+      <%= room.name %></option>
+    <% end %>
+  </select></p>
+  <%= submit_tag( 'Enable' ) %>
+<%= end_form_tag %>
+<%= link_to('Cancel', :action => 'show', :id => @quiz) %>
+

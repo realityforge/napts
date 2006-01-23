@@ -53,12 +53,12 @@ class Demonstrators::QuizControllerTest < Test::Unit::TestCase
   end
   
   def test_disable
-    post(:disable, 
-        {:id => @quiz_2.id}, 
+    post(:enable_quiz, 
+        {:id => @quiz_2.id, :room => @room_1.id }, 
         {:user_id => @peter_user.id, :role => :demonstrator, :subject_id => @subject_1.id} )
     assert_redirected_to(:action => 'show', :id => @quiz_2.id)
     @quiz_2.reload
-    assert_equal(false, @quiz_2.enable)
+    assert_equal(nil, @quiz_2.active_in.find(:first, :conditions => ['room_id = ? ', @room_1.id]))
     assert_nil(flash[:alert])
     assert_nil(flash[:notice])
   end

@@ -29,7 +29,7 @@ class Test::Unit::TestCase
     @user = User.find( @peter_user.id )
     get( :start_quiz, 
         {:quiz_id => @quiz_1.id },
-	{:user_id => @user.id, :role => "Student"} )
+	{:user_id => @user.id, :role => :student} )
     assert_not_nil( assigns(:quiz_attempt) )
     assigns(:quiz_attempt).reload
     assert_equal( 2, assigns(:quiz_attempt).quiz_responses.length )
