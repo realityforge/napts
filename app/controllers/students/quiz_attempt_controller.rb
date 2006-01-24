@@ -1,6 +1,15 @@
 class Students::QuizAttemptController < Students::BaseController
   def intro
-    @quiz = Quiz.find( :all, :conditions => ['id NOT IN (SELECT quiz_id FROM quiz_attempts WHERE quiz_attempts.user_id = ?) AND enable = ?' , current_user.id, true ] )
+    conditions = ['quizzes.id NOT IN (SELECT quiz_id FROM quiz_attempts WHERE quiz_attempts.user_id = ?) AND computers.ip_address = ?' ,
+                  current_user.id,
+		  request.remote_ip ]
+    @quizzes = Quiz.find( :all, 
+                          :select => 'quizzes.*',
+                          :joins => 
+			  'LEFT OUTER JOIN quizzes_rooms ON quizzes_rooms.quiz_id = quizzes.id ' + 
+			  'LEFT OUTER JOIN rooms ON quizzes_rooms.room_id = rooms.id ' + 
+			  'LEFT OUTER JOIN computers ON computers.room_id = rooms.id ',
+                          :conditions => conditions )
   end
   
   def start_quiz

@@ -1,4 +1,4 @@
-<% if @quiz.length == 0 %>
+<% if @quizzes.length == 0 %>
   <h1>No tests enabled currently</h1>
 <% else %>
   <h2>listing quizzes</h2>
@@ -9,7 +9,7 @@
       <th></th>
     </tr>
   
-    <% for quiz in @quiz %>
+    <% for quiz in @quizzes %>
       <tr>
         <td><%= quiz.id %></td>
         <td><%= link_to( "#{quiz.name}", :action => 'start_quiz', :quiz_id => quiz.id ) %></td>

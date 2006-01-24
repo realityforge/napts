@@ -1,4 +1,4 @@
-class PreviewQuizController < ApplicationController
+class Students::PreviewQuizController < Students::BaseController
   def intro
     @quiz = Quiz.find( :all, :conditions => ['prelim_enable = ?', true] )
   end
