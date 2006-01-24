@@ -40,7 +40,9 @@ class CreateInitialSchema < ActiveRecord::Migration
       t.column 'name', :string, :limit => 10, :null => false
       t.column 'subject_group_id', :integer, :null => false
     end
-    add_index('subjects', ['name'], :name => 'subjects_name_index', :unique => true)
+    add_index('subjects', ['name'], 
+              :name => 'subjects_name_index', 
+	      :unique => true)
     add_foreign_key_constraint('subjects', 'subject_group_id', 'subject_groups', 'id', :name => 'subjects_subject_group_id_fk')
     
     # Quizzes
@@ -52,18 +54,18 @@ class CreateInitialSchema < ActiveRecord::Migration
       t.column 'created_at', :datetime
       t.column 'prelim_enable', :boolean, :null => false
     end
-    add_index('quizzes', ['name', 'subject_id'], :name => 'quizzes_name_subject_id_index', :unique => true)
+    add_index('quizzes', ['name', 'subject_id'], 
+              :name => 'quizzes_name_subject_id_index', 
+	      :unique => true)
     add_foreign_key_constraint('quizzes', 'subject_id', 'subjects', 'id', :name => 'quizzes_subject_id_fk')    
 
     # QuizAttempts
     create_table('quiz_attempts', :force => true) do |t|
       t.column 'start_time', :datetime, :null => false
       t.column 'end_time', :datetime
- #     t.column 'computer_id', :integer, :null => false
       t.column 'quiz_id', :integer, :null => false
       t.column 'user_id', :integer, :null => false
     end
-#    add_foreign_key_constraint('quiz_attempts', 'computer_id', 'computers', 'id', :name => 'quiz_attempts_computer_id_fk')
     add_foreign_key_constraint('quiz_attempts', 'quiz_id', 'quizzes', 'id', :name => 'quiz_attempts_quiz_id_fk')
     add_foreign_key_constraint('quiz_attempts', 'user_id', 'users', 'id', :name => 'quiz_attempts_user_id_fk')
 
@@ -134,7 +136,9 @@ class CreateInitialSchema < ActiveRecord::Migration
                                :name => 'demonstrators_subject_id_fk')
     add_foreign_key_constraint('demonstrators', 'user_id', 'users', 'id',
                                :name => 'demonstrators_user_id_fk')
-    add_index('demonstrators', ['subject_id', 'user_id'], :name => 'demonstrators_subject_id_user_id_index', :unique => true)
+    add_index('demonstrators', ['subject_id', 'user_id'],
+              :name => 'demonstrators_subject_id_user_id_index',
+	      :unique => true)
     
     #Teachers
     create_table('teachers', :id => false, :force => true ) do |t|
@@ -142,10 +146,25 @@ class CreateInitialSchema < ActiveRecord::Migration
       t.column 'user_id', :integer, :null => false
     end
     add_foreign_key_constraint('teachers', 'subject_id', 'subjects', 'id',
-                               :name => 'eteachers_subject_id_fk')
+                               :name => 'teachers_subject_id_fk')
     add_foreign_key_constraint('teachers', 'user_id', 'users', 'id',
                                :name => 'teachers_user_id_fk')
-    add_index('teachers', ['subject_id', 'user_id'], :name => 'teachers_subject_id_user_id_index', :unique => true)
+    add_index('teachers', ['subject_id', 'user_id'],
+              :name => 'teachers_subject_id_user_id_index',
+	      :unique => true)
+    
+    #Students
+    create_table('students', :id => false, :force => true ) do |t|
+      t.column 'subject_id', :integer, :null => false
+      t.column 'user_id', :integer, :null => false
+    end
+    add_foreign_key_constraint('students', 'subject_id', 'subjects', 'id',
+                               :name => 'students_subject_id_fk')
+    add_foreign_key_constraint('students', 'user_id', 'users', 'id',
+                               :name => 'students_user_id_fk')
+    add_index('students', ['subject_id', 'user_id'], 
+              :name => 'students_subject_id_user_id_index',
+	      :unique => true)
     
     #Quizzes_Rooms
     create_table('quizzes_rooms', :id => false, :force => true ) do |t|
@@ -158,6 +177,7 @@ class CreateInitialSchema < ActiveRecord::Migration
   
   def self.down
     drop_table('quizzes_rooms')
+    drop_table('students')
     drop_table('teachers')
     drop_table('demonstrators')
     drop_table('answers_quiz_responses')

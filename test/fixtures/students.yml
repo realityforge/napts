@@ -1,0 +1,18 @@
+student_1:
+  user_id: 1
+  subject_id: 2
+student_2:
+  user_id: 3
+  subject_id: 3
+student_3:
+  user_id: 3
+  subject_id: 2
+student_4:
+  user_id: 3
+  subject_id: 1
+student_5:
+  user_id: 2
+  subject_id: 2
+student_6:
+  user_id: 1
+  subject_id: 1

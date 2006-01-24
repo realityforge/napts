@@ -5,6 +5,7 @@ class Subject < ActiveRecord::Base
   has_many( :quizzes, :dependent => true )
   has_and_belongs_to_many( :demonstrators, :class_name => 'User', :join_table => 'demonstrators', :uniq => true, :order => 'name' )
   has_and_belongs_to_many( :teachers, :class_name => 'User', :join_table => 'teachers', :uniq => true, :order => 'name' )
+  has_and_belongs_to_many( :students, :class_name => 'User', :join_table => 'students', :uniq => true, :order => 'name' )
   validates_uniqueness_of( :name )
   validates_length_of( :name, :within => 1..10 )
   validates_associated( :subject_group )
