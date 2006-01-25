@@ -1,4 +1,4 @@
-class Teachers::QuizzesController < Teachers::BaseController
+class Teachers::QuizController < Teachers::BaseController
   def list
     @quiz_pages, @quizzes = paginate( :quizzes,
                                       :conditions => ['subject_id = ?', current_subject.id],
@@ -84,8 +84,8 @@ class Teachers::QuizzesController < Teachers::BaseController
         flash[:alert] = "Must select something"
       else
         for question in params[:question_ids]
-          quiz_item = @quiz.quiz_items.create( {:quiz_id => params[:id],
-	                                        :question_id => question } )
+	  quiz_item = @quiz.quiz_items.create( { :quiz_id => params[:id],
+	                                         :question_id => question } )
 	  if ! quiz_item.valid?
 	    flash[:alert] = "Some questions not added as they were already in quiz"
 	  end

@@ -1,3 +1,4 @@
+<% @page_title = "Browse quiz '#{@quiz.name}'" %>
 <%= start_form_tag({:action => 'change', :id => @quiz},{:id => 'change_form'}) %>
 
 <h1>Quiz Name: <%= @quiz.name %></h1>
@@ -30,4 +31,3 @@
 
 <%= link_to( 'Add questions', :action => 'add_questions', :id => @quiz ) %>
 <%= link_to( 'Edit', :action => 'edit', :id => @quiz ) %>
-<%= link_to( 'Back to Quizzes List', :action => 'list' ) %>

@@ -1,3 +1,4 @@
+<% @page_title = "#{@quiz_attempt.quiz.subject.name}: '#{@quiz_attempt.quiz.name}' Results" %>
 <% numqns = @quiz_attempt.quiz_responses.length %>
 <% correct = numqns - @quiz_attempt.incorrect_answers.length %>
 <p>You got <%= correct %> out of <%= numqns %> questions correct.</p>

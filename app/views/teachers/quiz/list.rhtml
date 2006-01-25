@@ -1,27 +1,27 @@
-<h1>Listing quizzes</h1>
+<% @page_title = "Browse Quizzes" %>
+<h1><%= @quizzes[0].subject.name %>: Quiz List</h1>
 <table>
   <tr>
-    <th>Subject ID</th>
     <th>Name</th>
     <th>Description</th>
     <th>Duration</th>
-    <th>Preview Enabled</th>
-    <th></th><th></th><th></th>
+    <th>Preview?</th>
+    <th>Operations</th>
   </tr>
   
 <% for quiz in @quizzes %>
   <tr>
-    <td><%= quiz.subject.name %></td>
-    <td><%= link_to( "#{quiz.name}", :action => 'show', :id => quiz ) %></td>
+    <td><%= quiz.name %></td>
     <td><%= quiz.description %></td>
     <td><%= quiz.duration %></td>
     <td><%= quiz.prelim_enable %></td>
+    <td><%= link_to( 'Show',  :action => 'show', :id => quiz ) %> |
     <% if quiz.prelim_enable %>
-      <td><%= link_to( 'Disable Preview', :action => 'disable_preview', :id => quiz ) %></td>
+      <%= link_to( 'Disable Preview', :action => 'disable_preview', :id => quiz ) %> |
     <% else %>
-      <td><%= link_to( 'Enable Preview', :action => 'enable_preview', :id => quiz ) %></td>
+      <%= link_to( 'Enable Preview', :action => 'enable_preview', :id => quiz ) %> |
     <% end %>
-    <td><%= link_to( 'Destroy', { :action => 'destroy', :id => quiz }, :confirm => 'Are you sure?' ) %></td>
+    <%= link_to( 'Destroy', { :action => 'destroy', :id => quiz }, :confirm => 'Are you sure?' ) %></td>
   </tr>
 <% end %>
 </table>

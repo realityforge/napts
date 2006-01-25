@@ -3,7 +3,7 @@ class QuizItem < ActiveRecord::Base
   belongs_to( :question )
   belongs_to( :quiz )
   acts_as_list( :scope => :quiz_id )
-  validates_presence_of( :is_on_test )
+#  validates_presence_of( :is_on_test )
   validates_presence_of( :quiz_id )
   validates_presence_of( :question_id )
   validates_presence_of( :position )

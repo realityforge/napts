@@ -3,7 +3,7 @@ module MenuHelper
     Link = Struct.new( "Link", :name, :link_options, :html_options, :options )
 
     ManageQuizzesLink = Link.new('Manage Quizzes',
-      {:controller => '/teachers/quizzes', :action => 'list'},
+      {:controller => '/teachers/quiz', :action => 'list'},
       {:title => 'Create new quizzes or add and remove questions from existing quizzes'},
       {}).freeze
     ManageQuestionsLink = Link.new('Manage Questions',
@@ -97,7 +97,7 @@ module MenuHelper
   end
 
   def gen_manage_quizzes_link
-    is_selected = get_controller_name == '/teachers/quizzes' && @action_name == 'list'
+    is_selected = get_controller_name == '/teachers/quiz' && @action_name == 'list'
     dup_link_with_select( ManageQuizzesLink, is_selected )
   end
 
