@@ -1,0 +1,22 @@
+<% if @quiz_attempts.length == 0 %>
+  <h1>No results available</h1>
+<% else %>
+  <h1>Results for <%= @quiz_attempts[0].quiz.subject.name %></h1>
+  <table>
+    <tr>
+      <th>Quiz</th>
+      <th>Result</th>
+      <th>Date</th>
+      <th>Operations</th>
+    </tr>
+    <% for i in 0..(@quiz_attempts.length - 1) %>
+      <tr>
+        <td><%= @quiz_name[i] %>
+        <td><%= @score[i].to_s %>/<%= current_user.quiz_attempts[i].quiz_responses.length %></td>
+        <td><%= @date[i].strftime("%d/%m/%Y") %></td>
+	<td><%= link_to( 'Show', :action => 'show', :quiz_attempt => @quiz_attempts[i].id ) %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+
