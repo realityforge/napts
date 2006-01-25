@@ -21,6 +21,8 @@ class LoginController < ApplicationController
             redirect_to(:controller => '/demonstrators/quiz', :action => 'list')
           elsif role == :administrator 
             redirect_to(:controller => '/admins/subject', :action => 'list')
+          elsif role == :student 
+            redirect_to(:controller => '/students/subject', :action => 'list')
           else
             redirect_to(:controller => 'welcome', :action => 'index')
           end

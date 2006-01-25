@@ -1,0 +1,34 @@
+<% @page_title = "Browse Subjects" %>
+<%= start_form_tag({:action => 'list'},{:method => :get}) %>
+<div>
+<input type="text" name="q" value="<%= params[:q] %>"/>
+<button type="submit">Search</button>
+</div>
+<%= end_form_tag %>
+
+<table class="xlist">
+  <colgroup id="name-column"/>
+  <colgroup id="operations-column"/>
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Operations</th>
+  </tr>
+  </thead>
+  <tbody>  
+<% for subject in @subjects %>
+  <tr>
+    <td><%= h(subject.name) %></td>
+    <td>
+    <%= link_to( 'Previews', :controller => 'preview', :action => 'list', :subject_id => subject ) %> |
+    <%= link_to( 'Results', :controller => 'results', :action => 'list', :subject_id => subject ) %>
+    </td>
+  </tr>
+<% end %>
+  </tbody>
+</table>
+<%= link_to('< Previous', :page => @subject_pages.current.previous, 
+			  :q => params[:q]) if @subject_pages.current.previous %>
+<%= link_to('Next >', :page => @subject_pages.current.next, 
+		      :q => params[:q]) if @subject_pages.current.next %>
+
