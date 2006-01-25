@@ -6,7 +6,7 @@ class Students::PreviewController < Students::BaseController
   end
 
   def show
-    @quiz = Quiz.find(params[:id])
+    @quiz = Quiz.find(params[:id], :include => 'subject')
   end
 
   def show_question
