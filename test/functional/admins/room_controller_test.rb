@@ -12,42 +12,42 @@ class Admins::RoomControllerTest < Test::Unit::TestCase
     @request = ActionController::TestRequest.new
     @response = ActionController::TestResponse.new
   end
-  
+
   def test_list
-    get(:list, 
-        {}, 
-        {:user_id => @admin_user.id, :role => :administrator} )
+    get(:list,
+        {},
+        {:user_id => users(:admin_user).id, :role => :administrator} )
     assert_response(:success)
     assert_template('list')
     assert_valid_markup
     assert_not_nil(assigns(:rooms))
     assert_not_nil(assigns(:room_pages))
     assert_equal(2,assigns(:rooms).length)
-    assert_equal(@room_1.id,assigns(:rooms)[0].id)
-    assert_equal(@room_2.id,assigns(:rooms)[1].id)
+    assert_equal(rooms(:room_1).id,assigns(:rooms)[0].id)
+    assert_equal(rooms(:room_2).id,assigns(:rooms)[1].id)
     assert_nil(flash[:alert])
     assert_nil(flash[:notice])
   end
-  
+
   def test_list_with_query
-    get(:list, 
-        {:q => '211'}, 
-        {:user_id => @admin_user.id, :role => :administrator} )
+    get(:list,
+        {:q => '211'},
+        {:user_id => users(:admin_user).id, :role => :administrator} )
     assert_response(:success)
     assert_template('list')
     assert_valid_markup
     assert_not_nil(assigns(:rooms))
     assert_not_nil(assigns(:room_pages))
     assert_equal(1,assigns(:rooms).length)
-    assert_equal(@room_1.id,assigns(:rooms)[0].id)
+    assert_equal(rooms(:room_1).id,assigns(:rooms)[0].id)
     assert_nil(flash[:alert])
     assert_nil(flash[:notice])
   end
-  
+
   def test_new_get
-    get(:new, 
-        {}, 
-        {:user_id => @admin_user.id, :role => :administrator} )
+    get(:new,
+        {},
+        {:user_id => users(:admin_user).id, :role => :administrator} )
     assert_response(:success)
     assert_template('new')
     assert_valid_markup
@@ -55,11 +55,11 @@ class Admins::RoomControllerTest < Test::Unit::TestCase
     assert_nil(flash[:alert])
     assert_nil(flash[:notice])
   end
-  
+
   def test_new_post_with_error
-    post(:new, 
-        {:room_ => {:name => ''}}, 
-        {:user_id => @admin_user.id, :role => :administrator} )
+    post(:new,
+        {:room_ => {:name => ''}},
+        {:user_id => users(:admin_user).id, :role => :administrator} )
     assert_response(:success)
     assert_template('new')
     assert_valid_markup
@@ -68,11 +68,11 @@ class Admins::RoomControllerTest < Test::Unit::TestCase
     assert_nil(flash[:alert])
     assert_nil(flash[:notice])
   end
- 
+
   def test_new_post
-    post(:new, 
-        {:room => {:name => 'X', :addresses => '1.2.3.4 5.6.7.8 9.0.1.2'}}, 
-        {:user_id => @admin_user.id, :role => :administrator} )
+    post(:new,
+        {:room => {:name => 'X', :addresses => '1.2.3.4 5.6.7.8 9.0.1.2'}},
+        {:user_id => users(:admin_user).id, :role => :administrator} )
     assert_not_nil(assigns(:room))
     assert_redirected_to(:action => 'show', :id => assigns(:room).id)
     assert_nil(assigns(:room).errors[:name])
@@ -86,9 +86,9 @@ class Admins::RoomControllerTest < Test::Unit::TestCase
   end
 
   def test_show
-    get(:show, 
-        {:id => @room_1.id}, 
-        {:user_id => @admin_user.id, :role => :administrator} )
+    get(:show,
+        {:id => rooms(:room_1).id},
+        {:user_id => users(:admin_user).id, :role => :administrator} )
     assert_response(:success)
     assert_template('show')
     assert_valid_markup
@@ -96,41 +96,41 @@ class Admins::RoomControllerTest < Test::Unit::TestCase
     assert_nil(flash[:alert])
     assert_nil(flash[:notice])
   end
-  
+
   def test_edit_get
-    get(:edit, 
-        {:id => @room_1.id}, 
-        {:user_id => @admin_user.id, :role => :administrator} )
+    get(:edit,
+        {:id => rooms(:room_1).id},
+        {:user_id => users(:admin_user).id, :role => :administrator} )
     assert_response(:success)
     assert_template('edit')
     assert_valid_markup
     assert_not_nil(assigns(:room))
-    assert_equal(@room_1.id,assigns(:room).id)
+    assert_equal(rooms(:room_1).id,assigns(:room).id)
     assert_nil(flash[:alert])
     assert_nil(flash[:notice])
   end
-  
+
   def test_edit_post_with_error
-    post(:edit, 
-        {:id => @room_1.id, :room => {:name => ''}}, 
-        {:user_id => @admin_user.id, :role => :administrator} )
+    post(:edit,
+        {:id => rooms(:room_1).id, :room => {:name => ''}},
+        {:user_id => users(:admin_user).id, :role => :administrator} )
     assert_response(:success)
     assert_template('edit')
     assert_valid_markup
     assert_not_nil(assigns(:room))
-    assert_equal(@room_1.id,assigns(:room).id)
+    assert_equal(rooms(:room_1).id,assigns(:room).id)
     assert_not_nil(assigns(:room).errors[:name])
     assert_nil(flash[:alert])
     assert_nil(flash[:notice])
   end
- 
+
   def test_edit_post
-    post(:edit, 
-        {:id => @room_1.id, :room => {:name => 'X', :addresses => '1.2.3.4 5.6.7.8 9.0.1.2'}}, 
-        {:user_id => @admin_user.id, :role => :administrator} )
+    post(:edit,
+        {:id => rooms(:room_1).id, :room => {:name => 'X', :addresses => '1.2.3.4 5.6.7.8 9.0.1.2'}},
+        {:user_id => users(:admin_user).id, :role => :administrator} )
     assert_not_nil(assigns(:room))
-    assert_redirected_to(:action => 'show', :id => @room_1.id)
-    assert_equal(@room_1.id,assigns(:room).id)
+    assert_redirected_to(:action => 'show', :id => rooms(:room_1).id)
+    assert_equal(rooms(:room_1).id,assigns(:room).id)
     assert_nil(assigns(:room).errors[:name])
     assert_nil(flash[:alert])
     assert_equal('Room was successfully updated.',flash[:notice])
@@ -142,12 +142,12 @@ class Admins::RoomControllerTest < Test::Unit::TestCase
   end
 
   def test_destroy
-    post(:destroy, 
-        {:id => @room_1.id, :q => 's', :page => '1'}, 
-        {:user_id => @admin_user.id, :role => :administrator} )
+    post(:destroy,
+        {:id => rooms(:room_1).id, :q => 's', :page => '1'},
+        {:user_id => users(:admin_user).id, :role => :administrator} )
     assert_redirected_to(:action => 'list', :q => 's', :page => '1')
     assert_nil(flash[:alert])
     assert_equal('Room was successfully deleted.',flash[:notice])
-    assert(!Room.exists?(@room_1.id))
+    assert(!Room.exists?(rooms(:room_1).id))
   end
 end

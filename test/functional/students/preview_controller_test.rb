@@ -12,11 +12,11 @@ class Students::PreviewControllerTest < Test::Unit::TestCase
     @request = ActionController::TestRequest.new
     @response = ActionController::TestResponse.new
   end
-  
+
   def test_list
-    get(:list, 
-        {:subject_id => @subject_1.id}, 
-        {:user_id => @peter_user.id, :role => :student} )
+    get(:list,
+        {:subject_id => subjects(:subject_1).id},
+        {:user_id => users(:peter_user).id, :role => :student} )
     assert_response(:success)
     assert_template('list')
     assert_valid_markup
@@ -30,9 +30,9 @@ class Students::PreviewControllerTest < Test::Unit::TestCase
   end
 
   def test_show
-    get(:show, 
-        {:id => @quiz_1.id}, 
-        {:user_id => @peter_user.id, :role => :student} )
+    get(:show,
+        {:id => @quiz_1.id},
+        {:user_id => users(:peter_user).id, :role => :student} )
     assert_response(:success)
     assert_template('show')
     assert_valid_markup
@@ -43,9 +43,9 @@ class Students::PreviewControllerTest < Test::Unit::TestCase
   end
 
   def test_show_question
-    get(:show_question, 
-        {:id => @quiz_1.id, :position => '1'}, 
-        {:user_id => @peter_user.id, :role => :student} )
+    get(:show_question,
+        {:id => @quiz_1.id, :position => '1'},
+        {:user_id => users(:peter_user).id, :role => :student} )
     assert_response(:success)
     assert_template('show_question')
     assert_valid_markup
@@ -57,9 +57,9 @@ class Students::PreviewControllerTest < Test::Unit::TestCase
 
   def test_show_question_with_oob_position
     assert_raises(ActiveRecord::RecordNotFound){
-      get(:show_question, 
-          {:id => @quiz_1.id, :position => '100'}, 
-          {:user_id => @peter_user.id, :role => :student} )
+      get(:show_question,
+          {:id => @quiz_1.id, :position => '100'},
+          {:user_id => users(:peter_user).id, :role => :student} )
     }
   end
 end

@@ -12,9 +12,9 @@ class QuestionControllerTest < Test::Unit::TestCase
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
   end
-  
+
   def test_list
-  get(:list, {}, { :user_id => @lecturer_user.id, :role => :teacher, :subject_id => 1} )
+  get(:list, {}, { :user_id => users(:lecturer_user).id, :role => :teacher, :subject_id => 1} )
     assert_response(:success)
     assert_template('list')
     assert_valid_markup
@@ -22,7 +22,7 @@ class QuestionControllerTest < Test::Unit::TestCase
   end
 
   def test_show
-    get(:show, {:id => 1}, { :user_id => @lecturer_user.id, :role => :teacher, :subject_id => 1 } )
+    get(:show, {:id => 1}, { :user_id => users(:lecturer_user).id, :role => :teacher, :subject_id => 1 } )
     assert_response(:success)
     assert_template('show')
     assert_valid_markup
@@ -33,7 +33,7 @@ class QuestionControllerTest < Test::Unit::TestCase
   #test get, and answers
   def test_new_get
     num_questions = Question.count
-    get(:new, {}, { :user_id => @lecturer_user.id, :role => :teacher, :subject_id => 1 } )
+    get(:new, {}, { :user_id => users(:lecturer_user).id, :role => :teacher, :subject_id => 1 } )
     assert_response( :success )
     assert_template( 'new' )
     assert_valid_markup
@@ -50,10 +50,10 @@ class QuestionControllerTest < Test::Unit::TestCase
     is_correct = 'true'
     post( :new, {:question => {:content => content,
                               :question_type => question_type },
-			      :answer => {'this_is_ignored' => 
+			      :answer => {'this_is_ignored' =>
 			      	{:content => answer_content,
 				 :is_correct => is_correct}}},
-		{ :user_id => @lecturer_user.id, :role => :teacher, :subject_id => 1 }
+		{ :user_id => users(:lecturer_user).id, :role => :teacher, :subject_id => 1 }
 	)
     assert_response( :success )
     assert_template( 'new' )
@@ -64,7 +64,7 @@ class QuestionControllerTest < Test::Unit::TestCase
     assert_equal( num_questions, Question.count )
   end
 
-  #test new qn with data, flash and redirect 
+  #test new qn with data, flash and redirect
   def test_new_post
     num_questions = Question.count
 
@@ -73,23 +73,23 @@ class QuestionControllerTest < Test::Unit::TestCase
     subject_group_id = 1
     answer_content = 'answer content'
     is_correct = true
-    post( :new, 
+    post( :new,
          {:question => {:content => content,
                         :question_type => question_type,
 	                :subject_group_id => subject_group_id},
-			:answer => {'ignored1' => 
+			:answer => {'ignored1' =>
 			      	  {:content => 'forty two',
-				   :is_correct => is_correct }, 
-	                            'ignored2' => 
+				   :is_correct => is_correct },
+	                            'ignored2' =>
 				  {:content => 'arthur never could get the hang of thursdays',
 				   :is_correct => is_correct },
-	                            'ignored3' => 
+	                            'ignored3' =>
 	                            {:content => 'digital watches are a pretty neat idea',
 				   :is_correct => is_correct },
-	                            'ignored4' => 
+	                            'ignored4' =>
 	                            {:content => "he's a hoopy frood who really knows where his towel's at",
 	 :is_correct => is_correct }} },
-	                { :user_id => @lecturer_user.id, :role => :teacher, :subject_id => 1 }
+	                { :user_id => users(:lecturer_user).id, :role => :teacher, :subject_id => 1 }
 	)
     assert_equal( content, assigns(:question).content )
     assert_equal( question_type, assigns(:question).question_type )
@@ -103,7 +103,7 @@ class QuestionControllerTest < Test::Unit::TestCase
 
   def test_edit_get
     get( :edit, {:id => @q1.id},
-                {:user_id => @lecturer_user.id, :role => :teacher, :subject_id => 1 } )
+                {:user_id => users(:lecturer_user).id, :role => :teacher, :subject_id => 1 } )
     question = Question.find( @q1.id )
     content = "Is chocolate good?"
     question_type = 1
@@ -112,32 +112,32 @@ class QuestionControllerTest < Test::Unit::TestCase
     assert_response( :success )
     assert_nil( flash[:notice] )
     assert_nil( flash[:alert] )
-  end  
+  end
 
   def test_edit_post
     question = 'Is chocolate great?'
     answer = 'Maybe, or maybe not'
-    post(:edit, {'id' => @q1.id, 
-                'question' => {'content' => question}, 
+    post(:edit, {'id' => @q1.id,
+                'question' => {'content' => question},
 		'answer' => {@q1_a1.id.to_s => { 'content' => answer }}},
-		{ :user_id => @lecturer_user.id, :role => :teacher, :subject_id => 1 }
+		{ :user_id => users(:lecturer_user).id, :role => :teacher, :subject_id => 1 }
 	)
     assert_equal( 'Question was successfully updated.', flash[:notice] )
     assert_response( :redirect )
     assert_redirected_to( :action => 'show', :id => 1 )
     a1 = Answer.find( @q1_a1.id )
     q1 = Question.find( @q1.id )
-    assert_equal( answer, a1.content ) 
+    assert_equal( answer, a1.content )
     assert_equal( question, q1.content )
   end
-  
+
   def test_edit_post_with_invalid_question
     question = ''
     answer = 'Maybe, maybe not'
-    post(:edit, {:id => "#{@q1.id}", 
-                :question => {:content => question}, 
+    post(:edit, {:id => "#{@q1.id}",
+                :question => {:content => question},
 		:answer => {"#{@q1_a1.id}" => { :content => answer }}},
-		{ :user_id => @lecturer_user.id, :role => :teacher, :subject_id => 1 }
+		{ :user_id => users(:lecturer_user).id, :role => :teacher, :subject_id => 1 }
 	)
     assert_response(:success)
     assert_template('edit')
@@ -145,15 +145,15 @@ class QuestionControllerTest < Test::Unit::TestCase
     assert_equal( 1, assigns(:question).errors.count )
     assert_not_nil( assigns(:question).errors.on(:content) )
   end
-  
+
   def test_edit_post_invalid_answer
     question = 'Yo dude'
     answer = ''
-    
-    post(:edit, {:id => "#{@q1.id}", 
-                :question => {:content => question}, 
+
+    post(:edit, {:id => "#{@q1.id}",
+                :question => {:content => question},
 		:answer => {"#{@q1_a1.id}" => { :content => answer }}},
-		  { :user_id => @lecturer_user.id, :role => :teacher, :subject_id => 1 }
+		  { :user_id => users(:lecturer_user).id, :role => :teacher, :subject_id => 1 }
 	)
     assert_response( :success )
     assert_template('edit')
@@ -162,24 +162,24 @@ class QuestionControllerTest < Test::Unit::TestCase
     assert_equal( 1, answer.errors.count )
     assert_not_nil( answer.errors.on(:content) )
   end
-  
+
   def test_edit_post_with_answer_not_associated_with_question
     question = 'Yo dude'
     answer = 'Hiya'
     post( :edit, { :id => "#{@q2.id}",
                   :question => {:content => question},
                   :answer => { "#{@q4_a1.id}" => {:content => answer}} },
-		  { :user_id => @lecturer_user.id, :role => :teacher, :subject_id => 1 } 
+		  { :user_id => users(:lecturer_user).id, :role => :teacher, :subject_id => 1 }
 	)
     assert_response( :success )
     assert_equal( "Update not successful", flash[:alert] )
     assert_template( 'edit' )
     assert_valid_markup
   end
-#qn already in quizzes so  cannnot be destroyed  
+#qn already in quizzes so  cannnot be destroyed
 #  def test_destroy
 #    assert_not_nil( Question.find(@q3.id) )
-#    post( :destroy, {:id => @q3.id}, { :user_id => @peter_user.id } )
+#    post( :destroy, {:id => @q3.id}, { :user_id => users(:peter_user).id } )
 #    assert_response( :redirect )
 #    assert_nil( flash[:notice] )
 #    assert_nil( flash[:alert] )
