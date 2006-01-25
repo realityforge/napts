@@ -1,5 +1,5 @@
-<% @page_title = "#{h(@quiz.subject.name)}: #{h(@quiz.name)}" %>
-<h2><%= "#{h(@quiz.subject.name)}: #{h(@quiz.name)}" %></h2>
+<% @page_title = "#{h(@quiz.subject.name)}: '#{h(@quiz.name)}'" %>
+<h2><%= @page_title %></h2>
 <ul>
 <% for quiz_item in @quiz.quiz_items %>
   <li><%= link_to( "Q#{quiz_item.position}", :action => 'show_question', :id => @quiz.id, :position => 1 ) %></li>

@@ -1,18 +1,21 @@
-<% if @quizzes.length == 0 %>
-  <h1>No previews yet available</h1>
-<% else %>
-  <h2>Preview Quizzes</h2>
-  <table>
+<% @page_title = "#{@subject.name}: Browse Quiz Previews" %>
+<h2><%= @page_title %></h2>
+<table class="xlist">
+  <colgroup id="name-column"/>
+  <colgroup id="operations-column"/>
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Operations</th>
+  </tr>
+  </thead>
+  <tbody> 
+  <% for quiz in @quizzes %>
     <tr>
-      <th>Quiz id</th>
-      <th>Quiz name</th>
+      <td><%= quiz.name %></td>
+      <td><%= link_to('Show', :action => 'show', :id => quiz.id) %></td>
     </tr>
-  
-    <% for quiz in @quizzes %>
-      <tr>
-        <td><%= quiz.id %></td>
-        <td><%= link_to("#{quiz.name}", :action => 'show', :id => quiz.id) %></td>
-      </tr>
-    <% end %>
-  </table>
-<% end %>
+  <% end %>
+  </tbody>
+</table>
+

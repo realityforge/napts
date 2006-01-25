@@ -1,3 +1,5 @@
+<% @page_title = "#{@quiz_item.quiz.subject.name}: '#{h(@quiz_item.quiz.name)}' Q#{@quiz_item.position}" %>
+
 <h2><%= @quiz_item.question.content %></h2>
 <% if @quiz_item.question.question_type == 1 %>
   <% button_type = "checkbox" %>
