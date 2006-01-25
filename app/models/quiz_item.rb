@@ -1,6 +1,5 @@
 class QuizItem < ActiveRecord::Base
-  validates_uniqueness_of( :question_id,
-                           :scope => "quiz_id" )
+  validates_uniqueness_of( :question_id, :scope => 'quiz_id' )
   belongs_to( :question )
   belongs_to( :quiz )
   acts_as_list( :scope => :quiz_id )
