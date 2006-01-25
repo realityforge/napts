@@ -16,10 +16,10 @@
   <% end %>
 </table>
 <br/>
-<%= link_to_button("Previous", :action => 'view_quiz',
+<%= link_to_button("Previous", :action => 'show_question',
                                           :position => @quiz_item.higher_item.position,
 					  :id => @quiz_item.quiz_id ) if @quiz_item.higher_item %>
-<%= link_to_button("Next", :action => 'view_quiz', 
+<%= link_to_button("Next", :action => 'show_question', 
                                     :position => @quiz_item.lower_item.position,
 				    :id => @quiz_item.quiz_id ) if @quiz_item.lower_item %>
 <%= link_to_button("Exit Preview", :action => 'show', :id => @quiz_item.quiz_id) %>

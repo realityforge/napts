@@ -8,7 +8,7 @@ class Students::PreviewController < Students::BaseController
     @quiz = Quiz.find(params[:id])
   end
 
-  def view_quiz
+  def show_question
     @quiz_item = QuizItem.find(:first,
                                :conditions => ['quiz_id = ? AND position = ?', params[:id], params[:position] ] )
     raise ActiveRecord::RecordNotFound, "Couldn't find QuizItem with quiz_id = #{params[:id]} AND position = #{params[:position]}" unless @quiz_item
