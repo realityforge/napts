@@ -1,4 +1,4 @@
-<% if @quiz.length == 0 %>
+<% if @quizzes.length == 0 %>
   <h1>No previews yet available</h1>
 <% else %>
   <h2>Preview Quizzes</h2>
@@ -8,7 +8,7 @@
       <th>Quiz name</th>
     </tr>
   
-    <% for quiz in @quiz %>
+    <% for quiz in @quizzes %>
       <tr>
         <td><%= quiz.id %></td>
         <td><%= link_to( "#{quiz.name}", :action => 'view_quiz', 

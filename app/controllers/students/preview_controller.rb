@@ -1,9 +1,9 @@
 class Students::PreviewController < Students::BaseController
   def list
     @subject = Subject.find(params[:subject_id])
-    @quiz = Quiz.find( :all, :conditions => ['prelim_enable = ? AND subject_id = ?', true, @subject.id] )
+    @quizzes = Quiz.find( :all, :conditions => ['prelim_enable = ? AND subject_id = ?', true, @subject.id] )
   end
-  
+
   def view_quiz
     @quiz = Quiz.find( params[:quiz_id] )
     position = params[:quiz_item_position]
