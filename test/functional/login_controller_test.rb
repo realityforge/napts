@@ -51,7 +51,8 @@ class LoginControllerTest < Test::Unit::TestCase
 
   def test_login_post_success
     post(:login, {:username => 'peter', :password => 'peter', :type => 'Student'}, {:data => 'blah'})
-    assert_redirected_to(:controller => 'welcome', :action => 'index')
+    #assert_redirected_to(:controller => '/students/subject', :action => 'list')
+    assert_redirected_to(:action => 'list')
     assert_equal(users(:peter_user).id,session[:user_id])
     assert_equal(:student,session[:role])
     assert_nil(flash[:alert])
