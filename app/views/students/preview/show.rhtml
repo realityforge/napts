@@ -1,0 +1,7 @@
+<h1><%= "#{h(@quiz.subject.name)}: #{h(@quiz.name)}" %></h1>
+<ul>
+<% for quiz_item in @quiz.quiz_items %>
+  <li><%= link_to( "Q#{quiz_item.position}", :action => 'view_quiz', :id => @quiz.id, :position => 1 ) %></li>
+<% end %>
+</ul>
+<%= link_to( 'Return to Preview List', :action => 'list', :subject_id => @quiz.subject_id ) %></li>

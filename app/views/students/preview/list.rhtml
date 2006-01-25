@@ -11,9 +11,7 @@
     <% for quiz in @quizzes %>
       <tr>
         <td><%= quiz.id %></td>
-        <td><%= link_to( "#{quiz.name}", :action => 'view_quiz', 
-                                         :quiz_item_position => 1,
-                                         :quiz_id => quiz.id ) %></td>
+        <td><%= link_to("#{quiz.name}", :action => 'show', :id => quiz.id) %></td>
       </tr>
     <% end %>
   </table>
