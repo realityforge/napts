@@ -17,26 +17,26 @@ class LoginController < ApplicationController
           session[:subject_id] = Subject.find(params[:subject_id]).id if requires_subject?(role)
           session[:user_id] = user.id
           session[:role] = role
-          if role == :demonstrator 
+          if role == :demonstrator
             redirect_to(:controller => '/demonstrators/quiz', :action => 'list')
-          elsif role == :administrator 
+          elsif role == :administrator
             redirect_to(:controller => '/admins/subject', :action => 'list')
-          elsif role == :student 
+          elsif role == :student
             redirect_to(:controller => '/students/subject', :action => 'list')
           else
-            redirect_to(:controller => 'welcome', :action => 'index')
+            redirect_to(:controller => '/teachers/quizzes', :action => 'list')
           end
         end
       end
     end
   end
-  
+
   def logout
     reset_session
     flash[:notice] = 'Logged out'
     redirect_to( :action => 'login' )
   end
-    
+
 protected
   def is_secure?
     return !(action_name == 'login' || action_name == 'logout')
