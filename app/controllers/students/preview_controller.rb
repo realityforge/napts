@@ -1,4 +1,5 @@
 class Students::PreviewController < Students::BaseController
+  verify :method => :get, :only => %w( show list show_question )
   def list
     @subject = Subject.find(params[:subject_id])
     @quizzes = Quiz.find( :all, :conditions => ['prelim_enable = ? AND subject_id = ?', true, @subject.id] )
