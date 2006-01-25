@@ -18,6 +18,16 @@ class UserTest < Test::Unit::TestCase
     assert_equal( "1", user.teaches[1].subject_id )
   end
   
+  def test_enrolled_in
+    num_subjects = 2
+    subject_id_1 = "2"
+    subject_id_2 = "1"
+    user = User.find( @peter_user.id )
+    assert_equal( num_subjects, user.enrolled_in.size )
+    assert_equal( subject_id_1, user.enrolled_in[0].subject_id )
+    assert_equal( subject_id_2, user.enrolled_in[1].subject_id )
+  end
+  
   def test_teacher?
     assert_equal( true , User.find( @lecturer_user.id ).teacher? )
     assert_equal( false, User.find( @mr_fancy_pants_user.id  ).teacher? )

@@ -30,6 +30,8 @@ class QuizAttempt < ActiveRecord::Base
     return results
   end
   
+  
+  
   def time_up?
     length = self.quiz.duration * 60
     number = ( now.to_i - self.start_time.to_i )

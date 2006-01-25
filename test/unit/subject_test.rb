@@ -13,6 +13,14 @@ class SubjectTest < Test::Unit::TestCase
     subject = Subject.find( @subject_2.id )
     assert_equal( @mr_fancy_pants_user.id, subject.demonstrators[0].id )
   end
+  
+  def test_students
+    num_students = 3
+    first_user_name = 'MrFancyPants'
+    subject = Subject.find( @subject_2.id )
+    assert_equal( num_students, subject.students.size )
+    assert_equal( first_user_name, subject.students[0].name )
+  end
 
   def test_find_all_sorted
     subjects = Subject.find_all_sorted
