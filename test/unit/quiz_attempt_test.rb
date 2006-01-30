@@ -10,15 +10,15 @@ class QuizAttemptTest < Test::Unit::TestCase
   fixtures OrderedTables
 
   def test_incorrect_answers_multichoice_with_no_answers_selected
-    quiz_attempt = QuizAttempt.find( @qa_2.id )
+    quiz_attempt = QuizAttempt.find( quiz_attempts(:qa_2).id )
     assert_equal( 2, quiz_attempt.incorrect_answers.length )
     assert_equal( 3, quiz_attempt.quiz_responses.count )
     assert_equal( ["1", "2"], quiz_attempt.incorrect_answers )
   end
 
   def test_incorrect_answers_returns_correct_qn_numbers
-    quiz_attempt = QuizAttempt.find( @qa_1.id )
-    quiz_response = QuizResponse.find( @qr_1.id )
+    quiz_attempt = QuizAttempt.find( quiz_attempts(:qa_1).id )
+    quiz_response = QuizResponse.find( quiz_responses(:qr_1).id )
     assert_equal( 1, quiz_attempt.incorrect_answers.length )
     assert_equal( 13, quiz_response.answers[0].id )
     assert_equal( ["3"], quiz_attempt.incorrect_answers )
@@ -26,7 +26,7 @@ class QuizAttemptTest < Test::Unit::TestCase
 
   def test_time_up_true
     quiz_attempt = QuizAttempt.new
-    quiz_attempt.quiz_id = Quiz.find( @quiz_1.id ).id
+    quiz_attempt.quiz_id = Quiz.find( quizzes(:quiz_1).id ).id
     quiz_attempt.start_time = '2005-11-7 01:00:00'
     quiz_attempt.user_id = 1
     assert_equal( 10, quiz_attempt.quiz.duration )
@@ -36,7 +36,7 @@ class QuizAttemptTest < Test::Unit::TestCase
 
   def test_time_up_false
     quiz_attempt = QuizAttempt.new
-    quiz_attempt.quiz_id = Quiz.find( @quiz_1.id ).id
+    quiz_attempt.quiz_id = Quiz.find( quizzes(:quiz_1).id ).id
     quiz_attempt.start_time = '2005-11-7 01:00:00'
     quiz_attempt.user_id = 1
     assert_equal( 10, quiz_attempt.quiz.duration )
@@ -46,7 +46,7 @@ class QuizAttemptTest < Test::Unit::TestCase
 
   def test_time_up_exact_time
     quiz_attempt = QuizAttempt.new
-    quiz_attempt.quiz_id = Quiz.find( @quiz_1.id ).id
+    quiz_attempt.quiz_id = Quiz.find( quizzes(:quiz_1).id ).id
     quiz_attempt.start_time = '2005-11-7 01:00:00'
     quiz_attempt.user_id = 1
     assert_equal( 10, quiz_attempt.quiz.duration )
@@ -56,7 +56,7 @@ class QuizAttemptTest < Test::Unit::TestCase
 
   def test_time_up_exact_timeplusone
     quiz_attempt = QuizAttempt.new
-    quiz_attempt.quiz_id = Quiz.find( @quiz_1.id ).id
+    quiz_attempt.quiz_id = Quiz.find( quizzes(:quiz_1).id ).id
     quiz_attempt.start_time = '2005-11-7 01:00:00'
     quiz_attempt.user_id = 1
     assert_equal( 10, quiz_attempt.quiz.duration )
@@ -65,7 +65,7 @@ class QuizAttemptTest < Test::Unit::TestCase
   end
 
   def test_get_response
-    @quiz = Quiz.find( @quiz_1.id )
+    @quiz = Quiz.find( quizzes(:quiz_1).id )
     @quiz_attempt = QuizAttempt.new
     @quiz_attempt.quiz_id = @quiz.id
     @quiz_attempt.start_time = '2005-11-7 01:00:00'
@@ -86,7 +86,7 @@ class QuizAttemptTest < Test::Unit::TestCase
   end
 
   def test_get_response_2
-    @quiz = Quiz.find( @quiz_2.id )
+    @quiz = Quiz.find( quizzes(:quiz_2).id )
     @quiz_attempt = QuizAttempt.create( :quiz_id => @quiz.id,
                                         :start_time => '2005-11-7 01:00:00',
                                         :user_id => User.find( users(:sleepy_user).id ) )
@@ -107,7 +107,7 @@ class QuizAttemptTest < Test::Unit::TestCase
     assert_equal( 2, @quiz_attempt.get_response(2).position )
     assert_equal( 3, @quiz_attempt.get_response(3).position )
     assert_equal( nil, @quiz_attempt.get_response(4) )
-    @qi = QuizItem.create( :quiz_id => @quiz_2.id, :position => 4, :question_id => 2, :is_on_test => true )
+    @qi = QuizItem.create( :quiz_id => quizzes(:quiz_2).id, :position => 4, :question_id => 2, :is_on_test => true )
     @quiz_attempt.quiz_responses.create( :created_at => Time.now,
                                          :input => "",
 	                                 :question_id => 2,
@@ -115,6 +115,5 @@ class QuizAttemptTest < Test::Unit::TestCase
 					 :quiz_attempt_id => @quiz_attempt.id )
     assert_equal( 4, @quiz_attempt.get_response(4).position )
   end
-
 
 end

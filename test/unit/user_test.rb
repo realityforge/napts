@@ -44,7 +44,7 @@ class UserTest < Test::Unit::TestCase
   end
 
   def test_teacher_for?
-    assert_equal( true, User.find(users(:admin_user).id).teaches?(@subject_3.id) )
+    assert_equal( true, User.find(users(:admin_user).id).teaches?(subjects(:subject_3).id) )
     assert_equal( false, User.find(users(:peter_user).id).teaches?(subjects(:subject_2).id) )
   end
 end
