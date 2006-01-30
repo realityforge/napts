@@ -15,7 +15,7 @@ class Demonstrators::QuizAttemptControllerTest < Test::Unit::TestCase
 
   def test_list
     get(:list,
-        {:quiz_id => @quiz_2.id},
+        {:quiz_id => quizzes(:quiz_2).id},
         {:user_id => users(:peter_user).id, :role => :demonstrator, :subject_id => subjects(:subject_1).id} )
     assert_response(:success)
     assert_template('list')
@@ -28,7 +28,7 @@ class Demonstrators::QuizAttemptControllerTest < Test::Unit::TestCase
 
    def test_list_with_query
     get(:list,
-        {:quiz_id => @quiz_3.id, :q => 'pet'},
+        {:quiz_id => quizzes(:quiz_3).id, :q => 'pet'},
         {:user_id => users(:mr_fancy_pants_user).id, :role => :demonstrator, :subject_id => subjects(:subject_2).id} )
     assert_response(:success)
     assert_template('list')
@@ -42,9 +42,9 @@ class Demonstrators::QuizAttemptControllerTest < Test::Unit::TestCase
 
   def test_reset
     post(:reset,
-        {:quiz_id => @quiz_3.id, :quiz_attempt_id => @qa_1.id},
+        {:quiz_id => quizzes(:quiz_3).id, :quiz_attempt_id => quiz_attempts(:qa_1).id},
         {:user_id => users(:mr_fancy_pants_user).id, :role => :demonstrator, :subject_id => subjects(:subject_2).id} )
-    assert_redirected_to(:action => 'list', :quiz_id => @quiz_3.id)
-    assert_raise(ActiveRecord::RecordNotFound){QuizAttempt.find(@qa_1.id)}
+    assert_redirected_to(:action => 'list', :quiz_id => quizzes(:quiz_3).id)
+    assert_raise(ActiveRecord::RecordNotFound){QuizAttempt.find(quiz_attempts(:qa_1).id)}
   end
 end

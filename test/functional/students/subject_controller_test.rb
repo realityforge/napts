@@ -24,7 +24,7 @@ class Students::SubjectControllerTest < Test::Unit::TestCase
     assert_equal(3,assigns(:subjects).length)
     assert_equal(subjects(:subject_2).id,assigns(:subjects)[0].id)
     assert_equal(subjects(:subject_1).id,assigns(:subjects)[1].id)
-    assert_equal(@subject_3.id,assigns(:subjects)[2].id)
+    assert_equal(subjects(:subject_3).id,assigns(:subjects)[2].id)
     assert_nil(flash[:alert])
     assert_nil(flash[:notice])
   end

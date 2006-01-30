@@ -22,7 +22,7 @@ class QuizAttemptControllerTest < Test::Unit::TestCase
 
   def test_start_quiz_creates_quiz_attempt
     get( :start_quiz,
-         {:start_time => Time.now, :quiz_id => @quiz_1.id},
+         {:start_time => Time.now, :quiz_id => quizzes(:quiz_1).id},
          {:user_id =>  users(:peter_user).id, :role => :student})
     assert_equal( 2, assigns(:quiz_attempt).quiz_responses.length )
     assert_response( :redirect )
@@ -40,7 +40,7 @@ class QuizAttemptControllerTest < Test::Unit::TestCase
 
   def test_show_answer_multi_choice_question
     @quiz_attempt = QuizAttempt.create( :start_time => Time.now,
-                                        :quiz_id => @quiz_1.id,
+                                        :quiz_id => quizzes(:quiz_1).id,
 					:user_id => users(:peter_user).id )
     @quiz_response = QuizResponse.create( :created_at => Time.now,
                                           :input => "",
@@ -50,12 +50,12 @@ class QuizAttemptControllerTest < Test::Unit::TestCase
 
     post( :show, {:quiz_attempt_id => @quiz_attempt.id,
                   :quiz_response_position => @quiz_response.position,
-                  :answers => [ @q1_a1.id, @q1_a2.id ]},
+                  :answers => [ answers(:q1_a1).id, answers(:q1_a2).id ]},
 		 {:user_id => users(:peter_user).id, :role => :student} )
 
     assert_nil( flash[:alert] )
     assert_equal( 1, @quiz_response.question.question_type )
-    assert_equal( @q1_a1.id, @quiz_response.answers[0].id )
+    assert_equal( answers(:q1_a1).id, @quiz_response.answers[0].id )
     assert_redirected_to( :action => 'show',
                           :quiz_attempt_id => @quiz_attempt.id,
                           :quiz_response_position => 2 )
@@ -63,7 +63,7 @@ class QuizAttemptControllerTest < Test::Unit::TestCase
 
   def test_show_no_answer_single_question
     @quiz_attempt = QuizAttempt.create( :start_time => Time.now,
-                                        :quiz_id => @quiz_1.id,
+                                        :quiz_id => quizzes(:quiz_1).id,
 					:user_id => users(:peter_user).id )
     @quiz_response = QuizResponse.create( :created_at => Time.now,
                              :input => "",
@@ -80,10 +80,10 @@ class QuizAttemptControllerTest < Test::Unit::TestCase
 
   def test_show_last_question
     @quiz_attempt = QuizAttempt.create( :start_time => Time.now,
-                                        :quiz_id => @quiz_2.id,
+                                        :quiz_id => quizzes(:quiz_2).id,
 					:user_id => users(:peter_user).id )
     @count = 1
-    for quiz_item in @quiz_2.quiz_items
+    for quiz_item in quizzes(:quiz_2).quiz_items
       if quiz_item.is_on_test
         @quiz_attempt.quiz_responses.create( :created_at => Time.now,
 	                                    :input => "",
@@ -103,10 +103,10 @@ class QuizAttemptControllerTest < Test::Unit::TestCase
 
   def test_show_get_out_of_time
     @quiz_attempt = QuizAttempt.create( :start_time => '2005-11-7 12:00:00',
-                                        :quiz_id => @quiz_2.id,
+                                        :quiz_id => quizzes(:quiz_2).id,
 					:user_id => users(:peter_user).id )
     @count = 1
-    for quiz_item in @quiz_2.quiz_items
+    for quiz_item in quizzes(:quiz_2).quiz_items
       if quiz_item.is_on_test
         @quiz_attempt.quiz_responses.create( :created_at => Time.now,
 	                                    :input => "",
@@ -130,7 +130,7 @@ class QuizAttemptControllerTest < Test::Unit::TestCase
 
   def test_end_quiz_out_of_time
     @quiz_attempt = QuizAttempt.create( :start_time => Time.now,
-                                        :quiz_id => @quiz_2.id,
+                                        :quiz_id => quizzes(:quiz_2).id,
 					:user_id => users(:peter_user).id )
 
     get( :end_quiz,
@@ -144,7 +144,7 @@ class QuizAttemptControllerTest < Test::Unit::TestCase
 
   def test_end_quiz_not_out_of_time
     @quiz_attempt = QuizAttempt.create( :start_time => Time.now,
-                                        :quiz_id => @quiz_2.id,
+                                        :quiz_id => quizzes(:quiz_2).id,
 					:user_id => users(:peter_user).id )
 
     get( :end_quiz,
@@ -156,8 +156,9 @@ class QuizAttemptControllerTest < Test::Unit::TestCase
   end
 
   def test_results
-    @quiz_attempt = QuizAttempt.find( @qa_2.id )
-    get( :results, {:quiz_attempt_id => @quiz_attempt.id }, {:user_id => users(:peter_user).id, :role => :student } )
+    @quiz_attempt = QuizAttempt.find( quiz_attempts(:qa_2).id )
+    get( :results, {:quiz_attempt_id => @quiz_attempt.id },
+                   {:user_id => users(:peter_user).id, :role => :student } )
     assert_equal( ["1", "2"]  , assigns(:results) )
     assert_valid_markup
   end

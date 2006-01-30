@@ -14,3 +14,11 @@ ip_4:
   id: 4
   ip_address: 019.183.246.251
   room_id: 2
+ip_5:
+  id: 5
+  ip_address: 0.0.0.0
+  room_id: 1
+ip_6:
+  id: 6
+  ip_address: 0.0.0.0
+  room_id: 2
