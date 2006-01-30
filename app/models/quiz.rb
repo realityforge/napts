@@ -10,6 +10,16 @@ class Quiz < ActiveRecord::Base
   validates_length_of( :description, :within => 1..120 )
   validates_numericality_of( :duration )
   
+  def address_enabled?( remote_ip )
+    computer = Computer.find( :first, 
+                              :select => 'computers.*',
+                              :joins =>  
+			      'LEFT OUTER JOIN quizzes ON quizzes.id = quizzes_rooms.quiz_id '+
+			      'LEFT OUTER JOIN quizzes_rooms ON quizzes_rooms.room_id = computers.room_id',
+                              :conditions => ['computers.ip_address = ? AND quizzes.id = ?' ,remote_ip, self.id ] )
+    return ! computer.nil?
+  end
+  
   def validate
     errors.add( :duration, "should be positive" ) unless duration > 0
   end

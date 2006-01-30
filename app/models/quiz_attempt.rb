@@ -1,7 +1,7 @@
 class QuizAttempt < ActiveRecord::Base
   belongs_to( :quiz )
   belongs_to( :user )
-  has_many( :quiz_responses, :order => :position, :dependent => true )
+  has_many( :quiz_responses, :order => :position, :dependent => true, :include => ['answers', 'question'] )
   validates_presence_of( :start_time )
   validates_presence_of( :quiz_id )
   validates_presence_of( :user_id )
@@ -15,8 +15,8 @@ class QuizAttempt < ActiveRecord::Base
     for quiz_response in self.quiz_responses
       responses = []
       correct = []
-      for qr in quiz_response.answers
-        responses << qr.answer_id.to_s
+      for answer in quiz_response.answers
+        responses << answer.id.to_s
       end
       for question in quiz_response.question.answers
         correct << question.id.to_s if question.is_correct

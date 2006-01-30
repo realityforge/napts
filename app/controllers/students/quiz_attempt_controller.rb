@@ -13,7 +13,7 @@ class Students::QuizAttemptController < Students::BaseController
   
   def start_quiz
     @quiz = Quiz.find(params[:quiz_id])
-    if ! check_address_enabled?( @quiz.id )
+    if @quiz.address_enabled?(request.remote_ip)
       @quiz_attempt = QuizAttempt.create( :start_time => Time.now,
                                           :quiz_id => @quiz.id,
                                           :user_id => current_user.id )
@@ -41,7 +41,7 @@ class Students::QuizAttemptController < Students::BaseController
     position = params[:quiz_response_position]
     @quiz_attempt = QuizAttempt.find( params[:quiz_attempt_id] )
     @quiz_response = @quiz_attempt.get_response( position.to_i )
-    if ! check_address_enabled?( @quiz_attempt.quiz_id )
+    if @quiz_attempt.quiz.address_enabled?(request.remote_ip)
       if request.get? && ! @quiz_response
         redirect_to( :action => 'end_quiz', :quiz_attempt_id => @quiz_attempt.id, :out_of_time => false )
       elsif @quiz_attempt.time_up?
@@ -76,15 +76,4 @@ class Students::QuizAttemptController < Students::BaseController
     redirect_to( :controller => 'results', :action => 'show', :quiz_attempt => @quiz_attempt.id )
   end
 
-private  
-  def check_address_enabled?( quiz_id )
-    @computer = Computer.find( :first, 
-                          :select => 'computers.*',
-                          :joins =>  
-			  'LEFT OUTER JOIN quizzes ON quizzes.id = quizzes_rooms.quiz_id '+
-			  'LEFT OUTER JOIN quizzes_rooms ON quizzes_rooms.room_id = computers.room_id',
-                          :conditions => ['computers.ip_address = ? AND quizzes.id = ?' , request.remote_ip, quiz_id ] )
-    return @computer.nil?
-  end
-  
 end

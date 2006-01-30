@@ -1,7 +1,7 @@
 <% @page_title = "Browse question #{@question.id}" %>
 <h2>Question <%= @question.id %></h2>
 <p>Type: <%= Question::QUESTION_TYPE.index( @question.question_type ) %></p>
-<h3><p class="question_cont">Question: <%= @question.content %></p></h3>
+<h3><%= @question.content %></h3>
 
 <table>
   <tr>
