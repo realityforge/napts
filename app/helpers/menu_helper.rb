@@ -63,7 +63,7 @@ module MenuHelper
     links.each do |link|
       text += "<li>#{render_link(link)}</li>"
     end
-    content_tag("ul",text,html_options)
+    (text != '') ? content_tag("ul",text,html_options) : ''
   end
 
   def render_link(link)
