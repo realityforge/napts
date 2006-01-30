@@ -1,7 +1,8 @@
-<% @page_title = "#{@quiz_attempts[0].quiz.subject.name}: Results" %>
 <% if @quiz_attempts.length == 0 %>
+  <% @page_title = "Results" %>
   <h1>No results available</h1>
 <% else %>
+  <% @page_title = "#{@quiz_attempts[0].quiz.subject.name}: Results" %>
   <h1>Results for <%= @quiz_attempts[0].quiz.subject.name %></h1>
   <table>
     <tr>
@@ -10,12 +11,13 @@
       <th>Date</th>
       <th>Operations</th>
     </tr>
-    <% for i in 0..(@quiz_attempts.length - 1) %>
+    <% for attempt in @quiz_attempts %>
       <tr>
-        <td><%= @quiz_name[i] %>
-        <td><%= @score[i].to_s %>/<%= current_user.quiz_attempts[i].quiz_responses.length %></td>
-        <td><%= @date[i].strftime("%d/%m/%Y") %></td>
-	<td><%= link_to( 'Show', :action => 'show', :quiz_attempt => @quiz_attempts[i].id ) %></td>
+        <td><%= attempt.quiz.name %></td>
+	<td><%= attempt.quiz_responses.length - attempt.incorrect_answers.length%>/
+	<%= attempt.quiz_responses.length %></td>
+	<td><%= attempt.start_time.strftime("%d/%m/%Y") %></td>
+	<td><%= link_to( 'Show', :action => 'show', :quiz_attempt => attempt.id ) %></td>
       </tr>
     <% end %>
   </table>
