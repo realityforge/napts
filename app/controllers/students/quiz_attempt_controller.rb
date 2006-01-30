@@ -1,5 +1,5 @@
 class Students::QuizAttemptController < Students::BaseController
-  def intro
+  def list
     conditions = ['quizzes.id NOT IN (SELECT quiz_id FROM quiz_attempts WHERE quiz_attempts.user_id = ?) AND computers.ip_address = ?' ,
                   current_user.id,
 		  request.remote_ip ]
