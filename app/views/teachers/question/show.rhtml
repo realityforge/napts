@@ -1,7 +1,7 @@
+<% @page_title = "Browse question #{@question.id}" %>
 <h2>Question <%= @question.id %></h2>
 <p>Type: <%= Question::QUESTION_TYPE.index( @question.question_type ) %></p>
-<p>Subject Group: <%= @question.subject_group.name %></p>
-<p class="question_cont">Question: <%= @question.content %></p>
+<h3><p class="question_cont">Question: <%= @question.content %></p></h3>
 
 <table>
   <tr>
@@ -23,5 +23,3 @@
 <br />
 
 <%= link_to_button( 'Edit', {:action => 'edit', :id => @question.id} ) %><br/>
-<%= link_to( 'Back to Question List', {:action => 'list', :id => @question.id} ) %>
-

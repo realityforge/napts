@@ -17,6 +17,10 @@ class Teachers::QuizController < Teachers::BaseController
     @quiz = current_subject.quizzes.find(params[:id])
   end
   
+  def produce_report
+    @quiz = current_subject.quizzes.find(params[:id])
+  end
+  
   def change
     @quiz = current_subject.quizzes.find(params[:id])
     if params[:quiz_item_ids] == nil

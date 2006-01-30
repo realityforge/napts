@@ -1,5 +1,23 @@
 class Teachers::BaseController < ApplicationController
   before_filter :verify_teacher
+  
+  helper_method :get_navigation_links
+  
+protected
+  def get_navigation_links
+    links = []
+    is_selected = controller_name == 'quiz' && @action_name == 'list'
+    links << MenuHelper::Link.new('Quizzes',
+                                  {:controller => '/teachers/quiz', :action => 'list'},
+                                  {:title => 'Browse Quizzes'},
+                                  {:selected => is_selected}).freeze
+    is_selected = controller_name == 'question' && @action_name == 'list'
+    links << MenuHelper::Link.new('Questions',
+                                  {:controller => '/teachers/question', :action => 'list'},
+                                  {:title => 'Browse Questions'},
+				  {:selected => is_selected}).freeze
+    links
+  end
 
 private
   def verify_teacher

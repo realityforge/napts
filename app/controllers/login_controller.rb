@@ -24,7 +24,7 @@ class LoginController < ApplicationController
           elsif role == :student
             redirect_to(:controller => '/students/subject', :action => 'list')
           else
-            redirect_to(:controller => '/teachers/quizzes', :action => 'list')
+            redirect_to(:controller => '/teachers/quiz', :action => 'list')
           end
         end
       end

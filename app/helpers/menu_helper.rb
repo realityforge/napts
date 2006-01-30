@@ -2,15 +2,6 @@ module MenuHelper
   if ! const_defined?(:Link)
     Link = Struct.new( "Link", :name, :link_options, :html_options, :options )
 
-    ManageQuizzesLink = Link.new('Manage Quizzes',
-      {:controller => '/teachers/quiz', :action => 'list'},
-      {:title => 'Create new quizzes or add and remove questions from existing quizzes'},
-      {}).freeze
-    ManageQuestionsLink = Link.new('Manage Questions',
-      {:controller => '/teachers/question', :action => 'list'},
-      {:title => 'Add, remove or edit questions and answers'},
-      {}).freeze
-
     UserLink = Link.new('User: ',
       nil,
       {:title => 'Currently logged in user'},
@@ -77,15 +68,6 @@ module MenuHelper
     text
   end
 
-  def get_navigation_links
-    links = []
-    if session[:role] == :teacher
-      links << gen_manage_quizzes_link.freeze
-      links << gen_manage_questions_link.freeze
-    end
-    links
-  end
-
   def get_controller_name
     controller.controller_name
   end
@@ -94,15 +76,5 @@ module MenuHelper
     result = link.dup
     result.options.update(:selected => is_selected )
     result
-  end
-
-  def gen_manage_quizzes_link
-    is_selected = get_controller_name == '/teachers/quiz' && @action_name == 'list'
-    dup_link_with_select( ManageQuizzesLink, is_selected )
-  end
-
-   def gen_manage_questions_link
-    is_selected = get_controller_name == '/teachers/question' && @action_name == 'list'
-    dup_link_with_select( ManageQuestionsLink, is_selected )
   end
 end

@@ -15,6 +15,10 @@ class ApplicationController < ActionController::Base
   before_filter :force_no_cache
 
 protected
+    
+  def get_navigation_links
+  end
+
   def is_secure?
     true
   end

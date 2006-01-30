@@ -1,5 +1,5 @@
 <% @page_title = "Browse Quizzes" %>
-<h1><%= @quizzes[0].subject.name %>: Quiz List</h1>
+<h1><%= current_subject.name %>: Quiz List</h1>
 <table>
   <tr>
     <th>Name</th>
@@ -21,6 +21,7 @@
     <% else %>
       <%= link_to( 'Enable Preview', :action => 'enable_preview', :id => quiz ) %> |
     <% end %>
+    <%= link_to( 'Produce Report', :action => 'produce_report', :id => quiz ) %> |
     <%= link_to( 'Destroy', { :action => 'destroy', :id => quiz }, :confirm => 'Are you sure?' ) %></td>
   </tr>
 <% end %>

@@ -1,9 +1,8 @@
+<% @page_title = "#{current_subject.name}: New Question" %>
 <h1>New question</h1>
 
 <%= start_form_tag( :action => 'new' ) %>
   <%= render( :partial => 'form' ) %>
   <p><%= submit_tag( "Create" ) %></p>
 <%= end_form_tag %>
-
-<%= link_to( 'Back', :action => 'list' ) %>
 
