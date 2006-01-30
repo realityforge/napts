@@ -4,11 +4,12 @@ module MenuHelper
   end
 
   def render_links(links,html_options)
+    return '' unless links
     text = ''
     links.each do |link|
       text += "<li>#{render_link(link)}</li>"
     end
-    (text != '') ? content_tag("ul",text,html_options) : ''
+    content_tag("ul",text,html_options)
   end
 
   def render_link(link)
