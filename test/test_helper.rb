@@ -22,13 +22,14 @@ class Test::Unit::TestCase
   # test cases which use the @david style and don't mind the speed hit (each
   # instantiated fixtures translates to a database query per test method),
   # then set this back to true.
-  self.use_instantiated_fixtures  = true
-
+  self.use_instantiated_fixtures  = false
+  self.pre_loaded_fixtures = true
+   
   # Add more helper methods to be used by all tests here...
   def start_quiz
-    @user = User.find( @peter_user.id )
+    @user = User.find( users(:peter_user).id )
     get( :start_quiz, 
-        {:quiz_id => @quiz_1.id },
+        {:quiz_id => quizzes(:quiz_1).id },
 	{:user_id => @user.id, :role => :student} )
     assert_not_nil( assigns(:quiz_attempt) )
     assigns(:quiz_attempt).reload

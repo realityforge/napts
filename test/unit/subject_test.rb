@@ -27,6 +27,6 @@ class SubjectTest < Test::Unit::TestCase
     assert_equal( 3, subjects.length )
     assert_equal( subjects(:subject_2).id, subjects[0].id )
     assert_equal( subjects(:subject_1).id, subjects[1].id )
-    assert_equal( @subject_3.id, subjects[2].id )
+    assert_equal( subjects(:subject_3).id, subjects[2].id )
   end
 end
