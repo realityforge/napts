@@ -1,8 +1,6 @@
 class Demonstrators::BaseController < ApplicationController
   before_filter :verify_demonstrator
 
-  helper_method :get_navigation_links
-
 protected
   def get_navigation_links
     links = []

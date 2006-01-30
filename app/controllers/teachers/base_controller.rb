@@ -1,8 +1,6 @@
 class Teachers::BaseController < ApplicationController
   before_filter :verify_teacher
   
-  helper_method :get_navigation_links
-  
 protected
   def get_navigation_links
     links = []
