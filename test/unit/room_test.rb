@@ -11,7 +11,7 @@ class RoomTest < Test::Unit::TestCase
   end
 
   def test_addresses
-    assert_equal("0.0.0.0\n12.13.14.15\n123.123.145.154\n255.255.255.255", rooms(:room_1).addresses)
+    assert_equal("0.0.0.0\n12.13.14.15\n123.123.145.154\n127.0.0.1\n255.255.255.255", rooms(:room_1).addresses)
   end
 
   def test_addresses=

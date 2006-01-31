@@ -22,3 +22,7 @@ ip_6:
   id: 6
   ip_address: 0.0.0.0
   room_id: 2
+ip_7:
+  id: 7
+  ip_address: 127.0.0.1
+  room_id: 1
