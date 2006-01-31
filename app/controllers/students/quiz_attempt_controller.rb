@@ -73,7 +73,7 @@ class Students::QuizAttemptController < Students::BaseController
     end
     @quiz_attempt =  QuizAttempt.find(params[:quiz_attempt_id])
     @quiz_attempt.update_attributes( :end_time => Time.now )
-    redirect_to( :controller => 'results', :action => 'show', :quiz_attempt => @quiz_attempt.id )
+    redirect_to( :controller => 'results', :action => 'show', :id => @quiz_attempt.id )
   end
 
 end
