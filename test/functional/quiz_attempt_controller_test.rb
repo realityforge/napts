@@ -136,10 +136,12 @@ class QuizAttemptControllerTest < Test::Unit::TestCase
     get( :end_quiz,
         {:quiz_attempt_id => @quiz_attempt.id, :out_of_time => true },
         {:user_id => users(:peter_user).id, :role => :student} )
-
+    assert_redirected_to( :controller => 'students/results', :action => 'show', :quiz_attempt => @quiz_attempt.id )
+    assert_not_nil(assigns(:quiz_attempt))
     assert_equal( "Sorry, your time is up", flash[:alert] )
+    assert_nil(flash[:notice])
+
     assert_not_nil( assigns(:quiz_attempt).end_time )
-    assert_redirected_to( :action => 'results', :quiz_attempt_id => @quiz_attempt.id )
   end
 
   def test_end_quiz_not_out_of_time
@@ -152,15 +154,15 @@ class QuizAttemptControllerTest < Test::Unit::TestCase
         {:user_id => users(:peter_user).id, :role => :student} )
     assert_nil( flash[:alert] )
     assert_not_nil( assigns(:quiz_attempt).end_time )
-    assert_redirected_to( :action => 'results', :quiz_attempt_id => @quiz_attempt.id )
+    assert_redirected_to( :controller => 'results', :action => 'show', :quiz_attempt => @quiz_attempt.id )
   end
 
-  def test_results
-    @quiz_attempt = QuizAttempt.find( quiz_attempts(:qa_2).id )
-    get( :results, {:quiz_attempt_id => @quiz_attempt.id },
-                   {:user_id => users(:peter_user).id, :role => :student } )
-    assert_equal( ["1", "2"]  , assigns(:results) )
-    assert_valid_markup
-  end
+#  def test_results
+#    @quiz_attempt = QuizAttempt.find( quiz_attempts(:qa_2).id )
+#    get( :results, {:quiz_attempt_id => @quiz_attempt.id },
+#                   {:user_id => users(:peter_user).id, :role => :student } )
+#    assert_equal( ["1", "2"]  , assigns(:results) )
+#    assert_valid_markup
+#  end
 
 end
