@@ -14,6 +14,11 @@ protected
                                   {:controller => '/teachers/question', :action => 'list'},
                                   {:title => 'Browse Questions'},
 				  {:selected => is_selected}).freeze
+    is_selected = controller_name == 'resource' && @action_name == 'list'
+    links << MenuHelper::Link.new('Resources',
+                                  {:controller => '/teachers/resource', :action => 'list'},
+                                  {:title => 'Browse Resources'},
+				  {:selected => is_selected}).freeze
     links
   end
 

@@ -93,17 +93,26 @@ class CreateInitialSchema < ActiveRecord::Migration
       t.column 'is_correct', :boolean
       t.column 'question_id', :integer, :null => false
     end
-    add_foreign_key_constraint('answers', 'question_id', 'questions', 'id', :name => 'answers_question_id_fk')
+    add_foreign_key_constraint('answers', 'question_id', 'questions', 'id',
+                               :name => 'answers_question_id_fk')
+    
+     
     
     # Resources
     create_table('resources', :force => true) do |t|
-      t.column 'type', :string, :limit => 25, :null => false
-      t.column 'resource', :string, :limit => 125, :null => false
-      t.column 'question_id', :integer, :null => false
+      t.column 'name', :string, :limit => 50, :null => false
+      t.column 'description', :text, :limit => 120
+      t.column 'mime_type', :string, :limit => 25, :null => false
     end
-    add_foreign_key_constraint('resources', 'question_id', 'questions', 'id', 
-                               :name => 'resources_iquestion_id_fk')
-
+   
+    #ResourceData
+    create_table('resource_data', :force => true) do |t|
+      t.column 'data', :binary, :null => false
+      t.column 'resource_id', :integer, :null => false
+    end
+    add_foreign_key_constraint('resource_data', 'resource_id', 'resources', 'id',
+                               :name => 'resource_data_resource_id_fk')
+    
     # QuizResponses
     create_table('quiz_responses', :force => true) do |t|
       t.column 'input', :string, :limit => 125
@@ -176,6 +185,8 @@ class CreateInitialSchema < ActiveRecord::Migration
   end
   
   def self.down
+    drop_table('resource_data')
+    drop_table('resources')
     drop_table('quizzes_rooms')
     drop_table('students')
     drop_table('teachers')

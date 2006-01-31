@@ -1,0 +1,7 @@
+<%
+  @page_title = @form_title = "Edit Resource"
+  @form_action = {:action => 'edit', :id => @resource}
+  @form_action_desc = 'Save'
+  @form_cancel_action = {:action => 'show', :id => @resource}
+%>
+<%= render_partial('form') %>

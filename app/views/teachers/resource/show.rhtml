@@ -1,0 +1,17 @@
+<% @page_title = "Browse Resource '#{@resource.name}'" %>
+<table width="100%" cellpadding="3" cellspacing="0">
+<tr>
+  <th>Name</th>
+  <td><%= @resource.name %></td>
+</tr>
+<tr>
+  <th>Description</th>
+  <td><%= @resource.description %></td>
+</tr>
+<tr>
+  <th>Mime type</th>
+  <td><%= @resource.mime_type %></td>
+</tr>
+</table>
+
+<%= link_to( 'Edit', :action => 'edit', :id => @resource ) %>
