@@ -5,6 +5,7 @@ class Question < ActiveRecord::Base
   has_many( :answers, :dependent => true )
   has_many( :quiz_items )
   has_many( :quiz_responses )
+  has_and_belongs_to_many( :resources )
   belongs_to( :subject_group )
   validates_associated( :subject_group )
   
@@ -19,5 +20,9 @@ class Question < ActiveRecord::Base
     if question_type == 2 && count > 1
       errors.add_to_base( "Must have a single correct answer" )
     end
+  end
+  
+  def has_resource?
+    self.questions_resources.size > 0
   end
 end

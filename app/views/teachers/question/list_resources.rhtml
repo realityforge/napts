@@ -1,0 +1,29 @@
+<% @page_title = "#{current_subject.name}: Adding resources to Question #{@question.id}" %>
+<%= start_form_tag({:action => 'add_resource'},{:method => :get}) %>
+<div>
+<input type="text" name="q" value="<%= params[:q] %>"/>
+<button type="submit">Search</button>
+</div>
+<%= end_form_tag %>
+
+<table class="xlist">
+  <colgroup id="name-column"/>
+  <colgroup id="description-column"/>
+  <colgroup id="operations-column"/>
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Operations</th>
+  </tr>
+  </thead>
+  <tbody>
+<% for resource in @resources %>
+  <tr>
+    <td><%= h(resource.name) %></td>
+    <td><%= h(resource.description) %></td>
+    <td><%= link_to( 'Add to Question', :action => 'add_resource', :question_id => @question.id, :resource_id => @resource ) %></td>
+  </tr>
+<% end %>
+</table>
+<%= link_to( 'Back to Question', :action => 'show', :id => @question ) %>

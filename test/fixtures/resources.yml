@@ -3,13 +3,22 @@ resource_1:
   name: 'blue'
   description: 'blue writing'
   content_type: 'text/plain'
+  subject_group_id: 1
 resource_2:
   id: 2
   name: 'bigtext'
   description: 'lots of writing'
   content_type: 'text/html'
+  subject_group_id: 2
 resource_3:
   id: 3
   name: 'fred'
   description: '6ft2, blond, big hat'
   content_type: 'text/plain'
+  subject_group_id: 3
+resource_4:
+  id: 4
+  name: car
+  description: 'car picture'
+  content_type: 'image/jpeg'
+  subject_group_id: 2

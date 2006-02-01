@@ -3,7 +3,12 @@ class Teachers::ResourceController < Teachers::BaseController
   verify :method => :get, :only => %w( show list )
   
   def list
-    conditions = params[:q] ? ['name LIKE ?', "%#{params[:q]}%"] : '1 = 1'
+    if params[:q]
+      conditions = ['subject_group_id = ? AND name LIKE ?',
+                    current_subject.subject_group_id, "%#{params[:q]}%" ]
+    else
+      conditions = ['subject_group_id = ?', current_subject.subject_group_id ]
+    end
     @resource_pages, @resources = paginate( :resources, 
                                             :conditions => conditions,
 					    :order_by => 'name',
@@ -13,6 +18,7 @@ class Teachers::ResourceController < Teachers::BaseController
   def new
     @resource = Resource.new(params[:resource]) 
     if request.post?
+      @resource.subject_group_id = current_subject.subject_group_id
       if @resource.save
         flash[:notice] = 'Resource was successfully created.'
 	redirect_to( :action => 'show', :id => @resource )

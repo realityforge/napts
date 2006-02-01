@@ -1,5 +1,6 @@
 class Resource < ActiveRecord::Base
   has_one( :resource_data, :dependent => true )
+  has_and_belongs_to_many( :questions )
   validates_presence_of( :content_type, :name )
   
   def data=(data_field)

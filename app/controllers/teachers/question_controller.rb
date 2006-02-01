@@ -90,6 +90,21 @@ class Teachers::QuestionController < Teachers::BaseController
     end
   end
   
+  def list_resources
+    if request.get?
+      @question = Question.find(params[:id])
+      @resources = Resource.find( :all, :conditions => ['subject_group_id = ? ', current_subject.subject_group_id] )
+    end
+  end
+  
+  def add_resource
+    if request.post?
+      @question = Question.find(params[:question_id])
+      @question.resources << Resource.find(params[:resource_id])
+      redirect_to( :action => 'list_resources', :id => @question )
+    end
+  end
+  
   def destroy
     @question = current_subject.subject_group.questions.find(params[:id])
     if @question.quiz_items.length > 0

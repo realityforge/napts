@@ -103,7 +103,10 @@ class CreateInitialSchema < ActiveRecord::Migration
       t.column 'name', :string, :limit => 50, :null => false
       t.column 'description', :text, :limit => 120
       t.column 'content_type', :string, :limit => 25, :null => false
+      t.column 'subject_group_id', :integer, :null => false
     end
+    add_foreign_key_constraint('resources', 'subject_group_id', 'subject_groups', 'id',
+                               :name => 'resource_subject_group_id_fk')
    
     #ResourceData
     create_table('resource_data', :force => true) do |t|
@@ -112,6 +115,16 @@ class CreateInitialSchema < ActiveRecord::Migration
     end
     add_foreign_key_constraint('resource_data', 'resource_id', 'resources', 'id',
                                :name => 'resource_data_resource_id_fk')
+			       
+    #Questions_Resources
+    create_table('questions_resources', :force => true) do |t|
+      t.column 'question_id', :integer, :null => false
+      t.column 'resource_id', :integer, :null => false
+    end
+    add_foreign_key_constraint('questions_resources', 'question_id', 'questions', 'id',
+                               :name => 'question_id_fk')
+    add_foreign_key_constraint('questions_resources', 'resource_id', 'resources', 'id',
+                               :name => 'resource_id_fk')
     
     # QuizResponses
     create_table('quiz_responses', :force => true) do |t|

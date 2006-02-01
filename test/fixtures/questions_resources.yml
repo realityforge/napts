@@ -1,0 +1,10 @@
+qn_rs_1:
+  question_id: 1
+  resource_id: 1
+qn_rs_2:
+  question_id: 4
+  resource_id: 2
+qn_rs_3:
+  question_id: 2
+  resource_id: 1
+
