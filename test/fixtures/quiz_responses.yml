@@ -1,46 +1,46 @@
 #quiz attempt one
 qr_1:
   id: 1
-  input: ""
   created_at: '2005-11-7 00:03:00'
   quiz_attempt_id: 1
   question_id: 4
   position: 1
+  completed: true
 qr_2:
   id: 2
-  input: ""
   created_at: '2005-11-7 00:03:30'
   quiz_attempt_id: 1
   question_id: 5
   position: 2
+  completed: true
 qr_3:
   id: 3
-  input: ""
   created_at: '2005-11-7 00:04:30'
   quiz_attempt_id: 1
   question_id: 6
   position: 3
+  completed: true
   
 #quiz attempt two
 #no selection made for qr4 in answers_quiz_responses
 qr_4:
   id: 4
-  input: ""
   created_at: '2005-11-14 00:00:00'
   quiz_attempt_id: 2
   question_id: 1
   position: 1
+  completed: true
 qr_5:
   id: 5
-  input: ""
   created_at: '2005-11-14 00:04:00'
   quiz_attempt_id: 2
   question_id: 2
   position: 2
+  completed: true
 qr_6:
   id: 6
-  input: ""
   created_at: '2005-11-14 00:05:00'
   quiz_attempt_id: 2
   question_id: 3
   position: 3
+  completed: true
