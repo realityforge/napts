@@ -102,7 +102,16 @@ class Teachers::QuestionController < Teachers::BaseController
   def add_resource
     @question = Question.find(params[:question_id])
     @question.resources << Resource.find(params[:resource_id])
+    flash[:notice] = 'Resource was successfully added to question.'
     redirect_to( :action => 'list_resources', :id => @question )
+  end
+  
+  def remove_resource
+    @resource = Resource.find(params[:resource_id])
+    @question = Question.find(params[:question_id])
+    @question.resources.delete(@resource)
+    flash[:notice] = 'Resource was successfully removed from question.'
+    redirect_to( :action => 'show', :id => @question )
   end
   
   def destroy

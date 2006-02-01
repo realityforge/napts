@@ -1,6 +1,7 @@
 <% @page_title = "Browse question #{@question.id}" %>
 <h2>Question <%= @question.id %></h2>
 <p>Type: <%= Question::QUESTION_TYPE.index( @question.question_type ) %></p>
+
 <h3><%= @question.content %></h3>
 
 <table>
@@ -21,5 +22,25 @@
   <% end %>
 </table>
 <br />
+<% if @question.has_resource? %>
+  <table>
+    <tr>
+      <th>Resources</th>
+      <td>
+        <ul>
+	<% for resource in @question.resources %>
+	  <li><%= resource.name %> [<%= link_to('Remove', 
+	                                       {:action => 'remove_resource', 
+					        :question_id => @question, 
+						:resource_id => resource.id},
+						{:post => true}) %>]</li>
+	<% end %>
+        </ul>
+      </td>
+    </tr>
+  </table>
+<% end %>
+
+ <%= link_to_button( "Add Resource", :action => 'list_resources', :id => @question ) %>
 
 <%= link_to_button( 'Edit', {:action => 'edit', :id => @question.id} ) %><br/>

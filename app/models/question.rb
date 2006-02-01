@@ -23,6 +23,6 @@ class Question < ActiveRecord::Base
   end
   
   def has_resource?
-    self.questions_resources.size > 0
+    self.resources.size > 0
   end
 end
