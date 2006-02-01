@@ -1,19 +1,21 @@
 <% @page_title = "Browse Enabled Quizzes" %>
-<% if @quizzes.length == 0 %>
-  <h1>No tests enabled currently</h1>
-<% else %>
-  <table>
+<table class="xlist">
+  <colgroup id="name-column"/>
+  <colgroup id="group-column"/>
+  <colgroup id="operations-column"/>
+  <thead>
+  <tr>
+    <th>Subject</th>
+    <th>Quiz</th>
+    <th>Operations</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% for quiz in @quizzes %>
     <tr>
-      <th>Quiz id</th>
-      <th>Quiz name</th>
-      <th></th>
+      <td><%= quiz.subject.name %></td>
+      <td><%= quiz.name %></td>
+      <td><%= link_to( "Start", :action => 'start_quiz', :quiz_id => quiz.id ) %></td>
     </tr>
-  
-    <% for quiz in @quizzes %>
-      <tr>
-        <td><%= quiz.id %></td>
-        <td><%= link_to( "#{quiz.name}", :action => 'start_quiz', :quiz_id => quiz.id ) %></td>
-      </tr>
-    <% end %>
-  </table>
-<% end %>
+  <% end %>
+</table>
