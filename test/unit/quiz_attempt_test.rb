@@ -20,6 +20,39 @@ class QuizAttemptTest < Test::Unit::TestCase
     assert_equal(questions(:q1).id, quiz_attempt.quiz_responses[0].question_id )
     assert_equal(questions(:q4).id, quiz_attempt.quiz_responses[1].question_id )
   end
+
+  def test_next_response_and_completed?
+    quiz_attempt = QuizAttempt.create( :start_time => Time.now,
+                                       :quiz_id => quizzes(:quiz_1).id,
+                                       :user_id => users(:peter_user).id )
+    assert_equal(2, quiz_attempt.quiz_responses.count )
+    assert_equal(1, quiz_attempt.quiz_responses[0].position )
+    assert_equal(2, quiz_attempt.quiz_responses[1].position )
+    assert_equal(questions(:q1).id, quiz_attempt.quiz_responses[0].question_id )
+    assert_equal(questions(:q4).id, quiz_attempt.quiz_responses[1].question_id )
+
+    quiz_attempt.reload
+    qr = quiz_attempt.next_response
+    assert_not_nil(qr)
+    assert_equal(false, quiz_attempt.completed? )
+    assert_equal(questions(:q1).id, qr.question_id )
+    qr.completed = true
+    qr.save!
+
+    quiz_attempt.reload
+    qr = quiz_attempt.next_response
+    assert_not_nil(qr)
+    assert_equal(false, quiz_attempt.completed? )
+    assert_equal(questions(:q4).id, qr.question_id )
+    qr.completed = true
+    qr.save!
+
+    quiz_attempt.reload
+    qr = quiz_attempt.next_response
+    assert_nil(qr)
+    assert_equal(true, quiz_attempt.completed? )
+  end
+
   # ~PD
 
   def test_incorrect_answers_multichoice_with_no_answers_selected

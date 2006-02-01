@@ -13,11 +13,23 @@ class QuizAttempt < ActiveRecord::Base
     for quiz_item in self.quiz.quiz_items
       if quiz_item.is_on_test?
         self.quiz_responses.create( :created_at => Time.now,
+                                    :completed => false,
                                     :question_id => quiz_item.question.id,
                                     :position => count )
         count += count
       end
     end
+  end
+
+  def next_response
+    for quiz_response in self.quiz_responses
+      return quiz_response unless quiz_response.completed?
+    end
+    return nil
+  end
+
+  def completed?
+    quiz_responses.find( :first, :conditions => ['completed = ?', false] ).nil?
   end
 
   # stores the question number of all the incorrect 
