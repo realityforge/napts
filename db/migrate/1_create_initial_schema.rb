@@ -198,6 +198,7 @@ class CreateInitialSchema < ActiveRecord::Migration
   end
   
   def self.down
+    drop_table('questions_resources')
     drop_table('resource_data')
     drop_table('resources')
     drop_table('quizzes_rooms')

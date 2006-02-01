@@ -60,4 +60,4 @@ OrderedTables = [ :users, :rooms, :computers, :subject_groups, :subjects,
                   :quizzes, :questions, :quiz_items, :answers, :quiz_attempts, 
 		  :quiz_responses, :answers_quiz_responses, :demonstrators, 
 		  :teachers, :students, :quizzes_rooms, :resources, 
-		  :resource_data ].collect {|x| x.to_s }
+		  :resource_data, :questions_resources ].collect {|x| x.to_s }
