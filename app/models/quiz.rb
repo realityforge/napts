@@ -1,7 +1,7 @@
 class Quiz < ActiveRecord::Base
   has_many( :quiz_items, :dependent => true, :order => 'position' )
   has_many( :quiz_attempts, :dependent => true )
-  has_and_belongs_to_many( :active_in, :class_name => "Room", :join_table => "quizzes_rooms" )
+  has_and_belongs_to_many( :active_in, :class_name => 'Room', :join_table => 'quizzes_rooms' )
   belongs_to( :subject )
   validates_presence_of( :subject_id )
   validates_uniqueness_of( :name )
