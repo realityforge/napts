@@ -12,10 +12,9 @@ class QuizAttempt < ActiveRecord::Base
     count = 1
     for quiz_item in self.quiz.quiz_items
       if quiz_item.is_on_test?
-        qr = self.quiz_responses.create( :created_at => Time.now,
-                                         :input => '',
-                                         :question_id => quiz_item.question.id,
-                                         :position => count )
+        self.quiz_responses.create( :created_at => Time.now,
+                                    :question_id => quiz_item.question.id,
+                                    :position => count )
         count += count
       end
     end
@@ -42,8 +41,6 @@ class QuizAttempt < ActiveRecord::Base
     end
     return results
   end
-  
-  
   
   def time_up?
     length = self.quiz.duration * 60
