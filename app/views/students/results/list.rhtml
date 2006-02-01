@@ -17,7 +17,7 @@
 	<td><%= attempt.quiz_responses.length - attempt.incorrect_answers.length%>/
 	<%= attempt.quiz_responses.length %></td>
 	<td><%= attempt.start_time.strftime("%d/%m/%Y") %></td>
-	<td><%= link_to( 'Show', :action => 'show', :id => attempt.id ) %></td>
+	<td><%= link_to( 'Show', :action => 'show', :quiz_attempt => attempt.id ) %></td>
       </tr>
     <% end %>
   </table>

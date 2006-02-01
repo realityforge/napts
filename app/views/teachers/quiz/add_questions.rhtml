@@ -16,7 +16,7 @@
       <td>
         <input type="checkbox" name="question_ids[]" value="<%= question.id %>">
       <td><%= question.content %></td>
-      <td><%= question.question_type %></td>
+      <td><%= Question::QUESTION_TYPE.index( question.question_type ) %></td>
     </tr>
   <% end %>
 </table>
