@@ -1,6 +1,6 @@
 class Students::ResultsController < Students::BaseController
   def show
-    @quiz_attempt = current_user.quiz_attempts.find(params[:quiz_attempt])
+    @quiz_attempt = current_user.quiz_attempts.find(params[:id])
   end
 
   def list

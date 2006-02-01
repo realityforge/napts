@@ -1,4 +1,7 @@
 class Students::QuizAttemptController < Students::BaseController
+  verify :method => :get, :only => %w( list )
+  verify :method => :post, :only => %w( start )
+
   def list
     conditions = ['quizzes.id NOT IN (SELECT quiz_id FROM quiz_attempts WHERE quiz_attempts.user_id = ?) AND computers.ip_address = ?' ,
                   current_user.id,
@@ -12,10 +15,14 @@ class Students::QuizAttemptController < Students::BaseController
                           :conditions => conditions,
                           :order => 'subjects.name, quizzes.name')
   end
-  
-  def start_quiz
-    @quiz = Quiz.find(params[:quiz_id])
-    if @quiz.address_enabled?(request.remote_ip)
+
+  def start
+    @quiz = Quiz.find(params[:id])
+    if ! @quiz.address_enabled?(request.remote_ip)
+      flash[:alert] = 'Quiz not active for this Computer.'
+      redirect_to(:action => 'list')
+      # TODO: Check user has not completed or started quiz
+    else
       @quiz_attempt = QuizAttempt.create( :start_time => Time.now,
                                           :quiz_id => @quiz.id,
                                           :user_id => current_user.id )
@@ -33,9 +40,6 @@ class Students::QuizAttemptController < Students::BaseController
       redirect_to( :action => 'show',
                    :quiz_attempt_id => @quiz_attempt.id,
 	           :quiz_response_position => 1 )
-    else
-      flash[:alert] = "Quiz not currently enabled on this computer"
-      redirect_to( :action => 'intro' )
     end
   end
   

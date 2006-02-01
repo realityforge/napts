@@ -21,10 +21,10 @@ class QuizAttemptControllerTest < Test::Unit::TestCase
   end
 
   def test_start_quiz_creates_quiz_attempt
-    get( :start_quiz,
-         {:start_time => Time.now, :quiz_id => quizzes(:quiz_1).id},
+    post(:start,
+         {:id => quizzes(:quiz_1).id},
          {:user_id =>  users(:peter_user).id, :role => :student})
-    assert_equal( 2, assigns(:quiz_attempt).quiz_responses.length )
+    assert_equal(2, assigns(:quiz_attempt).quiz_responses.length)
     assert_response( :redirect )
   end
 

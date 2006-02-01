@@ -27,4 +27,11 @@ class Students::QuizAttemptControllerTest < Test::Unit::TestCase
     assert_nil(flash[:notice])
   end
 
+  def test_start_from_invalid_computer
+    post(:start, {:id => quizzes(:quiz_3).id}, {:user_id => users(:peter_user).id, :role => :student})
+    assert_redirected_to(:action => 'list')
+    assert_equal('Quiz not active for this Computer.',flash[:alert])
+    assert_nil(flash[:notice])
+  end
+
 end
