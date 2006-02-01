@@ -1,4 +1,4 @@
-<% @page_title = "Browse Enabled Quizzes" %>
+<% @page_title = "Browse Active Quizzes" %>
 <table class="xlist">
   <colgroup id="subject-column"/>
   <colgroup id="name-column"/>
@@ -15,7 +15,8 @@
     <tr>
       <td><%= quiz.subject.name %></td>
       <td><%= quiz.name %></td>
-      <td><%= link_to( "Start", :action => 'start_quiz', :quiz_id => quiz.id ) %></td>
+      <td><%= link_to( "Start", {:action => 'start', :id => quiz.id}, :post => true ) %></td>
     </tr>
   <% end %>
+  </tbody>
 </table>
