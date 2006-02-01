@@ -9,14 +9,19 @@ class Quiz < ActiveRecord::Base
   validates_length_of( :name, :within => 1..20 )
   validates_length_of( :description, :within => 1..120 )
   validates_numericality_of( :duration )
-  
+
+  def user_completed?( user_id )
+    quiz_attempt = QuizAttempt.find( :first, :conditions => ['user_id = ? AND quiz_id = ? AND end_time IS NOT NULL', user_id, self.id ] )
+    return ! quiz_attempt.nil?
+  end
+
   def address_enabled?( remote_ip )
     computer = Computer.find( :first, 
                               :select => 'computers.*',
                               :joins =>  
 			      'LEFT OUTER JOIN quizzes ON quizzes.id = quizzes_rooms.quiz_id '+
 			      'LEFT OUTER JOIN quizzes_rooms ON quizzes_rooms.room_id = computers.room_id',
-                              :conditions => ['computers.ip_address = ? AND quizzes.id = ?' ,remote_ip, self.id ] )
+                              :conditions => ['computers.ip_address = ? AND quizzes.id = ?', remote_ip, self.id ] )
     return ! computer.nil?
   end
   

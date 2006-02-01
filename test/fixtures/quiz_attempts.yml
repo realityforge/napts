@@ -22,3 +22,8 @@ qa_4:
   end_time: '2005-11-7 00:05:12'
   quiz_id: 2
   user_id: 3
+qa_5:
+  id: 5
+  start_time: '2005-11-7 00:00:00'
+  quiz_id: 3
+  user_id: 3

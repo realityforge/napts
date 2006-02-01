@@ -8,4 +8,12 @@ class QuizTest < Test::Unit::TestCase
     assert_equal( true, quiz.address_enabled?( '0.0.0.0' ) )
     assert_equal( false, quiz.address_enabled?( '127.0.0.12' ) )
   end  
+
+  def test_user_completed?
+    quiz = Quiz.find( quizzes(:quiz_3).id )
+    assert_equal( true, quiz.user_completed?( users(:peter_user).id ) )
+    assert_equal( false, quiz.user_completed?( users(:sleepy_user).id ) )
+    assert_equal( false, quiz.user_completed?( users(:admin_user).id ) )
+  end  
+
 end
