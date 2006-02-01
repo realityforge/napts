@@ -50,6 +50,10 @@ class QuizAttemptTest < Test::Unit::TestCase
     quiz_attempt.reload
     qr = quiz_attempt.next_response
     assert_nil(qr)
+    assert_equal(false, quiz_attempt.completed? )
+
+    quiz_attempt.complete
+    quiz_attempt.reload
     assert_equal(true, quiz_attempt.completed? )
   end
 

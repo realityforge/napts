@@ -22,14 +22,15 @@ class QuizAttempt < ActiveRecord::Base
   end
 
   def next_response
-    for quiz_response in self.quiz_responses
-      return quiz_response unless quiz_response.completed?
-    end
-    return nil
+    quiz_responses.find(:first, :conditions => ['completed = ?', false], :order => 'position' )
   end
 
   def completed?
-    quiz_responses.find( :first, :conditions => ['completed = ?', false] ).nil?
+    end_time.nil?
+  end
+
+  def complete
+    update_attributes( :end_time => Time.now )
   end
 
   # stores the question number of all the incorrect 
