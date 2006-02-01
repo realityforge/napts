@@ -102,7 +102,7 @@ class CreateInitialSchema < ActiveRecord::Migration
     create_table('resources', :force => true) do |t|
       t.column 'name', :string, :limit => 50, :null => false
       t.column 'description', :text, :limit => 120
-      t.column 'mime_type', :string, :limit => 25, :null => false
+      t.column 'content_type', :string, :limit => 25, :null => false
     end
    
     #ResourceData

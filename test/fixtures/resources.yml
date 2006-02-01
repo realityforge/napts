@@ -2,14 +2,14 @@ resource_1:
   id: 1
   name: 'blue'
   description: 'blue writing'
-  mime_type: 'text/plain'
+  content_type: 'text/plain'
 resource_2:
   id: 2
   name: 'bigtext'
   description: 'lots of writing'
-  mime_type: 'text/html'
+  content_type: 'text/html'
 resource_3:
   id: 3
   name: 'fred'
   description: '6ft2, blond, big hat'
-  mime_type: 'text/plain'
+  content_type: 'text/plain'

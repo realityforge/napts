@@ -1,19 +1,15 @@
-<%= start_form_tag(@form_action) %>
+<%= start_form_tag(@form_action, :multipart => true) %>
 <div class="dataset">
     <h2><%= @form_title %></h2>
     <%= error_messages_for('resource', :header_tag => 'h3') %>
 <table width="100%" cellpadding="3" cellspacing="0">
 <tr>
-  <th><label for="resource_name">Name</label></th>
-  <td><%= text_field( 'resource', 'name' ) %></td>
-</tr>
-<tr>
   <th><label for="resource_description">Description</label></th>
   <td><%= text_field( 'resource', 'description' ) %></td>
 </tr>
 <tr>
-  <th><label for="resource_mime_type">Mime Type</label></th>
-  <td><%= text_field( 'resource', 'mime_type' ) %></td>
+  <th><label for="resource_data">File</label></th>
+  <td><%= file_field('resource', 'data' ) %></td>
 </tr>
 </table>
 <button type="submit"><%= @form_action_desc %></button>

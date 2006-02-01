@@ -11,7 +11,7 @@ class Teachers::ResourceController < Teachers::BaseController
   end
   
   def new
-    @resource = Resource.new(params[:resource])
+    @resource = Resource.new(params[:resource]) 
     if request.post?
       if @resource.save
         flash[:notice] = 'Resource was successfully created.'
@@ -36,7 +36,21 @@ class Teachers::ResourceController < Teachers::BaseController
     end
   end
   
+  def picture
+    @resource = Resource.find(params[:id])
+    send_data(@resource.resource_data.data, 
+              :filename => @resource.name,
+	      :type => @resource.content_type,
+	      :disposition => 'inline' )
+  end
+  
   def download
+    @resource = Resource.find(params[:id])
+    send_data(@resource.resource_data.data,
+              :filename => @resource.name,
+	      :type => @resource.content_type,
+	      :disposition => 'attachment' )
+	     
   end
   
   def destroy

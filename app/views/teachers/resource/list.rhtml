@@ -9,12 +9,12 @@
 <table class="xlist">
   <colgroup id="name-column"/>
   <colgroup id="description-column"/>
-  <colgroup id="mime_type-column"/>
+  <colgroup id="content_type-column"/>
   <thead>
   <tr>
     <th>Name</th>
     <th>Description</th>
-    <th>Mime type</th>
+    <th>Content type</th>
     <th>Operations</th>
   </tr>
   </thead>
@@ -23,7 +23,7 @@
   <tr>
     <td><%= h(resource.name) %></td>
     <td><%= h(resource.description) %></td>
-    <td><%= h(resource.mime_type) %></td>
+    <td><%= h(resource.content_type) %></td>
     <td>
     <%= link_to( 'Show', :action => 'show', :id => resource ) %> |
     <%= link_to( 'Download', :action => 'download', :id => resource ) %> |

@@ -9,9 +9,12 @@
   <td><%= @resource.description %></td>
 </tr>
 <tr>
-  <th>Mime type</th>
-  <td><%= @resource.mime_type %></td>
+  <th>Content type</th>
+  <td><%= @resource.content_type %></td>
 </tr>
+<tr>
+  <img src="<%= url_for(:action => 'picture', :id => @resource) %>"/>
+<tr>
 </table>
 
 <%= link_to( 'Edit', :action => 'edit', :id => @resource ) %>
