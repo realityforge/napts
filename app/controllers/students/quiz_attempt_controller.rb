@@ -16,6 +16,37 @@ class Students::QuizAttemptController < Students::BaseController
                           :order => 'subjects.name, quizzes.name')
   end
 
+  def show_question
+    @quiz = Quiz.find(params[:id])
+    if ! @quiz.address_enabled?(request.remote_ip)
+      flash[:alert] = 'Quiz not active for this Computer.'
+      redirect_to(:action => 'list')
+    elsif @quiz.user_completed?(current_user.id)
+      flash[:alert] = 'User already completed Quiz.'
+      redirect_to(:action => 'list')
+    else
+      @quiz_attempt = @quiz.quiz_attempt_for_user(current_user.id)
+
+      if @quiz_attempt.time_up?
+        flash[:alert] = 'Sorry, your time is up.'
+        @quiz_attempt.complete
+      else
+        @quiz_response = @quiz_attempt.next_response
+        if @quiz_response.nil?
+          @quiz_attempt.complete
+        elsif request.post?
+          # TODO: Save answer and add flip response flag here
+          redirect_to( :action => 'show_question', :id => @quiz.id )
+          return
+        end
+      end
+
+      if @quiz_attempt.complete?
+        redirect_to( :controller => 'results', :action => 'show', :id => @quiz_attempt.id )
+      end
+    end
+  end
+
   def start
     @quiz = Quiz.find(params[:id])
     if ! @quiz.address_enabled?(request.remote_ip)
@@ -26,17 +57,6 @@ class Students::QuizAttemptController < Students::BaseController
       @quiz_attempt = QuizAttempt.create( :start_time => Time.now,
                                           :quiz_id => @quiz.id,
                                           :user_id => current_user.id )
-      count = 1
-      for quiz_item in @quiz.quiz_items
-        if quiz_item.is_on_test?
-          qr = QuizResponse.create( :created_at => Time.now,
-	                            :input => "",
-                                    :question_id => quiz_item.question.id,
-	               	            :position => count,
-			            :quiz_attempt_id => @quiz_attempt.id )
-	  count += count
-        end
-      end
       redirect_to( :action => 'show',
                    :quiz_attempt_id => @quiz_attempt.id,
 	           :quiz_response_position => 1 )
