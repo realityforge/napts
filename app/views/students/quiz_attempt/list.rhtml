@@ -15,7 +15,7 @@
     <tr>
       <td><%= quiz.subject.name %></td>
       <td><%= quiz.name %></td>
-      <td><%= link_to( "Start", {:action => 'start', :id => quiz.id}, :post => true ) %></td>
+      <td><%= link_to( "Start", {:action => 'show_question', :id => quiz.id}, :post => true ) %></td>
     </tr>
   <% end %>
   </tbody>

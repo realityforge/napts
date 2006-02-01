@@ -26,7 +26,7 @@ class QuizAttempt < ActiveRecord::Base
   end
 
   def completed?
-    end_time.nil?
+    not end_time.nil?
   end
 
   def complete
