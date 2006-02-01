@@ -4,7 +4,7 @@
   <%= render( :partial => 'form' ) %>
   <p>
   <button type="submit">Edit</button>
-   <p><%= link_to_button( "Add Resource", :action => 'list_resources', :id => @question ) %></p>
+  <%= link_to_button( "Add Resource", :action => 'list_resources', :id => @question ) %>
 
   <%= link_to_button("Cancel", {:action => 'show', :id => @question.id}) %>
   </p>
