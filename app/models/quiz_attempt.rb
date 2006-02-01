@@ -7,7 +7,20 @@ class QuizAttempt < ActiveRecord::Base
   validates_presence_of( :user_id )
   validates_associated( :quiz )
   validates_associated( :user )
-  
+
+  def after_create
+    count = 1
+    for quiz_item in self.quiz.quiz_items
+      if quiz_item.is_on_test?
+        qr = self.quiz_responses.create( :created_at => Time.now,
+                                         :input => '',
+                                         :question_id => quiz_item.question.id,
+                                         :position => count )
+        count += count
+      end
+    end
+  end
+
   # stores the question number of all the incorrect 
   # questions in an array and returns it
   def incorrect_answers

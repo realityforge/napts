@@ -9,6 +9,19 @@ end
 class QuizAttemptTest < Test::Unit::TestCase
   fixtures OrderedTables
 
+  # PD
+  def test_basic_create
+    quiz_attempt = QuizAttempt.create( :start_time => Time.now,
+                                       :quiz_id => quizzes(:quiz_1).id,
+                                       :user_id => users(:peter_user).id )
+    assert_equal(2, quiz_attempt.quiz_responses.count )
+    assert_equal(1, quiz_attempt.quiz_responses[0].position )
+    assert_equal(2, quiz_attempt.quiz_responses[1].position )
+    assert_equal(questions(:q1).id, quiz_attempt.quiz_responses[0].question_id )
+    assert_equal(questions(:q4).id, quiz_attempt.quiz_responses[1].question_id )
+  end
+  # ~PD
+
   def test_incorrect_answers_multichoice_with_no_answers_selected
     quiz_attempt = QuizAttempt.find( quiz_attempts(:qa_2).id )
     assert_equal( 2, quiz_attempt.incorrect_answers.length )
@@ -89,19 +102,7 @@ class QuizAttemptTest < Test::Unit::TestCase
     @quiz = Quiz.find( quizzes(:quiz_2).id )
     @quiz_attempt = QuizAttempt.create( :quiz_id => @quiz.id,
                                         :start_time => '2005-11-7 01:00:00',
-                                        :user_id => User.find( users(:sleepy_user).id ) )
-    @count = 1
-    for quiz_item in @quiz.quiz_items
-      if quiz_item.is_on_test
-        @quiz_attempt.quiz_responses.create( :created_at => Time.now,
-	                                     :input => "",
-	                                    :question_id => quiz_item.question.id,
-					    :position => @count,
-					    :quiz_attempt_id => @quiz_attempt.id )
-	@count += @count
-      end
-    end
-
+                                        :user_id => users(:sleepy_user).id )
     @quiz_attempt.reload
     assert_equal( 1, @quiz_attempt.get_response(1).position )
     assert_equal( 2, @quiz_attempt.get_response(2).position )
