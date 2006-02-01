@@ -22,7 +22,10 @@
   <tr>
     <td><%= h(resource.name) %></td>
     <td><%= h(resource.description) %></td>
-    <td><%= link_to( 'Add to Question', :action => 'add_resource', :question_id => @question.id, :resource_id => @resource ) %></td>
+    <td><%= link_to( 'Add to Question',
+                     :action => 'add_resource', 
+                     :question_id => @question.id,
+		     :resource_id => resource ) %></td>
   </tr>
 <% end %>
 </table>

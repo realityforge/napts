@@ -93,16 +93,16 @@ class Teachers::QuestionController < Teachers::BaseController
   def list_resources
     if request.get?
       @question = Question.find(params[:id])
-      @resources = Resource.find( :all, :conditions => ['subject_group_id = ? ', current_subject.subject_group_id] )
+      @resources = Resource.find( :all, 
+            :conditions => ['subject_group_id = ? AND id NOT IN (SELECT resource_id FROM questions_resources WHERE question_id = ?)',
+                                                       current_subject.subject_group_id, @question.id] )
     end
   end
   
   def add_resource
-    if request.post?
-      @question = Question.find(params[:question_id])
-      @question.resources << Resource.find(params[:resource_id])
-      redirect_to( :action => 'list_resources', :id => @question )
-    end
+    @question = Question.find(params[:question_id])
+    @question.resources << Resource.find(params[:resource_id])
+    redirect_to( :action => 'list_resources', :id => @question )
   end
   
   def destroy
