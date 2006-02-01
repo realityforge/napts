@@ -6,9 +6,11 @@ class Students::QuizAttemptController < Students::BaseController
     @quizzes = Quiz.find( :all, 
                           :select => 'DISTINCT quizzes.*',
                           :joins => 
-			  'LEFT OUTER JOIN quizzes_rooms ON quizzes_rooms.quiz_id = quizzes.id ' + 
-			  'LEFT OUTER JOIN computers ON computers.room_id = quizzes_rooms.room_id ',
-                          :conditions => conditions )
+                            'LEFT OUTER JOIN subjects ON quizzes.subject_id = subjects.id ' + 
+                            'LEFT OUTER JOIN quizzes_rooms ON quizzes_rooms.quiz_id = quizzes.id ' + 
+                            'LEFT OUTER JOIN computers ON computers.room_id = quizzes_rooms.room_id ',
+                          :conditions => conditions,
+                          :order => 'subjects.name, quizzes.name')
   end
   
   def start_quiz
