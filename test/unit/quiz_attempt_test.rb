@@ -4,7 +4,6 @@ require 'quiz_attempt'
 class QuizAttemptTest < Test::Unit::TestCase
   fixtures OrderedTables
 
-  # PD
   def test_basic_create
     quiz_attempt = QuizAttempt.create( :start_time => Time.now,
                                        :quiz_id => quizzes(:quiz_1).id,
@@ -52,57 +51,47 @@ class QuizAttemptTest < Test::Unit::TestCase
     assert_equal(true, quiz_attempt.completed? )
   end
 
-  # ~PD
-
   def test_incorrect_answers_multichoice_with_no_answers_selected
-    quiz_attempt = QuizAttempt.find( quiz_attempts(:qa_2).id )
-    assert_equal( 2, quiz_attempt.incorrect_answers.length )
-    assert_equal( 3, quiz_attempt.quiz_responses.count )
-    assert_equal( ["1", "2"], quiz_attempt.incorrect_answers )
+    quiz_attempt = quiz_attempts(:qa_2)
+    assert_equal(2, quiz_attempt.incorrect_answers.length)
+    assert_equal(3, quiz_attempt.quiz_responses.count)
+    assert_equal([1, 2], quiz_attempt.incorrect_answers)
   end
 
   def test_incorrect_answers_returns_correct_qn_numbers
-    quiz_attempt = QuizAttempt.find( quiz_attempts(:qa_1).id )
-    quiz_response = QuizResponse.find( quiz_responses(:qr_1).id )
-    assert_equal( 1, quiz_attempt.incorrect_answers.length )
-    assert_equal( 13, quiz_response.answers[0].id )
-    assert_equal( ["3"], quiz_attempt.incorrect_answers )
+    quiz_attempt = quiz_attempts(:qa_1)
+    assert_equal(1, quiz_attempt.incorrect_answers.length)
+    assert_equal([3], quiz_attempt.incorrect_answers)
   end
 
   def test_time_up_true
-    quiz_attempt = QuizAttempt.new
-    quiz_attempt.quiz_id = Quiz.find( quizzes(:quiz_1).id ).id
-    quiz_attempt.start_time = '2005-11-7 01:00:00'
-    quiz_attempt.user_id = 1
-    assert_equal( 10, quiz_attempt.quiz.duration )
-    assert_equal( true, quiz_attempt.time_up?(Time.local(*ParseDate.parsedate('2005-11-7 01:10:10'))) )
+    do_time_test('2005-11-7 01:00:00','2005-11-7 01:10:10',true)
   end
 
   def test_time_up_false
-    quiz_attempt = QuizAttempt.new
-    quiz_attempt.quiz_id = Quiz.find( quizzes(:quiz_1).id ).id
-    quiz_attempt.start_time = '2005-11-7 01:00:00'
-    quiz_attempt.user_id = 1
-    assert_equal( 10, quiz_attempt.quiz.duration )
-    assert_equal( false, quiz_attempt.time_up?(Time.local(*ParseDate.parsedate('2005-11-7 01:00:01'))) )
+    do_time_test('2005-11-7 01:00:00','2005-11-7 01:00:01',false)
   end
 
   def test_time_up_exact_time
-    quiz_attempt = QuizAttempt.new
-    quiz_attempt.quiz_id = Quiz.find( quizzes(:quiz_1).id ).id
-    quiz_attempt.start_time = '2005-11-7 01:00:00'
-    quiz_attempt.user_id = 1
-    assert_equal( 10, quiz_attempt.quiz.duration )
-    assert_equal( false, quiz_attempt.time_up?(Time.local(*ParseDate.parsedate('2005-11-7 01:10:00'))) )
+    do_time_test('2005-11-7 01:00:00','2005-11-7 01:10:00',false)
   end
 
   def test_time_up_exact_timeplusone
-    quiz_attempt = QuizAttempt.new
-    quiz_attempt.quiz_id = Quiz.find( quizzes(:quiz_1).id ).id
-    quiz_attempt.start_time = '2005-11-7 01:00:00'
-    quiz_attempt.user_id = 1
-    assert_equal( 10, quiz_attempt.quiz.duration )
+    do_time_test('2005-11-7 01:00:00','2005-11-7 01:10:01',true)
+  end
 
-    assert_equal( true, quiz_attempt.time_up?(Time.local(*ParseDate.parsedate('2005-11-7 01:10:01'))) )
+  private
+
+  def do_time_test(start,now,expected)
+    assert_equal(expected, gen_time(start).time_up?(Time.local(*ParseDate.parsedate(now))))
+  end
+
+  def gen_time(time)
+    quiz_attempt = QuizAttempt.new
+    quiz_attempt.quiz_id = quizzes(:quiz_1).id
+    quiz_attempt.start_time = time
+    quiz_attempt.user_id = users(:peter_user).id
+    assert_equal(10, quiz_attempt.quiz.duration)
+    quiz_attempt
   end
 end

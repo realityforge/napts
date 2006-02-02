@@ -33,23 +33,22 @@ class QuizAttempt < ActiveRecord::Base
     update_attributes( :end_time => Time.now )
   end
 
-  # stores the question number of all the incorrect
-  # questions in an array and returns it
+  # Returns an array (of positions) of the incorrect answers
   def incorrect_answers
     results = []
     for quiz_response in self.quiz_responses
       responses = []
       correct = []
       for answer in quiz_response.answers
-        responses << answer.id.to_s
+        responses << answer.id
       end
       for question in quiz_response.question.answers
-        correct << question.id.to_s if question.is_correct
+        correct << question.id if question.is_correct
       end
       correct.sort!
       responses.sort!
       if responses != correct
-        results << quiz_response.position.to_s
+        results << quiz_response.position
       end
     end
     return results
