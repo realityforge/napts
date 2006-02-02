@@ -6,11 +6,11 @@ class Students::QuizAttemptController < Students::BaseController
     conditions = ['quizzes.id NOT IN (SELECT quiz_id FROM quiz_attempts WHERE quiz_attempts.user_id = ?) AND computers.ip_address = ?' ,
                   current_user.id,
 		  request.remote_ip ]
-    @quizzes = Quiz.find( :all, 
+    @quizzes = Quiz.find( :all,
                           :select => 'DISTINCT quizzes.*',
-                          :joins => 
-                            'LEFT OUTER JOIN subjects ON quizzes.subject_id = subjects.id ' + 
-                            'LEFT OUTER JOIN quizzes_rooms ON quizzes_rooms.quiz_id = quizzes.id ' + 
+                          :joins =>
+                            'LEFT OUTER JOIN subjects ON quizzes.subject_id = subjects.id ' +
+                            'LEFT OUTER JOIN quizzes_rooms ON quizzes_rooms.quiz_id = quizzes.id ' +
                             'LEFT OUTER JOIN computers ON computers.room_id = quizzes_rooms.room_id ',
                           :conditions => conditions,
                           :order => 'subjects.name, quizzes.name')
@@ -26,7 +26,7 @@ class Students::QuizAttemptController < Students::BaseController
       redirect_to(:action => 'list')
     else
       @quiz_attempt = @quiz.quiz_attempt_for_user(current_user.id)
-      if @quiz_attempt.time_up?
+      if @quiz_attempt.time_up?(Time.now)
         flash[:alert] = 'Sorry, your time is up.'
         @quiz_attempt.complete
       else

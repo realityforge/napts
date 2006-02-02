@@ -8,10 +8,10 @@ require 'quiz_attempt'
 
 class QuizAttempt < ActiveRecord::Base
   cattr_accessor :time_up
-  
+
   alias :old_time_up :time_up?
 
-  def time_up?; @@time_up ? true : old_time_up; end
+  def time_up?(time); @@time_up ? true : old_time_up(time); end
 end
 
 class Students::QuizAttemptControllerTest < Test::Unit::TestCase
@@ -86,8 +86,8 @@ class Students::QuizAttemptControllerTest < Test::Unit::TestCase
   end
 
   def test_show_question_post_with_answers
-    post(:show_question, 
-        {:id => quizzes(:quiz_1).id, :answers => [answers(:q1_a1).id]}, 
+    post(:show_question,
+        {:id => quizzes(:quiz_1).id, :answers => [answers(:q1_a1).id]},
         {:user_id => users(:peter_user).id, :role => :student})
     assert_redirected_to(:action => 'show_question', :id => quizzes(:quiz_1).id)
     assert_not_nil(assigns(:quiz_attempt))
@@ -100,8 +100,8 @@ class Students::QuizAttemptControllerTest < Test::Unit::TestCase
   end
 
   def test_show_question_post_with_zero_answers
-    post(:show_question, 
-        {:id => quizzes(:quiz_1).id}, 
+    post(:show_question,
+        {:id => quizzes(:quiz_1).id},
         {:user_id => users(:peter_user).id, :role => :student})
     assert_redirected_to(:action => 'show_question', :id => quizzes(:quiz_1).id)
     assert_not_nil(assigns(:quiz_attempt))

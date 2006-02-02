@@ -1,11 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 require 'quiz_attempt'
 
-class QuizAttempt < ActiveRecord::Base
-  attr_accessor :time
-  def now; @time; end
-end
-
 class QuizAttemptTest < Test::Unit::TestCase
   fixtures OrderedTables
 
@@ -80,8 +75,7 @@ class QuizAttemptTest < Test::Unit::TestCase
     quiz_attempt.start_time = '2005-11-7 01:00:00'
     quiz_attempt.user_id = 1
     assert_equal( 10, quiz_attempt.quiz.duration )
-    quiz_attempt.time = Time.local(*ParseDate.parsedate('2005-11-7 01:10:10'))
-    assert_equal( true, quiz_attempt.time_up? )
+    assert_equal( true, quiz_attempt.time_up?(Time.local(*ParseDate.parsedate('2005-11-7 01:10:10'))) )
   end
 
   def test_time_up_false
@@ -90,8 +84,7 @@ class QuizAttemptTest < Test::Unit::TestCase
     quiz_attempt.start_time = '2005-11-7 01:00:00'
     quiz_attempt.user_id = 1
     assert_equal( 10, quiz_attempt.quiz.duration )
-    quiz_attempt.time = Time.local(*ParseDate.parsedate('2005-11-7 01:00:01'))
-    assert_equal( false, quiz_attempt.time_up? )
+    assert_equal( false, quiz_attempt.time_up?(Time.local(*ParseDate.parsedate('2005-11-7 01:00:01'))) )
   end
 
   def test_time_up_exact_time
@@ -100,8 +93,7 @@ class QuizAttemptTest < Test::Unit::TestCase
     quiz_attempt.start_time = '2005-11-7 01:00:00'
     quiz_attempt.user_id = 1
     assert_equal( 10, quiz_attempt.quiz.duration )
-    quiz_attempt.time = Time.local(*ParseDate.parsedate('2005-11-7 01:10:00'))
-    assert_equal( false, quiz_attempt.time_up? )
+    assert_equal( false, quiz_attempt.time_up?(Time.local(*ParseDate.parsedate('2005-11-7 01:10:00'))) )
   end
 
   def test_time_up_exact_timeplusone
@@ -110,7 +102,7 @@ class QuizAttemptTest < Test::Unit::TestCase
     quiz_attempt.start_time = '2005-11-7 01:00:00'
     quiz_attempt.user_id = 1
     assert_equal( 10, quiz_attempt.quiz.duration )
-    quiz_attempt.time = Time.local(*ParseDate.parsedate('2005-11-7 01:10:01'))
-    assert_equal( true, quiz_attempt.time_up? )
+
+    assert_equal( true, quiz_attempt.time_up?(Time.local(*ParseDate.parsedate('2005-11-7 01:10:01'))) )
   end
 end
