@@ -113,6 +113,18 @@ class Teachers::QuizController < Teachers::BaseController
     redirect_to( :action => 'add_questions', :id => @quiz )
   end
   
+  def move_up
+    quiz_item = QuizItem.find(params[:id])
+    quiz_item.move_higher
+    redirect_to( :action => 'list_quiz_items', :id => quiz_item.quiz_id )
+  end
+  
+  def move_down
+    quiz_item = QuizItem.find(params[:id])
+    quiz_item.move_lower
+    redirect_to( :action => 'list_quiz_items', :id => quiz_item.quiz_id )
+  end
+  
 private 
   def update_preview(value)
     @quiz = current_subject.quizzes.find(params[:id])
