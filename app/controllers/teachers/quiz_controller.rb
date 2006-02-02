@@ -15,6 +15,10 @@ class Teachers::QuizController < Teachers::BaseController
   
   def show
     @quiz = current_subject.quizzes.find(params[:id])
+  end
+  
+  def list_quiz_items
+    @quiz = current_subject.quizzes.find(params[:id])
     if params[:q]
       conditions = ['quiz_id = ? AND questions.content LIKE ?', 
                                  @quiz.id, "%#{params[:q]}%"]
@@ -39,7 +43,7 @@ class Teachers::QuizController < Teachers::BaseController
     if ! @quiz_item.update_attributes( :is_on_test => false )
       flash[:alert] = 'Item not successfully taken off Quiz'
     end
-    redirect_to( :action => 'show', :id => @quiz.id )
+    redirect_to( :action => 'list_quiz_items', :id => @quiz.id )
   end
   
   def put_on_quiz
@@ -48,14 +52,14 @@ class Teachers::QuizController < Teachers::BaseController
     if ! @quiz_item.update_attributes( :is_on_test => true )
       flash[:alert] = 'Item not successfully taken off Quiz'
     end
-    redirect_to( :action => 'show', :id => @quiz.id )
+    redirect_to( :action => 'list_quiz_items', :id => @quiz.id )
   end
   
   def remove
     @quiz = current_subject.quizzes.find(params[:id])
     @quiz_item = @quiz.quiz_items.find(params[:quiz_item_id])
     QuizItem.delete(@quiz_item.id)
-    redirect_to( :action => 'show', :id => @quiz.id )
+    redirect_to( :action => 'list_quiz_items', :id => @quiz.id )
   end
   
   def new
