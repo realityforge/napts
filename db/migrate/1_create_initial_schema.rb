@@ -127,7 +127,7 @@ class CreateInitialSchema < ActiveRecord::Migration
     # QuizResponses
     create_table('quiz_responses', :force => true) do |t|
       t.column 'input', :string, :limit => 125
-      t.column 'created_at', :datetime
+      t.column 'updated_at', :datetime
       t.column 'position', :integer
       t.column 'completed', :boolean, :null => false
       t.column 'quiz_attempt_id', :integer, :null => false

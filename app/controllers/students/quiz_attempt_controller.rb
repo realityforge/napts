@@ -37,7 +37,7 @@ class Students::QuizAttemptController < Students::BaseController
           for answer in params[:answers]
             @quiz_response.answers << Answer.find(answer)
           end if params[:answers]
-  	  @quiz_response.update_attributes(:created_at => Time.now, :completed => true)
+  	  @quiz_response.update_attributes(:updated_at => Time.now, :completed => true)
           redirect_to(:action => 'show_question', :id => @quiz.id)
           return
         end
