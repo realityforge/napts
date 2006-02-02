@@ -91,24 +91,22 @@ class Teachers::QuizController < Teachers::BaseController
   def add_questions
     @quiz = current_subject.quizzes.find(params[:id])
     if request.get?
-      @questions = Question.find(:all,
-        	                :conditions => ['id NOT IN (SELECT questions.id FROM questions RIGHT OUTER JOIN quiz_items ON quiz_items.question_id = questions.id WHERE quiz_items.quiz_id = ?) AND subject_group_id = ?',
-				@quiz.id, current_subject.subject_group_id ] )
-    else
-      if params[:question_ids].nil?
-        flash[:alert] = "Must select something"
+      if params[:q]
+        conditions = ['id NOT IN (SELECT questions.id FROM questions RIGHT OUTER JOIN quiz_items ON quiz_items.question_id = questions.id WHERE quiz_items.quiz_id = ?) AND subject_group_id = ? AND questions.content LIKE ?',
+	              @quiz.id, current_subject.subject_group_id, "%#{params[:q]}%" ]
       else
-        for question in params[:question_ids]
-	  quiz_item = @quiz.quiz_items.create( { :quiz_id => params[:id],
-	                                         :question_id => question } )
-	  if ! quiz_item.valid?
-	    flash[:alert] = "Some questions not added as they were already in quiz"
-	  end
-        end
+        conditions = ['id NOT IN (SELECT questions.id FROM questions RIGHT OUTER JOIN quiz_items ON quiz_items.question_id = questions.id WHERE quiz_items.quiz_id = ?) AND subject_group_id = ?',
+	               @quiz.id, current_subject.subject_group_id ]
       end
-      redirect_to( :action => 'add_questions', :id => @quiz.id )
-      return
+      @question_pages, @questions = paginate( :questions, :conditions => conditions, :per_page => 10 )
     end
+  end
+  
+  def add_to_quiz
+    @quiz = Quiz.find(params[:id])
+    @question = Question.find(params[:question_id])
+    quiz_item = @quiz.quiz_items.create( {:quiz_id => @quiz.id, :question_id => @question.id} )
+    redirect_to( :action => 'add_questions', :id => @quiz )
   end
   
 private 
