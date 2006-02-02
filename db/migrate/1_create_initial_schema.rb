@@ -96,8 +96,6 @@ class CreateInitialSchema < ActiveRecord::Migration
     add_foreign_key_constraint('answers', 'question_id', 'questions', 'id',
                                :name => 'answers_question_id_fk')
     
-     
-    
     # Resources
     create_table('resources', :force => true) do |t|
       t.column 'name', :string, :limit => 50, :null => false
@@ -115,7 +113,7 @@ class CreateInitialSchema < ActiveRecord::Migration
     end
     add_foreign_key_constraint('resource_data', 'resource_id', 'resources', 'id',
                                :name => 'resource_data_resource_id_fk')
-			       
+
     #Questions_Resources
     create_table('questions_resources', :force => true) do |t|
       t.column 'question_id', :integer, :null => false
