@@ -33,7 +33,7 @@ class QuizAttempt < ActiveRecord::Base
     update_attributes( :end_time => Time.now )
   end
 
-  # stores the question number of all the incorrect 
+  # stores the question number of all the incorrect
   # questions in an array and returns it
   def incorrect_answers
     results = []
@@ -54,18 +54,13 @@ class QuizAttempt < ActiveRecord::Base
     end
     return results
   end
-  
+
   def time_up?
     length = self.quiz.duration * 60
     number = ( now.to_i - self.start_time.to_i )
     return number > length
   end
-  
-  def get_response(position)
-    return nil if (position - 1) > self.quiz_responses.length
-    self.quiz_responses[position - 1]
-  end
-  
+
 private
-  def now; Time.now; end  
+  def now; Time.now; end
 end
