@@ -12,8 +12,7 @@ class QuizAttempt < ActiveRecord::Base
     count = 1
     for quiz_item in self.quiz.quiz_items
       if quiz_item.is_on_test?
-        self.quiz_responses.create(:updated_at => Time.now,
-                                   :completed => false,
+        self.quiz_responses.create(:completed => false,
                                    :question_id => quiz_item.question.id,
                                    :position => count )
         count += count
