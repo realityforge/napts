@@ -1,0 +1,20 @@
+<h2><%= @question.content %></h2>
+<% if @question.question_type == 1 %>
+  <% button_type = "checkbox" %>
+  <% message = "Please select all correct answers" %>
+<% elsif @question.question_type == 2 %>
+  <% button_type = "radio" %>
+  <% message = "Please select the one correct answer" %>
+<% end %>
+<p><%= message %></p>
+<table>
+  <% for answer in @question.answers %>
+    <tr>
+      <td>
+        <input type="<%= button_type %>" name="answers[]" value="<%= answer.id %>" />
+      </td>
+      <td><%= answer.content %></td>
+    </tr>
+  <% end %>
+</table>
+

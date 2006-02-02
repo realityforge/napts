@@ -1,22 +1,6 @@
 <% @page_title = "#{@quiz_item.quiz.subject.name}: '#{h(@quiz_item.quiz.name)}' Q#{@quiz_item.position}" %>
-
-<h2><%= @quiz_item.question.content %></h2>
-<% if @quiz_item.question.question_type == 1 %>
-  <% button_type = "checkbox" %>
-  <% message = "Please select all correct answers" %>
-<% elsif @quiz_item.question.question_type == 2 %>
-  <% button_type = "radio" %>
-  <% message = "Please select the one correct answer" %>
-<% end %>
-<p><%= message %></p>
-<table>
-  <% for answer in @quiz_item.question.answers %>
-    <tr>
-      <td><input type="<%= button_type %>" name="answers[]" value="<%= answer.id %>" /></td>
-      <td><%= answer.content %></td>
-    </tr>
-  <% end %>
-</table>
+<% @question = @quiz_item.question %>
+<%= render( :partial => 'students/question' ) %>
 <br/>
 <%= link_to_button("Previous", :action => 'show_question',
                                           :position => @quiz_item.higher_item.position,
