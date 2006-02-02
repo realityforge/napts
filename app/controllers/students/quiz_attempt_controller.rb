@@ -18,7 +18,7 @@ class Students::QuizAttemptController < Students::BaseController
 
   def show_question
     @quiz = Quiz.find(params[:id])
-    if ! @quiz.address_enabled?(request.remote_ip)
+    if ! @quiz.address_active?(request.remote_ip)
       flash[:alert] = 'Quiz not active for this Computer.'
       redirect_to(:action => 'list')
     elsif @quiz.user_completed?(current_user.id)

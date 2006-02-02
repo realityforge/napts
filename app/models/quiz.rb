@@ -21,16 +21,16 @@ class Quiz < ActiveRecord::Base
     return ! quiz_attempt.nil?
   end
 
-  def address_enabled?( remote_ip )
-    computer = Computer.find( :first, 
+  def address_active?( remote_ip )
+    computer = Computer.find( :first,
                               :select => 'computers.*',
-                              :joins =>  
+                              :joins =>
 			      'LEFT OUTER JOIN quizzes ON quizzes.id = quizzes_rooms.quiz_id '+
 			      'LEFT OUTER JOIN quizzes_rooms ON quizzes_rooms.room_id = computers.room_id',
                               :conditions => ['computers.ip_address = ? AND quizzes.id = ?', remote_ip, self.id ] )
     return ! computer.nil?
   end
-  
+
   def validate
     errors.add( :duration, "should be positive" ) unless duration > 0
   end
