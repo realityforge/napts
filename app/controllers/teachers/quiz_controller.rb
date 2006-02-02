@@ -15,35 +15,46 @@ class Teachers::QuizController < Teachers::BaseController
   
   def show
     @quiz = current_subject.quizzes.find(params[:id])
+    if params[:q]
+      conditions = ['quiz_id = ? AND questions.content LIKE ?', 
+                                 @quiz.id, "%#{params[:q]}%"]
+    else
+      conditions = ['quiz_id = ?', @quiz.id]
+    end
+    @quiz_item_pages, @quiz_items = 
+        paginate( :quiz_items, 
+	          :select => 'quiz_items.*',
+	          :joins => 'LEFT OUTER JOIN questions ON questions.id = quiz_items.question_id',
+	          :conditions => conditions, 
+		  :per_page => 10 )
   end
   
   def produce_report
     @quiz = current_subject.quizzes.find(params[:id])
   end
   
-  def change
+  def take_off_quiz
     @quiz = current_subject.quizzes.find(params[:id])
-    if params[:quiz_item_ids] == nil
-      flash[:alert] = 'must select something'
-    else
-      if params[:change] == '3'
-        for quiz_item_id in params[:quiz_item_ids]
-          QuizItem.delete(quiz_item_id)
-        end
-      else
-        if params[:change] == '1'
-          value = 'true'
-        elsif params[:change] == '2'
-          value = 'false'
-        end
-        for quiz_item_id in params[:quiz_item_ids]
-          quiz_item = @quiz.quiz_items.find(quiz_item_id)
-          if ! quiz_item.update_attributes( :is_on_test => value )
-            flash[:alert] = "not updated"
-          end
-        end
-      end
+    @quiz_item = @quiz.quiz_items.find(params[:quiz_item_id])
+    if ! @quiz_item.update_attributes( :is_on_test => false )
+      flash[:alert] = 'Item not successfully taken off Quiz'
     end
+    redirect_to( :action => 'show', :id => @quiz.id )
+  end
+  
+  def put_on_quiz
+    @quiz = current_subject.quizzes.find(params[:id])
+    @quiz_item = @quiz.quiz_items.find(params[:quiz_item_id])
+    if ! @quiz_item.update_attributes( :is_on_test => true )
+      flash[:alert] = 'Item not successfully taken off Quiz'
+    end
+    redirect_to( :action => 'show', :id => @quiz.id )
+  end
+  
+  def remove
+    @quiz = current_subject.quizzes.find(params[:id])
+    @quiz_item = @quiz.quiz_items.find(params[:quiz_item_id])
+    QuizItem.delete(@quiz_item.id)
     redirect_to( :action => 'show', :id => @quiz.id )
   end
   

@@ -1,32 +1,45 @@
 <% @page_title = "Browse quiz '#{@quiz.name}'" %>
-<%= start_form_tag({:action => 'change', :id => @quiz},{:id => 'change_form'}) %>
+<%= start_form_tag({:action => 'show', :id => @quiz},{:id => 'change_form'}) %>
+<div>
+<input type="text" name="q" value="<% params[:q] %>"/>
+<button type="submit">Search</button>
+</div>
 
 <h1>Quiz Name: <%= @quiz.name %></h1>
 <h2>Description: <%= @quiz.description %></h2>
 
-<table>
+<table width="100%" cellpadding="3" cellspacing="0">
   <tr>
-    <th></th>
-    <th>Questions</th>
+    <th>Question</th>
+    <th>Summary</th>
     <th>Will be on test</th>
+    <th>Operations</th>
   </tr>
   
   <% 
-    for quiz_item in @quiz.quiz_items
+    for quiz_item in @quiz_items
   %>
   <tr>
-    <td><input type="checkbox"  name="quiz_item_ids[]" value="<%= quiz_item.id %>"></td>
-    <td><%= link_to( "#{quiz_item.question.content}", :controller => 'question', :action => 'show', :id => quiz_item.question_id ) %></td>
+    <td><%= quiz_item.question.id %></td>
+    <td><%= truncate(quiz_item.question.content, 30) %></td>
     <td><%= quiz_item.is_on_test %></td>
+    <td>
+    <%= link_to('Show', :controller => 'question', :action => 'show', :id => quiz_item.question.id ) %> |
+    <% if quiz_item.is_on_test %>
+      <%= link_to('Take off Quiz', :action => 'take_off_quiz', :id => @quiz, :quiz_item_id => quiz_item.id ) %> |
+    <% else %>
+      <%= link_to('Put on Quiz', :action => 'put_on_quiz', :id => @quiz, :quiz_item_id => quiz_item.id ) %> |
+    <% end %>
+    <%= link_to('Remove', :action => 'remove', :id => @quiz, :quiz_item_id => quiz_item.id ) %>
+    </td>
   </tr>
   <% end %>
 </table>
-<br />
-
-<input id="change" type="hidden" name="change" value="true"/>
-<button onclick="change.value = '1'; change_form.submit(); return false;">put on quiz</button>
-<button onclick="change.value = '2'; change_form.submit(); return false;">take off quiz</button>
-<button onclick="change.value = '3'; change_form.submit(); return false;">remove</button>
+<%= link_to('< Previous', :page => @quiz_item_pages.current.previous, 
+			  :q => params[:q]) if @quiz_item_pages.current.previous %>
+<%= link_to('Next >', :page => @quiz_item_pages.current.next, 
+		      :q => params[:q]) if @quiz_item_pages.current.next %>
+<br/>
 <%= end_form_tag %>
 
 <%= link_to( 'Add questions', :action => 'add_questions', :id => @quiz ) %>
