@@ -1,14 +1,22 @@
 <% if index != 1 %>
+  <%= link_to( image_tag("icons/first.gif", {:class => 'move_arrow'}), 
+               {:action => 'move_first', :id => quiz_item}, 
+               {:title => "Move the first position", :post => true }) %>
   <%= link_to(image_tag("icons/up.gif", {:class => 'move_arrow'}),
               {:action => 'move_up', :id => quiz_item},
 	      {:title => 'Move up', :post => true}) %>
 <% else %>
+  <%= image_tag("icons/spacer.gif", {:class => 'move_arrow'}) %>
   <%= image_tag("icons/spacer.gif", {:class => 'move_arrow'}) %>
 <% end %>
 <% if  index != quiz_items.size %>
   <%= link_to(image_tag("icons/down.gif", {:class => 'move_arrow'}),
               {:action => 'move_down', :id => quiz_item},
 	      {:title => 'Move down', :post => true}) %>
+  <%= link_to( image_tag("icons/last.gif", {:class => 'move_arrow'}), 
+               {:action => 'move_last', :id => quiz_item}, 
+               {:title => "Move to the last position", :post => true }) %>
 <% else %>
+  <%= image_tag("icons/spacer.gif", {:class => 'move_arrow'}) %>  
   <%= image_tag("icons/spacer.gif", {:class => 'move_arrow'}) %>
 <% end %>
