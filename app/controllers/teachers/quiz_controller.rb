@@ -129,13 +129,13 @@ class Teachers::QuizController < Teachers::BaseController
   def move_first
     quiz_item = QuizItem.find(params[:id])
     quiz_item.move_to_top
-    redirect_to( :action => 'list_quiz_items', :id => quiz_items.quiz_id )
+    redirect_to( :action => 'list_quiz_items', :id => quiz_item.quiz_id )
   end
   
   def move_last
     quiz_item = QuizItem.find(params[:id])
     quiz_item.move_to_bottom
-    redirect_to( :action => 'list_quiz_items', :id => quiz_items.quiz_id )
+    redirect_to( :action => 'list_quiz_items', :id => quiz_item.quiz_id )
   end
   
 private 
