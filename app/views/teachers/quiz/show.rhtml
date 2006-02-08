@@ -2,11 +2,11 @@
 <table width="100%" cellpadding="3" cellspacing="0">
   <tr>
     <th>Name</th>
-    <td><%= @quiz.name %></td>
+    <td><%= h(@quiz.name) %></td>
   </tr>
   <tr>
     <th>Description</th>
-    <td><%= @quiz.description %></td>
+    <td><%= h(@quiz.description) %></td>
   </tr>
   <tr>
     <th>Questions on Preview</th>
