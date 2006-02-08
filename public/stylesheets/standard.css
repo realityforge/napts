@@ -1,0 +1,65 @@
+
+div.dataset
+{
+  margin: 5px 5px 5px 5px;
+  padding: 14px 5px 5px 5px;
+  background-color: #FFFFED;
+  border: 2px solid #ccc;
+  position: relative;
+}
+
+div.dataset h2
+{
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+  font-size: smaller;
+  background-color: #EEE;
+  border: 1px solid black;
+  color: black;
+  padding: 2px 5px;
+  position: absolute;
+  top: -10px;
+  left: 5px;
+  width: 12em;
+}
+
+table.xlist
+{
+  border: 1px solid black;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+table.xlist td
+{
+  font-size: small; 
+  padding: 2px 4px 1px 6px;
+  margin: 0;
+}
+
+table.xlist tr.even
+{
+  margin: 0;
+  padding: 0;
+  background-color: #EEE;
+}
+
+table.xlist tr.odd
+{
+  background-color: #FFFFED;
+}
+
+table.xlist th
+{ 
+  margin: 0;
+  padding: 4px 4px 4px 4px;
+  background-color: #036;
+  color: white;
+  font-weight: bold;
+  font-size: x-small; 
+  text-align: top;
+  vertical-align: top;
+}
+

@@ -11,9 +11,10 @@
   <%= javascript_include_tag("effects") %>
   <%= @content_for_head if @content_for_head %>
   <%= stylesheet_link_tag( 'napts' ) %>
+  <%= stylesheet_link_tag( 'standard' ) %>
   <%= javascript_include_tag( 'questions' ) %>
 </head>
-<body>
+<body id="<%= controller.controller_name %>__<%= @action_name %>">
 
 <div id="main">
 <% if authenticated? %>
@@ -26,14 +27,9 @@
 <% style = flash[:alert] ? " alert" : (flash[:notice] ? " notice" : "") -%>
 <div id="flash" class="<%= style %>">&nbsp;<%= flash[:alert] ? h(flash[:alert]) : h(flash[:notice]) -%></div>
 
-<table>
-<tr>
-<% if @content_for_menu %>
-<td id="menu"><%= @content_for_menu %></td>
-<% end %>
-<td id="content"><%= @content_for_layout %></td>
-</tr>
-</table>
+<div id="content">
+<div id="xcontent"><%= @content_for_layout %></div>
+</div>
 
 </div>
 

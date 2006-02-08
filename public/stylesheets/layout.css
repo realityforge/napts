@@ -29,26 +29,15 @@ body
 
 #content-panel
 {
-  position: relative;
-  display: block;
-  min-height: 400px;
+  width: 100%;
+  padding: 0px 0px 0px 0px;
+  margin: 0px 0px 0px 0px;
   vertical-align: top;
-  clear: both;
 }
 
 #content
 {
-  margin: 0px 15px 5px 15px;
-  vertical-align: top;
-}
-
-#menu
-{ 
-  margin: 0px 0px 0px 0px;
-  padding: 0px 0px 0px 0px;
-  background-color: #FFFFED;
-  border: 2px solid #ccc;
-  width: 200px;
+  margin: 5px 5px 5px 5px;
 }
 
 #flash 
