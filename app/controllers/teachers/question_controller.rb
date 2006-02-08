@@ -1,7 +1,13 @@
 class Teachers::QuestionController < Teachers::BaseController
   def list
+    if params[:q]
+      conditions = ['subject_group_id = ? AND content LIKE ?',
+                     current_subject.subject_group_id, "%#{params[:q]}%"]
+    else
+      conditions = ['subject_group_id = ?', current_subject.subject_group_id]
+    end
     @question_pages, @questions = paginate( :question, 
-                                            :conditions => ['subject_group_id = ?', current_subject.subject_group.id],
+                                            :conditions => conditions,
                                             :per_page => 10 )
   end
   
