@@ -5,7 +5,7 @@ class QuizAttemptTest < Test::Unit::TestCase
   fixtures OrderedTables
 
   def test_basic_create
-    quiz_attempt = QuizAttempt.create( :start_time => Time.now,
+    quiz_attempt = QuizAttempt.create( :created_at => Time.now,
                                        :quiz_id => quizzes(:quiz_1).id,
                                        :user_id => users(:peter_user).id )
     assert_equal(2, quiz_attempt.quiz_responses.count )
@@ -16,7 +16,7 @@ class QuizAttemptTest < Test::Unit::TestCase
   end
 
   def test_next_response_and_completed?
-    quiz_attempt = QuizAttempt.create( :start_time => Time.now,
+    quiz_attempt = QuizAttempt.create( :created_at => Time.now,
                                        :quiz_id => quizzes(:quiz_1).id,
                                        :user_id => users(:peter_user).id )
     assert_equal(2, quiz_attempt.quiz_responses.count )
@@ -89,7 +89,7 @@ class QuizAttemptTest < Test::Unit::TestCase
   def gen_time(time)
     quiz_attempt = QuizAttempt.new
     quiz_attempt.quiz_id = quizzes(:quiz_1).id
-    quiz_attempt.start_time = time
+    quiz_attempt.created_at = time
     quiz_attempt.user_id = users(:peter_user).id
     assert_equal(10, quiz_attempt.quiz.duration)
     quiz_attempt

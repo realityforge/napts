@@ -12,7 +12,7 @@ class Quiz < ActiveRecord::Base
 
   def quiz_attempt_for_user( user_id )
     quiz_attempt = QuizAttempt.find( :first, :conditions => ['user_id = ? AND quiz_id = ?', user_id, self.id ] )
-    quiz_attempt = self.quiz_attempts.create(:start_time => Time.now, :user_id => user_id ) unless quiz_attempt
+    quiz_attempt = self.quiz_attempts.create(:created_at => Time.now, :user_id => user_id ) unless quiz_attempt
     quiz_attempt
   end
 

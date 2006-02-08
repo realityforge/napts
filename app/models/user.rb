@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_many( :quiz_attempts, :order => 'start_time DESC', :dependent => true )
+  has_many( :quiz_attempts, :order => 'created_at DESC', :dependent => true )
   has_and_belongs_to_many( :demonstrates_for, 
                            :class_name => 'Subject', 
 			   :order => 'name', 

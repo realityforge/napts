@@ -2,7 +2,7 @@ class QuizAttempt < ActiveRecord::Base
   belongs_to( :quiz )
   belongs_to( :user )
   has_many( :quiz_responses, :order => :position, :dependent => true, :include => ['answers', 'question'] )
-  validates_presence_of( :start_time )
+  validates_presence_of( :created_at )
   validates_presence_of( :quiz_id )
   validates_presence_of( :user_id )
   validates_associated( :quiz )
@@ -55,7 +55,7 @@ class QuizAttempt < ActiveRecord::Base
 
   def time_up?(time)
     length = self.quiz.duration * 60
-    number = ( time.to_i - self.start_time.to_i )
+    number = ( time.to_i - self.created_at.to_i )
     return number > length
   end
 end

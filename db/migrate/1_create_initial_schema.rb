@@ -61,7 +61,7 @@ class CreateInitialSchema < ActiveRecord::Migration
 
     # QuizAttempts
     create_table('quiz_attempts', :force => true) do |t|
-      t.column 'start_time', :datetime, :null => false
+      t.column 'created_at', :datetime, :null => false
       t.column 'end_time', :datetime
       t.column 'quiz_id', :integer, :null => false
       t.column 'user_id', :integer, :null => false
