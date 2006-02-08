@@ -20,11 +20,11 @@
   <tbody>
   <% for subject_group in @subject_groups %>
     <tr>
-      <td><%= subject_group.name %></td>
+      <td><%= h(subject_group.name) %></td>
       <td>
         <ul>
         <% for subject in subject_group.subjects %>
-	  <li><%= subject.name %></li>
+	  <li><%= h(subject.name) %></li>
         <% end %>
         </ul>
       </td>

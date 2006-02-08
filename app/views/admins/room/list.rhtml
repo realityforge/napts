@@ -18,7 +18,7 @@
   <tbody>
   <% for room in @rooms %>
     <tr>
-      <td><%= room.name %></td>
+      <td><%= h(room.name) %></td>
       <td>
        <%= link_to('Show', :action => 'show', :id => room ) %> |
        <%= link_to('Delete', {:action => 'destroy', :id => room, :q => params[:q], :page => params[:page]}, 

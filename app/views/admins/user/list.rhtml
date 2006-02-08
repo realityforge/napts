@@ -20,7 +20,7 @@
   <tbody>  
   <% for user in @users %>
     <tr>
-      <td><%= user.name %></td>
+      <td><%= h(user.name) %></td>
       <td><%= user.administrator? ? 'Yes' : 'No' %></td>
       <td><%= link_to('Show', :action => 'show', :id => user.id ) %> |
           <%= link_to('Toggle Admin Status', {:action => 'toggle_admin_status', :id => user.id, 
