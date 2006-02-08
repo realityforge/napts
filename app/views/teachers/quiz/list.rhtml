@@ -1,6 +1,12 @@
 <% @page_title = "Browse Quizzes" %>
 <h1><%= current_subject.name %>: Quiz List</h1>
-<table>
+<table class="xlist">
+  <colgroup id="name-column"/>
+  <colgroup id="description-column"/>
+  <colgroup id="duration-column"/>
+  <colgroup id="preview-column"/>
+  <colgroup id="operations-column"/>
+  <thead>
   <tr>
     <th>Name</th>
     <th>Description</th>
@@ -8,23 +14,25 @@
     <th>Preview?</th>
     <th>Operations</th>
   </tr>
-  
-<% for quiz in @quizzes %>
-  <tr>
-    <td><%= quiz.name %></td>
-    <td><%= quiz.description %></td>
-    <td><%= quiz.duration %></td>
-    <td><%= quiz.prelim_enable %></td>
-    <td><%= link_to( 'Show',  :action => 'show', :id => quiz ) %> |
-    <% if quiz.prelim_enable %>
-      <%= link_to( 'Disable Preview', :action => 'disable_preview', :id => quiz ) %> |
-    <% else %>
-      <%= link_to( 'Enable Preview', :action => 'enable_preview', :id => quiz ) %> |
-    <% end %>
-    <%= link_to( 'Produce Report', :action => 'produce_report', :id => quiz ) %> |
-    <%= link_to( 'Destroy', { :action => 'destroy', :id => quiz }, :confirm => 'Are you sure?' ) %></td>
-  </tr>
-<% end %>
+  </thead>
+  <tbody>
+  <% for quiz in @quizzes %>
+    <tr>
+      <td><%= h(quiz.name) %></td>
+      <td><%= h(quiz.description) %></td>
+      <td><%= quiz.duration %></td>
+      <td><%= quiz.prelim_enable %></td>
+      <td><%= link_to( 'Show',  :action => 'show', :id => quiz ) %> |
+      <% if quiz.prelim_enable %>
+        <%= link_to( 'Disable Preview', :action => 'disable_preview', :id => quiz ) %> |
+      <% else %>
+        <%= link_to( 'Enable Preview', :action => 'enable_preview', :id => quiz ) %> |
+      <% end %>
+      <%= link_to( 'Produce Report', :action => 'produce_report', :id => quiz ) %> |
+      <%= link_to( 'Destroy', { :action => 'destroy', :id => quiz }, :confirm => 'Are you sure?' ) %></td>
+    </tr>
+  <% end %>
+  </tbody>
 </table>
 
 <%= link_to( 'Previous page', { :page => @quiz_pages.current.previous } ) if @quiz_pages.current.previous  %>

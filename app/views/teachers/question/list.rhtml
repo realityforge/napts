@@ -5,22 +5,28 @@
 <button type="submit">Search</button>
 </div>
 <%= end_form_tag %>
-<table width="100%" cellpadding="3" cellspacing="0">
+<table class="xlist">
+  <colgroup id="content-column"/>
+  <colgroup id="question_type-column"/>
+  <colgroup id="operations-column"/>
+  <thead>
   <tr>
     <th>Content</th>
     <th>Question Type</th>
     <th>Operations</th>
   </tr>
-  
-<% for question in @questions %>
-  <tr>
-    <td><%= truncate(question.content, 30) %></td>
-    <td><%= Question::QUESTION_TYPE.index( question.question_type ) %></td>
-    <td><%= link_to( 'Show', :action => 'show', :id => question ) %> |
-        <%= link_to( 'Destroy', { :action => 'destroy', :id => question }, 
+  </thead>
+  <tbody>
+  <% for question in @questions %>
+    <tr>
+      <td><%= h(truncate(question.content, 30)) %></td>
+      <td><%= Question::QUESTION_TYPE.index( question.question_type ) %></td>
+      <td><%= link_to( 'Show', :action => 'show', :id => question ) %> |
+          <%= link_to( 'Destroy', { :action => 'destroy', :id => question }, 
 	                          :confirm => 'Are you sure?' ) %></td>
-  </tr>
-<% end %>
+    </tr>
+  <% end %>
+  </tbody>
 </table>
 <%= link_to( '< Previous', :page => @question_pages.current.previous,
                            :q => params[:q] ) if @question_pages.current.previous %>

@@ -4,22 +4,29 @@
 
 <h3><%= @question.content %></h3>
 
-<table>
+<table class="xlist">
+  <colgroup id="number-column"/>
+  <colgroup id="answer_content-column"/>
+  <colgroup id="correct-column"/>
+  <thead>
   <tr>
     <th>Number</th>
     <th>Answer Content</th>
     <th>Correct</th>
   </tr>
+  </thead>
+  <tbody>
   <% i = 0
      for answer in @question.answers
      i = i + 1
   %>
     <tr>
       <td><%= i %></td>
-      <td><pre><%= answer.content %></pre></td>
-      <td><%= answer.is_correct %></td>
+      <td><pre><%= h(answer.content) %></pre></td>
+      <td><%= h(answer.is_correct) %></td>
     </tr>
   <% end %>
+  </tbody>
 </table>
 <br />
 <% if @question.has_resource? %>
@@ -29,7 +36,7 @@
       <td>
         <ul>
 	<% for resource in @question.resources %>
-	  <li><%= resource.name %> [<%= link_to('Remove', 
+	  <li><%= h(resource.name) %> [<%= link_to('Remove', 
 	                                       {:action => 'remove_resource', 
 					        :question_id => @question, 
 						:resource_id => resource.id},

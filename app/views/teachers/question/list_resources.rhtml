@@ -18,15 +18,16 @@
   </tr>
   </thead>
   <tbody>
-<% for resource in @resources %>
-  <tr>
-    <td><%= h(resource.name) %></td>
-    <td><%= h(resource.description) %></td>
-    <td><%= link_to( 'Add to Question',
-                     :action => 'add_resource', 
-                     :question_id => @question.id,
-		     :resource_id => resource ) %></td>
-  </tr>
+  <% for resource in @resources %>
+    <tr>
+      <td><%= h(resource.name) %></td>
+      <td><%= h(resource.description) %></td>
+      <td><%= link_to( 'Add to Question',
+                       :action => 'add_resource', 
+                       :question_id => @question.id,
+	               :resource_id => resource ) %></td>
+    </tr>
+  </tbody>
 <% end %>
 </table>
 <%= link_to( 'Back to Question', :action => 'show', :id => @question ) %>
