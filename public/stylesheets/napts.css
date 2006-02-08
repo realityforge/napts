@@ -89,6 +89,13 @@ a:hover { color: #fff; background-color:#000; }
   display: inline;
 }
 
+.move_arrow
+{
+  border: 0;
+  width: 11px;
+  height: 14px;
+}
+
 #ErrorExplanation
 {
   width: 400px;
