@@ -2,15 +2,15 @@
 <table width="100%" cellpadding="3" cellspacing="0">
 <tr>
   <th>Subject</th>
-  <td><%= @quiz.subject.name %></td>
+  <td><%= h(@quiz.subject.name) %></td>
 </tr>
 <tr>
   <th>Name</th>
-  <td><%= @quiz.name %></td>
+  <td><%= h(@quiz.name) %></td>
 </tr>
 <tr>
   <th>Description</th>
-  <td><%= @quiz.description %></td>
+  <td><%= h(@quiz.description) %></td>
 </tr>
 <tr>
   <th>Duration</th>
@@ -21,7 +21,7 @@
   <td>
   <ul>
   <% for room in @quiz.active_in %>
-    <li><%= room.name %></li>
+    <li><%= h(room.name) %></li>
   <% end %>
   </ul>
   </td>

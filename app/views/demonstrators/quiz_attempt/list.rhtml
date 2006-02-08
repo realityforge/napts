@@ -9,19 +9,26 @@
 </div>
 <%= end_form_tag %>
 
-<table>
-<tr>
-  <th>Name</th>
-  <th>Status</th>
-  <th>Operations</th>
-</tr>
-<% for quiz_attempt in @quiz_attempts %>
-<tr>
-  <td><%= quiz_attempt.user.name %></td>
-  <td>TODO</td>
-  <td><%= link_to('Reset', {:action => 'reset', :quiz_id => @quiz.id, :quiz_attempt_id => quiz_attempt.id}, {:post => true, :confirm => 'Are you sure?'} ) %></td>
-</tr>
-<% end %>
+<table class="xlist">
+  <colgroup id="name-column"/>
+  <colgroup id="status-column"/>
+  <colgroup id="operations-column"/>
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Status</th>
+    <th>Operations</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% for quiz_attempt in @quiz_attempts %>
+    <tr>
+      <td><%= h(quiz_attempt.user.name) %></td>
+      <td>TODO</td>
+      <td><%= link_to('Reset', {:action => 'reset', :quiz_id => @quiz.id, :quiz_attempt_id => quiz_attempt.id}, {:post => true, :confirm => 'Are you sure?'} ) %></td>
+    </tr>
+  <% end %>
+  </tbody>
 </table>
 <%= link_to( '< Previous', :page => @quiz_attempt_pages.current.previous, 
                            :quiz_id => params[:quiz_id],

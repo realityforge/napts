@@ -13,13 +13,13 @@
     <tbody> 
     <% for quiz in @quizzes %>
       <tr>
-        <td><%= quiz.name %></td>
+        <td><%= h(quiz.name) %></td>
         <td><%= link_to('Show', :action => 'show', :id => quiz.id) %></td>
       </tr>
     <% end %>
     </tbody>
   </table>
 <% else %>
-  <h1>No previews currently enabled for <%= @subject.name %></h1>
+  <h1>No previews currently enabled for <%= h(@subject.name) %></h1>
 <% end %>
 

@@ -4,13 +4,20 @@
 <% else %>
   <% @page_title = "#{@quiz_attempts[0].quiz.subject.name}: Results" %>
   <h1>Results for <%= @quiz_attempts[0].quiz.subject.name %></h1>
-  <table>
+  <table class="xlist">
+    <colgroup id="quiz-column"/>
+    <colgroup id="result-column"/>
+    <colgroup id="date-column"/>
+    <colgroup id="operations-column"/>
+    <thead>
     <tr>
       <th>Quiz</th>
       <th>Result</th>
       <th>Date</th>
       <th>Operations</th>
     </tr>
+    </thead>
+    <tbody>
     <% for attempt in @quiz_attempts %>
       <tr>
         <td><%= attempt.quiz.name %></td>
@@ -20,6 +27,7 @@
 	<td><%= link_to( 'Show', :action => 'show', :id => attempt.id ) %></td>
       </tr>
     <% end %>
+    </tbody>
   </table>
 <% end %>
 

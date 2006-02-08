@@ -22,7 +22,7 @@
   <tbody>
   <% for quiz in @quizzes %>
     <tr>
-      <td><%= quiz.name %></td>
+      <td><%= h(quiz.name) %></td>
       <td><%= ( quiz.active_in.size > 0 )? 'Yes' : 'No' %></td> 
       <td>TODO</td>
       <td><%= link_to( 'Show', :action => 'show', :id => quiz.id ) %></td>
