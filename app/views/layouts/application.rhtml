@@ -27,8 +27,8 @@
 <% style = flash[:alert] ? " alert" : (flash[:notice] ? " notice" : "") -%>
 <div id="flash" class="<%= style %>">&nbsp;<%= flash[:alert] ? h(flash[:alert]) : h(flash[:notice]) -%></div>
 
-<div id="content">
-<div id="xcontent"><%= @content_for_layout %></div>
+<div id="content-panel">
+<div id="content"><%= @content_for_layout %></div>
 </div>
 
 </div>

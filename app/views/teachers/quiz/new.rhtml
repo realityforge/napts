@@ -1,7 +1,6 @@
-<% @page_title = "#{current_subject.name}: new quiz" %>
-<h1>New quiz</h1>
-<%= start_form_tag( :action => 'new' ) %>
-  <%= render( :partial => 'form' ) %>
-  <%= submit_tag( "Create" ) %>
-<%= end_form_tag %>
-
+<%
+  @page_title = @form_title = "#{current_subject.name}: new quiz"
+  @form_action = {:action => 'new'}
+  @form_action_desc = 'Create'
+%>
+<%= render( :partial => 'form' ) %>

@@ -1,11 +1,20 @@
-<%= error_messages_for( 'quiz' ) %>
-
-<p><label for="quiz_name">Name</label><br/>
-<%= text_field( 'quiz', 'name' ) %></p>
-
-<p><label for="quiz_duration">Duration (in mins)</label><br/>
-<%= text_field( 'quiz', 'duration' ) %></p>
-
-<p><label for="quiz_description">Description</label><br/>
-<%= text_field( 'quiz', 'description' ) %></p>
-
+<%= start_form_tag(@form_action) %>
+<div class="dataset">
+  <h2><%= @form_title %></h2>
+  <%= error_messages_for( 'quiz', :header_tag => 'h3' ) %>
+<table width="100%" cellpadding="3" cellspacing="0">
+  <tr>
+    <th><label for="quiz_name">Name</label></th>
+    <td><%= text_field( 'quiz', 'name' ) %><td>
+  </tr>
+  <tr>
+    <th><label for="quiz_duration">Duration (in mins)</label></th>
+    <td><%= text_field( 'quiz', 'duration' ) %></td>
+  </tr>
+  <tr>
+    <th><label for="quiz_description">Description</label></th>
+    <td><%= text_field( 'quiz', 'description' ) %></td>
+  </tr>
+</table>
+</div>
+<%= end_form_tag %>
