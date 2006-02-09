@@ -53,6 +53,30 @@ class Teachers::QuizItemControllerTest < Test::Unit::TestCase
     assert_nil(flash[:notice])
   end
 
+  def test_toggle_preview_status_off
+    assert_equal(true,quiz_items(:qi_1).is_on_test?)
+    post(:toggle_preview_status, 
+         {:id => quiz_items(:qi_1).id, :preview_status => 'false'}, 
+         {:user_id => users(:lecturer_user).id, :role => :teacher, :subject_id => subjects(:subject_1).id})
+    assert_redirected_to(:action => 'list', :quiz_id => quiz_items(:qi_1).quiz_id)
+    assert_nil(flash[:alert])
+    assert_nil(flash[:notice])
+    quiz_items(:qi_1).reload
+    assert_equal(false,quiz_items(:qi_1).is_on_test?)
+  end
+
+  def test_toggle_preview_status_on
+    assert_equal(false,quiz_items(:qi_2).is_on_test?)
+    post(:toggle_preview_status, 
+         {:id => quiz_items(:qi_2).id, :preview_status => 'true'}, 
+         {:user_id => users(:lecturer_user).id, :role => :teacher, :subject_id => subjects(:subject_1).id})
+    assert_redirected_to(:action => 'list', :quiz_id => quiz_items(:qi_2).quiz_id)
+    assert_nil(flash[:alert])
+    assert_nil(flash[:notice])
+    quiz_items(:qi_2).reload
+    assert_equal(true,quiz_items(:qi_2).is_on_test?)
+  end
+
   def test_move_last
     assert_equal(1,quiz_items(:qi_1).position)
     post(:move_last, 

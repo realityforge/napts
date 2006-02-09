@@ -17,24 +17,6 @@ class Teachers::QuizController < Teachers::BaseController
     @quiz = current_subject.quizzes.find(params[:id])
   end
   
-  def take_off_quiz
-    @quiz = current_subject.quizzes.find(params[:id])
-    @quiz_item = @quiz.quiz_items.find(params[:quiz_item_id])
-    if ! @quiz_item.update_attributes( :is_on_test => false )
-      flash[:alert] = 'Item not successfully taken off Quiz'
-    end
-    redirect_to(:controller => 'quiz_item', :action => 'list', :quiz_id => @quiz.id )
-  end
-  
-  def put_on_quiz
-    @quiz = current_subject.quizzes.find(params[:id])
-    @quiz_item = @quiz.quiz_items.find(params[:quiz_item_id])
-    if ! @quiz_item.update_attributes( :is_on_test => true )
-      flash[:alert] = 'Item not successfully taken off Quiz'
-    end
-    redirect_to(:controller => 'quiz_item', :action => 'list', :quiz_id => @quiz.id )
-  end
-  
   def new
     @quiz = Quiz.new
     if request.post?

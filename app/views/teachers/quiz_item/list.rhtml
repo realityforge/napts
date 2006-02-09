@@ -33,11 +33,7 @@
     <td><%= render( :partial => 'positioning', :locals => {:quiz_item => quiz_item, :index => index, :quiz_items => @quiz_items} ) %></td>
     <td>
     <%= link_to('Show', :controller => 'question', :action => 'show', :id => quiz_item.question.id ) %> |
-    <% if quiz_item.is_on_test %>
-      <%= link_to('Take off Quiz', :controller => 'quiz', :action => 'take_off_quiz', :id => @quiz, :quiz_item_id => quiz_item.id ) %> |
-    <% else %>
-      <%= link_to('Put on Quiz', :controller => 'quiz', :action => 'put_on_quiz', :id => @quiz, :quiz_item_id => quiz_item.id ) %> |
-    <% end %>
+    <%= link_to('Toggle Preview Status', {:action => 'toggle_preview_status', :id => quiz_item.id, :preview_status => !quiz_item.is_on_test}, {:post => true} ) %> |
     <%= link_to('Delete', {:action => 'destroy', :id => quiz_item.id}, {:post => true} ) %>
     </td>
   </tr>
