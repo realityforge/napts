@@ -23,7 +23,7 @@ class Teachers::QuizController < Teachers::BaseController
     if ! @quiz_item.update_attributes( :is_on_test => false )
       flash[:alert] = 'Item not successfully taken off Quiz'
     end
-    redirect_to(:controller => 'quiz_item', :action => 'list', :id => @quiz.id )
+    redirect_to(:controller => 'quiz_item', :action => 'list', :quiz_id => @quiz.id )
   end
   
   def put_on_quiz
@@ -32,7 +32,7 @@ class Teachers::QuizController < Teachers::BaseController
     if ! @quiz_item.update_attributes( :is_on_test => true )
       flash[:alert] = 'Item not successfully taken off Quiz'
     end
-    redirect_to(:controller => 'quiz_item', :action => 'list', :id => @quiz.id )
+    redirect_to(:controller => 'quiz_item', :action => 'list', :quiz_id => @quiz.id )
   end
   
   def new
