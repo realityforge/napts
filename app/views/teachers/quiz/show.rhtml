@@ -26,7 +26,7 @@
   </tr>
   <tr>
     <td colspan="2">
-      <%= link_to('Show Questions', :action => 'list_quiz_items', :id => @quiz ) %>
+      <%= link_to('Show Questions', :controller => 'quiz_item', :action => 'list', :quiz_id => @quiz ) %>
     </td>
   </tr>
 </table>

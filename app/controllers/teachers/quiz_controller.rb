@@ -17,30 +17,13 @@ class Teachers::QuizController < Teachers::BaseController
     @quiz = current_subject.quizzes.find(params[:id])
   end
   
-  def list_quiz_items
-    @quiz = current_subject.quizzes.find(params[:id])
-    if params[:q]
-      conditions = ['quiz_id = ? AND questions.content LIKE ?', 
-                                 @quiz.id, "%#{params[:q]}%"]
-    else
-      conditions = ['quiz_id = ?', @quiz.id]
-    end
-    @quiz_item_pages, @quiz_items = 
-        paginate( :quiz_items, 
-	          :select => 'quiz_items.*',
-	          :joins => 'LEFT OUTER JOIN questions ON questions.id = quiz_items.question_id',
-	          :conditions => conditions,
-		  :order => 'position',
-		  :per_page => 10 )
-  end
-  
- def take_off_quiz
+  def take_off_quiz
     @quiz = current_subject.quizzes.find(params[:id])
     @quiz_item = @quiz.quiz_items.find(params[:quiz_item_id])
     if ! @quiz_item.update_attributes( :is_on_test => false )
       flash[:alert] = 'Item not successfully taken off Quiz'
     end
-    redirect_to( :action => 'list_quiz_items', :id => @quiz.id )
+    redirect_to(:controller => 'quiz_item', :action => 'list', :id => @quiz.id )
   end
   
   def put_on_quiz
@@ -49,24 +32,15 @@ class Teachers::QuizController < Teachers::BaseController
     if ! @quiz_item.update_attributes( :is_on_test => true )
       flash[:alert] = 'Item not successfully taken off Quiz'
     end
-    redirect_to( :action => 'list_quiz_items', :id => @quiz.id )
-  end
-  
-  def remove
-    @quiz = current_subject.quizzes.find(params[:id])
-    @quiz_item = @quiz.quiz_items.find(params[:quiz_item_id])
-    QuizItem.delete(@quiz_item.id)
-    redirect_to( :action => 'list_quiz_items', :id => @quiz.id )
+    redirect_to(:controller => 'quiz_item', :action => 'list', :id => @quiz.id )
   end
   
   def new
     @quiz = Quiz.new
     if request.post?
-    @quiz = Quiz.new( params[:quiz] )
-    @quiz.subject_id = current_subject.id
-      if ! @quiz.save
-        flash[:alert] = "Quiz could not be created"
-      else
+      @quiz = Quiz.new(params[:quiz])
+      @quiz.subject_id = current_subject.id
+      if @quiz.save
         flash[:notice] = 'Quiz was successfully created.'
         redirect_to( :action => 'show' , :id => @quiz.id )
       end
@@ -94,46 +68,22 @@ class Teachers::QuizController < Teachers::BaseController
     if request.get?
       if params[:q]
         conditions = ['id NOT IN (SELECT questions.id FROM questions RIGHT OUTER JOIN quiz_items ON quiz_items.question_id = questions.id WHERE quiz_items.quiz_id = ?) AND subject_group_id = ? AND questions.content LIKE ?',
-	              @quiz.id, current_subject.subject_group_id, "%#{params[:q]}%" ]
+          @quiz.id, current_subject.subject_group_id, "%#{params[:q]}%" ]
       else
         conditions = ['id NOT IN (SELECT questions.id FROM questions RIGHT OUTER JOIN quiz_items ON quiz_items.question_id = questions.id WHERE quiz_items.quiz_id = ?) AND subject_group_id = ?',
-	               @quiz.id, current_subject.subject_group_id ]
+          @quiz.id, current_subject.subject_group_id ]
       end
       @question_pages, @questions = paginate( :questions, :conditions => conditions, :per_page => 10 )
     end
   end
   
   def add_to_quiz
-    @quiz = Quiz.find(params[:id])
+    @quiz = current_subject.quizzes.find(params[:id])
     @question = Question.find(params[:question_id])
     quiz_item = @quiz.quiz_items.create( {:quiz_id => @quiz.id, :question_id => @question.id} )
     redirect_to( :action => 'add_questions', :id => @quiz )
   end
-  
-  def move_up
-    quiz_item = QuizItem.find(params[:id])
-    quiz_item.move_higher
-    redirect_to( :action => 'list_quiz_items', :id => quiz_item.quiz_id )
-  end
-  
-  def move_down
-    quiz_item = QuizItem.find(params[:id])
-    quiz_item.move_lower
-    redirect_to( :action => 'list_quiz_items', :id => quiz_item.quiz_id )
-  end
-  
-  def move_first
-    quiz_item = QuizItem.find(params[:id])
-    quiz_item.move_to_top
-    redirect_to( :action => 'list_quiz_items', :id => quiz_item.quiz_id )
-  end
-  
-  def move_last
-    quiz_item = QuizItem.find(params[:id])
-    quiz_item.move_to_bottom
-    redirect_to( :action => 'list_quiz_items', :id => quiz_item.quiz_id )
-  end
-  
+
 private 
   def update_preview(value)
     @quiz = current_subject.quizzes.find(params[:id])
