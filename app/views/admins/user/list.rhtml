@@ -19,7 +19,7 @@
   </thead>
   <tbody>  
   <% for user in @users %>
-    <tr>
+    <tr class="<%= cycle("even", "odd") %>">
       <td><%= h(user.name) %></td>
       <td><%= user.administrator? ? 'Yes' : 'No' %></td>
       <td><%= link_to('Show', :action => 'show', :id => user.id ) %> |

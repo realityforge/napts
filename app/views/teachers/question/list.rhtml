@@ -18,8 +18,8 @@
   </thead>
   <tbody>
   <% for question in @questions %>
-    <tr>
-      <td><%= h(truncate(question.content, 30)) %></td>
+    <tr class="<% cycle("even", "odd") %>">
+      <td><span title="<%= h(question.content) %>"><%= h(truncate(question.content, 30)) %></span></td>
       <td><%= Question::QUESTION_TYPE.index( question.question_type ) %></td>
       <td><%= link_to( 'Show', :action => 'show', :id => question ) %> |
           <%= link_to( 'Destroy', { :action => 'destroy', :id => question }, 

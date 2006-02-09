@@ -19,7 +19,7 @@
   </thead>
   <tbody>
   <% for subject_group in @subject_groups %>
-    <tr>
+    <tr class="<%= cycle("even", "odd") %>">
       <td><%= h(subject_group.name) %></td>
       <td>
         <ul>

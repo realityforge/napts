@@ -17,7 +17,7 @@
   </thead>
   <tbody>
   <% for room in @rooms %>
-    <tr>
+    <tr class="<%= cycle("even", "odd") %>">
       <td><%= h(room.name) %></td>
       <td>
        <%= link_to('Show', :action => 'show', :id => room ) %> |

@@ -19,10 +19,10 @@
   <% for quiz in @quizzes %>
     <tr>
       <td><%= h(quiz.name) %></td>
-      <td><%= h(quiz.description) %></td>
+      <td><span title="<%= h(quiz.description) %>"><%= h(quiz.description) %></span></td>
       <td><%= quiz.duration %></td>
       <td><%= quiz.prelim_enable %></td>
-      <td><%= link_to( 'Show',  :action => 'show', :id => quiz ) %> |
+      <td><%= link_to( 'Show',  :action => 'show', :id => quiz) %> |
       <% if quiz.prelim_enable %>
         <%= link_to( 'Disable Preview', :action => 'disable_preview', :id => quiz ) %> |
       <% else %>

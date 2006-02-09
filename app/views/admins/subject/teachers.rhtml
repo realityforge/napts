@@ -6,17 +6,23 @@
 </div>
 <%= end_form_tag %>
 
-<table>
-<tr>
-  <th>Name</th>
-  <th>Operations</th>
-</tr>
-<% for user in @users %>
-<tr>
-  <td><%= h(user.name) %></td>
-  <td><%= link_to('Add Teacher', {:action => 'add_teacher', :id => @subject.id, :user_id => user.id, :q => params[:q], :page => params[:page]}, {:post => true} ) %></td>
-</tr>
-<% end %>
+<table class="xlist">
+  <colgroup id="name-column">
+  <colgroup id="operations-column">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Operations</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% for user in @users %>
+    <tr class="<%= cycle("even", "odd") %>">
+      <td><%= h(user.name) %></td>
+      <td><%= link_to('Add Teacher', {:action => 'add_teacher', :id => @subject.id, :user_id => user.id, :q => params[:q], :page => params[:page]}, {:post => true} ) %></td>
+    </tr>
+  <% end %>
+  </tbody>
 </table>
 <%= link_to( '< Previous', :page => @user_pages.current.previous, 
                            :id => params[:id],
