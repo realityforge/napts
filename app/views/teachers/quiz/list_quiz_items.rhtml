@@ -6,7 +6,6 @@
 </div>
 <%= end_form_tag %>
 <table class="xlist">
-  <table class="xlist">
   <colgroup id="question-column"/>
   <colgroup id="summary-column"/>
   <colgroup id="on_test-column"/>
@@ -27,7 +26,7 @@
     for quiz_item in @quiz_items
       index += 1
   %>
-  <tr>
+  <tr class="<%= cycle("even", "odd") %>">
     <td><%= quiz_item.question.id %></td>
     <td><%= h(truncate(quiz_item.question.content, 30)) %></td>
     <td><%= quiz_item.is_on_test %></td>

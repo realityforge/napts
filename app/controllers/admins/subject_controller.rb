@@ -41,8 +41,7 @@ class Admins::SubjectController < Admins::BaseController
     if params[:q]
       conditions = 
         ['id NOT IN (SELECT user_id FROM teachers WHERE subject_id = ?) AND users.name LIKE ?', 
-        @subject.id, 
-        "%#{params[:q]}%"]
+        @subject.id, "%#{params[:q]}%"]
     else
       conditions = ['id NOT IN (SELECT user_id FROM teachers WHERE subject_id = ?)', @subject.id]
     end

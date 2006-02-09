@@ -34,11 +34,7 @@ class Teachers::QuizController < Teachers::BaseController
 		  :per_page => 10 )
   end
   
-  def produce_report
-    @quiz = current_subject.quizzes.find(params[:id])
-  end
-  
-  def take_off_quiz
+ def take_off_quiz
     @quiz = current_subject.quizzes.find(params[:id])
     @quiz_item = @quiz.quiz_items.find(params[:quiz_item_id])
     if ! @quiz_item.update_attributes( :is_on_test => false )
