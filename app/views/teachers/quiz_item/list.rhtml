@@ -38,7 +38,7 @@
     <% else %>
       <%= link_to('Put on Quiz', :controller => 'quiz', :action => 'put_on_quiz', :id => @quiz, :quiz_item_id => quiz_item.id ) %> |
     <% end %>
-    <%= link_to('Delete', :action => 'destroy', :id => quiz_item.id ) %>
+    <%= link_to('Delete', {:action => 'destroy', :id => quiz_item.id}, {:post => true} ) %>
     </td>
   </tr>
   <% end %>
