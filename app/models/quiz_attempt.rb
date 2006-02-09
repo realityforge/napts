@@ -9,14 +9,16 @@ class QuizAttempt < ActiveRecord::Base
   validates_associated( :user )
 
   def after_create
+    quiz_items = self.quiz.quiz_items.find_all{ |x| x.is_on_test? }
+    if self.quiz.randomise?
+      quiz_items = quiz_items.sort{|a, b| rand(3)-1}.slice(0...quiz_items.length)
+    end
     count = 1
-    for quiz_item in self.quiz.quiz_items
-      if quiz_item.is_on_test?
-        self.quiz_responses.create(:completed => false,
-                                   :question_id => quiz_item.question.id,
-                                   :position => count )
-        count += count
-      end
+    for quiz_item in quiz_items
+      self.quiz_responses.create(:completed => false,
+                                 :question_id => quiz_item.question.id,
+                                 :position => count )
+      count += count
     end
   end
 

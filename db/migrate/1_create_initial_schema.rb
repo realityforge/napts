@@ -50,6 +50,7 @@ class CreateInitialSchema < ActiveRecord::Migration
       t.column 'name', :string, :limit => 20, :null => false
       t.column 'description', :text, :limit => 120, :null => false
       t.column 'duration', :integer, :null => false
+      t.column 'randomise', :boolean, :null => false
       t.column 'subject_id', :integer, :null => false
       t.column 'created_at', :datetime
       t.column 'prelim_enable', :boolean, :null => false
@@ -63,6 +64,7 @@ class CreateInitialSchema < ActiveRecord::Migration
     create_table('quiz_attempts', :force => true) do |t|
       t.column 'created_at', :datetime, :null => false
       t.column 'end_time', :datetime
+     
       t.column 'quiz_id', :integer, :null => false
       t.column 'user_id', :integer, :null => false
     end
