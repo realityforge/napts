@@ -12,7 +12,7 @@
     </thead>
     <tbody> 
     <% for quiz in @quizzes %>
-      <tr>
+      <tr class="<%= cycle("even", "odd") %>">
         <td><%= h(quiz.name) %></td>
         <td><%= link_to('Show', :action => 'show', :id => quiz.id) %></td>
       </tr>

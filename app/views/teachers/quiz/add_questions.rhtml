@@ -22,7 +22,7 @@
   </thead>
   <tbody>
   <% for question in @questions %>
-    <tr>
+    <tr class="<%= cycle("even", "odd") %>">
       <td><%= question.id %></td>
       <td><%= h(truncate(question.content, 30)) %></td>
       <td><%= Question::QUESTION_TYPE.index( question.question_type ) %></td>

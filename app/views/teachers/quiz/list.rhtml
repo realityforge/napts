@@ -17,7 +17,7 @@
   </thead>
   <tbody>
   <% for quiz in @quizzes %>
-    <tr>
+    <tr class="<%= cycle("even", "odd") %>">
       <td><%= h(quiz.name) %></td>
       <td><span title="<%= h(quiz.description) %>"><%= h(quiz.description) %></span></td>
       <td><%= quiz.duration %></td>

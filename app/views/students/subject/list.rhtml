@@ -17,7 +17,7 @@
   </thead>
   <tbody>  
 <% for subject in @subjects %>
-  <tr>
+  <tr class="<%= cycle("even", "odd") %>">
     <td><%= h(subject.name) %></td>
     <td>
     <%= link_to( 'Previews', :controller => 'preview', :action => 'list', :subject_id => subject ) %> |

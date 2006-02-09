@@ -20,7 +20,7 @@
      for answer in @question.answers
      i = i + 1
   %>
-    <tr>
+    <tr class="<%= cycle("even", "odd") %>">
       <td><%= i %></td>
       <td><pre><%= h(answer.content) %></pre></td>
       <td><%= h(answer.is_correct) %></td>
