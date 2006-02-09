@@ -22,7 +22,7 @@
   </thead>
   <tbody>
   <% for quiz_attempt in @quiz_attempts %>
-    <tr>
+    <tr class="<%= cycle("even", "odd") %>">
       <td><%= h(quiz_attempt.user.name) %></td>
       <td>TODO</td>
       <td><%= link_to('Reset', {:action => 'reset', :quiz_id => @quiz.id, :quiz_attempt_id => quiz_attempt.id}, {:post => true, :confirm => 'Are you sure?'} ) %></td>

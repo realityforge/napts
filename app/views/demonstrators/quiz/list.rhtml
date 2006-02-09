@@ -21,7 +21,7 @@
   </thead>
   <tbody>
   <% for quiz in @quizzes %>
-    <tr>
+    <tr class="<%= cycle("even", "odd") %>">
       <td><%= h(quiz.name) %></td>
       <td><%= ( quiz.active_in.size > 0 )? 'Yes' : 'No' %></td> 
       <td>TODO</td>
