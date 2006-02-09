@@ -1,29 +1,31 @@
 class QuizAttempt < ActiveRecord::Base
   belongs_to( :quiz )
   belongs_to( :user )
-  has_many( :quiz_responses, :order => :position, :dependent => true, :include => ['answers', 'question'] )
+  has_many( :quiz_responses, :order => 'position', :dependent => true, :include => ['answers', 'question'] )
   validates_presence_of( :created_at )
   validates_presence_of( :quiz_id )
   validates_presence_of( :user_id )
-  validates_associated( :quiz )
-  validates_associated( :user )
 
   def after_create
     quiz_items = self.quiz.quiz_items.find_all{ |x| x.is_on_test? }
     if self.quiz.randomise?
-      quiz_items = quiz_items.sort{|a, b| rand(3)-1}.slice(0...quiz_items.length)
+      new_quiz_items = []
+      for i in 0...quiz_items.length
+      	new_quiz_items << quiz_items.delete_at( rand(quiz_items.length) )
+      end
+      quiz_items = new_quiz_items
     end
     count = 1
     for quiz_item in quiz_items
       self.quiz_responses.create(:completed => false,
-                                 :question_id => quiz_item.question.id,
+                                 :question_id => quiz_item.question_id,
                                  :position => count )
-      count += count
+      count += 1
     end
   end
 
   def next_response
-    quiz_responses.find(:first, :conditions => ['completed = ?', false], :order => 'position' )
+    quiz_responses.find(:first, :conditions => ['completed = ?', false] )
   end
 
   def completed?
