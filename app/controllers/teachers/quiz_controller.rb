@@ -1,16 +1,17 @@
 class Teachers::QuizController < Teachers::BaseController
+  verify :method => :get, :only => %w( list show )
+  verify :method => :post, :only => %w( toggle_preview_status destroy )
+
   def list
-    @quiz_pages, @quizzes = paginate( :quizzes,
-                                      :conditions => ['subject_id = ?', current_subject.id],
-                                      :per_page => 10 )
+    @quiz_pages, @quizzes = paginate(:quizzes,
+                                     :conditions => ['subject_id = ?', current_subject.id],
+                                     :per_page => 10 )
   end
-  
-  def disable_preview
-    update_preview(false)
-  end
-  
-  def enable_preview
-    update_preview(true)
+
+  def toggle_preview_status
+    quiz = current_subject.quizzes.find(params[:id])
+    quiz.update_attribute(:prelim_enable,(params[:preview_status] == 'true'))
+    redirect_to(:action => 'list')
   end
   
   def show
@@ -62,17 +63,7 @@ class Teachers::QuizController < Teachers::BaseController
   def add_to_quiz
     @quiz = current_subject.quizzes.find(params[:id])
     @question = Question.find(params[:question_id])
-    quiz_item = @quiz.quiz_items.create( {:quiz_id => @quiz.id, :question_id => @question.id} )
+    quiz_item = @quiz.quiz_items.create( :question_id => @question.id )
     redirect_to( :action => 'add_questions', :id => @quiz )
   end
-
-private 
-  def update_preview(value)
-    @quiz = current_subject.quizzes.find(params[:id])
-    if ! @quiz.update_attributes( :prelim_enable => value )
-      flash[:alert] = "Failed to update quiz."
-    end
-    redirect_to( :action => 'list', :id => @quiz.id )
-  end
-  
 end

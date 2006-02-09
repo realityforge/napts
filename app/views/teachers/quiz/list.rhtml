@@ -23,12 +23,8 @@
       <td><%= quiz.duration %></td>
       <td><%= quiz.prelim_enable %></td>
       <td><%= link_to( 'Show',  :action => 'show', :id => quiz) %> |
-      <% if quiz.prelim_enable %>
-        <%= link_to( 'Disable Preview', :action => 'disable_preview', :id => quiz ) %> |
-      <% else %>
-        <%= link_to( 'Enable Preview', :action => 'enable_preview', :id => quiz ) %> |
-      <% end %>
-      <%= link_to( 'Destroy', { :action => 'destroy', :id => quiz }, :confirm => 'Are you sure?' ) %></td>
+      <%= link_to( 'Toggle Preview Status', {:action => 'toggle_preview_status', :id => quiz, :preview_status => !quiz.prelim_enable?}, {:post => 'true'} ) %> |
+      <%= link_to('Destroy', { :action => 'destroy', :id => quiz }, {:confirm => 'Are you sure?', :post => true}) %></td>
     </tr>
   <% end %>
   </tbody>
