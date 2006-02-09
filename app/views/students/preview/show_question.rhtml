@@ -1,4 +1,5 @@
 <% @page_title = "#{@quiz_item.quiz.subject.name}: '#{h(@quiz_item.quiz.name)}' Q#{@quiz_item.position}" %>
+<% @form_title = "Question #{@quiz_item.position}" %>
 <% @question = @quiz_item.question %>
 <%= render( :partial => 'students/question' ) %>
 <br/>

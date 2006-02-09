@@ -24,6 +24,39 @@ div.dataset h2
   width: 12em;
 }
 
+div.dataset_question
+{
+  margin: 10px 0px 0px 0px;
+  padding: 8px 5px 8px 5px;
+  background-color: white;
+  border: 1px solid #000;
+  position: relative;
+}
+
+div.dataset_answer
+{
+  margin: 2px 2px 2px 2px;
+  padding: 8px 5px 8px 5px;
+  background-color: white;
+  border: 1px solid #000;
+  position: relative;
+}
+
+table.answers
+{
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  border: 1px solid #000;
+}
+
+table.answers td.cb
+{
+  margin: 2px 2px 2px 2px;
+  padding: 8px 5px 8px 5px;
+  width: 20px;
+}
+
 table.xlist
 {
   border: 1px solid black;

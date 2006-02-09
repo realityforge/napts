@@ -1,6 +1,9 @@
 <div class="dataset">
   <%= error_messages_for('question', :header_tag => 'h3') %>
-  <h2><%= @question.content %></h2>
+  <h2><%= @form_title %></h2>
+  <div class="dataset_question">
+    <%= @question.content %>
+  </div>
 <% if @question.question_type == 1 %>
   <% button_type = "checkbox" %>
   <% message = "Please select all correct answers" %>
@@ -9,13 +12,13 @@
   <% message = "Please select the one correct answer" %>
 <% end %>
 <p><%= message %></p>
-<table width="100%" cellpadding="3" cellspacing="0">
+<table class="answers">
   <% for answer in @question.answers %>
     <tr>
-      <td>
+      <td class="cb">
         <input type="<%= button_type %>" name="answers[]" value="<%= answer.id %>" />
       </td>
-      <td><%= answer.content %></td>
+      <td><div class="dataset_answer"><%= answer.content %></div></td>
     </tr>
   <% end %>
 </table>
