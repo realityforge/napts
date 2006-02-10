@@ -1,4 +1,11 @@
 <% @page_title = "Browse Quizzes" %>
+<%= start_form_tag({:action => 'list', :id => @quiz}, {:method => :get}) %>
+<div>
+<input type="text" name="q" value="<%= params[:q] %>"/>
+<button type="submit">Search</button>
+</div>
+<%= end_form_tag %>
+
 <h1><%= current_subject.name %>: Quiz List</h1>
 <table class="xlist">
   <colgroup id="name-column"/>
@@ -25,9 +32,9 @@
       <td><%= quiz.duration %></td>
       <td><%= quiz.prelim_enable %></td>
       <td><%= quiz.randomise %></td>
-      <td><%= link_to( 'Show',  :action => 'show', :id => quiz) %> |
-      <%= link_to( 'Toggle Preview Status', {:action => 'toggle_preview_status', :id => quiz, :preview_status => !quiz.prelim_enable?}, {:post => 'true'} ) %> |
-      <%= link_to('Destroy', { :action => 'destroy', :id => quiz }, {:confirm => 'Are you sure?', :post => true}) %></td>
+      <td><%= link_to('Show',  :action => 'show', :id => quiz) %> |
+      <%= link_to('Toggle Preview Status', {:action => 'toggle_preview_status', :id => quiz, :preview_status => !quiz.prelim_enable?}, {:post => 'true'} ) %> |
+      <%= link_to('Destroy', {:action => 'destroy', :id => quiz}, {:confirm => 'Are you sure?', :post => true}) %></td>
     </tr>
   <% end %>
   </tbody>

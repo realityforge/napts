@@ -45,5 +45,5 @@
 <%= link_to('Next >', :page => @quiz_item_pages.current.next, 
 		      :q => params[:q]) if @quiz_item_pages.current.next %>
 <br/>
-<%= link_to( 'Add questions', :controller => 'quiz', :action => 'add_questions', :id => @quiz ) %>
+<%= link_to( 'Add questions', :controller => 'quiz', :action => 'list_questions', :id => @quiz ) %>
 <%= link_to( 'Return to Quiz', :controller => 'quiz', :action => 'show', :id => @quiz ) %>

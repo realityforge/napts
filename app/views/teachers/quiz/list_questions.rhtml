@@ -1,5 +1,5 @@
 <% @page_title = "Add questions to #{@quiz.name}" %>
-<%= start_form_tag({:action => 'add_questions', :id => @quiz}, {:method => :get}) %>
+<%= start_form_tag({:action => 'list_questions', :id => @quiz}, {:method => :get}) %>
 <div>
 <input type="text" name="q" value="<%= params[:q] %>"/>
 <button type="submit">Search</button>
@@ -26,7 +26,7 @@
       <td><%= question.id %></td>
       <td><%= h(truncate(question.content, 30)) %></td>
       <td><%= Question::QUESTION_TYPE.index( question.question_type ) %></td>
-      <td><%= link_to( 'Add to Quiz', :action => 'add_to_quiz', :id => @quiz, :question_id => question.id ) %></td>
+      <td><%= link_to('Add to Quiz', :action => 'add_item', :id => @quiz, :question_id => question.id ) %></td>
     </tr>
   <% end %>
   </tbody>

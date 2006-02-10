@@ -6,6 +6,4 @@ class QuizItem < ActiveRecord::Base
   validates_presence_of( :quiz_id )
   validates_presence_of( :question_id )
   validates_presence_of( :position )
-  validates_associated( :quiz )
-  validates_associated( :question )
 end
