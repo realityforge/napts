@@ -7,15 +7,14 @@
 </tr>
 <tr>
   <th>Description</th>
-  <td><span title="<%= h(@resource.description) %>"><%= truncate(h(@resource.description), 20) %></span></td>
+  <td><%= h(@resource.description) %></td>
 </tr>
 <tr>
   <th>Content type</th>
   <td><%= h(@resource.content_type) %></td>
 </tr>
-<tr>
-  <img src="<%= url_for(:action => 'picture', :id => @resource) %>"/>
-<tr>
 </table>
 </div>
+
+<%= link_to( 'View', :action => 'view', :id => @resource ) %>
 <%= link_to( 'Edit', :action => 'edit', :id => @resource ) %>

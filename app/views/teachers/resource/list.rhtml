@@ -32,7 +32,7 @@
     </td>
     <td>
     <%= link_to( 'Show', :action => 'show', :id => resource ) %> |
-    <%= link_to( 'Download', :action => 'download', :id => resource ) %> |
+    <%= link_to( 'Download', :action => 'view', :id => resource, :disposition => 'download' ) %> |
     <% if resource.questions.size > 0 %>
       <% message = 'This resource is currently being used in some questions. Are you sure you want to destroy it?' %>
     <% else %>

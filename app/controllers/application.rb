@@ -78,10 +78,8 @@ private
     response.headers["Pragma"] = "no-cache"
 
     # HTTP 1.1 (disable caching of any kind)
-    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
-
-    # HTTP 1.1 (Internet Explorer should always check)
-    response.headers["Cache-Control"] = "pre-check=0, post-check=0"
+    # HTTP 1.1 'pre-check=0, post-check=0' => (Internet Explorer should always check)
+    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate, pre-check=0, post-check=0"
   end
 
   def check_authentication

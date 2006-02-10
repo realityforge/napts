@@ -7,10 +7,12 @@
   <th><label for="resource_description">Description</label></th>
   <td><%= text_field( 'resource', 'description' ) %></td>
 </tr>
+<% if @action_name == 'new' %>
 <tr>
   <th><label for="resource_data">File</label></th>
   <td><%= file_field('resource', 'data' ) %></td>
 </tr>
+<% end %>
 </table>
 <button type="submit"><%= @form_action_desc %></button>
 <%= link_to_button('Cancel', @form_cancel_action) %>
