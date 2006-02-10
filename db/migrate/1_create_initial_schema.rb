@@ -117,7 +117,7 @@ class CreateInitialSchema < ActiveRecord::Migration
                                :name => 'resource_data_resource_id_fk')
 
     #Questions_Resources
-    create_table('questions_resources', :force => true) do |t|
+    create_table('questions_resources', :id => false, :force => true) do |t|
       t.column 'question_id', :integer, :null => false
       t.column 'resource_id', :integer, :null => false
     end

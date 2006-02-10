@@ -15,6 +15,11 @@
     <th><label for="quiz_description">Description</label></th>
     <td><%= text_field( 'quiz', 'description' ) %></td>
   </tr>
+  <tr>
+    <th><label for="quiz_randomise">Randomise?</label></th>
+    <td><%= check_box( 'quiz', 'randomise' ) %></td>
+  </tr>
 </table>
+  <button type="submit"><%= @form_action_desc %></button>
 </div>
 <%= end_form_tag %>

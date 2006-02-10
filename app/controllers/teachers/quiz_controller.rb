@@ -19,7 +19,7 @@ class Teachers::QuizController < Teachers::BaseController
   end
   
   def new
-    @quiz = Quiz.new
+    @quiz = Quiz.new( :randomise => true )
     if request.post?
       @quiz = Quiz.new(params[:quiz])
       @quiz.subject_id = current_subject.id

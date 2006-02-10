@@ -4,6 +4,7 @@ class Quiz < ActiveRecord::Base
   has_and_belongs_to_many( :active_in, :class_name => 'Room', :join_table => 'quizzes_rooms' )
   belongs_to( :subject )
   validates_presence_of( :subject_id )
+  validates_presence_of( :randomise )
   validates_uniqueness_of( :name )
   validates_associated( :subject )
   validates_length_of( :name, :within => 1..20 )
@@ -12,7 +13,7 @@ class Quiz < ActiveRecord::Base
 
   def quiz_attempt_for_user( user_id )
     quiz_attempt = QuizAttempt.find( :first, :conditions => ['user_id = ? AND quiz_id = ?', user_id, self.id ] )
-    quiz_attempt = self.quiz_attempts.create(:created_at => Time.now, :user_id => user_id ) unless quiz_attempt
+    quiz_attempt = self.quiz_attempts.create!( :created_at => Time.now, :user_id => user_id ) unless quiz_attempt
     quiz_attempt
   end
 
