@@ -5,6 +5,7 @@
   <colgroup id="description-column"/>
   <colgroup id="duration-column"/>
   <colgroup id="preview-column"/>
+  <colgroup id="randomise-column"/>
   <colgroup id="operations-column"/>
   <thead>
   <tr>
@@ -12,6 +13,7 @@
     <th>Description</th>
     <th>Duration</th>
     <th>Preview?</th>
+    <th>Randomise?</th>
     <th>Operations</th>
   </tr>
   </thead>
@@ -22,6 +24,7 @@
       <td><span title="<%= h(quiz.description) %>"><%= h(quiz.description) %></span></td>
       <td><%= quiz.duration %></td>
       <td><%= quiz.prelim_enable %></td>
+      <td><%= quiz.randomise %></td>
       <td><%= link_to( 'Show',  :action => 'show', :id => quiz) %> |
       <%= link_to( 'Toggle Preview Status', {:action => 'toggle_preview_status', :id => quiz, :preview_status => !quiz.prelim_enable?}, {:post => 'true'} ) %> |
       <%= link_to('Destroy', { :action => 'destroy', :id => quiz }, {:confirm => 'Are you sure?', :post => true}) %></td>

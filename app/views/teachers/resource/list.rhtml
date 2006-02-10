@@ -15,6 +15,7 @@
     <th>Name</th>
     <th>Description</th>
     <th>Content type</th>
+    <th>Associated with Questions</th>
     <th>Operations</th>
   </tr>
   </thead>
@@ -25,10 +26,20 @@
     <td><span title="<%= h(resource.description) %>"><%= truncate(h(resource.description), 20) %></span></td>
     <td><%= h(resource.content_type) %></td>
     <td>
+    <% for question in resource.questions %>
+      q<%= question.question_id %> 
+    <% end %>
+    </td>
+    <td>
     <%= link_to( 'Show', :action => 'show', :id => resource ) %> |
     <%= link_to( 'Download', :action => 'download', :id => resource ) %> |
-    <%= link_to( 'Destroy', {:action => 'destroy', :id => resource, :q => params[:q], :page => params[:page]}, 
-                            {:confirm => 'Are you sure?', :post => true} ) %>
+    <% if resource.questions.size > 0 %>
+      <% message = 'This resource is currently being used in some questions. Are you sure you want to destroy it?' %>
+    <% else %>
+      <% message = 'Are you sure?' %>
+    <% end %>
+    <%= link_to( 'Destroy', {:action => 'destroy', :id => resource, :q => params[:q], :page => params[:page]},
+                            {:confirm => message, :post => true} ) %>
     </td>
   </tr>
 <% end %>
