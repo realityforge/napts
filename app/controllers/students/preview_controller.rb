@@ -6,12 +6,13 @@ class Students::PreviewController < Students::BaseController
   end
 
   def show
-    @quiz = Quiz.find(params[:id], :include => 'subject')
+    @quiz = Quiz.find(params[:id], :conditions => ['prelim_enable = ?', true], :include => 'subject')
   end
 
   def show_question
+    @quiz = Quiz.find(params[:id], :conditions => ['prelim_enable = ?', true])
     @quiz_item = QuizItem.find(:first,
-                               :conditions => ['quiz_id = ? AND position = ?', params[:id], params[:position] ] )
-    raise ActiveRecord::RecordNotFound, "Couldn't find QuizItem with quiz_id = #{params[:id]} AND position = #{params[:position]}" unless @quiz_item
+                               :conditions => ['quiz_id = ? AND position = ?', @quiz.id, params[:position] ] )
+    raise ActiveRecord::RecordNotFound, "Couldn't find QuizItem with prelim_enable = true AND quiz_id = #{params[:id]} AND position = #{params[:position]}" unless @quiz_item
   end
 end
