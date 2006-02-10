@@ -1,4 +1,6 @@
 <% @page_title = "Browse Room '#{@room.name}'" %>
+<div class="dataset">
+  <h2>Browse Room</h2>
 <table>
   <tr><th>Name</th><td><%= @room.name %></td></tr>
   <tr>
@@ -12,5 +14,5 @@
     </td>
   </tr>
 </table>
-<%= link_to( 'Edit', :action => 'edit', :id => @room ) %>
-    
+<%= link_to_button( 'Edit', :action => 'edit', :id => @room ) %>
+</div>

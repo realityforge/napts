@@ -1,5 +1,7 @@
 <% @page_title = "Browse Quiz #{@quiz.subject.name}: #{@quiz.name}" %>
-<table width="100%" cellpadding="3" cellspacing="0">
+<div class="dataset">
+  <h2>Browse Quiz</h2>
+<table>
 <tr>
   <th>Subject</th>
   <td><%= h(@quiz.subject.name) %></td>
@@ -38,6 +40,4 @@
 </table>
 <%= link_to('List Quiz Attempts', :controller => 'quiz_attempt', :action => 'list', :quiz_id => @quiz) %>
 <%= link_to('Enable Quiz in Rooms', :action => 'enable', :id => @quiz ) %>
-
-
-
+</div>

@@ -8,6 +8,37 @@ div.dataset
   position: relative;
 }
 
+div.dataset table
+{
+  width: 100%;
+  padding: 3;
+  border-spacing: 1;
+  
+}
+
+div.dataset th
+{
+  width: 40%;
+  text-align: right;
+  padding-right: 20px;
+  vertical-align: text-top;
+}
+
+div.dataset td
+{
+  width: 60%;
+  text-align: left;
+  padding-left: 20px;
+}
+
+div.dataset ul
+{
+  width: 60%;
+  text-align: left;
+  padding: 0px 0px 0px 20px;
+  margin: 0px 0px 0px 0px;
+}
+
 div.dataset h2
 {
   margin: 0;
