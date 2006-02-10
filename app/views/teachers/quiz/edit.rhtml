@@ -1,5 +1,6 @@
 <%
-  @page_title = @form_title = "#{@current_subject.name}: Editing #{@quiz.name}" 
+  @page_title = "#{@current_subject.name}: Editing #{@quiz.name}" 
+  @form_title = "Editing #{@quiz.name}"
   @form_action = { :action => 'edit', :id => @quiz }
   @form_action_desc = 'Save'
 %>

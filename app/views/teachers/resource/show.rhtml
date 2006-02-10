@@ -1,4 +1,5 @@
 <% @page_title = "Browse Resource '#{@resource.name}'" %>
+<div class="dataset">
 <table width="100%" cellpadding="3" cellspacing="0">
 <tr>
   <th>Name</th>
@@ -16,5 +17,5 @@
   <img src="<%= url_for(:action => 'picture', :id => @resource) %>"/>
 <tr>
 </table>
-
+</div>
 <%= link_to( 'Edit', :action => 'edit', :id => @resource ) %>

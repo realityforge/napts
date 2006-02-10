@@ -1,5 +1,7 @@
-<%= error_messages_for('question') %>
-<h2>Question <%= @question.id %></h2>
+<%= start_form_tag(@form_action) %>
+<div class="dataset">
+  <h2><%= @form_title %></h2>
+  <%= error_messages_for('question', :header_tag => 'h3') %>
 <div class="question">
   <div class="question_header">
     <div class="question_type">
@@ -40,3 +42,8 @@
 <% end %>
 </div>
 <p><a onclick="another_answer(); return false;" href="#">another answer</a></p>
+<button type="submit"><%= @form_action_desc %></button>
+<% if @action_name == 'edit' %>
+  <%= link_to_button('Cancel', @form_cancel_action) %>
+<% end %>
+</div>
