@@ -7,7 +7,7 @@ class QuizAttempt < ActiveRecord::Base
   validates_presence_of( :user_id )
 
   def after_create
-    quiz_items = self.quiz.quiz_items.find_all{ |x| x.is_on_test? }
+    quiz_items = self.quiz.quiz_items.find( :all, :conditions => ['is_on_test = ?', true] )
     if self.quiz.randomise?
       new_quiz_items = []
       for i in 0...quiz_items.length
