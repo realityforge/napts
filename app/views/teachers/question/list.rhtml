@@ -22,8 +22,8 @@
       <td><%= h(truncate(question.content, 30)) %></td>
       <td><%= Question::QUESTION_TYPE.index( question.question_type ) %></td>
       <td><%= link_to( 'Show', :action => 'show', :id => question ) %> |
-          <%= link_to( 'Destroy', { :action => 'destroy', :id => question }, 
-	                          :confirm => 'Are you sure?' ) %></td>
+          <%= link_to( 'Destroy', {:action => 'destroy', :id => question}, 
+	                          {:post => true, :confirm => 'Are you sure?'} ) %></td>
     </tr>
   <% end %>
   </tbody>

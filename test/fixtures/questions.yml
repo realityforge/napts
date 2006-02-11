@@ -60,4 +60,10 @@ q9:
   content: "Why did the chicken cross the road?"
   question_type: 1
   subject_group_id: 3
+
+q10:
+  id: 10
+  content: "Some Dummy Question"
+  question_type: 1
+  subject_group_id: 1
   

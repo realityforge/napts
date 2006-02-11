@@ -1,5 +1,5 @@
 <% @page_title = "#{current_subject.name}: Adding resources to Question #{@question.id}" %>
-<%= start_form_tag({:action => 'add_resource'},{:method => :get}) %>
+<%= start_form_tag({:action => 'list_resources'},{:method => :get}) %>
 <div>
 <input type="text" name="q" value="<%= params[:q] %>"/>
 <button type="submit">Search</button>
@@ -26,11 +26,15 @@
         <%= truncate(h(resource.description), 20) %></span>
       </td>
       <td><%= link_to( 'Add to Question',
-                       :action => 'add_resource', 
-                       :question_id => @question.id,
-	               :resource_id => resource ) %></td>
+                       {:action => 'add_resource', :id => @question.id, :resource_id => resource},
+		       {:post => true} ) %></td>
     </tr>
+  <% end %>
   </tbody>
-<% end %>
 </table>
-<%= link_to( 'Back to Question', :action => 'show', :id => @question ) %>
+<%= link_to( '< Previous', :page => @resource_pages.current.previous,
+                           :q => params[:q] ) if @resource_pages.current.previous %>
+<%= link_to( 'Next >', :page => @resource_pages.current.next,
+                       :q => params[:q] ) if @resource_pages.current.next %> 
+<br/>
+<%= link_to('Back to Question', :action => 'show', :id => @question ) %>
