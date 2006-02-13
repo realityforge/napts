@@ -25,13 +25,13 @@ class QuizTest < Test::Unit::TestCase
   
   def test_completed_attempts
     quiz = Quiz.find( quizzes(:quiz_2).id )
-    assert_equal( 3, quiz.completed_attempts )
+    assert_equal( 3, quiz.completed_attempts? )
   end
   
   def test_active_attempts
     quiz = Quiz.find( quizzes(:quiz_3).id )
-    assert_equal( 1, quiz.active_attempts )
-    assert_equal( 0, Quiz.find(quizzes(:quiz_2).id).active_attempts )
+    assert_equal( 1, quiz.active_attempts? )
+    assert_equal( 0, Quiz.find(quizzes(:quiz_2).id).active_attempts? )
   end
 
 end

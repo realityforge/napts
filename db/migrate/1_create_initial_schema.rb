@@ -80,6 +80,7 @@ class CreateInitialSchema < ActiveRecord::Migration
       t.column 'content', :text, :null => false
       t.column 'question_type', :integer, :null => false
       t.column 'subject_group_id', :integer, :null => false
+      t.column 'corrected_at', :datetime
     end
     add_index('questions', ['id', 'subject_group_id'], :name => 'questions_subject_groups', :unique => true )
     add_foreign_key_constraint('questions', 'subject_group_id', 'subject_groups', 'id', :name => 'questions_subject_group_id_fk')

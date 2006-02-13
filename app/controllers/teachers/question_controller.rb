@@ -76,7 +76,9 @@ class Teachers::QuestionController < Teachers::BaseController
       end
       
       @question.attributes = params[:question]
-
+      if params[:correct] 
+        @question.corrected_at = Time.now
+      end
       is_valid = true
       @answers.each do |x| 
       	is_valid = x.valid? && is_valid

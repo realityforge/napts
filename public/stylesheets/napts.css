@@ -33,6 +33,12 @@ div.question_type, div.answer_number
   _background-color: green;
 }
 
+div.question_correct_before_edit
+{
+  float: right;
+  width: 30%;
+  margin: 0px 0px 0px 0px;
+
 div.question_options, div.answer_options
 {
   float: right;
