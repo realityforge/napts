@@ -12,6 +12,6 @@ class Resource < ActiveRecord::Base
   end
   
   def self.base_part_of(file_name)
-    File.basename(file_name).gsub(/[^\w._-]/,'')
+    file_name.gsub(/^.*(\\|\/)/, '').gsub(/[^\w._-]/,'')
   end
 end

@@ -25,5 +25,4 @@ class ResourceTest < Test::Unit::TestCase
     assert_equal('text/plain', resource.content_type)
     assert_equal('ABCDEFGHIJKLMNOPQRSTUVWXYZ', resource.resource_data.data)
   end
-
 end
