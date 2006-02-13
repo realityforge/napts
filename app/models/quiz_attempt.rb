@@ -46,6 +46,14 @@ class QuizAttempt < ActiveRecord::Base
     end
     return results
   end
+  
+  def calculate_score
+    num_questions = self.quiz_responses.size
+    incorrect_questions = self.incorrect_answers.size
+    score = num_questions - incorrect_questions
+    update_attributes( :score => score )
+    return score
+  end
 
   def time_up?(time)
     length = self.quiz.duration * 60
