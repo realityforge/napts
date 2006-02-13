@@ -8,12 +8,10 @@ class ComputerTest < Test::Unit::TestCase
   fixtures OrderedTables
   
   def test_validate_format_correct
-    computer = Computer.create( :room_id => 1, :ip_address => "123.123.123.123" )
-    assert_valid( computer )
+    assert_valid(Computer.create(:room_id => 1, :ip_address => "123.123.123.123"))
   end
   
   def test_validate_format_incorrect
-    computer = Computer.create( :room_id => 1, :ip_address => "123.458" )
-    assert_equal( false, computer.valid? )
+    assert_equal(false, Computer.create(:room_id => 1, :ip_address => "123.458").valid?)
   end
 end
