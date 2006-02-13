@@ -54,7 +54,7 @@ class CreateInitialSchema < ActiveRecord::Migration
       t.column 'duration', :integer, :null => false
       t.column 'randomise', :boolean, :null => false
       t.column 'subject_id', :integer, :null => false
-      t.column 'created_at', :datetime
+      t.column 'created_at', :datetime, :null => false
       t.column 'publish_results', :boolean, :null => false
       t.column 'preview_enabled', :boolean, :null => false
     end

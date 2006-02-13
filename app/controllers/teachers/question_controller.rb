@@ -25,6 +25,7 @@ class Teachers::QuestionController < Teachers::BaseController
     elsif request.post?
       @question = Question.new(params[:question])
       @question.subject_group_id = current_subject.subject_group_id
+      @question.corrected_at = Time.now
       is_valid = @question.valid?
       for answer_id in params[:answer].keys
         data = params[:answer][answer_id].dup
