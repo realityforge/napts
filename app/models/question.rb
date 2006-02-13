@@ -5,7 +5,7 @@ class Question < ActiveRecord::Base
   has_many( :answers, :dependent => true )
   has_many( :quiz_items )
   has_many( :quiz_responses )
-  has_and_belongs_to_many( :resources )
+  has_and_belongs_to_many( :resources, :uniq => true )
   belongs_to( :subject_group )
   validates_associated( :subject_group )
   

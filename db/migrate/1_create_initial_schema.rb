@@ -28,6 +28,7 @@ class CreateInitialSchema < ActiveRecord::Migration
       t.column 'ip_address', :string, :limit => 16, :null => false
       t.column 'room_id', :integer, :null => false
     end
+    add_index('computers', ['id', 'room_id'], :name => 'computers_ip_room_id_index', :unique => true)
     add_foreign_key_constraint('computers', 'room_id', 'rooms', 'id', :name => 'computers_room_id_fk')
     
     # SubjectGroups
@@ -43,6 +44,7 @@ class CreateInitialSchema < ActiveRecord::Migration
     add_index('subjects', ['name'], 
               :name => 'subjects_name_index', 
 	      :unique => true)
+    add_index('subjects', ['name', 'subject_group_id'], :name => 'subjects_name_subject_group_index', :unique => true )
     add_foreign_key_constraint('subjects', 'subject_group_id', 'subject_groups', 'id', :name => 'subjects_subject_group_id_fk')
     
     # Quizzes
@@ -69,6 +71,7 @@ class CreateInitialSchema < ActiveRecord::Migration
       t.column 'quiz_id', :integer, :null => false
       t.column 'user_id', :integer, :null => false
     end
+    add_index('quiz_attempts', ['id', 'quiz_id'], :name => 'quiz_attempts_id_quiz_id_index', :unique => true)
     add_foreign_key_constraint('quiz_attempts', 'quiz_id', 'quizzes', 'id', :name => 'quiz_attempts_quiz_id_fk')
     add_foreign_key_constraint('quiz_attempts', 'user_id', 'users', 'id', :name => 'quiz_attempts_user_id_fk')
 
@@ -78,6 +81,7 @@ class CreateInitialSchema < ActiveRecord::Migration
       t.column 'question_type', :integer, :null => false
       t.column 'subject_group_id', :integer, :null => false
     end
+    add_index('questions', ['id', 'subject_group_id'], :name => 'questions_subject_groups', :unique => true )
     add_foreign_key_constraint('questions', 'subject_group_id', 'subject_groups', 'id', :name => 'questions_subject_group_id_fk')
 
     # QuizItems
@@ -87,6 +91,7 @@ class CreateInitialSchema < ActiveRecord::Migration
       t.column 'question_id', :integer, :null => false
       t.column 'position', :integer, :null => false
     end
+    add_index('quiz_items', ['id', 'quiz_id'], :name => 'quiz_items_id_quiz_id_index', :unique => true)
     add_foreign_key_constraint('quiz_items', 'quiz_id', 'quizzes', 'id', :name => 'quiz_items_quiz_id_fk')
     add_foreign_key_constraint('quiz_items', 'question_id', 'questions', 'id', :name => 'quiz_items_question_id_fk')
 
@@ -96,6 +101,7 @@ class CreateInitialSchema < ActiveRecord::Migration
       t.column 'is_correct', :boolean
       t.column 'question_id', :integer, :null => false
     end
+    add_index('answers', ['id', 'question_id'], :name => 'answers_content_question_id_index', :unique => true)
     add_foreign_key_constraint('answers', 'question_id', 'questions', 'id',
                                :name => 'answers_question_id_fk')
     
@@ -106,6 +112,7 @@ class CreateInitialSchema < ActiveRecord::Migration
       t.column 'content_type', :string, :limit => 25, :null => false
       t.column 'subject_group_id', :integer, :null => false
     end
+    add_index('resources', ['name', 'subject_group_id'], :name => 'resources_subeject_groups', :unique => true )
     add_foreign_key_constraint('resources', 'subject_group_id', 'subject_groups', 'id',
                                :name => 'resource_subject_group_id_fk')
    
@@ -122,6 +129,7 @@ class CreateInitialSchema < ActiveRecord::Migration
       t.column 'question_id', :integer, :null => false
       t.column 'resource_id', :integer, :null => false
     end
+    add_index('questions_resources', ['question_id', 'resource_id'], :name => 'questions_resources_id_index', :unique => true )
     add_foreign_key_constraint('questions_resources', 'question_id', 'questions', 'id',
                                :name => 'question_id_fk')
     add_foreign_key_constraint('questions_resources', 'resource_id', 'resources', 'id',
@@ -136,16 +144,19 @@ class CreateInitialSchema < ActiveRecord::Migration
       t.column 'quiz_attempt_id', :integer, :null => false
       t.column 'question_id', :integer, :null => false
     end
+    add_index('quiz_responses', ['id', 'quiz_attempt_id'], :name => 'quiz_responses_id_quiz_attempt_id_index', :unique => true)
     add_foreign_key_constraint('quiz_responses', 'quiz_attempt_id', 'quiz_attempts', 'id', 
                                :name => 'quiz_responses_quiz_attempt_id_fk')
     add_foreign_key_constraint('quiz_responses', 'question_id', 'questions', 'id', 
                                :name => 'quiz_responses_question_id_fk')
-  
+         
     # Answers_QuizResponses
     create_table('answers_quiz_responses', :id => false, :force => true ) do |t|
       t.column 'quiz_response_id', :integer, :null => false
       t.column 'answer_id', :integer, :null => false
     end
+    add_index('answers_quiz_responses', ['quiz_response_id', 'answer_id'],
+              :name => 'answers_quiz_responses_id_index', :unique => true )
     add_foreign_key_constraint('answers_quiz_responses', 'quiz_response_id', 'quiz_responses', 'id',
                                :name => 'quiz_response_id_fk')
     add_foreign_key_constraint('answers_quiz_responses', 'answer_id', 'answers', 'id',

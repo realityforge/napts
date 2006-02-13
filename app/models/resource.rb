@@ -1,8 +1,9 @@
 class Resource < ActiveRecord::Base
-  has_one(:resource_data, :dependent => true)
-  has_and_belongs_to_many(:questions)
-  validates_presence_of(:content_type, :name)
-  attr_accessible(:description, :data)
+
+  has_one( :resource_data, :dependent => true )
+  has_and_belongs_to_many( :questions, :uniq => true )
+  validates_presence_of( :content_type, :name )
+  attr_accessible :description, :data
   
   def data=(data_field)
     self.name = Resource.base_part_of(data_field.original_filename)

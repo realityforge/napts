@@ -1,7 +1,7 @@
 class QuizResponse < ActiveRecord::Base
   belongs_to( :quiz_attempt )
   belongs_to( :question )
-  has_and_belongs_to_many( :answers )
+  has_and_belongs_to_many( :answers, :uniq => true )
   validates_presence_of( :quiz_attempt_id, :question_id )
   
   def correct?

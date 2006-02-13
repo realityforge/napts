@@ -4,8 +4,6 @@ class Quiz < ActiveRecord::Base
   has_and_belongs_to_many( :active_in, :class_name => 'Room', :join_table => 'quizzes_rooms' )
   belongs_to( :subject )
   validates_presence_of( :subject_id )
-  validates_presence_of( :randomise )
-  validates_presence_of( :publish_results )
   validates_uniqueness_of( :name )
   validates_associated( :subject )
   validates_length_of( :name, :within => 1..20 )

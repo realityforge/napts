@@ -54,7 +54,7 @@ class Teachers::QuizItemControllerTest < Test::Unit::TestCase
   end
 
   def test_toggle_preview_status_off
-    assert_equal(true,quiz_items(:qi_1).preview_only?)
+    assert_equal(false,quiz_items(:qi_1).preview_only?)
     post(:toggle_preview_status, 
          {:id => quiz_items(:qi_1).id, :preview_status => 'false'}, 
          {:user_id => users(:lecturer_user).id, :role => :teacher, :subject_id => subjects(:subject_1).id})
@@ -66,7 +66,7 @@ class Teachers::QuizItemControllerTest < Test::Unit::TestCase
   end
 
   def test_toggle_preview_status_on
-    assert_equal(false,quiz_items(:qi_2).preview_only?)
+    assert_equal(true,quiz_items(:qi_2).preview_only?)
     post(:toggle_preview_status, 
          {:id => quiz_items(:qi_2).id, :preview_status => 'true'}, 
          {:user_id => users(:lecturer_user).id, :role => :teacher, :subject_id => subjects(:subject_1).id})

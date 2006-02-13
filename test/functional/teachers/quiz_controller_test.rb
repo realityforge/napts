@@ -64,7 +64,7 @@ class Teachers::QuizControllerTest < Test::Unit::TestCase
     post(:new,
         {:quiz => {
              :name => '', :duration => 10, :randomise => true, 
-             :subject_id => subjects(:subject_2).id, :description => 'Y', :preview_enabled => true
+             :description => 'Y', :preview_enabled => true
            }},
         {:user_id => users(:lecturer_user).id, :role => :teacher, :subject_id => subjects(:subject_1).id})
     assert_response(:success)
@@ -79,8 +79,8 @@ class Teachers::QuizControllerTest < Test::Unit::TestCase
   def test_new_post
     post(:new,
         {:quiz => {
-             :name => 'X', :duration => 10, :randomise => true, 
-             :subject_id => subjects(:subject_2).id, :description => 'Y', :preview_enabled => true
+             :name => 'X', :duration => 10, :randomise => true, :publish_results => 'false',
+             :description => 'Y', :preview_enabled => true
            }},
         {:user_id => users(:lecturer_user).id, :role => :teacher, :subject_id => subjects(:subject_1).id})
     assert_not_nil(assigns(:quiz))
