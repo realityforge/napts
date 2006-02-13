@@ -19,7 +19,7 @@
     <% 
       count = 0
       for qi in @quiz.quiz_items
-        if qi.is_on_test 
+        if ! qi.preview_only 
           count = count + 1
         end
       end 

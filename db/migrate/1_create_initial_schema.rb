@@ -82,7 +82,7 @@ class CreateInitialSchema < ActiveRecord::Migration
 
     # QuizItems
     create_table('quiz_items', :force => true) do |t|
-      t.column 'is_on_test', :boolean, :null => false
+      t.column 'preview_only', :boolean, :null => false
       t.column 'quiz_id', :integer, :null => false
       t.column 'question_id', :integer, :null => false
       t.column 'position', :integer, :null => false

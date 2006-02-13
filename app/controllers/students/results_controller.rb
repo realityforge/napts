@@ -18,7 +18,7 @@ class Students::ResultsController < Students::BaseController
     @quiz_attempt = current_user.quiz_attempts.find(params[:id])
     if @quiz_attempt.quiz.publish_results?
       @quiz_response = @quiz_attempt.quiz_responses.find( :first, :conditions => ['quiz_attempt_id = ? AND position = ?', @quiz_attempt.id, params[:position]])
-      if ! @quiz_response.correct?
+      if @quiz_response.correct?
         flash[:alert] = 'This question was answered correctly'
       end
     else

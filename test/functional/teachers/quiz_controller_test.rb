@@ -80,7 +80,7 @@ class Teachers::QuizControllerTest < Test::Unit::TestCase
     post(:new,
         {:quiz => {
              :name => 'X', :duration => 10, :randomise => true, 
-             :subject_id => subjects(:subject_2).id, :description => 'Y', :prelim_enable => true
+             :subject_id => subjects(:subject_2).id, :description => 'Y', :prelim_enable => false
            }},
         {:user_id => users(:lecturer_user).id, :role => :teacher, :subject_id => subjects(:subject_1).id})
     assert_not_nil(assigns(:quiz))

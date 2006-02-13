@@ -54,7 +54,7 @@ class Teachers::QuizItemControllerTest < Test::Unit::TestCase
   end
 
   def test_toggle_preview_status_off
-    assert_equal(true,quiz_items(:qi_1).is_on_test?)
+    assert_equal(true,quiz_items(:qi_1).preview_only?)
     post(:toggle_preview_status, 
          {:id => quiz_items(:qi_1).id, :preview_status => 'false'}, 
          {:user_id => users(:lecturer_user).id, :role => :teacher, :subject_id => subjects(:subject_1).id})
@@ -62,11 +62,11 @@ class Teachers::QuizItemControllerTest < Test::Unit::TestCase
     assert_nil(flash[:alert])
     assert_nil(flash[:notice])
     quiz_items(:qi_1).reload
-    assert_equal(false,quiz_items(:qi_1).is_on_test?)
+    assert_equal(false,quiz_items(:qi_1).preview_only?)
   end
 
   def test_toggle_preview_status_on
-    assert_equal(false,quiz_items(:qi_2).is_on_test?)
+    assert_equal(false,quiz_items(:qi_2).preview_only?)
     post(:toggle_preview_status, 
          {:id => quiz_items(:qi_2).id, :preview_status => 'true'}, 
          {:user_id => users(:lecturer_user).id, :role => :teacher, :subject_id => subjects(:subject_1).id})
@@ -74,7 +74,7 @@ class Teachers::QuizItemControllerTest < Test::Unit::TestCase
     assert_nil(flash[:alert])
     assert_nil(flash[:notice])
     quiz_items(:qi_2).reload
-    assert_equal(true,quiz_items(:qi_2).is_on_test?)
+    assert_equal(true,quiz_items(:qi_2).preview_only?)
   end
 
   def test_move_last

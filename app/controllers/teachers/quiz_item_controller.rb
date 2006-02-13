@@ -20,7 +20,7 @@ class Teachers::QuizItemController < Teachers::BaseController
 
   def toggle_preview_status
     quiz_item = find_quiz_item(params[:id])
-    quiz_item.update_attribute(:is_on_test,(params[:preview_status] == 'true'))
+    quiz_item.update_attribute(:preview_only,(params[:preview_status] == 'true'))
     redirect_to(:action => 'list', :quiz_id => quiz_item.quiz_id)
   end  
 

@@ -1,12 +1,12 @@
 qi_1:
   id: 1
-  is_on_test: true
+  preview_only: false
   quiz_id: 1
   question_id: 1
   position: 1
 qi_2:
   id: 2
-  is_on_test: false
+  preview_only: true
   quiz_id: 1
   question_id: 2
   position: 2
@@ -14,19 +14,19 @@ qi_2:
   
 qi_3:
   id: 3
-  is_on_test: true
+  preview_only: false
   quiz_id: 2
   question_id: 3
   position: 1
 qi_4:
   id: 4
-  is_on_test: true
+  preview_only: false
   quiz_id: 2
   question_id: 1
   position: 2
 qi_5:
   id: 5
-  is_on_test: true
+  preview_only: false
   quiz_id: 2
   question_id: 2
   position: 3
@@ -34,45 +34,45 @@ qi_5:
   
 qi_6:
   id: 6
-  is_on_test: true
+  preview_only: false
   quiz_id: 3
   question_id: 4
   position: 1
 qi_7:
   id: 7
-  is_on_test: true
+  preview_only: false
   quiz_id: 3
   question_id: 5
   position: 2
 qi_8:
   id: 8
-  is_on_test: true
+  preview_only: false
   quiz_id: 3
   question_id: 6
   position: 3
   
 qi_10:
   id: 10
-  is_on_test: false
+  preview_only: true
   quiz_id: 1
   question_id: 3
   position: 3
 qi_11:
   id: 11
-  is_on_test: true
+  preview_only: false
   quiz_id: 1
   question_id: 4
   position: 4
   
 #qi_12:
 #  id: 12
-#  is_on_test: true
+#  preview_only: false
 #  quiz_id: 4
 #  question_id: 1
 #  position: 1
 #qi_12:
 #  id: 12
-#  is_on_test: true
+#  preview_only: false
 #  quiz_id: 4
 #  question_id: 3
 #  position: 2
