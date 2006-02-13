@@ -40,17 +40,7 @@ class QuizAttempt < ActiveRecord::Base
   def incorrect_answers
     results = []
     for quiz_response in self.quiz_responses
-      responses = []
-      correct = []
-      for answer in quiz_response.answers
-        responses << answer.id
-      end
-      for question in quiz_response.question.answers
-        correct << question.id if question.is_correct
-      end
-      correct.sort!
-      responses.sort!
-      if responses != correct
+      if ! quiz_response.correct?
         results << quiz_response.position
       end
     end
