@@ -15,7 +15,7 @@ class Teachers::QuizController < Teachers::BaseController
 
   def toggle_preview_status
     quiz = current_subject.quizzes.find(params[:id])
-    quiz.update_attribute(:prelim_enable,(params[:preview_status] == 'true'))
+    quiz.update_attribute(:preview_enabled,(params[:preview_status] == 'true'))
     redirect_to(:action => 'list', :q => params[:q], :page => params[:page])
   end
   

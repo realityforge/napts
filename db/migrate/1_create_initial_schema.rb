@@ -54,7 +54,7 @@ class CreateInitialSchema < ActiveRecord::Migration
       t.column 'subject_id', :integer, :null => false
       t.column 'created_at', :datetime
       t.column 'publish_results', :boolean, :null => false
-      t.column 'prelim_enable', :boolean, :null => false
+      t.column 'preview_enabled', :boolean, :null => false
     end
     add_index('quizzes', ['name', 'subject_id'], 
               :name => 'quizzes_name_subject_id_index', 

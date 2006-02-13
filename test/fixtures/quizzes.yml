@@ -5,7 +5,7 @@ quiz_1:
   description: "introductory test"
   randomise: false
   subject_id: 1
-  prelim_enable: true
+  preview_enabled: true
   publish_results: true
   created_at: '2005-11-7 00:00:02'
 quiz_2:
@@ -15,7 +15,7 @@ quiz_2:
   description: "gruff"
   randomise: false
   subject_id: 1
-  prelim_enable: true
+  preview_enabled: true
   publish_results: true
   created_at: '2005-11-7 00:00:01'
 quiz_3:
@@ -25,7 +25,7 @@ quiz_3:
   description: "he drives to work"
   randomise: false
   subject_id: 2
-  prelim_enable: false
+  preview_enabled: false
   publish_results: true
   
 #only multiple choice questions
@@ -36,5 +36,5 @@ quiz_4:
   description: "multi questions only"
   randomise: false
   subject_id: 3
-  prelim_enable: true
+  preview_enabled: true
   publish_results: true

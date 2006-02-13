@@ -64,7 +64,7 @@ class Teachers::QuizControllerTest < Test::Unit::TestCase
     post(:new,
         {:quiz => {
              :name => '', :duration => 10, :randomise => true, 
-             :subject_id => subjects(:subject_2).id, :description => 'Y', :prelim_enable => true
+             :subject_id => subjects(:subject_2).id, :description => 'Y', :preview_enabled => true
            }},
         {:user_id => users(:lecturer_user).id, :role => :teacher, :subject_id => subjects(:subject_1).id})
     assert_response(:success)
@@ -80,7 +80,7 @@ class Teachers::QuizControllerTest < Test::Unit::TestCase
     post(:new,
         {:quiz => {
              :name => 'X', :duration => 10, :randomise => true, 
-             :subject_id => subjects(:subject_2).id, :description => 'Y', :prelim_enable => false
+             :subject_id => subjects(:subject_2).id, :description => 'Y', :preview_enabled => true
            }},
         {:user_id => users(:lecturer_user).id, :role => :teacher, :subject_id => subjects(:subject_1).id})
     assert_not_nil(assigns(:quiz))
@@ -91,7 +91,7 @@ class Teachers::QuizControllerTest < Test::Unit::TestCase
     assert_equal('X',assigns(:quiz).name)
     assert_equal(10,assigns(:quiz).duration)
     assert_equal(true,assigns(:quiz).randomise)
-    assert_equal(true,assigns(:quiz).prelim_enable)
+    assert_equal(true,assigns(:quiz).preview_enabled)
     assert_equal(subjects(:subject_1).id,assigns(:quiz).subject_id)
     assert_equal('Y',assigns(:quiz).description)
   end
@@ -112,7 +112,7 @@ class Teachers::QuizControllerTest < Test::Unit::TestCase
     post(:edit,
         {:id => quizzes(:quiz_2).id, :quiz => {
              :name => '', :duration => 10, :randomise => true, 
-             :subject_id => subjects(:subject_2).id, :description => 'Y', :prelim_enable => true
+             :subject_id => subjects(:subject_2).id, :description => 'Y', :preview_enabled => true
            }},
         {:user_id => users(:lecturer_user).id, :role => :teacher, :subject_id => subjects(:subject_1).id})
     assert_response(:success)
@@ -128,7 +128,7 @@ class Teachers::QuizControllerTest < Test::Unit::TestCase
     post(:edit,
         {:id => quizzes(:quiz_2).id, :quiz => {
              :name => 'X', :duration => 10, :randomise => true, 
-             :subject_id => subjects(:subject_2).id, :description => 'Y', :prelim_enable => true
+             :subject_id => subjects(:subject_2).id, :description => 'Y', :preview_enabled => true
            }},
         {:user_id => users(:lecturer_user).id, :role => :teacher, :subject_id => subjects(:subject_1).id})
     assert_not_nil(assigns(:quiz))
@@ -140,7 +140,7 @@ class Teachers::QuizControllerTest < Test::Unit::TestCase
   end
 
   def test_toggle_preview_status_off
-    assert_equal(true, quizzes(:quiz_2).prelim_enable?)
+    assert_equal(true, quizzes(:quiz_2).preview_enabled?)
     post(:toggle_preview_status,
          {:id => quizzes(:quiz_2).id, :preview_status => 'false', :q => 'q', :page => '1'}, 
          {:user_id => users(:lecturer_user).id, :role => :teacher, :subject_id => subjects(:subject_1).id})
@@ -148,11 +148,11 @@ class Teachers::QuizControllerTest < Test::Unit::TestCase
     assert_nil(flash[:alert])
     assert_nil(flash[:notice])
     quizzes(:quiz_2).reload
-    assert_equal(false, quizzes(:quiz_2).prelim_enable?)
+    assert_equal(false, quizzes(:quiz_2).preview_enabled?)
   end
 
   def test_toggle_preview_status_on
-    assert_equal(false, quizzes(:quiz_3).prelim_enable?)
+    assert_equal(false, quizzes(:quiz_3).preview_enabled?)
     post(:toggle_preview_status,
          {:id => quizzes(:quiz_3).id, :preview_status => 'true', :q => 'q', :page => '1'}, 
          {:user_id => users(:lecturer_user).id, :role => :teacher, :subject_id => subjects(:subject_2).id})
@@ -160,7 +160,7 @@ class Teachers::QuizControllerTest < Test::Unit::TestCase
     assert_nil(flash[:alert])
     assert_nil(flash[:notice])
     quizzes(:quiz_3).reload
-    assert_equal(true, quizzes(:quiz_3).prelim_enable?)
+    assert_equal(true, quizzes(:quiz_3).preview_enabled?)
   end
 
   def test_show
