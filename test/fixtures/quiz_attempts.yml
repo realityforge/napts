@@ -4,32 +4,38 @@ qa_1:
   end_time: '2005-11-7 00:10:00'
   quiz_id: 3
   user_id: 1
+
 qa_2:
   id: 2
   created_at: '2005-11-7 00:00:00'
   end_time: '2005-11-7 00:05:12'
   quiz_id: 2
   user_id: 1
+
 qa_3:
   id: 3
   created_at: '2005-11-7 00:00:00'
   end_time: '2005-11-7 00:05:12'
   quiz_id: 2
   user_id: 2
+
 qa_4:
   id: 4
   created_at: '2005-11-7 00:00:00'
   end_time: '2005-11-7 00:05:12'
   quiz_id: 2
   user_id: 3
+
 qa_5:
   id: 5
   created_at: '2005-11-7 00:00:00'
   quiz_id: 3
   user_id: 3
+
 qa_6:
   id: 6
   created_at: '2005-11-7 00:00:00'
   end_time: '2005-11-7 00:05:12'
   quiz_id: 1
   user_id: 2
+

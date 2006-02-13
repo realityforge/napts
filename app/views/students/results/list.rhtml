@@ -21,8 +21,7 @@
     <% for attempt in @quiz_attempts %>
       <tr class="<%= cycle("even", "odd") %>">
         <td><%= h(attempt.quiz.name) %></td>
-	<td><%= attempt.quiz_responses.length - attempt.incorrect_answers.length%>/
-	<%= attempt.quiz_responses.length %></td>
+	<td><%= attempt.calculate_score %>/<%= attempt.quiz_responses.length %></td>
 	<td><%= attempt.created_at.strftime("%d/%m/%Y") %></td>
 	<td><%= link_to( 'Show', :action => 'show', :id => attempt.id ) %></td>
       </tr>
