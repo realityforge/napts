@@ -19,6 +19,12 @@ class Teachers::QuizController < Teachers::BaseController
     redirect_to(:action => 'list', :q => params[:q], :page => params[:page])
   end
   
+  def toggle_results_status
+    quiz = current_subject.quizzes.find(params[:id])
+    quiz.update_attribute(:publish_results,(params[:results_status] == 'true'))
+    redirect_to(:action => 'list')
+  end
+  
   def show
     @quiz = current_subject.quizzes.find(params[:id])
   end

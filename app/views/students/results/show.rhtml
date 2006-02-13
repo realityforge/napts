@@ -9,6 +9,10 @@
 <% if not incorrect_answers.empty? %>
   <p>These questions were answered incorrectly: </p>
   <% for q_id in incorrect_answers %>
-    <p><%= q_id %></p>
+    <% if @quiz_attempt.quiz.publish_results %>
+      <p><%= link_to( q_id, :action => 'show_question', :id => @quiz_attempt.id, :position => q_id ) %></p>
+    <% else %>
+      <p><%= q_id %></p>
+    <% end %>
   <% end %>
 <% end %>
