@@ -31,11 +31,11 @@
 </tr>
 <tr>
   <th>Active Attempts</th>
-  <td><%= @quiz.active_attempts %></td>
+  <td><%= @quiz.active_attempts? %></td>
 </tr>
 <tr>
   <th>Completed Attempts</th>
-  <td><%= @quiz.completed_attempts %></td>
+  <td><%= @quiz.completed_attempts? %></td>
 </tr>
 </table>
 <%= link_to('List Quiz Attempts', :controller => 'quiz_attempt', :action => 'list', :quiz_id => @quiz) %>

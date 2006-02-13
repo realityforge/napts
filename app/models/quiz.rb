@@ -31,11 +31,11 @@ class Quiz < ActiveRecord::Base
     return ! computer.nil?
   end
   
-  def completed_attempts
+  def completed_attempts?
     QuizAttempt.count(['quiz_id = ? AND end_time IS NOT NULL', self.id])
   end
   
-  def active_attempts
+  def active_attempts?
     QuizAttempt.count(['quiz_id = ? AND end_time IS NULL', self.id])
   end
 
