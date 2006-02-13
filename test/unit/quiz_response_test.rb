@@ -16,4 +16,17 @@ class QuizResponseTest < Test::Unit::TestCase
     assert_equal( false, QuizResponse.find(quiz_responses(:qr_4).id).correct? )
     assert_equal( true, QuizResponse.find(quiz_responses(:qr_2).id).correct? )
   end
+  
+  def test_correct_corrected_at
+    question = Question.new(:content => "X", 
+                            :question_type => 2, 
+		            :subject_group_id => 1, 
+		            :corrected_at => (Time.now - 10) )
+    quiz_response = QuizResponse.new(:updated_at => Time.now,
+                                     :quiz_attempt_id => 1,
+				     :question => question,
+				     :position => 3,
+				     :completed => true)
+    assert_equal(true, quiz_response.correct?)
+  end
 end
