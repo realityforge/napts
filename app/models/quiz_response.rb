@@ -18,6 +18,8 @@ class QuizResponse < ActiveRecord::Base
       return responses.sort! == correct_answers.sort!
     elsif self.question.question_type == 3
       return self.input.strip.to_i == self.question.answers[0].content.to_i
+    else
+      return self.input =~ self.question.answers[0].content
     end
   end
 end

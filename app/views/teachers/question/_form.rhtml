@@ -76,11 +76,7 @@
   <div id="a_text">
     <div class="answer_content">
       <label for="text">Text Answer</label>
-      <textarea class='answer_content' cols="40" id="text" name="text" rows="20">
-        <% if @form_action_desc == 'Edit' && @question.question_type == 4 %>
-          <%= @text_answer.content %>
-        <% end %>
-      </textarea>
+      <textarea class='answer_content' cols="40" id="text" name="text" rows="20"><% if @form_action_desc == 'Edit' && @question.question_type == 4 %><%= @text_answer.content %><% end %></textarea>
     </div>
   </div>
 </div>
