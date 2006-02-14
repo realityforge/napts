@@ -12,7 +12,7 @@ Rails::Initializer.run do |config|
   # config.frameworks -= [ :action_web_service, :action_mailer ]
 
   # Add additional load paths for your own custom dirs
-  config.load_paths += %W( #{RAILS_ROOT}/app/services )
+  config.load_paths += %W( #{RAILS_ROOT}/app/services #{RAILS_ROOT}/vendor/rubypants #{RAILS_ROOT}/vendor/bluecloth/lib #{RAILS_ROOT}/vendor/redcloth/lib )
 
   # Force all environments to use the same logger level 
   # (by default production uses :info, the others :debug)
@@ -53,6 +53,9 @@ Inflector.inflections do |inflect|
   inflect.irregular 'data', 'data'
 end
 
+require 'redcloth'
+require 'bluecloth'
+require 'rubypants'
 
 # Include your application configuration below
 
