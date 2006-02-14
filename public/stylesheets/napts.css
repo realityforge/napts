@@ -18,6 +18,12 @@ div.question, div.answer
   _background-color: red;
 }
 
+div.answer_choice, div.answer_number, div.answer_text
+{
+  width: 100%;
+  margin: 0px 0px 0px 0px;
+}
+
 div.question_header, div.answer_header
 {
   width: 100%;
@@ -25,7 +31,7 @@ div.question_header, div.answer_header
   _background-color: blue;
 }
 
-div.question_type, div.answer_number 
+div.question_type, div.answer_position 
 {
   float: left;
   width: 25%;

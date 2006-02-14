@@ -5,12 +5,10 @@
 <h3><%= @question.content %></h3>
 
 <table class="xlist">
-  <colgroup id="position-column"/>
   <colgroup id="answer_content-column"/>
   <colgroup id="correct-column"/>
   <thead>
   <tr>
-    <th>Position</th>
     <th>Answer Content</th>
     <th>Correct</th>
   </tr>
@@ -18,7 +16,6 @@
   <tbody>
   <% for answer in @question.answers %>
     <tr class="<%= cycle("even", "odd") %>">
-      <td><%= answer.position %></td>
       <td><pre><%= h(answer.content) %></pre></td>
       <td><%= h(answer.is_correct) %></td>
     </tr>

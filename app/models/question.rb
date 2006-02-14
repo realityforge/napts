@@ -12,7 +12,9 @@ class Question < ActiveRecord::Base
   
   QUESTION_TYPE = {
     "Multiple answers" => 1,
-    "Single answer" => 2
+    "Single answer" => 2,
+    "Number" => 3,
+    "Text" => 4
   }.freeze
  
   def validate

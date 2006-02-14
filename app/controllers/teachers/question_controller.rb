@@ -23,22 +23,41 @@ class Teachers::QuestionController < Teachers::BaseController
     if request.get?
       @question.randomise = true
       @question.answers = [Answer.new,Answer.new,Answer.new,Answer.new]
+      @text_answer = Answer.new
+      @number_answer = Answer.new
     elsif request.post?
       @question = Question.new(params[:question])
       @question.subject_group_id = current_subject.subject_group_id
       @question.corrected_at = Time.now
       is_valid = @question.valid?
-      for answer_id in params[:answer].keys
-        data = params[:answer][answer_id].dup
-        answer = Answer.new(data)
-	@question.answers << answer 
+      if @question.question_type == 1 || @question.question_type == 2
+        for answer_id in params[:answer].keys
+          data = params[:answer][answer_id].dup
+          answer = Answer.new(data)
+	  @question.answers << answer 
+	  if ! answer.valid?
+	    is_valid = false
+          end
+        end
+      elsif @question.question_type == 3
+        content = params[:number].strip
+	answer = Answer.new( :content => content, :position => 1, :is_correct => true )
+	@question.answers << answer
+	if ! answer.valid?
+	  is_valid = false
+	end
+      else
+        content = params[:text].strip
+	answer = Answer.new( :content => content, :position => 1, :is_correct => true )
+	@question.answers << answer
 	if ! answer.valid?
 	  is_valid = false
 	end
       end
+	
       if is_valid && @question.save
         @question.answers.each {|answer| answer.save}
-      	flash[:notice] = 'Question was successfully created.'
+	flash[:notice] = 'Question was successfully created.'
 	redirect_to( :action => 'show', :id => @question )
 	return
       end
@@ -53,8 +72,18 @@ class Teachers::QuestionController < Teachers::BaseController
   
   def edit
     @question = find_question(params[:id])
+    @answers = [Answer.new,Answer.new,Answer.new,Answer.new]
+    @text_answer = Answer.new
+    @number_answer = Answer.new
+
     if request.get?
-      @answers = @question.answers
+      if @question.question_type == 3
+        @number_answer = @question.answers[0]
+      elsif @question.question_type == 4
+        @text_answer = @question.answers[0]
+      else
+        @answers = @question.answers
+      end
     elsif request.post?
       @answers = []
       if params[:answer]

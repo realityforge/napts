@@ -10,16 +10,22 @@
 <% elsif @question.question_type == 2 %>
   <% button_type = "radio" %>
   <% message = "Please select the one correct answer" %>
+<% else %>
+  <% message = "Please enter the correct answer" %>
 <% end %>
 <p><%= message %></p>
-<table class="answers">
-  <% for answer in @question.answers %>
-    <tr>
-      <td class="cb">
-        <input type="<%= button_type %>" name="answers[]" value="<%= answer.id %>" />
-      </td>
-      <td><div class="dataset_answer"><%= answer.content %></div></td>
-    </tr>
-  <% end %>
-</table>
+<% if @question.question_type == 1 or @question.question_type == 2 %>
+  <table class="answers">
+    <% for answer in @question.answers %>
+      <tr>
+        <td class="cb">
+          <input type="<%= button_type %>" name="answers[]" value="<%= answer.id %>" />
+        </td>
+        <td><div class="dataset_answer"><%= answer.content %></div></td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <p><%= text_field( 'quiz_response', 'input' ) %></p>
+<% end %>
 </div>

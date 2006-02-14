@@ -34,9 +34,13 @@ class Students::QuizAttemptController < Students::BaseController
         if @quiz_response.nil?
           @quiz_attempt.complete
         elsif request.post?
-          for answer in params[:answers]
-            @quiz_response.answers << Answer.find(answer)
-          end if params[:answers]
+	  if @quiz_response.question.question_type == 1 || @quiz_response.question.question_type == 2
+            for answer in params[:answers]
+              @quiz_response.answers << Answer.find(answer)
+            end if params[:answers]
+	  else
+	    @quiz_response.update_attributes( :input => params[:quiz_response][:input] )
+	  end
   	  @quiz_response.update_attributes(:completed => true)
           redirect_to(:action => 'show_question', :id => @quiz.id)
           return
