@@ -47,8 +47,7 @@ class Teachers::QuestionController < Teachers::BaseController
 	  is_valid = false
 	end
       else
-      
-        content = Regexp.new(params[:text])
+        content = params[:text].strip
 	answer = Answer.new( :content => content, :position => 1, :is_correct => true )
 	@question.answers << answer
 	if ! answer.valid?

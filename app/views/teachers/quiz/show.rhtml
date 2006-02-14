@@ -27,6 +27,10 @@
     <td><%= count %></td>
   </tr>
   <tr>
+    <th>Randomise?</th>
+    <td><%= @quiz.randomise? %></td>
+  </tr>
+  <tr>
     <td colspan="2">
       <%= link_to('Show Questions', :controller => 'quiz_item', :action => 'list', :quiz_id => @quiz ) %>
     </td>
