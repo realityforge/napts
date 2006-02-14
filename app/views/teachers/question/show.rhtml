@@ -5,23 +5,20 @@
 <h3><%= @question.content %></h3>
 
 <table class="xlist">
-  <colgroup id="number-column"/>
+  <colgroup id="position-column"/>
   <colgroup id="answer_content-column"/>
   <colgroup id="correct-column"/>
   <thead>
   <tr>
-    <th>Number</th>
+    <th>Position</th>
     <th>Answer Content</th>
     <th>Correct</th>
   </tr>
   </thead>
   <tbody>
-  <% i = 0
-     for answer in @question.answers
-     i = i + 1
-  %>
+  <% for answer in @question.answers %>
     <tr class="<%= cycle("even", "odd") %>">
-      <td><%= i %></td>
+      <td><%= answer.position %></td>
       <td><pre><%= h(answer.content) %></pre></td>
       <td><%= h(answer.is_correct) %></td>
     </tr>
@@ -48,6 +45,6 @@
   </table>
 <% end %>
 
- <%= link_to_button( "Add Resource", :action => 'list_resources', :id => @question ) %>
+<%= link_to_button( "Add Resource", :action => 'list_resources', :id => @question ) %>
 
 <%= link_to_button( 'Edit', {:action => 'edit', :id => @question.id} ) %><br/>

@@ -81,6 +81,7 @@ class CreateInitialSchema < ActiveRecord::Migration
       t.column 'question_type', :integer, :null => false
       t.column 'subject_group_id', :integer, :null => false
       t.column 'corrected_at', :datetime
+      t.column 'randomise', :boolean, :null => false
     end
     add_index('questions', ['id', 'subject_group_id'], :name => 'questions_subject_groups', :unique => true )
     add_foreign_key_constraint('questions', 'subject_group_id', 'subject_groups', 'id', :name => 'questions_subject_group_id_fk')
@@ -100,6 +101,7 @@ class CreateInitialSchema < ActiveRecord::Migration
     create_table('answers', :force => true) do |t|
       t.column 'content', :text, :null => false
       t.column 'is_correct', :boolean
+      t.column 'position', :integer, :null => false
       t.column 'question_id', :integer, :null => false
     end
     add_index('answers', ['id', 'question_id'], :name => 'answers_content_question_id_index', :unique => true)

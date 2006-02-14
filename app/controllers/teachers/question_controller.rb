@@ -19,8 +19,9 @@ class Teachers::QuestionController < Teachers::BaseController
   end
   
   def new
+    @question = Question.new(params[:question])
     if request.get?
-      @question = Question.new
+      @question.randomise = true
       @question.answers = [Answer.new,Answer.new,Answer.new,Answer.new]
     elsif request.post?
       @question = Question.new(params[:question])
@@ -79,6 +80,9 @@ class Teachers::QuestionController < Teachers::BaseController
       @question.attributes = params[:question]
       if params[:correct] 
         @question.corrected_at = Time.now
+      end
+      if params[:randomise]
+        @question.randomise_answers
       end
       is_valid = true
       @answers.each do |x| 

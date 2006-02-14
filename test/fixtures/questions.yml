@@ -5,6 +5,7 @@ q1:
   question_type: 1
   subject_group_id: 1
   corrected_at: '2006-3-14 00:00:00'
+  randomise: false
   
 #single answer
 q2:
@@ -13,6 +14,7 @@ q2:
   question_type: 2
   subject_group_id: 1
   corrected_at: '2006-3-14 00:00:00'
+  randomise: false
   
 #multiple choice
 q3:
@@ -21,6 +23,7 @@ q3:
   question_type: 1
   subject_group_id: 1
   corrected_at: '2006-3-14 00:00:00'
+  randomise: false
   
 #single answer
 q4:
@@ -29,6 +32,7 @@ q4:
   question_type: 2
   subject_group_id: 2
   corrected_at: '2006-3-14 00:00:00'
+  randomise: false
   
 #multi answer
 q5:
@@ -37,6 +41,7 @@ q5:
   question_type: 1
   subject_group_id: 2
   corrected_at: '2006-3-14 00:00:00'
+  randomise: false
   
 #single answer
 q6:
@@ -45,6 +50,7 @@ q6:
   question_type: 2
   subject_group_id: 2
   corrected_at: '2006-3-14 00:00:00'
+  randomise: false
   
 #multiple choice
 q7:
@@ -53,6 +59,7 @@ q7:
   question_type: 1
   subject_group_id: 3
   corrected_at: '2006-3-14 00:00:00'
+  randomise: false
   
 #single answer
 q8:
@@ -61,6 +68,7 @@ q8:
   question_type: 2
   subject_group_id: 3
   corrected_at: '2006-3-14 00:00:00'
+  randomise: false
   
 #multiple choice
 q9:
@@ -69,6 +77,7 @@ q9:
   question_type: 1
   subject_group_id: 3
   corrected_at: '2006-3-14 00:00:00'
+  randomise: false
   
 q10:
   id: 10
@@ -76,3 +85,4 @@ q10:
   question_type: 1
   subject_group_id: 1
   corrected_at: '2006-3-14 00:00:00'
+  randomise: false

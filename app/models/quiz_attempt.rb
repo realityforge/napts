@@ -1,7 +1,7 @@
 class QuizAttempt < ActiveRecord::Base
   belongs_to( :quiz )
   belongs_to( :user )
-  has_many( :quiz_responses, :order => 'position', :dependent => true, :include => ['answers', 'question'] )
+  has_many( :quiz_responses, :order => 'quiz_responses.position', :dependent => true, :include => ['answers', 'question'] )
   validates_presence_of( :created_at )
   validates_presence_of( :quiz_id )
   validates_presence_of( :user_id )

@@ -10,6 +10,10 @@
           select("question", "question_type", options )
       %>
     </div>
+    <div class="question_randomise_answers">
+      <label for="question_randomise">Randomise Answers</label>
+      <%= check_box( 'question', 'randomise' ) %>
+    </div>
     <% if @form_action_desc == 'Edit' %>
       <div class="question_correct_before_edit">
         <label for="correct">Correct before current Edit</label>
