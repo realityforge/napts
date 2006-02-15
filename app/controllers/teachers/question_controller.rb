@@ -110,9 +110,6 @@ class Teachers::QuestionController < Teachers::BaseController
       if params[:correct] 
         @question.corrected_at = Time.now
       end
-      if params[:randomise]
-        @question.randomise_answers
-      end
       is_valid = true
       @answers.each do |x| 
       	is_valid = x.valid? && is_valid

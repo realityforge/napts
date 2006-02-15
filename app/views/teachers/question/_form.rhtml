@@ -10,7 +10,7 @@
           select("question", "question_type", options, {}, :onchange => 'onSelectAnswerType();' )
       %>
     </div>
-    <% if @question.question_type == '1' || @question.question_type == '2' %>
+    <% if @question.question_type == 1 || @question.question_type == 2 %>
       <div class="question_randomise_answers">
         <label for="question_randomise">Randomise Answers</label>
         <%= check_box( 'question', 'randomise' ) %>

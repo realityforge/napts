@@ -19,8 +19,6 @@ class QuizResponse < ActiveRecord::Base
     elsif self.question.question_type == 3
       return self.input.strip.to_i == self.question.answers[0].content.to_i
     else
-    STDERR.puts "self.question.answers[0].content=#{self.question.answers[0].content}"
-    STDERR.puts "self.input=#{self.input}"
       return ! (Regexp.new(self.question.answers[0].content) =~ self.input).nil?
     end
   end

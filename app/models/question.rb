@@ -25,17 +25,16 @@ class Question < ActiveRecord::Base
     end
   end
   
-  def randomise_answers
+  def get_answers
     answers = self.answers
-    new_answers = []
-    for i in 0...answers.length
-      new_answers << answers.delete_at( rand(answers.length) )
+    if self.randomise?
+      new_answers = []
+      for i in 0...answers.length
+        new_answers << answers.delete_at( rand(answers.length) )
+      end
+      answers = new_answers
     end
-    count = 1
-    for answer in new_answers
-      answer.update_attributes( :position => count )
-      count += 1
-    end
+    return answers
   end
   
   def has_resource?

@@ -33,7 +33,11 @@ class Students::QuizAttemptController < Students::BaseController
         @quiz_response = @quiz_attempt.next_response
         if @quiz_response.nil?
           @quiz_attempt.complete
-        elsif request.post?
+	else
+	  @question = @quiz_response.question
+	  @question.answers = @question.get_answers
+	end
+        if request.post?
 	  if @quiz_response.question.question_type == 1 || @quiz_response.question.question_type == 2
             for answer in params[:answers]
               @quiz_response.answers << Answer.find(answer)
@@ -46,7 +50,6 @@ class Students::QuizAttemptController < Students::BaseController
           return
         end
       end
-
       if @quiz_attempt.completed?
         redirect_to(:controller => 'results', :action => 'show', :id => @quiz_attempt.id)
       end

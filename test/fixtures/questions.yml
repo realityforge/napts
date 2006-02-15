@@ -5,7 +5,7 @@ q1:
   question_type: 1
   subject_group_id: 1
   corrected_at: '2005-3-14 00:00:00'
-  randomise: false
+  randomise: true
   
 #single answer
 q2:
@@ -14,7 +14,7 @@ q2:
   question_type: 2
   subject_group_id: 1
   corrected_at: '2005-3-14 00:00:00'
-  randomise: false
+  randomise: true
   
 #multiple choice
 q3:
@@ -23,7 +23,7 @@ q3:
   question_type: 1
   subject_group_id: 1
   corrected_at: '2005-3-14 00:00:00'
-  randomise: false
+  randomise: true
   
 #single answer
 q4:
