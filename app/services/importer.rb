@@ -29,11 +29,11 @@ class Importer
     content = "<div>#{task.elements['DESCRIPTION'].text}</div><div>#{task.elements['QUESTION'].text}</div>"
     choices = task.elements['SINGLE-CHOICE']
     if choices
-      type = 2
+      type = Question::SingleOptionType
     else
       choices = task.elements['MULTI-CHOICE']
       return unless choices
-      type = 1
+      type = Question::MultiOptionType
     end
     question = Question.create!(:content => content, 
                                 :subject_group_id => quiz.subject.subject_group_id,
