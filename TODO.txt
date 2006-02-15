@@ -22,4 +22,6 @@
 
   You run the importer something like 
   C:\Projects\napts>ruby script\runner 'Importer.import_file("CSE21ADS","cse12oop.xml")'
- 
+
+* Add validation so that Question.question_type can only be one of the valid values (1-4). Repeat
+  with Question.text_filter_type
