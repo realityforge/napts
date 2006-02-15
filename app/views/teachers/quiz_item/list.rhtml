@@ -40,6 +40,7 @@
   <% end %>
   </tbody>
 </table>
+
 <%= link_to('< Previous', :page => @quiz_item_pages.current.previous, 
 			  :q => params[:q]) if @quiz_item_pages.current.previous %>
 <%= link_to('Next >', :page => @quiz_item_pages.current.next, 

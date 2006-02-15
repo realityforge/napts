@@ -51,6 +51,7 @@ div.question_correct_before_edit
   float: right;
   width: 30%;
   margin: 0px 0px 0px 0px;
+}
 
 div.question_options, div.answer_options
 {
@@ -106,6 +107,16 @@ a:hover { color: #fff; background-color:#000; }
   border: 0;
   width: 11px;
   height: 14px;
+}
+
+img.arrows
+{
+  background-color: purple;
+  margin: 5px 5px 5px 5px;
+  border: 0;
+  width: 14px;
+  height: 14px;
+  outline-style: none;
 }
 
 #ErrorExplanation

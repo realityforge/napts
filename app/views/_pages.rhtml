@@ -1,0 +1,15 @@
+<%= "#{name} #{object_pages.current.first_item} to #{object_pages.current.last_item} of #{object_pages.item_count}" %>
+<% if object_pages.current.previous %>
+  <%= link_to( image_tag("icons/first-arrow.png", {:class => 'arrows'}) + 'First', :page => object_pages.first, :q => params[:q] ) %>
+  <%= link_to( image_tag("icons/previous-arrow.png", {:class => 'arrows'}) + 'Prev', :page => object_pages.current.previous, :q => params[:q] ) %>
+<% else %>
+  <%= image_tag("icons/first-arrow-greyed.png", {:class => 'arrows'}) + 'First' %>
+  <%= image_tag("icons/previous-arrow-greyed.png", {:class => 'arrows'}) + 'Prev' %>
+<% end %>
+<% if object_pages.current.next %>
+  <%= link_to( image_tag("icons/next-arrow.png", {:class => 'arrows'}) + 'Next', :page => object_pages.current.next, :q => params[:q] ) %>
+  <%= link_to( image_tag("icons/last-arrow.png", {:class => 'arrows'}) + 'Last', :page => object_pages.last, :q => params[:q] ) %>
+<% else %>
+  <%= image_tag("icons/next-arrow-greyed.png", {:class => 'arrows'}) + 'Next' %>
+  <%= image_tag("icons/last-arrow-greyed.png", {:class => 'arrows'}) + 'Last' %>
+<% end %>

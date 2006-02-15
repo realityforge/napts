@@ -73,6 +73,17 @@ div.dataset_answer
   position: relative;
 }
 
+div.change_page
+{
+  font-size: small;
+  margin: 2px 2px 2px 2px;
+  padding: 2px 2px 2px 2px;
+  background-color: white;
+  border: 1px solid black;
+  position: relative;
+  width: 40%;
+}
+
 table.answers
 {
   margin: 0;
