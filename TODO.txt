@@ -1,0 +1,14 @@
+* Add in concept of text filters for questions. Each question will have a text-format type
+  (an integer similar to question type) that can either be RedCloth, BlueCloth, RubyPants,
+  or Plain and defaults to RedCloth. Define them as constants in Question model. When 
+  rendering the text of either the question or answer content it will check the text filter 
+  and pass it through the most appropriate text filter. See the following files for examples
+   - vendor/redcloth/lib/redcloth.rb
+   - vendor/bluecloth/lib/bluecloth.rb
+   - vendor/rubypants/rubypants.rb
+
+  The Raw format passes through the content directly as html. The _form view should also
+  have a link to manual for current filter if appropriate that should only be shown when 
+  filter selected. (Ie RedCloth should link to http://hobix.com/textile/)
+
+ 
