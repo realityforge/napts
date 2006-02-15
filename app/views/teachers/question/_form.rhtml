@@ -10,12 +10,10 @@
           select("question", "question_type", options, {}, :onchange => 'onSelectAnswerType();' )
       %>
     </div>
-    <% if @question.question_type == 1 || @question.question_type == 2 %>
-      <div class="question_randomise_answers">
-        <label for="question_randomise">Randomise Answers</label>
-        <%= check_box( 'question', 'randomise' ) %>
-      </div>
-    <% end %>
+    <div class="question_randomise_answers">
+      <label for="question_randomise">Randomise Answers</label>
+      <%= check_box( 'question', 'randomise' ) %>
+    </div>
     <% if @form_action_desc == 'Edit' %>
       <div class="question_correct_before_edit">
         <label for="correct">Correct before current Edit</label>
@@ -31,20 +29,17 @@
   <div class="answer_choice">
     <div id="choice">
     <% 
-       i = 0
-       for @answer in @answers do
-         i = i + 1
+      id = 0
+      for @choice in @question.choices.values 
+        id += 1
     %>
       <div class="answer">
         
         <div class="answer_header">
-          <div class="answer_position">
-            <label for="answer_<%= @answer.id %>_content">Answer <%= i %></label>
-          </div>
-	  
           <div class="answer_options">
-            <label for="answer_<%= @answer.id %>_is_correct">Is correct</label>
-            <%= check_box('answer[]', 'is_correct') %>
+            <label for="answer_<%= id %>_is_correct">Is correct</label>
+	    <input type="checkbox" name="choice[<%= id %>][is_correct]" value="true" <%= (@choice[:is_correct].to_s == 'true') ? ' checked="checked"': '' %>/>
+	    <input type="hidden" name="choice[<%= id %>][is_correct]" value="false"/>
 	    <a onclick="delete_answer(this); return false;" href="#">
 	      	delete
 	    </a>
@@ -52,8 +47,7 @@
         </div>
 	
         <div class="answer_content">
-          <%= error_messages_for('answer') if false %>
-          <%= text_area('answer[]', 'content', :class => 'answer_content' ) %>
+          <textarea class="answer_content" cols="40" id="answer_<%= id %>_content" name="choice[<%= id %>][content]" rows="20"><%= @choice[:content] %></textarea>
         </div>
 	
       </div>
@@ -66,8 +60,8 @@
 <div class="answer_number">
   <div id="a_number">
     <div class="answer_content">
-      <label for="number">Number Answer</label>
-      <textarea class='answer_content' cols="40" id="number" name="number" rows="20"><% if @form_action_desc == 'Edit' && @question.question_type == 3 %><%= @number_answer.content %><% end %></textarea>
+      <label for="question_number_answer">Number Answer</label>
+      <%= text_area('question', 'number_answer', :class => 'answer_content') %>
     </div>
   </div>
 </div>
@@ -75,8 +69,8 @@
 <div class="answer_text">
   <div id="a_text">
     <div class="answer_content">
-      <label for="text">Text Answer</label>
-      <textarea class='answer_content' cols="40" id="text" name="text" rows="20"><% if @form_action_desc == 'Edit' && @question.question_type == 4 %><%= @text_answer.content %><% end %></textarea>
+      <label for="question_text_answer">Text Answer</label>
+      <%= text_area('question', 'text_answer', :class => 'answer_content') %>
     </div>
   </div>
 </div>
@@ -96,13 +90,13 @@ onSelectAnswerType();
   function onSelectAnswerType()
   {
     var question_type = $('question_question_type').value;
-    if( question_type == "1" || question_type == "2" )
+    if( question_type == "<%= Question::MultiOptionType %>" || question_type == "<%= Question::SingleOptionType %>" )
     {
       Element.show("choice")
       Element.hide("a_text")
       Element.hide("a_number")
     }
-    else if( question_type == "3" )
+    else if( question_type == "<%= Question::NumberType %>" )
     {
       Element.show("a_number")
       Element.hide("choice")

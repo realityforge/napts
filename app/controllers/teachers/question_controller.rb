@@ -22,112 +22,32 @@ class Teachers::QuestionController < Teachers::BaseController
     @question = Question.new(params[:question])
     if request.get?
       @question.randomise = true
+      @question.question_type = 1
       @question.answers = [Answer.new,Answer.new,Answer.new,Answer.new]
-      @text_answer = Answer.new
-      @number_answer = Answer.new
     elsif request.post?
       @question = Question.new(params[:question])
       @question.subject_group_id = current_subject.subject_group_id
       @question.corrected_at = Time.now
-      is_valid = @question.valid?
-      if @question.question_type == 1 || @question.question_type == 2
-        for answer_id in params[:answer].keys
-          data = params[:answer][answer_id].dup
-          answer = Answer.new(data)
-	  @question.answers << answer 
-	  if ! answer.valid?
-	    is_valid = false
-          end
-        end
-      elsif @question.question_type == 3
-        content = params[:number].strip
-	answer = Answer.new( :content => content, :position => 1, :is_correct => true )
-	@question.answers << answer
-	if ! answer.valid?
-	  is_valid = false
-	end
-      else
-        content = params[:text].strip
-	answer = Answer.new( :content => content, :position => 1, :is_correct => true )
-	@question.answers << answer
-	if ! answer.valid?
-	  is_valid = false
-	end
-      end
-	
-      if is_valid && @question.save
-        @question.answers.each {|answer| answer.save}
+      @question.choices = params[:choice]
+      if @question.save
 	flash[:notice] = 'Question was successfully created.'
-	redirect_to( :action => 'show', :id => @question )
-	return
+	redirect_to(:action => 'show', :id => @question)
       end
     end
-    i = 1 
-    for answer in @question.answers
-        answer.id = i
-	i = i + 1
-    end
-    @answers = @question.answers
   end  
   
   def edit
     @question = find_question(params[:id])
-    @answers = [Answer.new,Answer.new,Answer.new,Answer.new]
-    @text_answer = Answer.new
-    @number_answer = Answer.new
-
-    if request.get?
-      if @question.question_type == 3
-        @number_answer = @question.answers[0]
-      elsif @question.question_type == 4
-        @text_answer = @question.answers[0]
-      else
-        @answers = @question.answers
-      end
-    elsif request.post?
+    if request.post?
       @answers = []
-      if params[:answer]
-        for id in params[:answer].keys
-	  if ! id.index('new')
-            answer = @question.answers.detect { |x| x.id.to_s == id.to_s }
-	    if answer.nil?
-	      flash[:alert] = "Update not successful"
-	    else
-	      answer.attributes = params[:answer][id]
-	      @answers << answer
-	    end
-          else
-	    answer = Answer.new( params[:answer][id] )
-	    # This is just a temporary id used prior to saving to database 
-	    answer.id = id.to_s
-	    answer.question_id = @question.id
-	    @answers << answer
-	  end
-        end
-      end
-      
       @question.attributes = params[:question]
       if params[:correct] 
         @question.corrected_at = Time.now
       end
-      is_valid = true
-      @answers.each do |x| 
-      	is_valid = x.valid? && is_valid
-      end
-      is_valid &&= @question.valid?
-      return unless is_valid && ! flash[:alert]
-      
-      Answer.transaction do
-        for answer in @question.answers
-	  if params[:answer] && ! params[:answer][answer.id.to_s]
-	    @question.answers.delete(answer)
-	  end
-        end
-	@question.save!
-	@answers.each {|x| x.save!}
-	flash[:notice] = 'Question was successfully updated.'
-        redirect_to( :action => 'show', :id => @question )
-        return
+      @question.choices = params[:choice]
+      if @question.save
+        flash[:notice] = 'Question was successfully updated.'
+        redirect_to(:action => 'show', :id => @question)
       end
     end
   end

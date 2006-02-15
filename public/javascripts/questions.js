@@ -13,36 +13,21 @@ function another_answer()
   answer_header.setAttribute('class', 'answer_header');
   answer.appendChild(answer_header);
   
-  answer_number = document.createElement('div');
-  answer_number.setAttribute('class', 'answer_number');
-  answer_header.appendChild(answer_number);
-  
-  content_label = document.createElement('label');
-  content_label.setAttribute('for', 'answer_' + randomnumber + '_content');
-  content_label.appendChild(document.createTextNode('Answer ' + randomnumber));
-  answer_number.appendChild(content_label);
-
   answer_options = document.createElement('div');
   answer_options.setAttribute('class', 'answer_options');
   answer_header.appendChild(answer_options);
 
   is_correct_label = document.createElement('label');
-  is_correct_label.setAttribute('for', 'answer_' + randomnumber + '_is_correct');
+  is_correct_label.setAttribute('for', 'choice_' + randomnumber + '_is_correct');
   is_correct_label.appendChild(document.createTextNode("Is correct"));
   answer_options.appendChild(is_correct_label);
   
   cb = document.createElement('input');
   cb.setAttribute('type', 'checkbox');
-  cb.setAttribute('id', 'answer_' + randomnumber + '_is_correct');
-  cb.setAttribute('name', 'answer[' + randomnumber + '][is_correct]');
+  cb.setAttribute('id', 'choice_' + randomnumber + '_is_correct');
+  cb.setAttribute('name', 'choice[' + randomnumber + '][is_correct]');
   cb.setAttribute('value', "1");
   answer_options.appendChild(cb);
-  
-  cbd = document.createElement('input');
-  cbd.setAttribute('name', 'answer[' + randomnumber + '][is_correct]');
-  cbd.setAttribute('type', 'hidden' );
-  cbd.setAttribute('value', "0");
-  answer_options.appendChild(cbd);
   
   del = document.createElement('a');
   del.setAttribute( 'onclick', 'delete_answer(this); return false');
@@ -56,8 +41,8 @@ function another_answer()
   
   content = document.createElement('textarea');
   content.setAttribute('class', 'answer_content' );
-  content.setAttribute('id', 'answer_' + randomnumber + '_content' );
-  content.setAttribute('name', 'answer[' + randomnumber + '][content]');
+  content.setAttribute('id', 'choice_' + randomnumber + '_content' );
+  content.setAttribute('name', 'choice[' + randomnumber + '][content]');
   content.setAttribute('cols', 40 );
   content.setAttribute('rows', 20 );
   answer_content.appendChild(content);
