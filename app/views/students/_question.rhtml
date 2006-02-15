@@ -4,19 +4,19 @@
   <div class="dataset_question">
     <%= @question.content %>
   </div>
-<% if @question.question_type == 1 %>
+<% if @question.question_type == Question::MultiOptionType %>
   <% button_type = "checkbox" %>
   <% message = "Please select all correct answers" %>
-<% elsif @question.question_type == 2 %>
+<% elsif @question.question_type == Question::SingleOptionType %>
   <% button_type = "radio" %>
   <% message = "Please select the one correct answer" %>
 <% else %>
   <% message = "Please enter the correct answer" %>
 <% end %>
 <p><%= message %></p>
-<% if @question.question_type == 1 or @question.question_type == 2 %>
+<% if @question.question_type == Question::MultiOptionType or @question.question_type == Question::SingleOptionType %>
   <table class="answers">
-    <% for answer in @question.answers %>
+    <% for answer in @question.get_answers %>
       <tr>
         <td class="cb">
           <input type="<%= button_type %>" name="answers[]" value="<%= answer.id %>" />
