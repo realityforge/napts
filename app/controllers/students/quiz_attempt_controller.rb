@@ -33,12 +33,9 @@ class Students::QuizAttemptController < Students::BaseController
         @quiz_response = @quiz_attempt.next_response
         if @quiz_response.nil?
           @quiz_attempt.complete
-	else
-	  @question = @quiz_response.question
-	  @question.answers = @question.get_answers
 	end
         if request.post?
-	  if @quiz_response.question.question_type == 1 || @quiz_response.question.question_type == 2
+	  if @quiz_response.question.question_type == Question::MultiOptionType || @quiz_response.question.question_type == Question::SingleOptionType
             for answer in params[:answers]
               @quiz_response.answers << Answer.find(answer)
             end if params[:answers]
