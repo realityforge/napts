@@ -11,4 +11,15 @@
   have a link to manual for current filter if appropriate that should only be shown when 
   filter selected. (Ie RedCloth should link to http://hobix.com/textile/)
 
+* Update app/services/importer.rb to support loading of text and number answers. Currently it 
+  only creates a question if it is a single-choice or multi-choice. It should also create the
+  question (and answers) if it is a text or number node. You can get an example of the old 
+  question format from cbt/trunk/subjects/cse12oop/cse12oop.xml (or similar). You need to support
+  NUMBER and WORD element answer formats. For a description of how the XML api in Ruby works you 
+  can look at 
+  - Tutorial: http://www.germane-software.com/~ser/software/rexml/docs/tutorial.html
+  - API Docs: http://www.germane-software.com/~ser/software/rexml/doc/index.html
+
+  You run the importer something like 
+  C:\Projects\napts>ruby script\runner 'Importer.import_file("CSE21ADS","cse12oop.xml")'
  
