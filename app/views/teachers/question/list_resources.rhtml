@@ -32,9 +32,7 @@
   <% end %>
   </tbody>
 </table>
-<%= link_to( '< Previous', :page => @resource_pages.current.previous,
-                           :q => params[:q] ) if @resource_pages.current.previous %>
-<%= link_to( 'Next >', :page => @resource_pages.current.next,
-                       :q => params[:q] ) if @resource_pages.current.next %> 
-<br/>
+<div class="change_page">
+  <%= render( :partial => '/pages', :locals => {:name => 'Resource', :obejct_pages => @resource_pages} ) %>
+</div>
 <%= link_to('Back to Question', :action => 'show', :id => @question ) %>

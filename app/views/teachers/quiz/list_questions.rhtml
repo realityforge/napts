@@ -31,12 +31,8 @@
   <% end %>
   </tbody>
 </table>
-<br />
-<%= link_to('< Previous', :page => @question_pages.current.previous, 
-			  :q => params[:q]) if @question_pages.current.previous %>
-<%= link_to('Next >', :page => @question_pages.current.next, 
-		      :q => params[:q]) if @question_pages.current.next %>
-
-
+<div class="change_page">
+  <%= render( :partial => '/pages', :locals => {:name => 'Question', :object_pages => @question_pages} ) %>
+</div>
 <%= link_to("Cancel", {:controller => 'quiz_item', :action => 'list', :quiz_id => @quiz.id}) %>
 

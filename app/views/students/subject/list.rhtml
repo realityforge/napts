@@ -27,8 +27,7 @@
 <% end %>
   </tbody>
 </table>
-<%= link_to('< Previous', :page => @subject_pages.current.previous, 
-			  :q => params[:q]) if @subject_pages.current.previous %>
-<%= link_to('Next >', :page => @subject_pages.current.next, 
-		      :q => params[:q]) if @subject_pages.current.next %>
+<div class="change_page">
+  <%= render( :partial => '/pages', :locals => {:name => 'Subject', :object_pages => @subject_pages} ) %>
+</div>
 

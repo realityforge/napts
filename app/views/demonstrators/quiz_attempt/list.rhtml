@@ -30,9 +30,8 @@
   <% end %>
   </tbody>
 </table>
-<%= link_to( '< Previous', :page => @quiz_attempt_pages.current.previous, 
-                           :quiz_id => params[:quiz_id],
-			   :q => params[:q]) if @quiz_attempt_pages.current.previous %>
-<%= link_to( 'Next >', :page => @quiz_attempt_pages.current.next, 
-                           :quiz_id => params[:quiz_id],
-			   :q => params[:q]) if @quiz_attempt_pages.current.next %>
+<div class="change_page">
+  <%= render( :partial => '/pages', 
+              :locals => {:name => 'QuizAttempt', :object_pages => @quiz_attempt_pages}, 
+	      :quiz_id => params[:quiz_id] ) %>
+</div>

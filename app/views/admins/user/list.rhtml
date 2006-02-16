@@ -34,9 +34,7 @@
   <% end %>
   </tbody>
 </table>
-<%= link_to('< Previous', :page => @user_pages.current.previous, 
-			  :q => params[:q]) if @user_pages.current.previous %>
-<%= link_to('Next >', :page => @user_pages.current.next, 
-		      :q => params[:q]) if @user_pages.current.next %>
-<br/>
+<div class="change_page">
+  <%= render( :partial => '/pages', :locals => {:name => 'User', :object_pages => @user_pages } ) %>
+</div>
 <%= link_to('New User', :action => 'new', :q => params[:q], :page => params[:page]) %>
