@@ -114,13 +114,15 @@ class Question < ActiveRecord::Base
     end
   end
   
-  def format_text
+  def formatted_content
     if text_format == RedClothFormat
-      self.content = RedCloth.new( self.content )
+      RedCloth.new( content ).to_html
     elsif text_format == BlueClothFormat
-      self.content = BlueCloth::new( self.content )
+      BlueCloth::new( content ).to_html
     elsif text_format == RubyPantsFormat
-      self.content == RubyPants.new( self.content )
+      RubyPants.new( content ).to_html
+    else # assume text_format == PlainFormaat
+      content
     end
   end
 end
