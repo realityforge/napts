@@ -25,7 +25,6 @@ class Teachers::QuestionController < Teachers::BaseController
       @question.question_type = 1
       @question.answers = [Answer.new,Answer.new,Answer.new,Answer.new]
     elsif request.post?
-      @question = Question.new(params[:question])
       @question.subject_group_id = current_subject.subject_group_id
       @question.corrected_at = Time.now
       @question.choices = params[:choice]
@@ -39,11 +38,7 @@ class Teachers::QuestionController < Teachers::BaseController
   def edit
     @question = find_question(params[:id])
     if request.post?
-      @answers = []
-      @question.attributes = params[:question]
-      if params[:correct] 
-        @question.corrected_at = Time.now
-      end
+      @question.corrected_at = Time.now if params[:correct] 
       @question.choices = params[:choice]
       if @question.save
         flash[:notice] = 'Question was successfully updated.'
