@@ -33,7 +33,9 @@
 * (For Pete) Unit test the Question class so that all those new methods have adequete
   coverage. 
   
-* Functional test for new and edit of question controller
+* (For Pete) Functional test for new and edit of question controller
+
+* (For Pete) Functional test the importer
 
 
   
