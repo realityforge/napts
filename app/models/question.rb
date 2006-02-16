@@ -23,11 +23,16 @@ class Question < ActiveRecord::Base
     "Text" => TextType
   }.freeze
   
+  RedClothFormat = 1
+  BlueClothFormat = 2
+  RubyPantsFormat = 3
+  PlainFormat = 4
+  
   TEXT_FORMAT = {
-    "RedCloth" => 1,
-    "BlueCloth" => 2,
-    "RubyPants" => 3,
-    "Plain" => 4
+    "RedCloth" => RedClothFormat,
+    "BlueCloth" => BlueClothFormat,
+    "RubyPants" => RubyPantsFormat,
+    "Plain" => PlainFormat
   }.freeze
   
   def validate

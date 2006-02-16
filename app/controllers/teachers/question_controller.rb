@@ -22,11 +22,9 @@ class Teachers::QuestionController < Teachers::BaseController
     @question = Question.new(params[:question])
     if request.get?
       @question.randomise = true
-      @question.text_format = 1
-      @question.question_type = 1
+      @question.text_format = Question::RedClothFormat
+      @question.question_type = Question::MultiOptionType
       @question.answers = [Answer.new,Answer.new,Answer.new,Answer.new]
-      @number_answer = Answer.new
-      @text_answer = Answer.new
     elsif request.post?
       @question.subject_group_id = current_subject.subject_group_id
       @question.corrected_at = Time.now
