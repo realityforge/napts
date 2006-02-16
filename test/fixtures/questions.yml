@@ -51,7 +51,7 @@ q5:
 #single answer
 q6:
   id: 6
-  content: "What's the time Mr Wolf?"
+  content: "Whats the time Mr Wolf?"
   question_type: 2
   subject_group_id: 2
   corrected_at: '2005-3-14 00:00:00'
@@ -91,7 +91,16 @@ q9:
 q10:
   id: 10
   content: "Some Dummy Question"
-  question_type: 1
+  question_type: 4
+  subject_group_id: 1
+  corrected_at: '2005-3-14 00:00:00'
+  randomise: false
+  text_format: 4
+
+q11:
+  id: 11
+  content: "Life, the Universe and Everything = ?"
+  question_type: 3
   subject_group_id: 1
   corrected_at: '2005-3-14 00:00:00'
   randomise: false

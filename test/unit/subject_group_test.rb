@@ -19,11 +19,12 @@ class SubjectGroupTest < Test::Unit::TestCase
 
   def test_questions
     group = SubjectGroup.find( subject_groups(:sg_1).id )
-    assert_equal(4, group.questions.size)
+    assert_equal(5, group.questions.size)
     assert_equal(questions(:q1).id, group.questions[0].id)
     assert_equal(questions(:q2).id, group.questions[1].id)
     assert_equal(questions(:q3).id, group.questions[2].id)
     assert_equal(questions(:q10).id, group.questions[3].id)
+    assert_equal(questions(:q11).id, group.questions[4].id)
   end
 
   def test_resources

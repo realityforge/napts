@@ -214,3 +214,17 @@ q9_a4:
   position: 4
   question_id: 9
 
+q10_a:
+  id: 34
+  content: "^ACE$"
+  is_correct: true
+  position: 1
+  question_id: 10
+
+q11_a:
+  id: 35
+  content: "42"
+  is_correct: true
+  position: 1
+  question_id: 11
+
