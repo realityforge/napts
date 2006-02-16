@@ -23,16 +23,16 @@ class Question < ActiveRecord::Base
   }.freeze
  
   def validate
-    if question_type == MultiOptionType || question_type == SingleOptionType
+    if (question_type == MultiOptionType || question_type == SingleOptionType) && @choices
       correct_count = 0
       choices.each_value do |choice|
         errors.add_to_base( 'All answers must have content of length 1 or more.' ) if (! choice[:content] || choice[:content].length == 0)
         correct_count += 1 if choice[:is_correct].to_s == 'true'
       end
       errors.add_to_base( 'Must select single correct answer.' ) if (question_type == SingleOptionType && correct_count != 1)
-    elsif question_type == NumberType
+    elsif question_type == NumberType && @number_answer
       errors.add_to_base( 'Must specify a number answer.' ) if (! number_answer || !(number_answer.to_s =~ /^[+-]?\d+$/))
-    elsif question_type == TextType 
+    elsif question_type == TextType && @text_answer
       errors.add_to_base( 'Must have a answer of length of 1 or more.' ) if (! text_answer || text_answer.length == 0)
     end
   end

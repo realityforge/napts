@@ -37,7 +37,9 @@ class Importer
     end
     question = Question.create!(:content => content, 
                                 :subject_group_id => quiz.subject.subject_group_id,
-                                :question_type => type)
+                                :question_type => type,
+                                :randomise => true,
+                                :corrected_at => Time.now)
 
     quiz.quiz_items.create(:preview_only => false, :question_id => question.id)
     choices.elements.each('OPTION') {|option| Importer.import_answer(question,option)}
