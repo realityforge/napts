@@ -37,5 +37,11 @@
 
 * (For Pete) Functional test the importer
 
+* (For Pete) Unit test resource + resource_data
 
-  
+* Set :uniq => true in has_and_belongs_to_many for Quiz.active_in, 
+  QuizAttempt.quiz_responses, Room.quizzes and make sure all tests pass
+
+* Set :exclusively_dependent => true in QuizAttempt.quiz_responses, 
+  Quiz.quiz_items and Question.answers. (Make sure all tests pass).
+
