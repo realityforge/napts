@@ -50,7 +50,7 @@ class Question < ActiveRecord::Base
   end
   
   def get_answers
-    answers = self.answers
+    answers = self.answers.collect {|a| a }
     if self.randomise?
       new_answers = []
       for i in 0...answers.length
