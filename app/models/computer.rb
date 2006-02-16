@@ -6,7 +6,6 @@ class Computer < ActiveRecord::Base
   validates_format_of( :ip_address, :with => AddressRegex )
   validates_length_of( :ip_address, :maximum => 16 )
   belongs_to( :room )
-  validates_associated( :room )
   validates_presence_of( :room )
   validates_presence_of( :ip_address )
   validates_uniqueness_of( :ip_address, :scope => :room_id )

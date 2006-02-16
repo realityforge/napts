@@ -9,7 +9,6 @@ class Question < ActiveRecord::Base
   has_many( :quiz_responses )
   has_and_belongs_to_many( :resources, :uniq => true )
   belongs_to( :subject_group )
-  validates_associated( :subject_group )
 
   MultiOptionType = 1
   SingleOptionType = 2

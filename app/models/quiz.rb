@@ -5,7 +5,6 @@ class Quiz < ActiveRecord::Base
   belongs_to( :subject )
   validates_presence_of( :subject_id )
   validates_uniqueness_of( :name )
-  validates_associated( :subject )
   validates_length_of( :name, :within => 1..20 )
   validates_length_of( :description, :within => 1..120 )
   validates_numericality_of( :duration )
