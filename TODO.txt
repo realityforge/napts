@@ -31,6 +31,7 @@ STARTED THIS BUT PROBABLY DOING IT WAY WRONG. I'LL KEEP DOING IT TOMORROW
 DONE
 * Enforce Question.corrected_at not null at database layer (in migrate file)
 
+DONE
 * Remove all validates_associated declarations as I just got bit by it again
 
 * (For Pete) Unit test the Question class so that all those new methods have adequete
@@ -42,9 +43,13 @@ DONE
 
 * (For Pete) Unit test resource + resource_data
 
+DONE IN MODEL AND MIGRATE FILE
+:UNIQ IS ONLY AN OPTION FOR HABTM SO CAN'T USE IT IN QUIZ_ATTEMPT.QUIZ_RESPONSES,
+ IT'S ALREADY SET TO UNIQUE IN THE MIGRATE FILE THO
 * Set :uniq => true in has_and_belongs_to_many for Quiz.active_in, 
   QuizAttempt.quiz_responses, Room.quizzes and make sure all tests pass
 
+DIDN'T CHANGE QUIZ_ATTEMPT.QUIZ_RESPONSE COS IT WAS FAILING TESTS BUT I CHANGED THE OTHERS
 * Set :exclusively_dependent => true in QuizAttempt.quiz_responses, 
   Quiz.quiz_items and Question.answers. (Make sure all tests pass).
 
