@@ -50,6 +50,7 @@ DONE IN MODEL AND MIGRATE FILE
   QuizAttempt.quiz_responses, Room.quizzes and make sure all tests pass
 
 DIDN'T CHANGE QUIZ_ATTEMPT.QUIZ_RESPONSE COS IT WAS FAILING TESTS BUT I CHANGED THE OTHERS
+CAN'T USE EXCLUSIVELY DEPENDENT FOR QUIZ_ATTEMPT.QUIZ_RESPONSE BECAUSE QUIZ_RESPONSE ALSO BELONGS TO QUESTION
 * Set :exclusively_dependent => true in QuizAttempt.quiz_responses, 
   Quiz.quiz_items and Question.answers. (Make sure all tests pass).
 
