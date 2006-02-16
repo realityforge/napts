@@ -212,6 +212,9 @@ class CreateInitialSchema < ActiveRecord::Migration
     end
     add_foreign_key_constraint('quizzes_rooms', 'quiz_id', 'quizzes', 'id', :name => 'quiz_id_fk' )
     add_foreign_key_constraint('quizzes_rooms', 'room_id', 'rooms', 'id', :name => 'room_id_fk' )
+    add_index('quizzes_rooms', ['quiz_id', 'room_id'], 
+              :name => 'quizzes_rooms_quiz_id_room_id_index',
+	      :unique => true)
   end
   
   def self.down
