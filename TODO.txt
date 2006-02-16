@@ -23,7 +23,17 @@
   You run the importer something like 
   C:\Projects\napts>ruby script\runner 'Importer.import_file("CSE21ADS","cse12oop.xml")'
 
-* Add validation so that Question.question_type can only be one of the valid values (1-4). Repeat
-  with Question.text_filter_type
+* Add validation so that Question.question_type can only be one of the valid values (1-4). 
+  Repeat with Question.text_filter_type
 
 * Enforce Question.corrected_at not null at database layer (in migrate file)
+
+* Remove all validates_associated declarations as I just got bit by it again
+
+* (For Pete) Unit test the Question class so that all those new methods have adequete
+  coverage. 
+  
+* Functional test for new and edit of question controller
+
+
+  
