@@ -3,6 +3,7 @@ class Question < ActiveRecord::Base
   validates_presence_of( :question_type )
   validates_presence_of( :subject_group_id )
   validates_presence_of( :corrected_at )
+  validates_presence_of( :text_format )
   has_many( :answers, :dependent => true, :order => 'position' )
   has_many( :quiz_items )
   has_many( :quiz_responses )
@@ -21,7 +22,14 @@ class Question < ActiveRecord::Base
     "Number" => NumberType,
     "Text" => TextType
   }.freeze
- 
+  
+  TEXT_FORMAT = {
+    "RedCloth" => 1,
+    "BlueCloth" => 2,
+    "RubyPants" => 3,
+    "Plain" => 4
+  }.freeze
+  
   def validate
     if (question_type == MultiOptionType || question_type == SingleOptionType) && @choices
       correct_count = 0
@@ -88,18 +96,17 @@ class Question < ActiveRecord::Base
   end
 
   def after_save
-    if (question_type == MultiOptionType || question_type = SingleOptionType) && @choices
+    if question_type == NumberType && @number_answer
+      answers.clear
+      Answer.create!(:question_id => id, :content => @number_answer, :position => 1, :is_correct => true)
+    elsif question_type == TextType && @text_answer
+      answers.clear
+      Answer.create!(:question_id => id, :content => @text_answer, :position => 1, :is_correct => true)
+    elsif (question_type == MultiOptionType || question_type = SingleOptionType) && @choices
       answers.clear
       @choices.each_value do |choice|
         Answer.create!(:question_id => id, :content => choice[:content], :position => choice[:position], :is_correct => choice[:is_correct])
       end
-    elsif question_type == NumberType && @number_answer
-      answers.clear
-      Answer.create!(:question_id => id, :content => @number_answer, :position => 1, :is_correct => true)
-    end
-    if question_type == TextType && @text_answer
-      answers.clear
-      Answer.create!(:question_id => id, :content => @text_answer, :position => 1, :is_correct => true)
     end
   end
 end

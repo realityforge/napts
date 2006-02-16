@@ -3,12 +3,17 @@
   <h2><%= @form_title %></h2>
   <%= error_messages_for('question', :header_tag => 'h3') %>
 <div class="question">
+  <div class="question_type">
+    <label for="question_question_type">Type</label>
+    <%= options = Question::QUESTION_TYPE
+        select("question", "question_type", options, {}, :onchange => 'onSelectAnswerType();' )
+    %>
+  </div>
   <div class="question_header">
-    <div class="question_type">
-      <label for="question_question_type">Type</label>
-      <%= options = Question::QUESTION_TYPE
-          select("question", "question_type", options, {}, :onchange => 'onSelectAnswerType();' )
-      %>
+    <div class="question_text_format">
+      <label for="question_text_format">Text Format</label>
+      <%= options = Question::TEXT_FORMAT
+          select("question", "text_format", options) %>
     </div>
     <div class="question_randomise_answers">
       <label for="question_randomise">Randomise Answers</label>
