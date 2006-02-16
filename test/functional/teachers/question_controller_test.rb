@@ -4,11 +4,6 @@ require 'teachers/question_controller'
 #Re-raise errors caught by the controller.
 class Teachers::QuestionController; def rescue_action(e) raise e end; end
 
-module UploadedFile
-  attr_accessor :original_filename, :content_type
-end
-
-
 class Teachers::QuestionControllerTest < Test::Unit::TestCase
   fixtures OrderedTables
 
