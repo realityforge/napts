@@ -38,6 +38,9 @@
   </tbody>
 </table>
 <div class="change_page">
-  <%= render( :partial => '/pages', :locals => {:name => 'Subject Group', :object_pages => @subject_group_pages} ) %>
+  <%= render( :partial => '/pages',
+              :locals => {:name => 'Subject Group', 
+	                  :object_pages => @subject_group_pages,
+			  :extra_params => {}} ) %>
 </div>
 <%= link_to( 'New Subject Group', :action => 'new' ) %>

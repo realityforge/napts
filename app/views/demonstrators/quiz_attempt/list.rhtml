@@ -32,6 +32,7 @@
 </table>
 <div class="change_page">
   <%= render( :partial => '/pages', 
-              :locals => {:name => 'QuizAttempt', :object_pages => @quiz_attempt_pages}, 
-	      :quiz_id => params[:quiz_id] ) %>
+              :locals => {:name => 'QuizAttempt', 
+	                  :object_pages => @quiz_attempt_pages, 
+			  :extra_params => { :quiz_id => params[:quiz_id]}} ) %>
 </div>

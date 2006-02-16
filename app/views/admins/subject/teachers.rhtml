@@ -25,6 +25,6 @@
   </tbody>
 </table>
 <div class="change_page">
-  <%= render( :partial => '/pages', :locals => {:name => 'Teacher', :object_pages => @user_pages} ) %>
+  <%= render( :partial => '/pages', :locals => {:name => 'Teacher', :object_pages => @user_pages, :extra_params => { :id => params[:id]}} ) %>
 </div>
 <%= link_to( 'Return to Subject Page', :action => 'show', :id => @subject ) %>

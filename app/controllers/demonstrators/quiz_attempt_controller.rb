@@ -14,7 +14,7 @@ class Demonstrators::QuizAttemptController < Demonstrators::BaseController
                                                     :joins => 'LEFT OUTER JOIN users ON users.id = quiz_attempts.user_id',
                                                     :conditions => conditions,
                                                     :order_by => 'users.name',
-                                                    :per_page => 20 )
+                                                    :per_page => 1 )
   end
 
   def reset

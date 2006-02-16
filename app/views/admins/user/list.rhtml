@@ -35,6 +35,9 @@
   </tbody>
 </table>
 <div class="change_page">
-  <%= render( :partial => '/pages', :locals => {:name => 'User', :object_pages => @user_pages } ) %>
+  <%= render( :partial => '/pages', 
+              :locals => {:name => 'User', 
+	                  :object_pages => @user_pages,
+			  :extra_params => {}} ) %>
 </div>
 <%= link_to('New User', :action => 'new', :q => params[:q], :page => params[:page]) %>
