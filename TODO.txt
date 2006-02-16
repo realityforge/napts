@@ -25,3 +25,5 @@
 
 * Add validation so that Question.question_type can only be one of the valid values (1-4). Repeat
   with Question.text_filter_type
+
+* Enforce Question.corrected_at not null at database layer (in migrate file)
