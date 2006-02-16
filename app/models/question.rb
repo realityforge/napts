@@ -114,4 +114,14 @@ class Question < ActiveRecord::Base
       end
     end
   end
+  
+  def format_text
+    if text_format == RedClothFormat
+      self.content = RedCloth.new( self.content )
+    elsif text_format == BlueClothFormat
+      self.content = BlueCloth::new( self.content )
+    elsif text_format == RubyPantsFormat
+      self.content == RubyPants.new( self.content )
+    end
+  end
 end

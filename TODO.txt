@@ -1,3 +1,5 @@
+
+STARTED THIS BUT PROBABLY DOING IT WAY WRONG. I'LL KEEP DOING IT TOMORROW
 * Add in concept of text filters for questions. Each question will have a text-format type
   (an integer similar to question type) that can either be RedCloth, BlueCloth, RubyPants,
   or Plain and defaults to RedCloth. Define them as constants in Question model. When 
@@ -26,6 +28,7 @@
 * Add validation so that Question.question_type can only be one of the valid values (1-4). 
   Repeat with Question.text_filter_type
 
+DONE
 * Enforce Question.corrected_at not null at database layer (in migrate file)
 
 * Remove all validates_associated declarations as I just got bit by it again

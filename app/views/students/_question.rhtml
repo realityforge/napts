@@ -2,7 +2,11 @@
   <%= error_messages_for('question', :header_tag => 'h3') %>
   <h2><%= @form_title %></h2>
   <div class="dataset_question">
-    <%= @question.content %>
+    <% if @question.text_format == Question::PlainFormat %>
+      <%= @question.content %>
+    <% else %>
+      <%= @question.content.to_html %>
+    <% end %>
   </div>
 <% if @question.question_type == Question::MultiOptionType %>
   <% button_type = "checkbox" %>
