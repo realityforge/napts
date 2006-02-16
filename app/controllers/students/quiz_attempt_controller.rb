@@ -33,9 +33,6 @@ class Students::QuizAttemptController < Students::BaseController
         @quiz_response = @quiz_attempt.next_response
         if @quiz_response.nil?
           @quiz_attempt.complete
-	else
-	  @question = @quiz_response.question
-	  @question.format_text
 	end
         if request.post?
 	  if @quiz_response.question.question_type == Question::MultiOptionType || @quiz_response.question.question_type == Question::SingleOptionType
