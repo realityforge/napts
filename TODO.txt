@@ -28,20 +28,12 @@ STARTED THIS BUT PROBABLY DOING IT WAY WRONG. I'LL KEEP DOING IT TOMORROW
 * Add validation so that Question.question_type can only be one of the valid values (1-4). 
   Repeat with Question.text_filter_type
 
-DONE
-* Enforce Question.corrected_at not null at database layer (in migrate file)
-
-DONE
-* Remove all validates_associated declarations as I just got bit by it again
-
 * (For Pete) Unit test the Question class so that all those new methods have adequete
   coverage. 
   
 * (For Pete) Functional test for new and edit of question controller
 
 * (For Pete) Functional test the importer
-
-* (For Pete) Unit test resource + resource_data
 
 DONE IN MODEL AND MIGRATE FILE
 :UNIQ IS ONLY AN OPTION FOR HABTM SO CAN'T USE IT IN QUIZ_ATTEMPT.QUIZ_RESPONSES,
@@ -54,3 +46,4 @@ CAN'T USE EXCLUSIVELY DEPENDENT FOR QUIZ_ATTEMPT.QUIZ_RESPONSE BECAUSE QUIZ_RESP
 * Set :exclusively_dependent => true in QuizAttempt.quiz_responses, 
   Quiz.quiz_items and Question.answers. (Make sure all tests pass).
 
+* students/question partial should take a local and not use an instance variable
