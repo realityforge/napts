@@ -32,7 +32,10 @@
   </tbody>
 </table>
 <div class="change_page">
-  <%= render( :partial => '/pages', :locals => {:name => 'Question', :object_pages => @question_pages} ) %>
+  <%= render( :partial => '/pages',
+              :locals => {:name => 'Question',
+	                  :object_pages => @question_pages,
+			  :extra_params => {}} ) %>
 </div>
 <%= link_to("Cancel", {:controller => 'quiz_item', :action => 'list', :quiz_id => @quiz.id}) %>
 

@@ -29,6 +29,9 @@
   </tbody>
 </table>
 <div class="change_page">
-  <%= render( :partial => '/pages', :locals => {:name => 'Room', :object_pages => @room_pages, :extra_params => {} } ) %>
+  <%= render( :partial => '/pages', 
+              :locals => {:name => 'Room', 
+	                  :object_pages => @room_pages,
+			  :extra_params => {} } ) %>
 </div>
 <%= link_to( 'New Room', :action => 'new' ) %>

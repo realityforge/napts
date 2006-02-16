@@ -28,6 +28,9 @@
   </tbody>
 </table>
 <div class="change_page">
-  <%= render( :partial => '/pages', :locals => {:name => 'Subject', :object_pages => @subject_pages} ) %>
+  <%= render( :partial => '/pages',
+              :locals => {:name => 'Subject', 
+	                  :object_pages => @subject_pages,
+	                  :extra_params => {}} ) %>
 </div>
 

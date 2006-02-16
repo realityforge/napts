@@ -46,7 +46,10 @@
   </tbody>
 </table>
 <div class="change_page">
-  <%= render( :partial => '/pages', :locals => {:name => 'Quiz', :object_pages => @quiz_pages} ) %>
+  <%= render( :partial => '/pages',
+              :locals => {:name => 'Quiz', 
+	                  :object_pages => @quiz_pages,
+			  :extra_params => {}} ) %>
 </div>
 <%= link_to( 'New quiz', :action => 'new' ) %>
 

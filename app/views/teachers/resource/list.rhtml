@@ -46,6 +46,9 @@
   </tbody>
 </table>
 <div class="change_page">
-  <%= render( :partial => '/pages', :locals => {:name => 'Resource', :object_pages => @resource_pages} ) %>
+  <%= render( :partial => '/pages',
+              :locals => {:name => 'Resource', 
+	                  :object_pages => @resource_pages, 
+			  :extra_params => {}} ) %>
 </div>
 <%= link_to( 'New resource', :action => 'new' ) %>
