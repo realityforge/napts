@@ -6,7 +6,7 @@ q1:
   subject_group_id: 1
   corrected_at: '2005-3-14 00:00:00'
   randomise: true
-  text_format: 1
+  text_format: 4
   
 #single answer
 q2:
@@ -16,7 +16,7 @@ q2:
   subject_group_id: 1
   corrected_at: '2005-3-14 00:00:00'
   randomise: true
-  text_format: 1
+  text_format: 4
   
 #multiple choice
 q3:
@@ -26,7 +26,7 @@ q3:
   subject_group_id: 1
   corrected_at: '2005-3-14 00:00:00'
   randomise: true
-  text_format: 1
+  text_format: 4
   
 #single answer
 q4:
@@ -36,7 +36,7 @@ q4:
   subject_group_id: 2
   corrected_at: '2005-3-14 00:00:00'
   randomise: false
-  text_format: 1
+  text_format: 4
   
 #multi answer
 q5:
@@ -46,7 +46,7 @@ q5:
   subject_group_id: 2
   corrected_at: '2005-3-14 00:00:00'
   randomise: false
-  text_format: 1
+  text_format: 4
   
 #single answer
 q6:
@@ -56,7 +56,7 @@ q6:
   subject_group_id: 2
   corrected_at: '2005-3-14 00:00:00'
   randomise: false
-  text_format: 1
+  text_format: 4
   
 #multiple choice
 q7:
@@ -66,7 +66,7 @@ q7:
   subject_group_id: 3
   corrected_at: '2005-3-14 00:00:00'
   randomise: false
-  text_format: 1
+  text_format: 4
   
 #single answer
 q8:
@@ -76,7 +76,7 @@ q8:
   subject_group_id: 3
   corrected_at: '2005-3-14 00:00:00'
   randomise: false
-  text_format: 1
+  text_format: 4
   
 #multiple choice
 q9:
@@ -86,7 +86,7 @@ q9:
   subject_group_id: 3
   corrected_at: '2005-3-14 00:00:00'
   randomise: false
-  text_format: 1
+  text_format: 4
   
 q10:
   id: 10
@@ -95,4 +95,4 @@ q10:
   subject_group_id: 1
   corrected_at: '2005-3-14 00:00:00'
   randomise: false
-  text_format: 1
+  text_format: 4

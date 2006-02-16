@@ -2,7 +2,7 @@ class Room < ActiveRecord::Base
   validates_length_of( :name, :within => 1..50 )
   validates_uniqueness_of( :name )
   has_many( :computers, :exclusively_dependent => true, :order => 'ip_address' )
-  has_and_belongs_to_many( :quizzes )
+  has_and_belongs_to_many( :quizzes, :uniq => true )
 
   def self.find_all_sorted
     find(:all, :order => 'name')
