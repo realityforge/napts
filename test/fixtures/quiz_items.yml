@@ -63,30 +63,4 @@ qi_11:
   quiz_id: 1
   question_id: 4
   position: 4
-  
-qi_12:
-  id: 12
-  preview_only: false
-  quiz_id: 5
-  question_id: 11
-  position: 1
-qi_13:
-  id: 13
-  preview_only: false
-  quiz_id: 5
-  question_id: 12
-  position: 2
-qi_14:
-  id: 14
-  preview_only: false
-  quiz_id: 5
-  question_id: 13
-  position: 3
-qi_15:
-  id: 15
-  preview_only: false
-  quiz_id: 5
-  question_id: 14
-  position: 4
-  
 

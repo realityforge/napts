@@ -7,9 +7,4 @@ quiz_room_2:
 quiz_room_3:
   quiz_id: 2
   room_id: 2
-quiz_room_4:
-  quiz_id: 5
-  room_id: 1
-quiz_room_5:
-  quiz_id: 5
-  room_id: 2
+

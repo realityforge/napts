@@ -38,14 +38,4 @@ quiz_4:
   subject_id: 3
   preview_enabled: true
   publish_results: true
-  
-#redcloth qn
-quiz_5:
-  id: 5
-  duration: 10
-  name: "redcloth"
-  description: "redcloth question"
-  randomise: true
-  subject_id: 1
-  preview_enabled: true
-  publish_results: true
+

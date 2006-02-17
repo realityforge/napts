@@ -4,6 +4,8 @@ class Question < ActiveRecord::Base
   validates_presence_of( :subject_group_id )
   validates_presence_of( :corrected_at )
   validates_presence_of( :text_format )
+  validates_inclusion_of( :question_type, :in => { 1 2 3 4 } )
+  validates_inclusion_of( :text_format, :in => { 1 2 3 4 } )
   has_many( :answers, :exclusively_dependent => true, :order => 'position' )
   has_many( :quiz_items )
   has_many( :quiz_responses )
