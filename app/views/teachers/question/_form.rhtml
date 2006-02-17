@@ -12,7 +12,7 @@
   <div class="question_header">
     <div class="question_text_format">
       <label for="question_text_format">Text Format</label>
-      <%= options = Question::TEXT_FORMAT
+      <%= options = TextFormatter::TEXT_FORMAT
           select("question", "text_format", options) %>
     </div>
     <div class="question_randomise_answers">

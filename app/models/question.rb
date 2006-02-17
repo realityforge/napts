@@ -24,29 +24,17 @@ class Question < ActiveRecord::Base
     "Text" => TextType
   }.freeze
   
-  RedClothFormat = 1
-  BlueClothFormat = 2
-  RubyPantsFormat = 3
-  PlainFormat = 4
-  
-  TEXT_FORMAT = {
-    "RedCloth" => RedClothFormat,
-    "BlueCloth" => BlueClothFormat,
-    "RubyPants" => RubyPantsFormat,
-    "Plain" => PlainFormat
-  }.freeze
-  
   def validate
-    if (question_type == MultiOptionType || question_type == SingleOptionType) && @choices
+    if (question_type == Question::MultiOptionType || question_type == Question::SingleOptionType) && @choices
       correct_count = 0
       choices.each_value do |choice|
         errors.add_to_base( 'All answers must have content of length 1 or more.' ) if (! choice[:content] || choice[:content].length == 0)
         correct_count += 1 if choice[:is_correct].to_s == 'true'
       end
-      errors.add_to_base( 'Must select single correct answer.' ) if (question_type == SingleOptionType && correct_count != 1)
-    elsif question_type == NumberType && @number_answer
+      errors.add_to_base( 'Must select single correct answer.' ) if (question_type == Question::SingleOptionType && correct_count != 1)
+    elsif question_type == Question::NumberType && @number_answer
       errors.add_to_base( 'Must specify a number answer.' ) if (! number_answer || !(number_answer.to_s =~ /^[+-]?\d+$/))
-    elsif question_type == TextType && @text_answer
+    elsif question_type == Question::TextType && @text_answer
       errors.add_to_base( 'Must have a answer of length of 1 or more.' ) if (! text_answer || text_answer.length == 0)
     end
   end
@@ -68,7 +56,7 @@ class Question < ActiveRecord::Base
   end
 
   def text_answer
-    @text_answer = (question_type == TextType) ? answers[0].content : '' unless @text_answer
+    @text_answer = (question_type == Question::TextType) ? answers[0].content : '' unless @text_answer
     @text_answer
   end
 
@@ -77,7 +65,7 @@ class Question < ActiveRecord::Base
   end
 
   def number_answer
-    @number_answer = (question_type == NumberType) ? answers[0].content : '' unless @number_answer
+    @number_answer = (question_type == Question::NumberType) ? answers[0].content : '' unless @number_answer
     @number_answer
   end
 
@@ -88,7 +76,7 @@ class Question < ActiveRecord::Base
   def choices
     if ! @choices
       @choices = {}
-      if question_type == MultiOptionType || question_type == SingleOptionType
+      if question_type == Question::MultiOptionType || question_type == Question::SingleOptionType
         self.answers.each do |answer|
           choices[answer.id.to_s] = {:content => answer.content, :position => answer.position, :is_correct => answer.is_correct}
         end
@@ -102,13 +90,13 @@ class Question < ActiveRecord::Base
   end
 
   def after_save
-    if question_type == NumberType && @number_answer
+    if question_type == Question::NumberType && @number_answer
       answers.clear
       Answer.create!(:question_id => id, :content => @number_answer, :position => 1, :is_correct => true)
-    elsif question_type == TextType && @text_answer
+    elsif question_type == Question::TextType && @text_answer
       answers.clear
       Answer.create!(:question_id => id, :content => @text_answer, :position => 1, :is_correct => true)
-    elsif (question_type == MultiOptionType || question_type = SingleOptionType) && @choices
+    elsif (question_type == Question::MultiOptionType || question_type = Question::SingleOptionType) && @choices
       answers.clear
       @choices.each_value do |choice|
         Answer.create!(:question_id => id, :content => choice[:content], :position => choice[:position], :is_correct => choice[:is_correct])
@@ -117,14 +105,6 @@ class Question < ActiveRecord::Base
   end
   
   def formatted_content
-    if text_format == RedClothFormat
-      RedCloth.new( content ).to_html
-    elsif text_format == BlueClothFormat
-      BlueCloth::new( content ).to_html
-    elsif text_format == RubyPantsFormat
-      RubyPants.new( content ).to_html
-    else # assume text_format == PlainFormaat
-      content
-    end
+    TextFormatter.formatted_content(text_format,content)
   end
 end

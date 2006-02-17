@@ -5,14 +5,6 @@ class Answer < ActiveRecord::Base
   acts_as_list( :scope => :question_id )
   
   def formatted_content
-    if self.question.text_format == Question::RedClothFormat
-      RedCloth.new( content ).to_html
-    elsif self.question.text_format == Question::BlueClothFormat
-      BlueCloth::new( content ).to_html
-    elsif self.question.text_format == Question::RubyPantsFormat
-      RubyPants.new( content ).to_html
-    else #assume PlainFormat
-      content
-    end
+    TextFormatter.formatted_content(question.text_format,content)
   end
 end
