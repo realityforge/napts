@@ -23,6 +23,7 @@ class Importer
                         :publish_results => false,
                         :preview_enabled => false)
     test.elements.each('TASK') {|task| Importer.import_question(quiz,task)}
+    quiz.reload
   end
 
   def self.import_question(quiz,task)
@@ -32,17 +33,35 @@ class Importer
       type = Question::SingleOptionType
     else
       choices = task.elements['MULTI-CHOICE']
-      return unless choices
-      type = Question::MultiOptionType
+      word = ''
+      if choices
+        type = Question::MultiOptionType
+      else
+	if task.elements['WORD']
+	  word = task.elements['WORD'].attributes['CORRECT']
+	  type = Question::TextType
+	elsif task.elements['NUMBER']
+	  number = task.elements['NUMBER'].attributes['CORRECT']
+	  type = Question::NumberType
+	end
+      end
     end
     question = Question.create!(:content => content, 
                                 :subject_group_id => quiz.subject.subject_group_id,
                                 :question_type => type,
                                 :randomise => true,
+				:text_format => TextFormatter::PlainFormat,
                                 :corrected_at => Time.now)
 
+				
     quiz.quiz_items.create(:preview_only => false, :question_id => question.id)
-    choices.elements.each('OPTION') {|option| Importer.import_answer(question,option)}
+    if type == Question::MultiOptionType || type == Question::SingleOptionType 
+      choices.elements.each('OPTION') {|option| Importer.import_answer(question,option)}
+    elsif type == Question::NumberType
+      Answer.create!(:question_id => question.id, :content => number, :position => 1, :is_correct => true)
+    else # type == Question::TextType
+      Answer.create!(:question_id => question.id, :content => "^#{word}$", :position => 1, :is_correct => true)
+    end
   end
 
   def self.import_answer(question,option)

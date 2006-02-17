@@ -1,22 +1,23 @@
 <div class="dataset">
+  <% @question = question %>
   <%= error_messages_for('question', :header_tag => 'h3') %>
   <h2><%= @form_title %></h2>
   <div class="dataset_question">
-  <%= @question.formatted_content %>
+  <%= question.formatted_content %>
   </div>
-<% if @question.question_type == Question::MultiOptionType %>
+<% if question.question_type == Question::MultiOptionType %>
   <% button_type = "checkbox" %>
   <% message = "Please select all correct answers" %>
-<% elsif @question.question_type == Question::SingleOptionType %>
+<% elsif question.question_type == Question::SingleOptionType %>
   <% button_type = "radio" %>
   <% message = "Please select the one correct answer" %>
 <% else %>
   <% message = "Please enter the correct answer" %>
 <% end %>
 <p><%= message %></p>
-<% if @question.question_type == Question::MultiOptionType or @question.question_type == Question::SingleOptionType %>
+<% if question.question_type == Question::MultiOptionType or question.question_type == Question::SingleOptionType %>
   <table class="answers">
-    <% for answer in @question.get_answers %>
+    <% for answer in question.get_answers %>
       <tr>
         <td class="cb">
           <input type="<%= button_type %>" name="answers[]" value="<%= answer.id %>" />

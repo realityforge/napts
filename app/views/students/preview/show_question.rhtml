@@ -1,7 +1,6 @@
 <% @page_title = "#{@quiz_item.quiz.subject.name}: '#{h(@quiz_item.quiz.name)}' Q#{@quiz_item.position}" %>
 <% @form_title = "Question #{@quiz_item.position}" %>
-<% @question = @quiz_item.question %>
-<%= render( :partial => 'students/question' ) %>
+<%= render( :partial => 'students/question', :locals => { :question => @quiz_item.question, :extra_params => {} } ) %>
 <br/>
 <%= link_to_button("Previous", :action => 'show_question',
                                           :position => @quiz_item.higher_item.position,
