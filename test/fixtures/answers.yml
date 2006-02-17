@@ -1,19 +1,19 @@
 #is chocolate good?   multichoice
 q1_a1:
   id: 1
-  content: "Yes, for sure!"
+  content: "Yes, ~for sure~!"
   is_correct: true
   position: 1
   question_id: 1
 q1_a2:
   id: 2
-  content: "Absolutely"
+  content: "@Absolutely@"
   is_correct: true
   position: 2
   question_id: 1
 q1_a3:
   id: 3
-  content: "Of course not!"
+  content: "* Of course not!\n* Well maybe\n* fine have it your way!\n"
   is_correct: false
   position: 3
   question_id: 1
@@ -27,13 +27,13 @@ q1_a4:
 #how many ppl does it take to change a lightbulb?  single answer
 q2_a1:
   id: 5
-  content: "twelve"
+  content: "> twelve\n"
   is_correct: true
   position: 1
   question_id: 2
 q2_a2:
   id: 6
-  content: "six?"
+  content: "* six?"
   is_correct: false
   position: 2
   question_id: 2
@@ -45,7 +45,7 @@ q2_a3:
   question_id: 2
 q2_a4:
   id: 8
-  content: "pineapple"
+  content: "> * pineapple"
   is_correct: false
   position: 4
   question_id: 2
@@ -53,13 +53,13 @@ q2_a4:
 #why did the chicken cross the road? multi  
 q3_a1:
   id: 9
-  content: "To get to the other side"
+  content: "To 'get' to the other side"
   is_correct: true
   position: 1
   question_id: 3
 q3_a2:
   id: 10
-  content: "To show his girlfriend he had guts"
+  content: "To show his 'girlfriend' he had guts ..."
   is_correct: false
   position: 2
   question_id: 3
@@ -71,7 +71,7 @@ q3_a3:
   question_id: 3
 q3_a4:
   id: 12
-  content: "he felt like it"
+  content: "-- he felt like it"
   is_correct: false
   position: 4
   question_id: 3

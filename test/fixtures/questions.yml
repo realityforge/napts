@@ -1,32 +1,32 @@
 #multiple choice
 q1:
   id: 1
-  content: "Is chocolate good?"
+  content: "h1. Redcloth question\n\nIs **chocolate** \"good\":http://dictionary.reference.com/search?q=good?"
   question_type: 1
   subject_group_id: 1
   corrected_at: '2005-3-14 00:00:00'
   randomise: true
-  text_format: 4
+  text_format: 1
   
 #single answer
 q2:
   id: 2
-  content: "how many people does it take to change a lightbulb?"
+  content: "BlueCloth Example\n=================\n\n * how many [inquisitive insects][1] does it take to change a lightbulb?\n\n[1]: http://www.insect.com/\n\"Lighty\""
   question_type: 2
   subject_group_id: 1
   corrected_at: '2005-3-14 00:00:00'
   randomise: true
-  text_format: 4
+  text_format: 2
   
 #multiple choice
 q3:
   id: 3
-  content: "Why did the chicken cross the road?"
+  content: "Why did the \"chicken\" cross the road?"
   question_type: 1
   subject_group_id: 1
   corrected_at: '2005-3-14 00:00:00'
   randomise: true
-  text_format: 4
+  text_format: 3
   
 #single answer
 q4:
@@ -90,7 +90,7 @@ q9:
   
 q10:
   id: 10
-  content: "Some Dummy Question"
+  content: "What am i?"
   question_type: 4
   subject_group_id: 1
   corrected_at: '2005-3-14 00:00:00'
@@ -105,3 +105,4 @@ q11:
   corrected_at: '2005-3-14 00:00:00'
   randomise: false
   text_format: 4
+
