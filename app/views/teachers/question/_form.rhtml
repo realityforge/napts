@@ -3,17 +3,10 @@
   <h2><%= @form_title %></h2>
   <%= error_messages_for('question', :header_tag => 'h3') %>
 <div class="question">
-  <div class="question_type">
-    <label for="question_question_type">Type</label>
-    <%= options = Question::QUESTION_TYPE
-        select("question", "question_type", options, {}, :onchange => 'onSelectAnswerType();' )
-    %>
-  </div>
   <div class="question_header">
-    <div class="question_text_format">
-      <label for="question_text_format">Text Format</label>
-      <%= options = TextFormatter::TEXT_FORMAT
-          select("question", "text_format", options) %>
+    <div class="question_type">
+      <label for="question_question_type">Type</label>
+      <%= select("question", "question_type", Question::QUESTION_TYPE, {}, :onchange => 'onSelectAnswerType();' ) %>
     </div>
     <div class="question_randomise_answers">
       <label for="question_randomise">Randomise Answers</label>
@@ -25,6 +18,20 @@
 	<input type="checkbox" id="correct" name="correct" value="" />
       </div>
     <% end %>
+  </div>
+  <div class="question_text_format">
+      <label for="question_text_format">Text Format</label>
+      <%= options = TextFormatter::TEXT_FORMAT
+          select("question", "text_format", options) %>
+    <span id="redcloth">
+      <a href="http://hobix.com/textile/" target="_blank">More about RedCloth</a>
+    </span>
+    <span id="bluecloth">
+      <a href="http://daringfireball.net/projects/markdown/syntax" target="_blank">More about BlueCloth</a>
+    </span>
+    <span id="rubypants">
+      <a href="http://daringfireball.net/projects/smartypants/" target="_blank">More about RubyPants</a>
+    </span>
   </div>
   <div class="question_content">
     <%= text_area('question', 'content', :class => 'question_content') %>
@@ -88,6 +95,7 @@
 <%= end_form_tag %>
 <script type="text/javascript"><!-- 
 onSelectAnswerType(); 
+onSelectTextFormat();
 --></script>
 <% content_for :head do %>
 <script type="text/javascript">
@@ -114,6 +122,36 @@ onSelectAnswerType();
       Element.hide("a_number")
     }
   }
+  
+  function onSelectTextFormat()
+  {
+    var text_format = $('question_text_format').value;
+    if( text_format == "<%= Question::RedClothFormat %>" )
+    {
+      Element.show("redcloth")
+      Element.hide("bluecloth")
+      Element.hide("rubypants")
+    }
+    else if( text_format == "<%= Question::BlueClothFormat %>" )
+    {
+      Element.show("bluecloth")
+      Element.hide("redcloth")
+      Element.hide("rubypants")
+    }
+    else if( text_format == "<%= Question::RubyPantsFormat %>" )
+    {
+      Element.show("rubypants")
+      Element.hide("redcloth")
+      Element.hide("bluecloth")
+    }
+    else
+    {
+      Element.hide("redcloth")
+      Element.hide("bluecloth")
+      Element.hide("rubypants")
+    }
+  }
+    
 -->
 </script>
 <% end %>

@@ -23,6 +23,7 @@
     <tr class="<%= cycle("even", "odd") %>">
       <td><%= h(truncate(question.content, 30)) %></td>
       <td><%= Question::QUESTION_TYPE.index( question.question_type ) %></td>
+      <td><%= Question::TEXT_FORMAT.index( question.text_format ) %></td>
       <td><%= link_to( 'Show', :action => 'show', :id => question ) %> |
           <%= link_to( 'Destroy', {:action => 'destroy', :id => question}, 
 	                          {:post => true, :confirm => 'Are you sure?'} ) %></td>

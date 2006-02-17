@@ -27,11 +27,11 @@ div.answer_choice, div.answer_number, div.answer_text
 div.question_header, div.answer_header
 {
   width: 100%;
-  margin: 0px 0px 0px 0px;
+  margin: 2px 2px 2px 2px;
   _background-color: blue;
 }
 
-div.question_type, div.answer_position, div.question_text_format 
+div.question_type, div.answer_position
 {
   float: left;
   width: 25%;
@@ -45,6 +45,15 @@ div.question_randomise_answers
   width: 30%;
   margin: 0px 0px 0px 0px;
 }
+
+div.question_text_format
+{
+  float: left;
+  width: 100%;
+  margin: 2px 2px 2px 2px;
+}
+
+
 
 div.question_correct_before_edit
 {
