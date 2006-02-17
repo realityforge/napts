@@ -216,8 +216,8 @@ class QuestionTest < Test::Unit::TestCase
       ## Make sure non-randomised always returned in correct order
       answer_ids1 = questions(:q1).get_answers.collect{|a| a.id}
       answer_ids2 = questions(:q1).get_answers.collect{|a| a.id}
-      count += 1 if (answer_ids1 != answer_ids2)
+      count += 1 if (answer_ids1 == answer_ids2)
     end
     flunk('Answers not randomized') if (count == 10)
-  end
+  endtest\unit\question_test.rb
 end
