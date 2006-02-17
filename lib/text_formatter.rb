@@ -21,7 +21,7 @@ class TextFormatter
       RubyPants.new( content ).to_html
     elsif format == PlainFormat
       content
-    else # assume text_format == PlainFormat
+    else
       raise 'Unknown format'
     end
   end
