@@ -11,9 +11,8 @@ div.dataset
 div.dataset table
 {
   width: 100%;
-  padding: 3;
-  border-spacing: 1;
-  
+  padding: 3px;
+  border-spacing: 1px;
 }
 
 div.dataset th
@@ -134,7 +133,6 @@ table.xlist th
   color: white;
   font-weight: bold;
   font-size: x-small; 
-  text-align: top;
   vertical-align: top;
 }
 

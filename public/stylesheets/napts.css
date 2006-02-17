@@ -15,7 +15,6 @@ div.question, div.answer
   width: 100%;
   margin-top: 10px;
   margin: 0px 0px 0px 0px;
-  _background-color: red;
 }
 
 div.answer_choice, div.answer_number, div.answer_text
@@ -28,7 +27,6 @@ div.question_header, div.answer_header
 {
   width: 100%;
   margin: 2px 2px 2px 2px;
-  _background-color: blue;
 }
 
 div.question_type, div.answer_position
@@ -36,7 +34,6 @@ div.question_type, div.answer_position
   float: left;
   width: 25%;
   margin: 0px 0px 0px 0px;
-  _background-color: green;
 }
 
 div.question_randomise_answers
@@ -67,7 +64,6 @@ div.question_options, div.answer_options
   float: right;
   width: 25%;
   margin: 0px 0px 0px 0px;
-  _background-color: purple;
 }
 
 div.question_content, div.answer_content
@@ -131,7 +127,7 @@ img.arrows
 #ErrorExplanation
 {
   width: 400px;
-  border: 2px solid 'red';
+  border: 2px solid red;
   padding: 7px;
   padding-bottom: 12px;
   margin-bottom: 20px;
