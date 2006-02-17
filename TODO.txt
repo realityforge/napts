@@ -1,18 +1,3 @@
-    THINK THIS IS DONE NOW
-    STARTED THIS BUT PROBABLY DOING IT WAY WRONG. I'LL KEEP DOING IT TOMORROW
-    * Add in concept of text filters for questions. Each question will have a text-format type
-      (an integer similar to question type) that can either be RedCloth, BlueCloth, RubyPants,
-      or Plain and defaults to RedCloth. Define them as constants in Question model. When 
-      rendering the text of either the question or answer content it will check the text filter 
-      and pass it through the most appropriate text filter. See the following files for examples
-      - vendor/redcloth/lib/redcloth.rb
-      - vendor/bluecloth/lib/bluecloth.rb
-      - vendor/rubypants/rubypants.rb
-
-      The Raw format passes through the content directly as html. The _form view should also
-      have a link to manual for current filter if appropriate that should only be shown when 
-      filter selected. (Ie RedCloth should link to http://hobix.com/textile/)
-
 * Update app/services/importer.rb to support loading of text and number answers. Currently it 
   only creates a question if it is a single-choice or multi-choice. It should also create the
   question (and answers) if it is a text or number mode. You can get an example of the old 
@@ -25,23 +10,9 @@
   You run the importer something like 
   C:\Projects\napts>ruby script\runner 'Importer.import_file("CSE21ADS","cse12oop.xml")'
 
-* (For Pete) Unit test the Question class so that all those new methods have adequete
-  coverage. 
-  
 * (For Pete) Functional test for new and edit of question controller
 
 * (For Pete) Functional test the importer
-
-    DONE IN MODEL AND MIGRATE FILE
-    :UNIQ IS ONLY AN OPTION FOR HABTM SO CAN'T USE IT IN QUIZ_ATTEMPT.QUIZ_RESPONSES,
-    IT'S ALREADY SET TO UNIQUE IN THE MIGRATE FILE THO
-    * Set :uniq => true in has_and_belongs_to_many for Quiz.active_in, 
-    QuizAttempt.quiz_responses, Room.quizzes and make sure all tests pass
-
-    DIDN'T CHANGE QUIZ_ATTEMPT.QUIZ_RESPONSE COS IT WAS FAILING TESTS BUT I CHANGED THE OTHERS
-    CAN'T USE EXCLUSIVELY DEPENDENT FOR QUIZ_ATTEMPT.QUIZ_RESPONSE BECAUSE QUIZ_RESPONSE ALSO BELONGS TO QUESTION
-    * Set :exclusively_dependent => true in QuizAttempt.quiz_responses, 
-     Quiz.quiz_items and Question.answers. (Make sure all tests pass).
 
 * students/question partial should take a local and not use an instance variable
 
