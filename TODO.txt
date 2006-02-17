@@ -1,4 +1,3 @@
 * (For Pete) Functional test for new and edit of question controller
 
 * (For Pete) Functional test the importer
-
