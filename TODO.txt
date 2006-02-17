@@ -15,5 +15,3 @@
 * (For Pete) Functional test the importer
 
 * students/question partial should take a local and not use an instance variable
-
-* write the stupid test for text_formatter in lib
