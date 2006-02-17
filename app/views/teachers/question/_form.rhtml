@@ -126,19 +126,19 @@ onSelectTextFormat();
   function onSelectTextFormat()
   {
     var text_format = $('question_text_format').value;
-    if( text_format == "<%= Question::RedClothFormat %>" )
+    if( text_format == "<%= TextFormatter::RedClothFormat %>" )
     {
       Element.show("redcloth")
       Element.hide("bluecloth")
       Element.hide("rubypants")
     }
-    else if( text_format == "<%= Question::BlueClothFormat %>" )
+    else if( text_format == "<%= TextFormatter::BlueClothFormat %>" )
     {
       Element.show("bluecloth")
       Element.hide("redcloth")
       Element.hide("rubypants")
     }
-    else if( text_format == "<%= Question::RubyPantsFormat %>" )
+    else if( text_format == "<%= TextFormatter::RubyPantsFormat %>" )
     {
       Element.show("rubypants")
       Element.hide("redcloth")
