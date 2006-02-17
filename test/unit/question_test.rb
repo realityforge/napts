@@ -219,5 +219,5 @@ class QuestionTest < Test::Unit::TestCase
       count += 1 if (answer_ids1 == answer_ids2)
     end
     flunk('Answers not randomized') if (count == 10)
-  endtest\unit\question_test.rb
+  end
 end
