@@ -1,36 +1,40 @@
 <% @page_title = "#{current_subject.name}: Browse Quizzes" %>
-<%= start_form_tag({:action => 'list'},{:method => :get}) %>
-<div>
-<input type="text" name="q" value="<%= params[:q] %>"/>
-<button type="submit">Search</button>
-</div>
-<%= end_form_tag %>
-
-<table class="xlist">
-  <colgroup id="name-column"/>
-  <colgroup id="enabled-column"/>
-  <colgroup id="status-column"/>
-  <colgroup id="operations-column"/>
-  <thead>
-  <tr>
-    <th>Name</th>
-    <th>Enabled?</th> 
-    <th>Status</th>
-    <th>Operations</th>
-  </tr>
-  </thead>
-  <tbody>
-  <% for quiz in @quizzes %>
-    <tr class="<%= cycle("even", "odd") %>">
-      <td><%= h(quiz.name) %></td>
-      <td><%= ( quiz.active_in.size > 0 )? 'Yes' : 'No' %></td> 
-      <td>TODO</td>
-      <td><%= link_to( 'Show', :action => 'show', :id => quiz.id ) %></td>
+<div id="list_view">
+  <table class="header">
+    <tr>
+      <td class="action"></td>
+      <td class="search">
+        <%= start_form_tag({:action => 'list'},{:method => :get}) %>
+          <p><input type="text" name="q" value="<%= params[:q] %>"/>
+          <button type="submit">Search</button></p>
+        <%= end_form_tag %>
+      </td>
     </tr>
-  <% end %>
-  </tbody>
-</table>
-<div class="change_page">
+  </table>
+  <table class="xlist">
+    <colgroup id="name-column"/>
+    <colgroup id="enabled-column"/>
+    <colgroup id="status-column"/>
+    <colgroup id="operations-column"/>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Enabled?</th> 
+        <th>Status</th>
+        <th>Operations</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for quiz in @quizzes %>
+        <tr class="<%= cycle("even", "odd") %>">
+          <td><%= h(quiz.name) %></td>
+          <td><%= ( quiz.active_in.size > 0 )? 'Yes' : 'No' %></td> 
+          <td>TODO</td>
+          <td><%= link_to( 'Show', :action => 'show', :id => quiz.id ) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
   <%= render( :partial => '/pages',
               :locals => {:name => 'Quiz',
 	                  :object_pages => @quiz_pages, 
