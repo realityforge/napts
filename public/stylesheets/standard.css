@@ -69,16 +69,22 @@ div.dataset_answer
   padding: 8px 5px 8px 5px;
   background-color: white;
   border: 1px solid #000;
-  position: relative;
 }
 
 #list_view table.header
 {
   width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 #list_view table.header td.action
 {
+}
+
+#list_view table.header td.search p
+{
+  margin: 0;
 }
 
 #list_view table.header td.search
@@ -96,7 +102,6 @@ div.dataset_answer
 {
   margin: 2px 2px 2px 0px;
   padding: 0px 0px 0px 0px;
-  xxbackground-color: blue;
   border: 1px solid black;
   width: 100%;
 }
