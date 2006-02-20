@@ -1,4 +1,3 @@
-require 'cgi'
 require 'rexml/document'
 
 class Importer
@@ -18,7 +17,7 @@ class Importer
   def self.import_test(subject,test)
     desc = test.elements.to_a[0]
     name = (desc.attributes['SUBJECT'] + '-' + desc.attributes['NAME']).slice(0,20)
-    STDERR.puts "Importing test #{name}"
+    STDERR.puts "Importing test #{name}" unless ENV['RAILS_ENV'] == 'test'
     quiz = Quiz.create!(:name => name, 
                         :description => "Imported from #{name}".slice(0,120),
                         :duration => 10,
