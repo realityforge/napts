@@ -1,40 +1,54 @@
 <% @page_title = "Browse Questions" %>
-<%= start_form_tag({:action => 'list'},{:id => 'change_form'}) %>
-<div>
-<input type="text" name="q" value="<% params[:q] %>"/>
-<button type="submit">Search</button>
-</div>
-<%= end_form_tag %>
-<table class="xlist">
-  <colgroup id="content-column"/>
-  <colgroup id="question_type-column"/>
-  <colgroup id="text_format-column"/>
-  <colgroup id="operations-column"/>
-  <thead>
-  <tr>
-    <th>Content</th>
-    <th>Question Type</th>
-    <th>Text Format</th>
-    <th>Operations</th>
-  </tr>
-  </thead>
-  <tbody>
-  <% for question in @questions %>
-    <tr class="<%= cycle("even", "odd") %>">
-      <td><%= h(truncate(question.content, 30)) %></td>
-      <td><%= Question::QUESTION_TYPE.index( question.question_type ) %></td>
-      <td><%= TextFormatter::TEXT_FORMAT.index( question.text_format ) %></td>
-      <td><%= link_to( 'Show', :action => 'show', :id => question ) %> |
-          <%= link_to( 'Destroy', {:action => 'destroy', :id => question}, 
-	                          {:post => true, :confirm => 'Are you sure?'} ) %></td>
+<div id="list_view">
+  <table class="header">
+    <tr>
+      <td class="action">
+        <%= link_to( 'New question', :action => 'new' ) %>
+      </td>
+      <td class="search">
+        <%= start_form_tag(:action => 'list') %>
+          <input type="text" name="q" value="<% params[:q] %>"/>
+          <button type="submit">Search</button>
+        <%= end_form_tag %>
+      </td>
     </tr>
-  <% end %>
-  </tbody>
-</table>
-<div class="change_page">
-  <%= render( :partial => '/pages', 
-              :locals => {:name => 'Question',
-	                  :object_pages => @question_pages,
-	                  :extra_params => {}} ) %>
+  </table>
+  <table class="xlist">
+    <colgroup id="content-column"/>
+    <colgroup id="question_type-column"/>
+    <colgroup id="text_format-column"/>
+    <colgroup id="operations-column"/>
+    <thead>
+      <tr>
+        <th>Content</th>
+        <th>Question Type</th>
+        <th>Text Format</th>
+        <th>Operations</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for question in @questions %>
+        <tr class="<%= cycle("even", "odd") %>">
+          <td><%= h(truncate(question.content, 30)) %></td>
+          <td><%= Question::QUESTION_TYPE.index( question.question_type ) %></td>
+          <td><%= TextFormatter::TEXT_FORMAT.index( question.text_format ) %></td>
+          <td><%= link_to( 'Show', :action => 'show', :id => question ) %> |
+              <%= link_to( 'Destroy', {:action => 'destroy', :id => question}, 
+	                              {:post => true, :confirm => 'Are you sure?'} ) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <table class="change_page">
+    <tr>
+      <td class="beforearrows"></td>
+      <td>
+      <%= render( :partial => '/pages', 
+                  :locals => {:name => 'Question',
+	                      :object_pages => @question_pages,
+	                      :extra_params => {}} ) %>
+      </td>
+      <td class="afterarrows"></td>
+    </tr>
+  </table>
 </div>
-<%= link_to( 'New question', :action => 'new' ) %>

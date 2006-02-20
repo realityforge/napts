@@ -72,16 +72,124 @@ div.dataset_answer
   position: relative;
 }
 
-div.change_page
+#list_view table.header
+{
+  width: 100%;
+}
+
+#list_view table.header td.action
+{
+}
+
+#list_view table.header td.search
+{  
+  padding: 0;
+  width: 220px;
+}
+
+#list_view table.header td.search form
+{
+  margin: 0;
+}
+
+#list_view table.change_page
+{
+  margin: 2px 2px 2px 0px;
+  padding: 0px 0px 0px 0px;
+  xxbackground-color: blue;
+  border: 1px solid black;
+  width: 100%;
+}
+
+#list_view table.change_page td
 {
   font-size: small;
-  margin: 2px 2px 2px 2px;
-  padding: 2px 2px 2px 2px;
-  background-color: white;
-  border: 1px solid black;
-  position: relative;
-  width: 40%;
+  xxbackground-color: pink;
 }
+
+#list_view table.change_page td.beforearrows, td.afterarrows
+{
+  width: 25%;
+}
+
+#list_view table.change_page img.arrows
+{
+  margin: 1px 3px 0px 0px;
+  border: 0;
+  width: 14px;
+  height: 14px;
+  outline-style: none;
+  vertical-align: middle;
+}
+
+table.options
+{
+  margin: 0;
+  padding: 0;
+}
+
+table.options td.stats
+{
+  width: 250px;
+}
+
+.first-arrow
+{
+  background-image: url(../images/icons/first-arrow.png);
+}
+
+.first-arrow-greyed
+{
+  color: grey;
+  background-image: url(../images/icons/first-arrow-greyed.png);
+}
+
+.previous-arrow
+{
+  background-image: url(../images/icons/previous-arrow.png);
+}
+
+.previous-arrow-greyed
+{
+  color: grey;
+  background-image: url(../images/icons/previous-arrow-greyed.png);
+}
+
+.last-arrow
+{
+  background-image: url(../images/icons/last-arrow.png);
+}
+
+.last-arrow-greyed
+{
+  color: grey;
+  background-image: url(../images/icons/last-arrow-greyed.png);
+}
+
+.next-arrow
+{
+  background-image: url(../images/icons/next-arrow.png);
+  
+}
+
+.next-arrow-greyed
+{
+  color: grey;
+  background-image: url(../images/icons/next-arrow-greyed.png);
+}
+
+.arrows
+{
+  background-repeat: no-repeat;
+  background-position: left;
+  padding-left: 16px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  font-size: small;
+  text-decoration: none;
+}
+
+#list_view table.change_page .arrows:hover { color: #666; background-color: white;}
 
 table.answers
 {

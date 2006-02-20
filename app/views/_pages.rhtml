@@ -1,16 +1,24 @@
-<%= "#{name} #{object_pages.current.first_item} to #{object_pages.current.last_item} of #{object_pages.item_count}" %>
+<table class="options">
+  <tr>
+    <td class="stats">
+      <%= "#{name} #{object_pages.current.first_item} to #{object_pages.current.last_item} of #{object_pages.item_count}" %>
+    </td>
+    <td>
 <% if object_pages.current.previous %>
-  <%= link_to( image_tag("icons/first-arrow.png", {:class => 'arrows'}) + 'First', {:page => object_pages.first, :q => params[:q]}.update(extra_params) ) %>
-  <%= link_to( image_tag("icons/previous-arrow.png", {:class => 'arrows'}) + 'Prev', {:page => object_pages.current.previous, :q => params[:q]}.update(extra_params) ) %>
+  <%= link_to( 'First', {:page => object_pages.first, :q => params[:q]}.update(extra_params), {:class => 'arrows first-arrow'} ) %>
+  <%= link_to( 'Prev', {:page => object_pages.current.previous, :q => params[:q]}.update(extra_params) , {:class => 'arrows previous-arrow'} ) %>
 <% else %>
-  <%= image_tag("icons/first-arrow-greyed.png", {:class => 'arrows'}) + 'First' %>
-  <%= image_tag("icons/previous-arrow-greyed.png", {:class => 'arrows'}) + 'Prev' %>
+  <span class="arrows first-arrow-greyed">First</span>
+  <span class="arrows previous-arrow-greyed">Prev</span>
 <% end %>
 <% if object_pages.current.next %>
-  <%= link_to( image_tag("icons/next-arrow.png", {:class => 'arrows'}) + 'Next', {:page => object_pages.current.next, :q => params[:q]}.update(extra_params) ) %>
-  <%= link_to( image_tag("icons/last-arrow.png", {:class => 'arrows'}) + 'Last', {:page => object_pages.last, :q => params[:q]}.update(extra_params) ) %>
+  <%= link_to( 'Next', {:page => object_pages.current.next, :q => params[:q]}.update(extra_params), {:class => 'arrows next-arrow'} ) %>
+  <%= link_to( 'Last', {:page => object_pages.last, :q => params[:q]}.update(extra_params), {:class => 'arrows last-arrow'} ) %>
 <% else %>
-  <%= image_tag("icons/next-arrow-greyed.png", {:class => 'arrows'}) + 'Next' %>
-  <%= image_tag("icons/last-arrow-greyed.png", {:class => 'arrows'}) + 'Last' %>
+  <span class="arrows next-arrow-greyed">Next</span>
+  <span class="arrows last-arrow-greyed">Last</span>
 <% end %>
+    </td>
+  </tr>
+</table>
 
