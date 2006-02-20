@@ -38,7 +38,7 @@
       q<%= question.question_id %> 
     <% end %>
     </td>
-    <td>
+    <td class="ops">
     <%= link_to( 'Show', :action => 'show', :id => resource ) %> |
     <%= link_to( 'Download', :action => 'view', :id => resource, :disposition => 'download' ) %> |
     <% if resource.questions.size > 0 %>

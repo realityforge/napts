@@ -32,7 +32,7 @@
       <td><%= question.id %></td>
       <td><%= h(truncate(question.content, 30)) %></td>
       <td><%= Question::QUESTION_TYPE.index( question.question_type ) %></td>
-      <td><%= link_to('Add to Quiz', {:action => 'add_item', :id => @quiz, :question_id => question.id}, {:post => true} ) %></td>
+      <td class="ops"><%= link_to('Add to Quiz', {:action => 'add_item', :id => @quiz, :question_id => question.id}, {:post => true} ) %></td>
     </tr>
   <% end %>
   </tbody>

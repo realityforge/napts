@@ -24,7 +24,7 @@
       <% for subject in @subjects %>
         <tr class="<%= cycle("even", "odd") %>">
           <td><%= h(subject.name) %></td>
-          <td>
+          <td class="ops">
           <%= link_to( 'Previews', :controller => 'preview', :action => 'list', :subject_id => subject ) %> |
           <%= link_to( 'Results', :controller => 'results', :action => 'list', :id => subject ) %>
           </td>

@@ -27,7 +27,7 @@
       <% for room in @rooms %>
         <tr class="<%= cycle("even", "odd") %>">
           <td><%= h(room.name) %></td>
-          <td>
+          <td class="ops">
             <%= link_to('Show', :action => 'show', :id => room ) %> |
             <%= link_to('Delete', {:action => 'destroy', :id => room, :q => params[:q], :page => params[:page]}, 
                                   {:confirm => 'Are you sure?', :post => true} ) %>

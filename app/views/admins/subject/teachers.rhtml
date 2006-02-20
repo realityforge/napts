@@ -26,7 +26,7 @@
       <% for user in @users %>
         <tr class="<%= cycle("even", "odd") %>">
           <td><%= h(user.name) %></td>
-          <td><%= link_to('Add Teacher', {:action => 'add_teacher', :id => @subject.id, :user_id => user.id, :q => params[:q], :page => params[:page]}, {:post => true} ) %></td>
+          <td class="ops"><%= link_to('Add Teacher', {:action => 'add_teacher', :id => @subject.id, :user_id => user.id, :q => params[:q], :page => params[:page]}, {:post => true} ) %></td>
         </tr>
       <% end %>
     </tbody>

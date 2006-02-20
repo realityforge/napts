@@ -15,7 +15,7 @@
     <tr class="<%= cycle("even", "odd") %>">
       <td><%= h(quiz.subject.name) %></td>
       <td><%= h(quiz.name) %></td>
-      <td><%= link_to( "Start", :action => 'show_question', :id => quiz.id ) %></td>
+      <td class="ops"><%= link_to( "Start", :action => 'show_question', :id => quiz.id ) %></td>
     </tr>
   <% end %>
   </tbody>

@@ -131,7 +131,6 @@ table.options
 {
   margin: 2px 2px 2px 0px;
   padding: 0px 0px 0px 0px;
-  xxbackground-color: blue;
   border: 1px solid black;
   width: 100%;
   font-size: small;
@@ -260,5 +259,10 @@ table.xlist th
   font-weight: bold;
   font-size: x-small; 
   vertical-align: top;
+}
+
+table.xlist td.ops
+{
+  width: 300px;
 }
 
