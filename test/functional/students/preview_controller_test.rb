@@ -23,8 +23,8 @@ class Students::PreviewControllerTest < Test::Unit::TestCase
     assert_not_nil(assigns(:subject))
     assert_not_nil(assigns(:quizzes))
     assert_equal(2,assigns(:quizzes).length)
-    assert_equal(quizzes(:quiz_1).id,assigns(:quizzes)[0].id)
-    assert_equal(quizzes(:quiz_2).id,assigns(:quizzes)[1].id)
+    assert_equal(quizzes(:quiz_2).id,assigns(:quizzes)[0].id)
+    assert_equal(quizzes(:quiz_1).id,assigns(:quizzes)[1].id)
     assert_nil(flash[:alert])
     assert_nil(flash[:notice])
   end
