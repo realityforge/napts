@@ -29,7 +29,7 @@
       <tr class="<%= cycle("even", "odd") %>">
         <td><%= h(user.name) %></td>
         <td><%= user.administrator? ? 'Yes' : 'No' %></td>
-        <td class="ops">
+        <td>
 	    <%= link_to('Show', :action => 'show', :id => user.id ) %> |
             <%= link_to('Toggle Admin Status', {:action => 'toggle_admin_status', :id => user.id, 
                         :admin_status => !user.administrator?, :q => params[:q], :page => params[:page]},

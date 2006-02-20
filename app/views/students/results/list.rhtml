@@ -23,7 +23,7 @@
         <td><%= h(attempt.quiz.name) %></td>
 	<td><%= attempt.calculate_score %>/<%= attempt.quiz_responses.length %></td>
 	<td><%= attempt.created_at.strftime("%d/%m/%Y") %></td>
-	<td class="ops"><%= link_to( 'Show', :action => 'show', :id => attempt.id ) %></td>
+	<td><%= link_to( 'Show', :action => 'show', :id => attempt.id ) %></td>
       </tr>
     <% end %>
     </tbody>

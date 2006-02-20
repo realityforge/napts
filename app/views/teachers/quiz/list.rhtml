@@ -41,10 +41,10 @@
       <td><%= quiz.preview_enabled %></td>
       <td><%= quiz.publish_results %></td>
       <td><%= quiz.randomise %></td>
-      <td class="ops">
+      <td>
       <%= link_to( 'Show',  :action => 'show', :id => quiz) %> |
-      <%= link_to('Toggle Preview Status', {:action => 'toggle_preview_status', :id => quiz, :preview_status => !quiz.preview_enabled?}, {:post => 'true'} ) %> |
       <%= link_to( 'Toggle Publish Results Status', {:action => 'toggle_results_status', :id => quiz, :results_status => !quiz.publish_results?}, {:post => 'true'} ) %> |
+      <%= link_to('Toggle Preview Status', {:action => 'toggle_preview_status', :id => quiz, :preview_status => !quiz.preview_enabled?}, {:post => 'true'} ) %> |
       <%= link_to('Destroy', { :action => 'destroy', :id => quiz }, {:confirm => 'Are you sure?', :post => true}) %>
       </td>
     </tr>

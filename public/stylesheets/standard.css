@@ -261,7 +261,17 @@ table.xlist th
   vertical-align: top;
 }
 
-table.xlist td.ops
+#operations-column
+{
+  width: 200px;
+}
+
+#teachers_quiz_item__list #operations-column
+{
+  width: 250px;
+}
+
+#teachers_quiz__list #operations-column, #admins_user__list #operations-column
 {
   width: 300px;
 }

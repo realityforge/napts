@@ -32,7 +32,7 @@
           <span title="<%= h(resource.description) %>">
           <%= truncate(h(resource.description), 20) %></span>
           </td>
-          <td class="ops"><%= link_to( 'Add to Question',
+          <td><%= link_to( 'Add to Question',
                           {:action => 'add_resource', :id => @question.id, :resource_id => resource}, {:post => true} ) %></td>
         </tr>
       <% end %>

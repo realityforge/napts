@@ -40,7 +40,7 @@
     <td><%= h(truncate(quiz_item.question.content, 30)) %></td>
     <td><%= ! quiz_item.preview_only %></td>
     <td><%= render( :partial => 'positioning', :locals => {:quiz_item => quiz_item, :index => index, :quiz_items => @quiz_items} ) %></td>
-    <td class="ops">
+    <td>
     <%= link_to('Show', :controller => 'question', :action => 'show', :id => quiz_item.question.id ) %> |
     <%= link_to('Toggle Quiz Status', {:action => 'toggle_quiz_status', :id => quiz_item.id, :preview_status => ! quiz_item.preview_only? }, {:post => true} ) %> |
     <%= link_to('Delete', {:action => 'destroy', :id => quiz_item.id}, {:post => true} ) %>

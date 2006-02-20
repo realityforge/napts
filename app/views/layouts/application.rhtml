@@ -18,7 +18,7 @@
   <%= stylesheet_link_tag( 'standard' ) %>
   <%= javascript_include_tag( 'questions' ) %>
 </head>
-<body id="<%= controller.controller_name %>__<%= @action_name %>">
+<body id="<%= controller.class.name.gsub(/Controllers\:\:/,'').gsub(/\:\:.*/,'').downcase %>_<%= controller.controller_name %>__<%= @action_name %>">
 
 <div id="main">
 <% if authenticated? %>

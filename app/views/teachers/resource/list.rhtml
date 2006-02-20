@@ -18,6 +18,8 @@
   <colgroup id="name-column"/>
   <colgroup id="description-column"/>
   <colgroup id="content_type-column"/>
+  <colgroup id="assoc_with_qn-column"/>
+  <colgroup id="operations-column"/>
   <thead>
   <tr>
     <th>Name</th>
@@ -38,7 +40,7 @@
       q<%= question.question_id %> 
     <% end %>
     </td>
-    <td class="ops">
+    <td>
     <%= link_to( 'Show', :action => 'show', :id => resource ) %> |
     <%= link_to( 'Download', :action => 'view', :id => resource, :disposition => 'download' ) %> |
     <% if resource.questions.size > 0 %>

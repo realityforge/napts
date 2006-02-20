@@ -29,7 +29,7 @@
         <tr class="<%= cycle("even", "odd") %>">
           <td><%= h(subject.name) %></td>
           <td><%= h(subject.subject_group.name) %></td>
-          <td class="ops">
+          <td>
             <%= link_to( 'Show', :action => 'show', :id => subject ) %> |
             <%= link_to( 'Destroy', {:action => 'destroy', :id => subject, :q => params[:q], :page => params[:page]}, 
                                     {:confirm => 'Are you sure?', :post => true} ) %>

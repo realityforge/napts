@@ -30,7 +30,7 @@
           <td><%= h(quiz.name) %></td>
           <td><%= ( quiz.active_in.size > 0 )? 'Yes' : 'No' %></td> 
           <td>TODO</td>
-          <td class="ops"><%= link_to( 'Show', :action => 'show', :id => quiz.id ) %></td>
+          <td><%= link_to( 'Show', :action => 'show', :id => quiz.id ) %></td>
         </tr>
       <% end %>
     </tbody>
