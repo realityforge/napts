@@ -124,14 +124,27 @@ div.dataset_answer
 
 table.options
 {
-  margin: 0;
-  padding: 0;
+  margin: 2px 2px 2px 0px;
+  padding: 0px 0px 0px 0px;
+  xxbackground-color: blue;
+  border: 1px solid black;
+  width: 100%;
+  font-size: small;
+}
+
+table.options td.firstcolumn, td.lastcolumn
+{
+  width: 25%;
 }
 
 table.options td.stats
 {
   width: 250px;
 }
+
+
+table.options .arrows:hover { color: #666; background-color: white;}
+
 
 .first-arrow
 {
