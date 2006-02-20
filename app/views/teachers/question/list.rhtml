@@ -6,9 +6,10 @@
         <%= link_to( 'New question', :action => 'new' ) %>
       </td>
       <td class="search">
-        <%= start_form_tag(:action => 'list') %>
-          <input type="text" name="q" value="<% params[:q] %>"/>
-          <button type="submit">Search</button>
+        <p><%= start_form_tag(:action => 'list') %>
+           <input type="text" name="q" value="<% params[:q] %>"/>
+           <button type="submit">Search</button>
+	</p>
         <%= end_form_tag %>
       </td>
     </tr>
@@ -39,16 +40,9 @@
       <% end %>
     </tbody>
   </table>
-  <table class="change_page">
-    <tr>
-      <td class="beforearrows"></td>
-      <td>
+
       <%= render( :partial => '/pages', 
                   :locals => {:name => 'Question',
 	                      :object_pages => @question_pages,
 	                      :extra_params => {}} ) %>
-      </td>
-      <td class="afterarrows"></td>
-    </tr>
-  </table>
 </div>

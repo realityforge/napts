@@ -1,41 +1,46 @@
 <% @page_title = "Browse Subjects" %>
-<%= start_form_tag({:action => 'list'},{:method => :get}) %>
-<div>
-<input type="text" name="q" value="<%= params[:q] %>"/>
-<button type="submit">Search</button>
-</div>
-<%= end_form_tag %>
-
-<table class="xlist">
-  <colgroup id="name-column"/>
-  <colgroup id="group-column"/>
-  <colgroup id="operations-column"/>
-  <thead>
-  <tr>
-    <th>Name</th>
-    <th>Group</th>
-    <th>Operations</th>
-  </tr>
-  </thead>
-  <tbody>  
-<% for subject in @subjects %>
-  <tr class="<%= cycle("even", "odd") %>">
-    <td><%= h(subject.name) %></td>
-    <td><%= h(subject.subject_group.name) %></td>
-    <td>
-    <%= link_to( 'Show', :action => 'show', :id => subject ) %> |
-    <%= link_to( 'Destroy', {:action => 'destroy', :id => subject, :q => params[:q], :page => params[:page]}, 
-                            {:confirm => 'Are you sure?', :post => true} ) %>
-    </td>
-  </tr>
-<% end %>
-  </tbody>
-</table>
-<div class="change_page">
+<div id="list_view">
+  <table class="header">
+    <tr>
+      <td class="action">
+        <%= link_to( 'New subject', :action => 'new' ) %>
+      </td>
+      <td class="search">
+        <%= start_form_tag({:action => 'list'},{:method => :get}) %>
+          <p><input type="text" name="q" value="<%= params[:q] %>"/>
+          <button type="submit">Search</button></p>
+        <%= end_form_tag %>
+      </td>
+    </tr>
+  </table>
+  <table class="xlist">
+    <colgroup id="name-column"/>
+    <colgroup id="group-column"/>
+    <colgroup id="operations-column"/>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Group</th>
+        <th>Operations</th>
+      </tr>
+    </thead>
+    <tbody>  
+      <% for subject in @subjects %>
+        <tr class="<%= cycle("even", "odd") %>">
+          <td><%= h(subject.name) %></td>
+          <td><%= h(subject.subject_group.name) %></td>
+          <td>
+            <%= link_to( 'Show', :action => 'show', :id => subject ) %> |
+            <%= link_to( 'Destroy', {:action => 'destroy', :id => subject, :q => params[:q], :page => params[:page]}, 
+                                    {:confirm => 'Are you sure?', :post => true} ) %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
   <%= render( :partial => '/pages', 
               :locals => {:name => 'Subject', 
-	                  :object_pages => @subject_pages, 
-			  :extra_params => {}} ) %>
+                          :object_pages => @subject_pages, 
+   		          :extra_params => {}} ) %>
+      
 </div>
-<%= link_to( 'New subject', :action => 'new' ) %>
-

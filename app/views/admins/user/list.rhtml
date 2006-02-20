@@ -1,43 +1,48 @@
 <% @page_title = "Browse Users" %>
-<%= start_form_tag({:action => 'list'},{:method => :get}) %>
-<div>
-<input type="text" name="q" value="<%= params[:q] %>"/>
-<button type="submit">Search</button>
-</div>
-<%= end_form_tag %>
-
-<table class="xlist">
-  <colgroup id="name-column"/>
-  <colgroup id="admin-column"/>
-  <colgroup id="operations-column"/>
-  <thead>
-  <tr>
-    <th>User name</th>
-    <th>Admin?</th>
-    <th>Operations</th>
-  </tr>
-  </thead>
-  <tbody>  
-  <% for user in @users %>
-    <tr class="<%= cycle("even", "odd") %>">
-      <td><%= h(user.name) %></td>
-      <td><%= user.administrator? ? 'Yes' : 'No' %></td>
-      <td><%= link_to('Show', :action => 'show', :id => user.id ) %> |
-          <%= link_to('Toggle Admin Status', {:action => 'toggle_admin_status', :id => user.id, 
-                      :admin_status => !user.administrator?, :q => params[:q], :page => params[:page]},
-		      {:post => true} ) %> |
-          <%= link_to( "Delete",
-		     {:action => "destroy", :id => user.id, :q => params[:q], :page => params[:page]},
-		     {:confirm => "Really delete #{user.name}?", :post => true}) %>
+<div id="list_view">
+  <table class="header">
+    <tr>
+      <td class="action">
+        <%= link_to('New User', :action => 'new', :q => params[:q], :page => params[:page]) %>
+      </td>
+      <td class="search">
+        <%= start_form_tag({:action => 'list'},{:method => :get}) %>
+          <p><input type="text" name="q" value="<%= params[:q] %>"/>
+          <button type="submit">Search</button></p>
+        <%= end_form_tag %>
       </td>
     </tr>
-  <% end %>
-  </tbody>
-</table>
-<div class="change_page">
+  </table>
+  <table class="xlist">
+    <colgroup id="name-column"/>
+    <colgroup id="admin-column"/>
+    <colgroup id="operations-column"/>
+    <thead>
+    <tr>
+      <th>User name</th>
+      <th>Admin?</th>
+      <th>Operations</th>
+    </tr>
+    </thead>
+    <tbody>  
+    <% for user in @users %>
+      <tr class="<%= cycle("even", "odd") %>">
+        <td><%= h(user.name) %></td>
+        <td><%= user.administrator? ? 'Yes' : 'No' %></td>
+        <td><%= link_to('Show', :action => 'show', :id => user.id ) %> |
+            <%= link_to('Toggle Admin Status', {:action => 'toggle_admin_status', :id => user.id, 
+                        :admin_status => !user.administrator?, :q => params[:q], :page => params[:page]},
+		        {:post => true} ) %> |
+            <%= link_to( "Delete",
+		       {:action => "destroy", :id => user.id, :q => params[:q], :page => params[:page]},
+		       {:confirm => "Really delete #{user.name}?", :post => true}) %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
   <%= render( :partial => '/pages', 
-              :locals => {:name => 'User', 
-	                  :object_pages => @user_pages,
-			  :extra_params => {}} ) %>
+              :locals => {:name => 'User', :object_pages => @user_pages, :extra_params => {}} ) %>
+
 </div>
-<%= link_to('New User', :action => 'new', :q => params[:q], :page => params[:page]) %>
+

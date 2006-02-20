@@ -1,46 +1,47 @@
 <% @page_title = "Browse Subject Groups" %>
-<%= start_form_tag({:action => 'list'},{:method => :get}) %>
-<div>
-<input type="text" name="q" value="<%= params[:q] %>"/>
-<button type="submit">Search</button>
-</div>
-<%= end_form_tag %>
-
-<table class="xlist">
-  <colgroup id="name-column"/>
-  <colgroup id="subjects-column"/>
-  <colgroup id="operations-column"/>
-  <thead>
-  <tr>
-    <th>Name</th>
-    <th>Subjects</th>
-    <th>Operations</th>
-  </tr>
-  </thead>
-  <tbody>
-  <% for subject_group in @subject_groups %>
-    <tr class="<%= cycle("even", "odd") %>">
-      <td><%= h(subject_group.name) %></td>
-      <td>
-        <ul>
-        <% for subject in subject_group.subjects %>
-	  <li><%= h(subject.name) %></li>
-        <% end %>
-        </ul>
+<div id="list_view">
+  <table class="header">
+    <tr>
+      <td class="action">
+        <%= link_to( 'New Subject Group', :action => 'new' ) %>
       </td>
-      <td>
-        <%= link_to( 'Edit', :action => 'edit', :id => subject_group ) %> |
-	<%= link_to( 'Destroy', {:action => 'destroy', :id => subject_group, :q => params[:q], :page => params[:page]}, 
-	                         :confirm => "Are you sure you want to delete #{subject_group.name} and all its associated subjects, quizzes and questions?", :post => true) %>
+      <td class="search">
+        <%= start_form_tag({:action => 'list'},{:method => :get}) %>
+          <p><input type="text" name="q" value="<%= params[:q] %>"/>
+          <button type="submit">Search</button></p>
+        <%= end_form_tag %>
       </td>
     </tr>
-  <% end %>
-  </tbody>
-</table>
-<div class="change_page">
+  </table>
+  <table class="xlist">
+    <colgroup id="name-column"/>
+    <colgroup id="subjects-column"/>
+    <colgroup id="operations-column"/>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Subjects</th>
+        <th>Operations</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for subject_group in @subject_groups %>
+        <tr class="<%= cycle("even", "odd") %>">
+          <td><%= h(subject_group.name) %></td>
+          <td><ul>
+            <% for subject in subject_group.subjects %>
+              <li><%= h(subject.name) %></li>
+            <% end %>
+          </ul></td>
+          <td>
+            <%= link_to( 'Edit', :action => 'edit', :id => subject_group ) %> |
+ 	    <%= link_to( 'Destroy', {:action => 'destroy', :id => subject_group, :q => params[:q], :page => params[:page]}, 
+	                             :confirm => "Are you sure you want to delete #{subject_group.name} and all its associated subjects, quizzes and questions?", :post => true) %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
   <%= render( :partial => '/pages',
-              :locals => {:name => 'Subject Group', 
-	                  :object_pages => @subject_group_pages,
-			  :extra_params => {}} ) %>
+              :locals => {:name => 'Subject Group', :object_pages => @subject_group_pages, :extra_params => {}} ) %>
 </div>
-<%= link_to( 'New Subject Group', :action => 'new' ) %>
