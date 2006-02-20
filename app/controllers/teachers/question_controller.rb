@@ -22,7 +22,7 @@ class Teachers::QuestionController < Teachers::BaseController
     @question = Question.new(params[:question])
     if request.get?
       @question.randomise = true
-      @question.text_format = Question::RedClothFormat
+      @question.text_format = TextFormatter::RedClothFormat
       @question.question_type = Question::MultiOptionType
       @question.answers = [Answer.new,Answer.new,Answer.new,Answer.new]
     elsif request.post?
@@ -40,6 +40,7 @@ class Teachers::QuestionController < Teachers::BaseController
     @question = find_question(params[:id])
     if request.post?
       @question.corrected_at = Time.now if params[:correct] 
+      @question.attributes = params[:question]
       @question.choices = params[:choice]
       if @question.save
         flash[:notice] = 'Question was successfully updated.'

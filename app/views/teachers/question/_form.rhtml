@@ -1,3 +1,7 @@
+<%
+  # Need to be set to allow target attribute on anchor tags
+  @use_link_targets = true
+%>
 <%= start_form_tag(@form_action) %>
 <div class="dataset">
   <h2><%= @form_title %></h2>
@@ -49,8 +53,8 @@
         
         <div class="answer_header">
           <div class="answer_options">
-            <label for="answer_<%= id %>_is_correct">Is correct</label>
-	    <input type="checkbox" name="choice[<%= id %>][is_correct]" value="true" <%= (@choice[:is_correct].to_s == 'true') ? ' checked="checked"': '' %>/>
+            <label for="choice_<%= id %>_is_correct">Is correct</label>
+	    <input type="checkbox" id="choice_<%= id %>_is_correct" name="choice[<%= id %>][is_correct]" value="true" <%= (@choice[:is_correct].to_s == 'true') ? ' checked="checked"': '' %>/>
 	    <input type="hidden" name="choice[<%= id %>][is_correct]" value="false"/>
 	    <a onclick="delete_answer(this); return false;" href="#">
 	      	delete
