@@ -170,6 +170,7 @@ class ImporterTest < Test::Unit::TestCase
     content += '  <TEST>'
     content += '    <TEST-DESCRIPTION SUBJECT="test" NAME="1" TESTSIZE="0"></TEST-DESCRIPTION>'
     content += '    <TASK>'
+    content += '    <DESCRIPTION></DESCRIPTION>'
     content += '    <QUESTION>Whats the answer?</QUESTION>'
     content += '    <SINGLE-CHOICE>'
     content += '      <OPTION CORRECT="true">42</OPTION>'
