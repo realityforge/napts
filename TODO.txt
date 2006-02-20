@@ -1,1 +1,0 @@
-* (For Pete) Functional test the importer

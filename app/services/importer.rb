@@ -4,7 +4,10 @@ class Importer
 
   def self.import_file(subject_name,file_name)
     subject = Subject.find_by_name(subject_name)
-    testset = REXML::Document.new(File.new(file_name)).root
+    raise "Unknown subject #{subject_name}" unless subject
+    f = File.new(file_name)
+    testset = REXML::Document.new(f).root
+    f.close
     Quiz.transaction do
       testset.elements.each('TEST') {|test| Importer.import_test(subject,test)}
     end
@@ -15,7 +18,7 @@ class Importer
     name = (desc.attributes['SUBJECT'] + '-' + desc.attributes['NAME']).slice(0,20)
     STDERR.puts "Importing test #{name}"
     quiz = Quiz.create!(:name => name, 
-                        :description => "imported from #{name}".slice(0,120),
+                        :description => "Imported from #{name}".slice(0,120),
                         :duration => 10,
                         :randomise => true,
                         :subject_id => subject.id,
@@ -23,7 +26,6 @@ class Importer
                         :publish_results => false,
                         :preview_enabled => false)
     test.elements.each('TASK') {|task| Importer.import_question(quiz,task)}
-    quiz.reload
   end
 
   def self.import_question(quiz,task)
@@ -53,18 +55,15 @@ class Importer
 				:text_format => TextFormatter::PlainFormat,
                                 :corrected_at => Time.now)
 
-				
     quiz.quiz_items.create(:preview_only => false, :question_id => question.id)
     if type == Question::MultiOptionType || type == Question::SingleOptionType 
-      choices.elements.each('OPTION') {|option| Importer.import_answer(question,option)}
+      choices.elements.each('OPTION') do |option| 
+        Answer.create!(:question_id => question.id, :content => option.text, :is_correct => (option.attributes['CORRECT'] == 'true'))
+      end
     elsif type == Question::NumberType
       Answer.create!(:question_id => question.id, :content => number, :position => 1, :is_correct => true)
     else # type == Question::TextType
       Answer.create!(:question_id => question.id, :content => "^#{word}$", :position => 1, :is_correct => true)
     end
-  end
-
-  def self.import_answer(question,option)
-    Answer.create!(:question_id => question.id, :content => option.text, :is_correct => (option.attributes['CORRECT'] == 'true'))
   end
 end
