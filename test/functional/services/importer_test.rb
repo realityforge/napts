@@ -132,6 +132,38 @@ class ImporterTest < Test::Unit::TestCase
     assert_answer('42',true,question.answers[0])
   end
 
+  def test_import_test_with_escaped_text
+    content = ''
+    content += '<TESTSET>'
+    content += '  <TEST>'
+    content += '    <TEST-DESCRIPTION SUBJECT="test" NAME="1" TESTSIZE="0"></TEST-DESCRIPTION>'
+    content += '    <TASK>'
+    content += '    <DESCRIPTION>&lt;pre&gt;Life, Universe and Everything?&lt;/pre&gt;</DESCRIPTION>'
+    content += '    <QUESTION>Whats the answer?</QUESTION>'
+    content += '    <SINGLE-CHOICE>'
+    content += '      <OPTION CORRECT="true">42</OPTION>'
+    content += '      <OPTION>&lt;Chocolate&gt;</OPTION>'
+    content += '      <OPTION>Purple</OPTION>'
+    content += '    </SINGLE-CHOICE>'
+    content += '    </TASK>'
+    content += '  </TEST>'
+    content += '</TESTSET>'
+    subject = init_data(content)
+    quiz = assert_single_quiz(subject)
+    assert_equal(1,quiz.quiz_items.length)
+    question = quiz.quiz_items[0].question
+    assert_equal(subject.subject_group_id,question.subject_group_id)
+    assert_equal(true,question.randomise?)
+    assert_equal(TextFormatter::PlainFormat,question.text_format)
+    assert_equal('<div><pre>Life, Universe and Everything?</pre></div><div>Whats the answer?</div>',question.content)
+    assert_equal(TextFormatter::PlainFormat,question.text_format)
+    assert_equal(Question::SingleOptionType,question.question_type)
+    assert_equal(3,question.answers.length)
+    assert_answer('42',true,question.answers[0])
+    assert_answer('<Chocolate>',false,question.answers[1])
+    assert_answer('Purple',false,question.answers[2])
+  end
+
   def assert_answer(content,is_correct,answer)
     assert_equal(content,answer.content)
     assert_equal(is_correct,answer.is_correct?)

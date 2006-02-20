@@ -29,7 +29,7 @@ class Importer
   end
 
   def self.import_question(quiz,task)
-    content = "<div>#{task.elements['DESCRIPTION'].text}</div><div>#{task.elements['QUESTION'].text}</div>"
+    content = "<div>#{CGI::unescapeHTML(task.elements['DESCRIPTION'].text)}</div><div>#{CGI::unescapeHTML(task.elements['QUESTION'].text)}</div>"
     choices = task.elements['SINGLE-CHOICE']
     if choices
       type = Question::SingleOptionType
@@ -58,7 +58,7 @@ class Importer
     quiz.quiz_items.create(:preview_only => false, :question_id => question.id)
     if type == Question::MultiOptionType || type == Question::SingleOptionType 
       choices.elements.each('OPTION') do |option| 
-        Answer.create!(:question_id => question.id, :content => option.text, :is_correct => (option.attributes['CORRECT'] == 'true'))
+        Answer.create!(:question_id => question.id, :content => CGI::unescapeHTML(option.text), :is_correct => (option.attributes['CORRECT'] == 'true'))
       end
     elsif type == Question::NumberType
       Answer.create!(:question_id => question.id, :content => number, :position => 1, :is_correct => true)
