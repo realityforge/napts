@@ -1,33 +1,37 @@
 <% @page_title = "Browse Subjects" %>
-<%= start_form_tag({:action => 'list'},{:method => :get}) %>
-<div>
-<input type="text" name="q" value="<%= params[:q] %>"/>
-<button type="submit">Search</button>
-</div>
-<%= end_form_tag %>
-
-<table class="xlist">
-  <colgroup id="name-column"/>
-  <colgroup id="operations-column"/>
-  <thead>
-  <tr>
-    <th>Name</th>
-    <th>Operations</th>
-  </tr>
-  </thead>
-  <tbody>  
-<% for subject in @subjects %>
-  <tr class="<%= cycle("even", "odd") %>">
-    <td><%= h(subject.name) %></td>
-    <td>
-    <%= link_to( 'Previews', :controller => 'preview', :action => 'list', :subject_id => subject ) %> |
-    <%= link_to( 'Results', :controller => 'results', :action => 'list', :id => subject ) %>
-    </td>
-  </tr>
-<% end %>
-  </tbody>
-</table>
-<div class="change_page">
+<div id="list_view">
+  <table class="header">
+    <tr>
+      <td class="action"></td>
+      <td class="search">
+        <%= start_form_tag({:action => 'list'},{:method => :get}) %>
+          <p><input type="text" name="q" value="<%= params[:q] %>"/>
+          <button type="submit">Search</button></p>
+	<%= end_form_tag %>
+      </td>
+    </tr>
+  </table>
+  <table class="xlist">
+    <colgroup id="name-column"/>
+    <colgroup id="operations-column"/>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Operations</th>
+      </tr>
+    </thead>
+    <tbody>   
+      <% for subject in @subjects %>
+        <tr class="<%= cycle("even", "odd") %>">
+          <td><%= h(subject.name) %></td>
+          <td>
+          <%= link_to( 'Previews', :controller => 'preview', :action => 'list', :subject_id => subject ) %> |
+          <%= link_to( 'Results', :controller => 'results', :action => 'list', :id => subject ) %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
   <%= render( :partial => '/pages',
               :locals => {:name => 'Subject', 
 	                  :object_pages => @subject_pages,

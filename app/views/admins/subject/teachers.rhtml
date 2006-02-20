@@ -7,8 +7,8 @@
       </td>
       <td class="search">
         <%= start_form_tag({:action => 'teachers', :id => @subject},{:method => :get}) %>
-        <input type="text" name="q" value="<%= params[:q] %>"/>
-        <button type="submit">Search</button>
+          <p><input type="text" name="q" value="<%= params[:q] %>"/>
+          <button type="submit">Search</button></p>
         <%= end_form_tag %>
       </td>
     </tr>
@@ -31,13 +31,5 @@
       <% end %>
     </tbody>
   </table>
-  <table class="change_page">
-    <tr>
-      <td class="beforearrows"></td>
-      <td>
-        <%= render( :partial => '/pages', :locals => {:name => 'Teacher', :object_pages => @user_pages, :extra_params => { :id => params[:id]}} ) %>
-      </td>
-      <td class="afterarrows"></td>
-    </tr>
-  </table>
+  <%= render( :partial => '/pages', :locals => {:name => 'Teacher', :object_pages => @user_pages, :extra_params => { :id => params[:id]}} ) %>
 </div>

@@ -1,12 +1,18 @@
 <% @page_title = "Add questions to #{@quiz.name}" %>
-<%= start_form_tag({:action => 'list_questions', :id => @quiz}, {:method => :get}) %>
-<div>
-<input type="text" name="q" value="<%= params[:q] %>"/>
-<button type="submit">Search</button>
-</div>
-<%= end_form_tag %>
-<h2>Quiz ID: <%= @quiz.id %></h2>
-
+<div id="list_view">
+  <table class="header">
+    <tr>
+      <td class="action">
+        <%= link_to("Cancel", {:controller => 'quiz_item', :action => 'list', :quiz_id => @quiz.id}) %>
+      </td>
+      <td class="search">
+        <%= start_form_tag({:action => 'list_questions', :id => @quiz}, {:method => :get}) %>
+          <p><input type="text" name="q" value="<%= params[:q] %>"/>
+	  <button type="submit">Search</button></p>
+	<%= end_form_tag %>
+      </td>
+    </tr>
+  </table>
 <table class="xlist">
   <colgroup id="question-column"/>
   <colgroup id="summary-column"/>
@@ -31,11 +37,8 @@
   <% end %>
   </tbody>
 </table>
-<div class="change_page">
   <%= render( :partial => '/pages',
               :locals => {:name => 'Question',
 	                  :object_pages => @question_pages,
 			  :extra_params => {}} ) %>
 </div>
-<%= link_to("Cancel", {:controller => 'quiz_item', :action => 'list', :quiz_id => @quiz.id}) %>
-

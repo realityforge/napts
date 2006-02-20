@@ -1,10 +1,18 @@
 <% @page_title = "Browse Resources" %>
-<%= start_form_tag({:action => 'list'},{:method => :get}) %>
-<div>
-<input type="text" name="q" value="<%= params[:q] %>"/>
-<button type="submit">Search</button>
-</div>
-<%= end_form_tag %>
+<div id="list_view">
+  <table class="header">
+    <tr>
+      <td class="action">
+        <%= link_to( 'New resource', :action => 'new' ) %>
+      </td>
+      <td class="search">
+        <%= start_form_tag({:action => 'list'},{:method => :get}) %>
+          <p><input type="text" name="q" value="<%= params[:q] %>"/>
+	  <button type="submit">Search</button></p>
+	<%= end_form_tag %>
+      </td>
+    </tr>
+  </table>
 
 <table class="xlist">
   <colgroup id="name-column"/>
@@ -45,10 +53,9 @@
 <% end %>
   </tbody>
 </table>
-<div class="change_page">
   <%= render( :partial => '/pages',
               :locals => {:name => 'Resource', 
 	                  :object_pages => @resource_pages, 
 			  :extra_params => {}} ) %>
 </div>
-<%= link_to( 'New resource', :action => 'new' ) %>
+
