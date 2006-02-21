@@ -29,9 +29,9 @@
       <td><ul>
         <% for answer in @question.answers %>
 	  <% if answer.is_correct? %>
-	    <li><%= image_tag("icons/tick.gif") %> <%= h(answer.content) %></li>
+	    <li class="answer_true"><%= h(answer.content) %></li>
 	  <% else %>
-	    <li><%= image_tag("icons/cross.gif") %> <%= h(answer.content) %></li>
+	    <li class="answer_false"><%= h(answer.content) %></li>
 	  <% end %>
 	<% end %>
       </ul></td>

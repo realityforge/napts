@@ -111,6 +111,16 @@ table.answers td.cb
   width: 1%;
 }
 
+div.dataset li.answer_true
+{
+  list-style-image: url(../images/icons/tick.gif);
+}
+
+div.dataset li.answer_false
+{
+  list-style-image: url(../images/icons/cross.gif);
+}
+
 #list_view table.header
 {
   width: 100%;
