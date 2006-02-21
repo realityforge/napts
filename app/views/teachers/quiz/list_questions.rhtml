@@ -1,9 +1,10 @@
 <% @page_title = "Add questions to #{@quiz.name}" %>
 <div id="list_view">
+  <h1>Add questions to <%= @quiz.name %></h1>
   <table class="header">
     <tr>
       <td class="action">
-        <%= link_to("Return to Quiz", {:controller => 'quiz_item', :action => 'list', :quiz_id => @quiz.id}) %>
+        <%= link_to("Return to Question List", {:controller => 'quiz_item', :action => 'list', :quiz_id => @quiz.id}) %>
       </td>
       <td class="search">
         <%= start_form_tag({:action => 'list_questions', :id => @quiz}, {:method => :get}) %>
@@ -15,13 +16,13 @@
   </table>
 <table class="xlist">
   <colgroup id="question-column"/>
-  <colgroup id="summary-column"/>
+  <colgroup id="content-column"/>
   <colgroup id="question_type-column"/>
   <colgroup id="operations-column"/>
   <thead>
   <tr>
     <th>Question</th>
-    <th>Summary</th>
+    <th>Content</th>
     <th>Question Type</th>
     <th>Operations</th>
   </tr>
