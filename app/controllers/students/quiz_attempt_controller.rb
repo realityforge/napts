@@ -35,10 +35,26 @@ class Students::QuizAttemptController < Students::BaseController
           @quiz_attempt.complete
 	end
         if request.post?
-	  if @quiz_response.question.question_type == Question::MultiOptionType || @quiz_response.question.question_type == Question::SingleOptionType
+	  if @quiz_response.question.question_type == Question::MultiOptionType
             for answer in params[:answers]
               @quiz_response.answers << Answer.find(answer)
             end if params[:answers]
+	  elsif @quiz_response.question.question_type == Question::SingleOptionType
+	    if params[:answers].nil?
+	      flash[:alert] = 'Must select an answer'
+	      redirect_to( :action => 'show_question', :id => @quiz )
+	      return
+	    else
+	      @quiz_response.answers << Answer.find(params[:answers])
+	    end
+#	  elsif @quiz_response.question.question_type == Question::NumberType
+#	  if params[:quiz_response][:input]
+#	      @quiz_response.update_attributes( :input => params[:quiz_response][:input] )
+#	    else
+#	      flash[:alert] = 'Must enter a number'
+#	      redirect_to( :action => 'show_question', :id => @quiz )
+#	      return
+#	    end
 	  else
 	    @quiz_response.update_attributes( :input => params[:quiz_response][:input] )
 	  end
