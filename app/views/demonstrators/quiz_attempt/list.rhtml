@@ -2,7 +2,9 @@
 <div id="list_view">
   <table class="header">
     <tr>
-      <td class="action"></td>
+      <td class="action">
+        <%= link_to('Return to Quiz', :controller => 'quiz', :action => 'show', :id => @quiz ) %>
+      </td>
       <td class="search">
         <%= start_form_tag({:action => 'list'},{:method => :get}) %>
           <p><input type="hidden" name="quiz_id" value="<%= params[:quiz_id] %>"/>

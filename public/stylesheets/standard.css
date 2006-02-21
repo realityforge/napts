@@ -17,17 +17,18 @@ div.dataset table
 
 div.dataset th
 {
-  width: 40%;
+  width: 250px;
   text-align: right;
   padding-right: 20px;
   vertical-align: text-top;
+  __background-color: green;
 }
 
 div.dataset td
 {
-  width: 60%;
   text-align: left;
   padding-left: 20px;
+  __background-color: blue;
 }
 
 div.dataset ul
@@ -36,6 +37,11 @@ div.dataset ul
   text-align: left;
   padding: 0px 0px 0px 20px;
   margin: 0px 0px 0px 0px;
+}
+
+div.davaset td.room_ids
+{
+  width: 150px;
 }
 
 div.dataset h2

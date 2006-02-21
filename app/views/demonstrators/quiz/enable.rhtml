@@ -1,11 +1,11 @@
 <%= start_form_tag( :action => 'enable', :id => @quiz ) %>
 <div class="dataset">
   <h2>Enable Quiz in Rooms</h2>
-<table width="100%" cellpadding="3" cellspacing="0">
+<table>
 <tr>
   <th><label for="room_ids">Rooms</label></th>
   <td>
-  <select id="room_ids" name="room_ids[]" multiple="multiple">
+  <select id="room_ids" name="room_ids[]" multiple="multiple" style="width: 250px;">
     <% for room in @rooms %>
       <option value="<%= room.id %>"<%= @quiz.active_in.find(:first, :conditions => ['id = ?', room.id]) ? ' selected="selected"' : '' %>><%= room.name %></option>
     <% end %>
