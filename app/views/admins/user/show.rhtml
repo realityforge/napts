@@ -1,7 +1,7 @@
 <% @page_title = "Browse User '#{@user.name}'" %>
 <div class="dataset">
   <h2>Details</h2>
-<table>
+<table width="100%" cellpadding="3" cellspacing="0">
   <tr>
     <th>Name</th>
     <td><%= @user.name %></td>
@@ -36,4 +36,4 @@
 <% end %>
 </table>
 </div>
-<%= link_to( 'Back to Users List', :action => 'list' ) %>
+

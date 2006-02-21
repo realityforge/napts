@@ -15,7 +15,6 @@
   <td><%= h(@resource.content_type) %></td>
 </tr>
 </table>
+<%= link_to_button( 'View Resource', :action => 'view', :id => @resource ) %>
+<%= link_to_button( 'Edit', :action => 'edit', :id => @resource ) %>
 </div>
-
-<%= link_to( 'View', :action => 'view', :id => @resource ) %>
-<%= link_to( 'Edit', :action => 'edit', :id => @resource ) %>
