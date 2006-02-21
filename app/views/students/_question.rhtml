@@ -2,6 +2,11 @@
   <% @question = question %>
   <%= error_messages_for('question', :header_tag => 'h3') %>
   <h2><%= @form_title %></h2>
+  <% if @form_action_desc == 'QuizAttempt' %>
+    <div class="time">
+      <%= distance_of_time_in_words(Time.now,@quiz_attempt.created_at + (@quiz_attempt.quiz.duration * 60)) %> remaining
+    </div>
+  <% end %>
   <div class="dataset_question">
   <%= question.formatted_content %>
   </div>
@@ -22,7 +27,7 @@
         <td class="cb">
           <input type="<%= button_type %>" name="answers[]" value="<%= answer.id %>" />
         </td>
-        <td><div class="dataset_answer"><%= answer.formatted_content %></div></td>
+        <td class="answer"><div class="dataset_answer"><%= answer.formatted_content %></div></td>
       </tr>
     <% end %>
   </table>

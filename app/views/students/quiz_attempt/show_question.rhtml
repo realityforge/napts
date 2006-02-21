@@ -1,7 +1,7 @@
 <% @page_title = "Quiz '#{@quiz_attempt.quiz.name}': Question #{@quiz_response.position}" %>
 <% @form_title = "Question #{@quiz_response.position}" %> 
+<% @form_action_desc = 'QuizAttempt' %>
 <div>
-<h3>Question <%= @quiz_response.position %></h3>
 <%= start_form_tag( :action => 'show_question', :id => @quiz ) %>
   <%= render( :partial => 'students/question', :locals => { :question => @quiz_response.question, :extra_params => {:id => @quiz} } ) %>
   <p><button type="submit">Submit</button></p>
