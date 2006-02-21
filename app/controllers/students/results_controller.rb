@@ -4,12 +4,14 @@ class Students::ResultsController < Students::BaseController
   end
 
   def list
+    @subject = Subject.find(params[:id])
     @quiz_attempts = QuizAttempt.find(:all,
                                       :select => 'quiz_attempts.*',
                                       :joins => 'LEFT OUTER JOIN quizzes ON quizzes.id = quiz_attempts.quiz_id',
-                                      :conditions => ['subject_id = ? AND user_id = ? AND end_time IS NOT NULL', params[:id], current_user.id],
+                                      :conditions => ['subject_id = ? AND user_id = ? AND end_time IS NOT NULL', @subject.id, current_user.id],
 				      :order => 'created_at DESC',
 				      :readonly => false)
+				      
   end
   
   #make sure it is the right user,  ~
