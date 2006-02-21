@@ -17,7 +17,7 @@ class QuizResponse < ActiveRecord::Base
       end
       return responses.sort! == correct_answers.sort!
     elsif self.question.question_type == 3
-      return self.input.strip.to_i == self.question.answers[0].content.to_i
+      return self.input && self.input.strip.to_i == self.question.answers[0].content.to_i
     else
       return ! (Regexp.new(self.question.answers[0].content) =~ self.input).nil?
     end
