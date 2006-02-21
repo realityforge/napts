@@ -37,7 +37,7 @@
   %>
   <tr class="<%= cycle("even", "odd") %>">
     <td><%= quiz_item.question.id %></td>
-    <td><%= h(truncate(quiz_item.question.content, 30)) %></td>
+    <td><%= h(truncate(quiz_item.question.content, 65)) %></td>
     <td><%= ! quiz_item.preview_only %></td>
     <td><%= render( :partial => 'positioning', :locals => {:quiz_item => quiz_item, :index => index, :quiz_items => @quiz_items} ) %></td>
     <td>

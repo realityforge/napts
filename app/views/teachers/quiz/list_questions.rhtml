@@ -3,7 +3,7 @@
   <table class="header">
     <tr>
       <td class="action">
-        <%= link_to("Cancel", {:controller => 'quiz_item', :action => 'list', :quiz_id => @quiz.id}) %>
+        <%= link_to("Return to Quiz", {:controller => 'quiz_item', :action => 'list', :quiz_id => @quiz.id}) %>
       </td>
       <td class="search">
         <%= start_form_tag({:action => 'list_questions', :id => @quiz}, {:method => :get}) %>
@@ -30,7 +30,7 @@
   <% for question in @questions %>
     <tr class="<%= cycle("even", "odd") %>">
       <td><%= question.id %></td>
-      <td><%= h(truncate(question.content, 30)) %></td>
+      <td><%= h(truncate(question.content, 65)) %></td>
       <td><%= Question::QUESTION_TYPE.index( question.question_type ) %></td>
       <td><%= link_to('Add to Quiz', {:action => 'add_item', :id => @quiz, :question_id => question.id}, {:post => true} ) %></td>
     </tr>
