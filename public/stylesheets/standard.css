@@ -28,6 +28,7 @@ div.dataset td
 {
   text-align: left;
   padding-left: 20px;
+  padding-right: 20px;
   __background-color: blue;
 }
 

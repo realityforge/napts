@@ -1,0 +1,9 @@
+<tr id="choice_<%= key %>_answer_row" class="choice_answer">
+  <th><label for="choice_<%= key %>_content">Option</label></th>
+  <td>
+    <textarea class="choice_control" cols="40" id="choice_<%= key %>_content" name="choice[<%= key %>][content]" rows="20"><%= choice[:content] %></textarea>
+    <input class="choice_control" type="checkbox" id="choice_<%= key %>_is_correct" name="choice[<%= key %>][is_correct]" value="true" <%= (choice[:is_correct].to_s == 'true') ? ' checked="checked"': '' %>/><input class="choice_control" type="hidden" name="choice[<%= key %>][is_correct]" value="false"/><label for="choice_<%= key %>_is_correct">Is correct?</label>
+    <br/>
+    <a href="javascript:Element.remove('choice_<%= key %>_answer_row')">Delete Option</a>
+  </td>
+</tr>

@@ -13,6 +13,10 @@ class Teachers::QuestionController < Teachers::BaseController
                                            :conditions => conditions,
                                            :per_page => 10)
   end
+
+  def gen_answer
+    render(:partial => 'answer', :locals => {:key => Time.now.to_i, :choice => {}}, :layout => false)
+  end
   
   def show
     @question = current_subject.subject_group.questions.find(params[:id])
