@@ -17,7 +17,7 @@ div.dataset table
 
 div.dataset th
 {
-  width: 250px;
+  width: 165px;
   text-align: right;
   padding-right: 20px;
   vertical-align: text-top;
@@ -32,17 +32,17 @@ div.dataset td
   __background-color: blue;
 }
 
+div.dataset .input
+{
+  width: 500px;
+}
+
 div.dataset ul
 {
   width: 60%;
   text-align: left;
   padding: 0px 0px 0px 20px;
   margin: 0px 0px 0px 0px;
-}
-
-div.davaset td.room_ids
-{
-  width: 150px;
 }
 
 div.dataset h2
@@ -300,5 +300,13 @@ table.xlist th
 #teachers_quiz__list #operations-column, #admins_user__list #operations-column
 {
   width: 300px;
+}
+
+#admins_subject_group__list #subjects-column 
+{
+
+  padding: 0;
+  background-color: blue;
+  margin: 0;
 }
 
