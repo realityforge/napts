@@ -38,7 +38,7 @@ class CreateInitialSchema < ActiveRecord::Migration
     
     # Subjects
     create_table('subjects', :force => true) do |t|
-      t.column 'name', :string, :limit => 10, :null => false
+      t.column 'name', :string, :limit => 20, :null => false
       t.column 'subject_group_id', :integer, :null => false
     end
     add_index('subjects', ['name'], 

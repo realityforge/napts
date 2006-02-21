@@ -47,14 +47,15 @@ class Students::QuizAttemptController < Students::BaseController
 	    else
 	      @quiz_response.answers << Answer.find(params[:answers])
 	    end
-#	  elsif @quiz_response.question.question_type == Question::NumberType
-#	  if params[:quiz_response][:input]
-#	      @quiz_response.update_attributes( :input => params[:quiz_response][:input] )
-#	    else
-#	      flash[:alert] = 'Must enter a number'
-#	      redirect_to( :action => 'show_question', :id => @quiz )
-#	      return
-#	    end
+	  elsif @quiz_response.question.question_type == Question::NumberType
+	    number = params[:quiz_response][:input]
+	    if  Regexp.new(/\D{0}\d+\D{0}/) =~ number 
+	      @quiz_response.update_attributes( :input => params[:quiz_response][:input] )
+            else
+	      flash[:alert] = 'Must enter a number'
+	      redirect_to( :action => 'show_question', :id => @quiz )
+	      return
+	    end
 	  else
 	    @quiz_response.update_attributes( :input => params[:quiz_response][:input] )
 	  end
