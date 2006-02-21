@@ -2,6 +2,6 @@
   @page_title = @form_title = "Edit Subject Group"
   @form_action = {:action => 'edit', :id => @subject_group.id}
   @form_action_desc = 'Save'
-  @form_cancel_action = {:action => 'show', :id => @subject_group}
+  @form_cancel_action = {:action => 'list'}
 %>
 <%= render_partial('form') %>
