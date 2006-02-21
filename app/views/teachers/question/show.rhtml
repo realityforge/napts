@@ -37,47 +37,21 @@
       </ul></td>
     </tr>
   <% end %>
-        
-
-<!--<table class="xlist">
-  <colgroup id="answer_content-column"/>
-  <colgroup id="correct-column"/>
-  <thead>
-  <tr>
-    <th>Answer Content</th>
-    <th>Correct</th>
-  </tr>
-  </thead>
-  <tbody>
-  <% for answer in @question.answers %>
-    <tr class="<%= cycle("even", "odd") %>">
-      <td><pre><%= h(answer.content) %></pre></td>
-      <td><%= h(answer.is_correct) %></td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
--->
-
-<br/>
-<% if @question.has_resource? %>
+  <% if @question.has_resource? %>
     <tr>
       <th>Resources</th>
       <td>
         <ul>
 	<% for resource in @question.resources %>
-	  <li><%= h(resource.name) %> [<%= link_to('Remove', 
-	                                       {:action => 'remove_resource', 
-					        :id => @question, 
-						:resource_id => resource},
-						{:post => true}) %>]</li>
+	  <li><%= h(resource.name) %> [
+	      <%= link_to('Remove', {:action => 'remove_resource', :id => @question, 
+				     :resource_id => resource},	{:post => true}) %>]</li>
 	<% end %>
         </ul>
       </td>
     </tr>
-  </table>
-<% end %>
-
+  <% end %>
+</table>
 <%= link_to_button( "Add Resource", :action => 'list_resources', :id => @question ) %>
 
 <%= link_to_button( 'Edit', {:action => 'edit', :id => @question.id} ) %>

@@ -12,7 +12,7 @@
   <tr>
     <th><label for="question_text_format">Format</label></th>
     <td>
-    <%= select("question", "text_format", TextFormatter::TEXT_FORMAT) %>
+    <%= select("question", "text_format", TextFormatter::TEXT_FORMAT, {}, :onchange => 'onSelectTextFormat();' ) %>
     <span id="redcloth">
       <a href="http://hobix.com/textile/" target="_blank">More about RedCloth</a>
     </span>
