@@ -1,11 +1,45 @@
 <% @page_title = "Browse question #{@question.id}" %>
-<h2>Question <%= @question.id %></h2>
-<p>Type: <%= Question::QUESTION_TYPE.index( @question.question_type ) %></p>
-<p>Format: <%= TextFormatter::TEXT_FORMAT.index( @question.text_format ) %></p>
+<div class="dataset">
+<h2>Details</h2>
+<table width="100%" cellpadding="3" cellspacing="0">
+  <tr>
+    <th>ID</th>
+    <td><%= @question.id %></td>
+  </tr>
+  <tr>
+    <th>Type</th>
+    <td><%= Question::QUESTION_TYPE.index( @question.question_type ) %></td>
+  </tr>
+  <tr>
+    <th>Text Format</th>
+    <td><%= TextFormatter::TEXT_FORMAT.index( @question.text_format ) %></td>
+  </tr>
+  <tr>
+    <th>Content</th>
+    <td><%= @question.content %></td>
+  </tr>
+  <% if @question.question_type == Question::NumberType || @question.question_type == Question::TextType %>
+    <tr>
+      <th>Answer</th>
+      <td><%= h(@question.answers[0].content) %></td>
+    </tr>
+  <% else %>
+    <tr>
+      <th>Answers</th>
+      <td><ul>
+        <% for answer in @question.answers %>
+	  <% if answer.is_correct? %>
+	    <li><%= image_tag("icons/tick.gif") %> <%= h(answer.content) %></li>
+	  <% else %>
+	    <li><%= image_tag("icons/cross.gif") %> <%= h(answer.content) %></li>
+	  <% end %>
+	<% end %>
+      </ul></td>
+    </tr>
+  <% end %>
+        
 
-<h3><%= @question.content %></h3>
-
-<table class="xlist">
+<!--<table class="xlist">
   <colgroup id="answer_content-column"/>
   <colgroup id="correct-column"/>
   <thead>
@@ -23,9 +57,10 @@
   <% end %>
   </tbody>
 </table>
-<br />
+-->
+
+<br/>
 <% if @question.has_resource? %>
-  <table>
     <tr>
       <th>Resources</th>
       <td>
@@ -45,4 +80,5 @@
 
 <%= link_to_button( "Add Resource", :action => 'list_resources', :id => @question ) %>
 
-<%= link_to_button( 'Edit', {:action => 'edit', :id => @question.id} ) %><br/>
+<%= link_to_button( 'Edit', {:action => 'edit', :id => @question.id} ) %>
+</div>
