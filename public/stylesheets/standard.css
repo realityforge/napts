@@ -32,11 +32,6 @@ div.dataset td
   __background-color: blue;
 }
 
-div.dataset .input
-{
-  width: 500px;
-}
-
 div.dataset ul
 {
   width: 60%;
@@ -108,7 +103,7 @@ table.answers td.cb
 {
   margin: 2px 2px 2px 0px;
   padding: 8px 5px 8px 5px;
-  width: 1%;
+  width: 15px;
 }
 
 div.dataset li.answer_true
@@ -119,6 +114,17 @@ div.dataset li.answer_true
 div.dataset li.answer_false
 {
   list-style-image: url(../images/icons/cross.gif);
+}
+
+div.dataset input.textfield
+{
+  width: 100%;
+  __background-color: pink;
+}
+
+table.xlist ul
+{
+  margin: 0;
 }
 
 #list_view table.header
@@ -311,12 +317,3 @@ table.xlist th
 {
   width: 300px;
 }
-
-#admins_subject_group__list #subjects-column 
-{
-
-  padding: 0;
-  background-color: blue;
-  margin: 0;
-}
-

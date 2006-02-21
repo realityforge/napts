@@ -28,11 +28,7 @@
       <th>Answers</th>
       <td><ul>
         <% for answer in @question.answers %>
-	  <% if answer.is_correct? %>
-	    <li class="answer_true"><%= h(answer.content) %></li>
-	  <% else %>
-	    <li class="answer_false"><%= h(answer.content) %></li>
-	  <% end %>
+          <li class="answer_<%= answer.is_correct? %>"><%= h(answer.content) %></li>
 	<% end %>
       </ul></td>
     </tr>
