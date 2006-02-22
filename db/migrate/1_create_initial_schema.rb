@@ -116,7 +116,7 @@ class CreateInitialSchema < ActiveRecord::Migration
       t.column 'content_type', :string, :limit => 25, :null => false
       t.column 'subject_group_id', :integer, :null => false
     end
-    add_index('resources', ['name', 'subject_group_id'], :name => 'resources_subeject_groups', :unique => true )
+    add_index('resources', ['name', 'subject_group_id'], :name => 'resources_subject_groups', :unique => true )
     add_foreign_key_constraint('resources', 'subject_group_id', 'subject_groups', 'id',
                                :name => 'resource_subject_group_id_fk')
    
