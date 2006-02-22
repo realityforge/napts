@@ -38,6 +38,6 @@
   <td><%= @quiz.completed_attempts? %></td>
 </tr>
 </table>
-<%= link_to('List Quiz Attempts', :controller => 'quiz_attempt', :action => 'list', :quiz_id => @quiz) %>
-<%= link_to('Enable Quiz in Rooms', :action => 'enable', :id => @quiz ) %>
+<%= link_to_button('Quiz Attempts', :controller => 'quiz_attempt', :action => 'list', :quiz_id => @quiz) %>
+<%= link_to_button('Enable Quiz', :action => 'enable', :id => @quiz ) %>
 </div>

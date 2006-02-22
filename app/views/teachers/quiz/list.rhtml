@@ -17,8 +17,8 @@
   <colgroup id="name-column"/>
   <colgroup id="description-column"/>
   <colgroup id="duration-column"/>
-  <colgroup id="preview-column"/>
   <colgroup id="publish-column"/>
+  <colgroup id="preview-column"/>
   <colgroup id="randomise-column"/>
   <colgroup id="operations-column"/>
   <thead>
@@ -26,8 +26,8 @@
     <th>Name</th>
     <th>Description</th>
     <th>Duration</th>
-    <th>Preview?</th>
     <th>Publish Results?</th>
+    <th>Preview?</th>
     <th>Randomise?</th>
     <th>Operations</th>
   </tr>
@@ -38,8 +38,8 @@
       <td><%= truncate(h(quiz.name), 10) %></td>
       <td><span title="<%= h(quiz.description) %>"><%= h(truncate(quiz.description,35)) %></span></td>
       <td><%= quiz.duration %></td>
-      <td><%= quiz.preview_enabled %></td>
       <td><%= quiz.publish_results %></td>
+      <td><%= quiz.preview_enabled %></td>
       <td><%= quiz.randomise %></td>
       <td>
       <%= link_to( 'Show',  :action => 'show', :id => quiz) %> |

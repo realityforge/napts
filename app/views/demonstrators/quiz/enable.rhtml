@@ -5,7 +5,7 @@
 <tr>
   <th><label for="room_ids">Rooms</label></th>
   <td>
-  <select id="room_ids" name="room_ids[]" multiple="multiple" style="width: 250px;">
+  <select id="room_ids" name="room_ids[]" multiple="multiple" style="width: 100px;">
     <% for room in @rooms %>
       <option value="<%= room.id %>"<%= @quiz.active_in.find(:first, :conditions => ['id = ?', room.id]) ? ' selected="selected"' : '' %>><%= room.name %></option>
     <% end %>
