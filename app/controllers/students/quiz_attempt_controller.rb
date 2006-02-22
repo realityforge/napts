@@ -49,7 +49,7 @@ class Students::QuizAttemptController < Students::BaseController
 	    end
 	  elsif @quiz_response.question.question_type == Question::NumberType
 	    number = params[:quiz_response][:input]
-	    if  Regexp.new(/^\D{0}\d+\D{0}$/) =~ number 
+	    if  Regexp.new(/^\d+$/) =~ number 
 	      @quiz_response.update_attributes( :input => params[:quiz_response][:input] )
             else
 	      flash[:alert] = 'Must enter a number'
