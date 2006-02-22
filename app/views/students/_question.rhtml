@@ -12,7 +12,7 @@
     </div>
   <% end %>
   <div class="dataset_question">
-  <%= question.formatted_content %>
+  <%= format_content(question.text_format,question.content,@resource_base) %>
   </div>
 <% if question.question_type == Question::MultiOptionType %>
   <% button_type = "checkbox" %>
@@ -31,7 +31,7 @@
         <td class="cb">
           <input type="<%= button_type %>" name="answers[]" value="<%= answer.id %>" />
         </td>
-        <td class="answer"><div class="dataset_answer"><%= answer.formatted_content %></div></td>
+        <td class="answer"><div class="dataset_answer"><%= format_content(answer.question.text_format,answer.content,@resource_base) %></div></td>
       </tr>
     <% end %>
   </table>

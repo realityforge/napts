@@ -15,6 +15,7 @@ class Students::PreviewController < Students::BaseController
     @quiz_item = QuizItem.find(:first,
                                :conditions => ['quiz_id = ? AND position = ?', @quiz.id, params[:position] ] )
     raise ActiveRecord::RecordNotFound, "Couldn't find QuizItem with preview_enabled = true AND quiz_id = #{params[:id]} AND position = #{params[:position]}" unless @quiz_item
+    @resource_base = {:action => 'resource', :id => params[:id], :position => params[:position]}
   end
 
   def resource

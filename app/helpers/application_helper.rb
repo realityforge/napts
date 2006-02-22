@@ -6,4 +6,19 @@ module ApplicationHelper
     html_options['type'] = 'button'
     content_tag('button', name, html_options)
   end
+
+  def format_content(format,content,resource_base = {})
+    output = TextFormatter.format_content(format,content)
+    post_process(resource_base, output)
+  end
+
+  private
+  
+  def post_process(resource_base, output)
+    while output =~ /\$\$resource\:(.*)\$\$/
+      resource_base[:name] = $1
+      output = "#{$`}#{url_for(resource_base)}#{$'}"
+    end
+    output
+  end
 end

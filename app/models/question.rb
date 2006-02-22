@@ -23,7 +23,7 @@ class Question < ActiveRecord::Base
     "Number" => NumberType,
     "Text" => TextType
   }.freeze
-  
+
   def validate
     if (question_type == MultiOptionType || question_type == SingleOptionType) && @choices
       correct_count = 0
@@ -38,7 +38,7 @@ class Question < ActiveRecord::Base
       errors.add_to_base( 'Must have a answer of length of 1 or more.' ) if (! text_answer || text_answer.length == 0)
     end
   end
-  
+
   def get_answers
     answers = self.answers.collect {|a| a }
     if self.randomise?
@@ -50,7 +50,7 @@ class Question < ActiveRecord::Base
     end
     return answers
   end
-  
+
   def has_resource?
     self.resources.size > 0
   end
@@ -102,9 +102,5 @@ class Question < ActiveRecord::Base
         Answer.create!(:question_id => id, :content => choice[:content], :position => choice[:position], :is_correct => choice[:is_correct])
       end
     end
-  end
-  
-  def formatted_content
-    TextFormatter.formatted_content(text_format,content)
   end
 end

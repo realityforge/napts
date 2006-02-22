@@ -12,18 +12,13 @@ class TextFormatter
     "Plain" => PlainFormat
   }.freeze
 
-  def self.formatted_content(format,content)
-    if format == RedClothFormat
-      RedCloth.new( content ).to_html
-    elsif format == BlueClothFormat
-      BlueCloth::new( content ).to_html
-    elsif format == RubyPantsFormat
-      RubyPants.new( content ).to_html
-    elsif format == PlainFormat
-      content
-    else
-      raise 'Unknown format'
+  def self.format_content(format,content)
+    case format
+    when RedClothFormat  then RedCloth.new( content ).to_html
+    when BlueClothFormat then BlueCloth::new( content ).to_html
+    when RubyPantsFormat then RubyPants.new( content ).to_html
+    when PlainFormat     then content
+    else                      raise 'Unknown format'
     end
   end
-
 end
