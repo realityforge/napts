@@ -2,7 +2,7 @@
   <tr>
     <td class="firstcolumn"></td>
     <td class="stats">
-      <% if #{object_pages.item_count} == 0 %>
+      <% if object_pages.item_count == 0 %>
         <%= "#{name} 0 to 0 of 0" %>
       <% else %>
         <%= "#{name} #{object_pages.current.first_item} to #{object_pages.current.last_item} of #{object_pages.item_count}" %>
