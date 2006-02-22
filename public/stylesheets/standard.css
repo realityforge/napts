@@ -328,9 +328,29 @@ table.xlist th
   vertical-align: top;
 }
 
+#teachers_quiz_item__list #order-column, #question-column
+{
+  width: 80px;
+}
+
+#teachers_quiz_item__list #on_test-column, #teachers_quiz__list_questions #question_type-column
+{
+  width: 120px;
+}
+
+#teachers_quiz__list_questions #question-column
+{
+  width: 80px;
+}
+
+#admins_user__list #admin-column
+{
+  width: 80px;
+}
+
 #operations-column
 {
-  width: 200px;
+  width: 215px;
 }
 
 #teachers_quiz_item__list #operations-column

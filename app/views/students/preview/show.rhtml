@@ -1,8 +1,13 @@
 <% @page_title = "#{h(@quiz.subject.name)}: '#{h(@quiz.name)}'" %>
-<h2><%= @page_title %></h2>
-<ul>
-<% for quiz_item in @quiz.quiz_items %>
-  <li><%= link_to( "Q#{quiz_item.position}", :action => 'show_question', :id => @quiz.id, :position => 1 ) %></li>
-<% end %>
-</ul>
-<%= link_to( 'Return to Preview List', :action => 'list', :subject_id => @quiz.subject_id ) %>
+<div class="dataset">
+  <h2>Preview</h2>
+  <table width="100%" cellpadding="3" cellspacing="0">
+    <tr>
+      <td><ul>
+      <% for quiz_item in @quiz.quiz_items %>
+        <li><%= link_to( "Q#{quiz_item.position}", :action => 'show_question', :id => @quiz.id, :position => 1 ) %></li>
+      <% end %>
+    </ul></td></tr>
+  </table>
+  <%= link_to_button( 'Return to Preview List', :action => 'list', :subject_id => @quiz.subject_id ) %>
+</div>

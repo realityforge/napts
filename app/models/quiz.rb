@@ -39,6 +39,6 @@ class Quiz < ActiveRecord::Base
   end
 
   def validate
-    errors.add( :duration, "should be positive" ) unless duration > 0
+    errors.add( :duration, "should be positive" ) unless duration.nil? || duration > 0
   end
 end

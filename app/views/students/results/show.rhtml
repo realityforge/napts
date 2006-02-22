@@ -4,15 +4,21 @@
   incorrect_answers = @quiz_attempt.incorrect_answers
   correct = numqns - incorrect_answers.length
 %>
-
-<p>You got <%= correct %> out of <%= numqns %> questions correct.</p>
-<% if not incorrect_answers.empty? %>
-  <p>These questions were answered incorrectly: </p>
-  <% for q_id in incorrect_answers %>
-    <% if @quiz_attempt.quiz.publish_results %>
-      <p><%= link_to( q_id, :action => 'show_question', :id => @quiz_attempt.id, :position => q_id ) %></p>
-    <% else %>
-      <p><%= q_id %></p>
+<div class="dataset">
+  <h2>Results</h2>
+  <table width="100%" cellpadding="3" cellspacing="0">
+    <tr><td>You got <%= correct %> out of <%= numqns %> questions correct.</td></tr>
+    <% if not incorrect_answers.empty? %>
+      <tr><td>These questions were answered incorrectly: </td></tr>
+      <tr><td><ul>
+        <% for q_id in incorrect_answers %>
+          <% if @quiz_attempt.quiz.publish_results %>
+            <li><%= link_to( q_id, :action => 'show_question', :id => @quiz_attempt.id, :position => q_id ) %></li>
+          <% else %>
+            <li><%= q_id %></li>
+          <% end %>
+        <% end %>
+      </ul></td></tr>
     <% end %>
-  <% end %>
-<% end %>
+  </table>
+</div>
