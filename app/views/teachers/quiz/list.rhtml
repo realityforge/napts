@@ -35,8 +35,8 @@
   <tbody>
   <% for quiz in @quizzes %>
     <tr class="<%= cycle("even", "odd") %>">
-      <td><%= h(quiz.name) %></td>
-      <td><span title="<%= h(quiz.description) %>"><%= h(truncate(quiz.description,40)) %></span></td>
+      <td><%= truncate(h(quiz.name), 10) %></td>
+      <td><span title="<%= h(quiz.description) %>"><%= h(truncate(quiz.description,35)) %></span></td>
       <td><%= quiz.duration %></td>
       <td><%= quiz.preview_enabled %></td>
       <td><%= quiz.publish_results %></td>

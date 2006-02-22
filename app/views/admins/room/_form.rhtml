@@ -5,11 +5,11 @@
 <table width="100%" cellpadding="3" cellspacing="0">
 <tr>
   <th><label for="room_name">Name</label></th>
-  <td><%= text_field( 'room', 'name' ) %></td>
+  <td><%= text_field( 'room', 'name', :class => 'textfield' ) %></td>
 </tr>
 <tr>
   <th><label for="room_addresses">IP Addresses</label></th>
-  <td><%= text_area("room", "addresses", "cols" => 40, "rows" => 20) %></td>
+  <td><%= text_area("room", "addresses", :class => 'address_area') %></td>
 </tr>
 </table>
     <button type="submit"><%= @form_action_desc %></button>

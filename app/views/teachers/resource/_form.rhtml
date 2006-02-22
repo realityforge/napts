@@ -5,7 +5,7 @@
 <table width="100%" cellpadding="3" cellspacing="0">
 <tr>
   <th><label for="resource_description">Description</label></th>
-  <td><%= text_field( 'resource', 'description' ) %></td>
+  <td><%= text_area( 'resource', 'description', :class => 'resource_description' ) %></td>
 </tr>
 <% if @action_name == 'new' %>
 <tr>

@@ -118,8 +118,26 @@ div.dataset li.answer_false
 
 div.dataset input.textfield
 {
-  width: 100%;
+  width: 250px;
   __background-color: pink;
+}
+
+div.dataset textarea.area_description
+{
+  width: 250px;
+  height: 100px;
+}
+
+div.dataset textarea.resource_description
+{
+  width: 275px;
+  height: 100px;
+}
+
+div.dataset textarea.address_area
+{
+  width: 250px;
+  height: 200px;
 }
 
 table.xlist ul
