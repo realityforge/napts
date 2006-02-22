@@ -1,40 +1,42 @@
 <% @page_title = "Sign in to NAPTS" %>
-<fieldset>
-  <legend>Login</legend>
 <%= form_tag({:action => "login"}, {:id => "login_form"}) %>
-  <div>
-  <label for="username">Name</label>
-  <input id="username" name="username" size="20" type="text"/>
-  <br/>
-
-  <label for="password">Password</label>
-  <input id="password" name="password" size="20" type="password"/>
-  <br/>
-
-  <label for="role">Role</label>
-  <select id="role" name="type" onchange="onSelectRole();">
-    <option value="Student">Student</option>
-    <option value="Demonstrator">Demonstrator</option>
-    <option value="Teacher">Teacher</option>
-    <option value="Administrator">Administrator</option>
-  </select>
-  <br/>
-
-  <label for="subject_id">Subject</label>
-  <select id="subject_id" name="subject_id" disabled="disabled">
-    <%= options_from_collection_for_select(@subjects, :id, :name) %>
-  </select>
-  <br/>
+<div class="dataset">
+  <h2>Login</h2>
+  <table width="100%" cellpadding="3" cellspacing="0">
+    <tr>
+      <th><label for="username">Name</label></th>
+      <td><input id="username" name="username" size="20" type="text" class="login"/></td>
+    </tr>
+    <tr>
+      <th><label for="password">Password</label></th>
+      <td><input id="password" name="password" size="20" type="password" class="login"/></td>
+    </tr>
+    <tr>
+      <th><label for="role">Role</label></th>
+      <td><select id="role" name="type" class="login" onchange="onSelectRole();">
+          <option value="Student">Student</option>
+          <option value="Demonstrator">Demonstrator</option>
+          <option value="Teacher">Teacher</option>
+          <option value="Administrator">Administrator</option>
+          </select>
+      </td>
+    </tr>
+    <tr>
+      <th><label for="subject_id">Subject</label></th>
+      <td><select id="subject_id" name="subject_id" class="login" disabled="disabled">
+          <%= options_from_collection_for_select(@subjects, :id, :name) %>
+          </select>
+      </td>
+    </tr>
+  </table>
   <script type="text/javascript"><!-- onSelectRole(); --></script>
 
   <button type="submit">Login</button>
   </div>
 <%= end_form_tag %>
-</fieldset>
+
 <% content_for :head do %>
   <style type="text/css">
-  label {width: 90px; display: block; float: left; clear: both;}
-  input, select {width: 190px; display: block; float: left;}
   button {display: block; clear: both;}
   </style>
   <script type="text/javascript">
