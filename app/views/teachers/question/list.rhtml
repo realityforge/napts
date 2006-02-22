@@ -6,7 +6,7 @@
         <%= link_to( 'New question', :action => 'new' ) %>
       </td>
       <td class="search">
-        <%= start_form_tag(:action => 'list') %>
+        <%= start_form_tag({:action => 'list'}, {:method => :get}) %>
           <p><input type="text" name="q" value="<% params[:q] %>"/>
           <button type="submit">Search</button></p>
         <%= end_form_tag %>

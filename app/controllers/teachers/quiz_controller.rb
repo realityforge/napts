@@ -9,7 +9,7 @@ class Teachers::QuizController < Teachers::BaseController
       conditions = ['subject_id = ?', current_subject.id]
     end
     @quiz_pages, @quizzes = paginate(:quizzes,
-                                     :conditions => ['subject_id = ?', current_subject.id],
+                                     :conditions => conditions,
                                      :per_page => 10 )
   end
 
