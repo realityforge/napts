@@ -1,7 +1,7 @@
 #multiple choice
 q1:
   id: 1
-  content: "h1. Redcloth question\n\nIs **chocolate** \"good\":http://dictionary.reference.com/search?q=good?"
+  content: "h1. Redcloth question\n\nIs **chocolate** \"good\":http://dictionary.reference.com/search?q=good?\n\n!$$resource:greenofb.jpg$$!"
   question_type: 1
   subject_group_id: 1
   corrected_at: '2005-3-14 00:00:00'
