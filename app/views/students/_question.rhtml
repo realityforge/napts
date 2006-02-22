@@ -4,7 +4,11 @@
   <h2><%= @form_title %></h2>
   <% if @form_action_desc == 'QuizAttempt' %>
     <div class="time">
-      <%= distance_of_time_in_words(Time.now,@quiz_attempt.created_at + (@quiz_attempt.quiz.duration * 60)) %> remaining
+      <% 
+         time = (@quiz_attempt.quiz.duration * 60) - (Time.now - @quiz_attempt.created_at).to_i
+         seconds = time%60
+      %>
+      <%= time/60 %>:<%= "#{(seconds<10)?'0':''}#{seconds}" %> remaining
     </div>
   <% end %>
   <div class="dataset_question">
