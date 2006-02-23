@@ -5,7 +5,7 @@
     <tr>
       <td><ul>
       <% for quiz_item in @quiz.quiz_items %>
-        <li><%= link_to( "Q#{quiz_item.position}", :action => 'show_question', :id => @quiz.id, :position => 1 ) %></li>
+        <li><%= link_to( "Q#{quiz_item.position}", :action => 'show_question', :id => @quiz.id, :position => quiz_item.position ) %></li>
       <% end %>
     </ul></td></tr>
   </table>
