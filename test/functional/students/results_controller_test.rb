@@ -15,7 +15,7 @@ class Students::ResultsControllerTest < Test::Unit::TestCase
 
   def test_list
     get(:list,
-        {:id => subjects(:subject_1).id},
+        {:subject_id => subjects(:subject_1).id},
         {:user_id => users(:mr_fancy_pants_user).id, :role => :student} )
     assert_response(:success)
     assert_template('list')

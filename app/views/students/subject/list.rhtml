@@ -26,7 +26,7 @@
           <td><%= h(subject.name) %></td>
           <td>
           <%= link_to( 'Previews', :controller => 'preview', :action => 'list', :subject_id => subject ) %> |
-          <%= link_to( 'Results', :controller => 'results', :action => 'list', :id => subject ) %>
+          <%= link_to( 'Results', :controller => 'results', :action => 'list', :subject_id => subject ) %>
           </td>
         </tr>
       <% end %>

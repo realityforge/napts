@@ -4,7 +4,7 @@ class Students::ResultsController < Students::BaseController
   end
 
   def list
-    @subject = Subject.find(params[:id])
+    @subject = Subject.find(params[:subject_id])
     @quiz_attempts = QuizAttempt.find(:all,
                                       :select => 'quiz_attempts.*',
                                       :joins => 'LEFT OUTER JOIN quizzes ON quizzes.id = quiz_attempts.quiz_id',
