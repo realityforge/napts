@@ -7,6 +7,6 @@ class TextFormatterTest < Test::Unit::TestCase
     assert_equal('<p><strong>blue</strong></p>', TextFormatter.format_content(TextFormatter::BlueClothFormat, '**blue**'))
     assert_equal('&#8220;pants&#8221;', TextFormatter.format_content(TextFormatter::RubyPantsFormat, '"pants"'))
     assert_equal( 'bob', TextFormatter.format_content(TextFormatter::PlainFormat, 'bob'))
-    assert_raise( RuntimeError ) {  TextFormat.format_content('NeridaSmellsFunny', 'bob') }
+    assert_raise( RuntimeError ) {  TextFormatter.format_content('NeridaSmellsFunny', 'bob') }
   end
 end
