@@ -1,17 +1,13 @@
 <% @page_title = "#{@quiz_attempt.quiz.subject.name}: '#{@quiz_attempt.quiz.name}' Results" %>
-<%
-  numqns = @quiz_attempt.quiz_responses.length
-  incorrect_answers = @quiz_attempt.incorrect_answers
-  correct = numqns - incorrect_answers.length
-%>
 <div class="dataset">
   <h2>Results</h2>
   <table width="100%" cellpadding="3" cellspacing="0">
-    <tr><td>You got <%= correct %> out of <%= numqns %> questions correct.</td></tr>
-    <% if not incorrect_answers.empty? %>
+    <tr><td>You got <%= @quiz_attempt.calculate_score %> out of <%= @quiz_attempt.quiz_responses.length %> questions correct.</td></tr>
+      <% incorrect_answers = @quiz_attempt.incorrect_answers %>
+      <% if not incorrect_answers.empty? %>
       <tr><td>These questions were answered incorrectly: </td></tr>
       <tr><td><ul>
-        <% for q_id in incorrect_answers %>
+        <% for q_id in @quiz_attempt.incorrect_answers %>
           <% if @quiz_attempt.quiz.publish_results %>
             <li><%= link_to( q_id, :action => 'show_question', :id => @quiz_attempt.id, :position => q_id ) %></li>
           <% else %>

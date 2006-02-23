@@ -43,7 +43,18 @@ class Teachers::QuestionController < Teachers::BaseController
   def edit
     @question = find_question(params[:id])
     if request.post?
-      @question.corrected_at = Time.now if params[:correct] 
+      if params[:correct]
+        @question.corrected_at = Time.now
+	@quiz_attempts = QuizAttempt.find( :all,
+	                                   :select => 'quiz_attempts.*',
+	                                   :conditions =>  ['quiz_responses.question_id = ? AND quiz_attempts.end_time IS NOT NULL', @question.id],
+	                                   :joins => 'LEFT JOIN quiz_responses ON quiz_responses.quiz_attempt_id = quiz_attempts.id',
+					   :readonly => false)
+
+	for quiz_attempt in @quiz_attempts
+	  quiz_attempt.update_attributes(:score => nil)
+	end
+      end
       @question.attributes = params[:question]
       @question.choices = params[:choice]
       if @question.save
