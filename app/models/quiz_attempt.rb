@@ -5,6 +5,7 @@ class QuizAttempt < ActiveRecord::Base
   validates_presence_of( :created_at )
   validates_presence_of( :quiz_id )
   validates_presence_of( :user_id )
+  validates_presence_of( :computer )
 
   def after_create
     quiz_items = self.quiz.quiz_items.find( :all, :conditions => ['preview_only = ?', false] )

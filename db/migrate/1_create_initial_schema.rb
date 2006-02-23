@@ -70,6 +70,7 @@ class CreateInitialSchema < ActiveRecord::Migration
       t.column 'score', :integer
       t.column 'quiz_id', :integer, :null => false
       t.column 'user_id', :integer, :null => false
+      t.column 'computer', :text, :limit => 16, :null => false
     end
     add_index('quiz_attempts', ['id', 'quiz_id'], :name => 'quiz_attempts_id_quiz_id_index', :unique => true)
     add_foreign_key_constraint('quiz_attempts', 'quiz_id', 'quizzes', 'id', :name => 'quiz_attempts_quiz_id_fk')

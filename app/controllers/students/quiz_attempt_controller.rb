@@ -25,7 +25,7 @@ class Students::QuizAttemptController < Students::BaseController
       flash[:alert] = 'User already completed Quiz.'
       redirect_to(:action => 'list')
     else
-      @quiz_attempt = @quiz.quiz_attempt_for_user(current_user.id)
+      @quiz_attempt = @quiz.quiz_attempt_for_user(current_user.id, request.remote_ip)
       if @quiz_attempt.time_up?(Time.now)
         flash[:alert] = 'Sorry, your time is up.'
         @quiz_attempt.complete
