@@ -52,7 +52,8 @@ body
 }
 
 #flash.alert { color: red; }
-#flash.notice { color: green; }
+
+#flash { color: green; }
 
 ul.usermenu 
 { 
