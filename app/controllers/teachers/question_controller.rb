@@ -112,7 +112,8 @@ class Teachers::QuestionController < Teachers::BaseController
   def resource
     resource = Resource.find(:first,
                              :select => 'resources.*',
-                             :conditions => ['questions_resources.question_id = ? AND resources.name = ?', params[:id], params[:name] ],
+                             :conditions => ['questions_resources.question_id = ? AND resources.name = ? AND resources.subject_group_id = ?', 
+                               params[:id], params[:name], current_subject.subject_group_id ],
                              :joins => 'LEFT OUTER JOIN questions_resources ON resources.id = questions_resources.resource_id'
                              )
     raise ActiveRecord::RecordNotFound, "Couldn't find Resource named #{params[:name]} for question = #{params[:id]}" unless resource
