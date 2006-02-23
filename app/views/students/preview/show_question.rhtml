@@ -2,12 +2,34 @@
 <% @form_title = "Question #{@quiz_item.position}" %>
 <% @form_action_desc = 'Preview' %>
 <%= render( :partial => '/question', :locals => { :question => @quiz_item.question, :extra_params => {} } ) %>
-<br/>
-<%= link_to_button("Previous", :action => 'show_question',
-                                          :position => @quiz_item.higher_item.position,
-					  :id => @quiz_item.quiz_id ) if @quiz_item.higher_item %>
-<%= link_to_button("Next", :action => 'show_question', 
-                                    :position => @quiz_item.lower_item.position,
-				    :id => @quiz_item.quiz_id ) if @quiz_item.lower_item %>
-<%= link_to_button("Exit Preview", :action => 'show', :id => @quiz_item.quiz_id) %>
+
+<table class="options">
+  <tr>
+    <td class="firstcolumn"></td>
+    <td class="stats">
+      <%= "Question #{@quiz_item.position} of #{@quiz.quiz_items.size}" %>
+    <td>
+    <td>
+      <% if @quiz_item.higher_item %>
+        <%= link_to( 'First', {:action => 'show_question', :position => 1, :id => @quiz_item.quiz_id},
+	                      {:class => 'arrows first-arrow'} ) %>
+	<%= link_to( 'Prev', {:action => 'show_question', :position => @quiz_item.higher_item.position, :id => @quiz_item.quiz_id},
+	                     {:class => 'arrows previous-arrow'} ) %>
+      <% else %>
+        <span class="arrows first-arrow-greyed">First</span>
+        <span class="arrows previous-arrow-greyed">Prev</span>
+      <% end %>
+      <% if @quiz_item.lower_item %>
+        <%= link_to( 'Next', {:action => 'show_question', :position => @quiz_item.lower_item.position, :id => @quiz_item.quiz_id},
+	                     {:class => 'arrows next-arrow'} ) %>
+	<%= link_to( 'Last', {:action => 'show_question', :position => @quiz.quiz_items.size, :id => @quiz_item.quiz_id},
+	                     {:class => 'arrows last-arrow'} ) %>
+     <% else %>
+       <span class="arrows next-arrow-greyed">Next</span>
+       <span class="arrows last-arrow-greyed">Last</span>
+     <% end %>
+   </td>
+   <td class="lastcolumn"></td>
+  </tr>
+</table>
 

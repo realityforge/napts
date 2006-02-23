@@ -16,14 +16,10 @@
   </div>
 <% if question.question_type == Question::MultiOptionType %>
   <% button_type = "checkbox" %>
-  <% message = "Please select all correct answers" %>
 <% elsif question.question_type == Question::SingleOptionType %>
   <% button_type = "radio" %>
-  <% message = "Please select the one correct answer" %>
-<% else %>
-  <% message = "Please enter the correct answer" %>
 <% end %>
-<p><%= message %></p>
+<br/>
 <% if question.question_type == Question::MultiOptionType or question.question_type == Question::SingleOptionType %>
   <table class="answers">
     <% for answer in question.get_answers %>
