@@ -27,9 +27,8 @@ class Teachers::ResourceControllerTest < Test::Unit::TestCase
     assert_valid_markup
     assert_not_nil(assigns(:resource_pages))
     assert_not_nil(assigns(:resources))
-    assert_equal(2,assigns(:resources).length)
+    assert_equal(1,assigns(:resources).length)
     assert_equal(resources(:resource_2).id,assigns(:resources)[0].id)
-    assert_equal(resources(:resource_4).id,assigns(:resources)[1].id)
     assert_nil(flash[:alert])
     assert_nil(flash[:notice])
   end

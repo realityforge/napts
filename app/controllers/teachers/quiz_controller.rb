@@ -67,7 +67,7 @@ class Teachers::QuizController < Teachers::BaseController
   def add_item
     quiz = current_subject.quizzes.find(params[:id])
     question = Question.find(params[:question_id], :conditions => ['subject_group_id = ?', current_subject.subject_group_id])
-    quiz_item = quiz.quiz_items.create!(:question_id => question.id, :preview_only => true )
+    quiz_item = quiz.quiz_items.create!(:question_id => question.id, :preview_only => false )
     redirect_to(:action => 'list_questions', :id => quiz, :q => params[:q], :page => params[:page])
   end
   

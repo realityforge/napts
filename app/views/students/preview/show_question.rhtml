@@ -8,7 +8,7 @@
     <td class="firstcolumn"></td>
     <td class="stats">
       <%= "Question #{@quiz_item.position} of #{@quiz.quiz_items.size}" %>
-    <td>
+    </td>
     <td>
       <% if @quiz_item.higher_item %>
         <%= link_to( 'First', {:action => 'show_question', :position => 1, :id => @quiz_item.quiz_id},
