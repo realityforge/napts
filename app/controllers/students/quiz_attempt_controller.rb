@@ -37,30 +37,24 @@ class Students::QuizAttemptController < Students::BaseController
           @resource_base = {:action => 'resource', :id => params[:id], :position => @quiz_response.position}
 	end
         if request.post?
-          ## TODO: Fix up next section...
-	  if @quiz_response.question.question_type == Question::MultiOptionType
+          type = @quiz_response.question.question_type
+
+          if type == Question::SingleOptionType && params[:answers].nil?
+            flash[:alert] = 'Must select an answer'
+            redirect_to( :action => 'show_question', :id => @quiz )
+            return
+          elsif type == Question::NumberType && ! (params[:quiz_response][:input] =~ /^\d+$/)
+            flash[:alert] = 'Must enter a number'
+            redirect_to( :action => 'show_question', :id => @quiz )
+            return
+          end
+
+	  if type == Question::MultiOptionType || type == Question::SingleOptionType
             for answer in params[:answers]
               @quiz_response.answers << Answer.find(answer)
             end if params[:answers]
-	  elsif @quiz_response.question.question_type == Question::SingleOptionType
-	    if params[:answers].nil?
-	      flash[:alert] = 'Must select an answer'
-	      redirect_to( :action => 'show_question', :id => @quiz )
-	      return
-	    else
-	      @quiz_response.answers << Answer.find(params[:answers])
-	    end
 	  elsif @quiz_response.question.question_type == Question::NumberType
-	    number = params[:quiz_response][:input]
-	    if  Regexp.new(/^\d+$/) =~ number 
 	      @quiz_response.update_attributes( :input => params[:quiz_response][:input] )
-            else
-	      flash[:alert] = 'Must enter a number'
-	      redirect_to( :action => 'show_question', :id => @quiz )
-	      return
-	    end
-	  else
-	    @quiz_response.update_attributes( :input => params[:quiz_response][:input] )
 	  end
   	  @quiz_response.update_attributes(:completed => true)
           redirect_to(:action => 'show_question', :id => @quiz.id)
@@ -72,7 +66,6 @@ class Students::QuizAttemptController < Students::BaseController
       end
     end    
   end
-
 
   def resource
     resource = Resource.find(:first,
