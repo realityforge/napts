@@ -103,6 +103,11 @@ class Teachers::QuestionController < Teachers::BaseController
     end
     redirect_to(:action => 'list', :q => params[:q], :page => params[:page])
   end
+  
+  def show_question
+    @question = Question.find(params[:id])
+    @resource_base = {}
+  end
 
 private
   def find_question(question_id)

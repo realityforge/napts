@@ -1,0 +1,6 @@
+<% @page_title = "#{current_subject.name}: Preview Question" %>
+<% @form_title = "Question #{@question.id}" %>
+<% @form_action_desc = 'Preview' %>
+<%= render( :partial => '/question', :locals => {:question => @question, :extra_params => {}} ) %>
+<br/>
+<%= link_to_button( 'Return to Question', :action => 'show', :id => @question ) %>
