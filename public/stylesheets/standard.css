@@ -1,3 +1,8 @@
+div.dataset_answer.answer_is_true
+{
+  background-color: #CCC;
+}
+
 div.dataset
 {
   margin: 5px 5px 5px 5px;
@@ -362,3 +367,5 @@ table.xlist th
 {
   width: 300px;
 }
+
+

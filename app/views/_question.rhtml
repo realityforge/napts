@@ -27,11 +27,11 @@
         <td class="cb">
           <input type="<%= button_type %>" name="answers[]" value="<%= answer.id %>" />
         </td>
-        <td class="answer"><div class="dataset_answer"><%= format_content(answer.question.text_format,answer.content,@resource_base) %></div></td>
+        <td class="answer"><div class="dataset_answer answer_is_<%= answer.is_correct? if controller.controller_name == 'results' %>"><%= format_content(answer.question.text_format,answer.content,@resource_base) %></div></td>
       </tr>
     <% end %>
   </table>
 <% else %>
-  <p><%= text_field( 'quiz_response', 'input' ) %></p>
+  <p><%= text_field('quiz_response', 'input') %></p>
 <% end %>
 </div>
