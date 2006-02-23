@@ -105,8 +105,22 @@ class Teachers::QuestionController < Teachers::BaseController
   end
   
   def show_question
-    @question = Question.find(params[:id])
-    @resource_base = {}
+    @question = find_question(params[:id])
+    @resource_base = {:action => 'resource', :id => params[:id], :position => params[:position]}
+  end
+
+  def resource
+    resource = Resource.find(:first,
+                             :select => 'resources.*',
+                             :conditions => ['questions_resources.question_id = ? AND resources.name = ?', params[:id], params[:name] ],
+                             :joins => 'LEFT OUTER JOIN questions_resources ON resources.id = questions_resources.resource_id'
+                             )
+    raise ActiveRecord::RecordNotFound, "Couldn't find Resource named #{params[:name]} for question = #{params[:id]}" unless resource
+    disposition = (params[:disposition] == 'download') ? 'download' : 'inline'
+    send_data(resource.resource_data.data, 
+              :filename => resource.name,
+	      :type => resource.content_type,
+	      :disposition => disposition )
   end
 
 private
