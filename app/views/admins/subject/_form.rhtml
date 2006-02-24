@@ -5,12 +5,12 @@
 <table width="100%" cellpadding="3" cellspacing="0">
 <% if @action_name == 'new' %>
 <tr>
-  <th><label for="subject_subject_group_id">Subject Group</label></th>
+  <th><label for="subject_subject_group_id">Group</label></th>
   <td><%= collection_select('subject', 'subject_group_id', @groups, :id, :name) %></td>
 </tr>
 <% end %>
 <tr>
-  <th><label for="subject_name">Subject Name</label></th>
+  <th><label for="subject_name">Name</label></th>
   <td><%= text_field( 'subject', 'name', :class => 'textfield' ) %></td>
 </tr>
 </table>

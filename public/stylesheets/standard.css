@@ -428,6 +428,12 @@ table.xlist th
   vertical-align: top;
 }
 
+table.xlist li
+{
+  list-style-type: disc;
+  list-style-position: inside;
+}
+
 #teachers_quiz_item__list #order-column, #question-column
 {
   width: 80px;
