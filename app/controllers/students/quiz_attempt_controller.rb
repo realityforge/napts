@@ -18,24 +18,19 @@ class Students::QuizAttemptController < Students::BaseController
 
   def show_question
     @quiz = Quiz.find(params[:id])
-    logger.warn "show_question(#{@quiz.id})"
     if ! @quiz.address_active?(request.remote_ip)
       flash[:alert] = 'Quiz not active for this Computer.'
       redirect_to(:action => 'list')
     elsif @quiz.user_completed?(current_user.id)
-      logger.warn "--- completed!"
       flash[:alert] = 'User already completed Quiz.'
       redirect_to(:action => 'list')
     else
-      logger.warn "--- in progress"
       @quiz_attempt = @quiz.quiz_attempt_for_user(current_user.id, request.remote_ip)
       if @quiz_attempt.time_up?(Time.now)
-        logger.warn "--- time up"
         flash[:alert] = 'Sorry, your time is up.'
         @quiz_attempt.complete
       else
         @quiz_response = @quiz_attempt.next_response
-	logger.warn "--- response #{@quiz_response}"
         if @quiz_response.nil?
           @quiz_attempt.complete
         else
@@ -44,7 +39,6 @@ class Students::QuizAttemptController < Students::BaseController
 	
         if request.post?
           type = @quiz_response.question.question_type
-          logger.warn "--- request.post? type #{type}"
           if type == Question::SingleOptionType && params[:answers].nil?
             flash[:alert] = 'Must select an answer'
             redirect_to( :action => 'show_question', :id => @quiz )
@@ -57,11 +51,9 @@ class Students::QuizAttemptController < Students::BaseController
 
 	  if type == Question::MultiOptionType || type == Question::SingleOptionType
             for answer in params[:answers]
-	      logger.warn "--- loop"
               @quiz_response.answers << Answer.find(answer)
             end if params[:answers]
 	  elsif @quiz_response.question.question_type == Question::NumberType
-	    logger.warn "--- skip"
             @quiz_response.update_attributes( :input => params[:quiz_response][:input] )
 	  end
   	  @quiz_response.update_attributes(:completed => true)
@@ -69,7 +61,6 @@ class Students::QuizAttemptController < Students::BaseController
           return
         end
       end
-      logger.warn "--- @quiz_attempt.completed? = #{@quiz_attempt.completed?}"
       if @quiz_attempt.completed?
         redirect_to(:controller => 'results', :action => 'show', :id => @quiz_attempt.id)
       end
