@@ -27,7 +27,7 @@
         <td class="cb">
           <input type="<%= button_type %>" name="answers[]" value="<%= answer.id %>" />
         </td>
-        <td class="answer"><div class="dataset_answer"><%= format_content(answer.question.text_format,answer.content,@resource_base) %></div></td>
+        <td class="answer"><div class="dataset_answer"><%= format_content(question.text_format,answer.content,@resource_base) %></div></td>
       </tr>
     <% end %>
   </table>

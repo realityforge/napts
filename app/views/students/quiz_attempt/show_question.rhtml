@@ -3,7 +3,9 @@
 <% @form_action_desc = 'QuizAttempt' %>
 <div>
 <%= start_form_tag( :action => 'show_question', :id => @quiz ) %>
+  <%= logger.warn "--- pre partial" %>
   <%= render( :partial => '/question', :locals => { :question => @quiz_response.question, :extra_params => {:id => @quiz} } ) %>
+  <%= logger.warn "--- post partial" %>
   <p><button type="submit">Submit</button></p>
 <%= end_form_tag %>
 </div>
