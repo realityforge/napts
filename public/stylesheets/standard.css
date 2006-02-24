@@ -1,3 +1,102 @@
+.details
+{
+  margin: 0px 0px 10px 0px;
+  padding: 0px 5px 0px 5px;
+}
+
+a, a:visited
+{
+  color: black;
+}
+
+div.question_options, div.answer_options
+{
+  float: right;
+  width: 25%;
+  margin: 0px 0px 0px 0px;
+}
+
+div.question_content, div.answer_content
+{
+  width: 100%;
+}
+
+div.question_display
+{
+  clear: both;
+  border: 5px double black;
+  width: 100%;
+  margin: 0px 0px 0px 0px;
+  min-height: 160px;
+  padding: 2px;
+}
+
+td.question_cont
+{
+  width: 100%;
+  min-height: 160px;
+}
+
+div.answer_display
+{
+  clear: both;
+  border: 1px solid black;
+  width: 100%;
+  margin: 0px 0px 0px 0px;
+  padding: 2px;
+}
+
+a { color: #000; }
+a:visited { color: #666; }
+a:hover { color: #fff; background-color:#000; }
+
+.fieldWithErrors
+{
+  padding: 2px;
+  background-color: red;
+  display: inline;
+}
+
+.move_arrow
+{
+  border: 0;
+  width: 11px;
+  height: 14px;
+}
+
+#ErrorExplanation
+{
+  width: 400px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+
+#ErrorExplanation h2
+{
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+  background-color: #c00;
+  color: #fff;
+}
+
+#ErrorExplanation p 
+{
+  color: #333;
+  margin-bottom: 0;
+  padding: 5px;
+}
+
+#ErrorExplanation ul li
+{
+  font-size: 12px;
+  list-style: square;
+}
 div.dataset
 {
   margin: 5px 5px 5px 5px;
@@ -119,7 +218,6 @@ div.dataset input.textfield, input.login
   width: 250px;
 }
 
-
 div.dataset textarea.area_description
 {
   width: 250px;
@@ -153,10 +251,6 @@ table.xlist ul
   width: 100%;
   margin: 0;
   padding: 0;
-}
-
-#list_view table.header td.action
-{
 }
 
 #list_view table.header td.search p
@@ -222,7 +316,6 @@ table.options td.stats
   width: 250px;
 }
 
-
 table.options .arrows:hover { color: #666; background-color: white;}
 
 
@@ -283,7 +376,8 @@ table.options .arrows:hover { color: #666; background-color: white;}
 }
 
 #list_view table.change_page .arrows:hover { color: #666; background-color: white;}
-
+#list_view table.header td.action a:visited { color: black;}
+#list_view table.header td.action a:hover { color: white; background-color: black; }
 
 table.xlist
 {
@@ -310,6 +404,17 @@ table.xlist tr.even
 table.xlist tr.odd
 {
   background-color: #FFFFED;
+}
+
+table.xlist a, table.xlist a:visited
+{
+  color: black;
+}
+
+table.xlist a:hover
+{
+  color: white;
+  background-color: black;
 }
 
 table.xlist th

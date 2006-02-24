@@ -70,7 +70,8 @@ ul.usermenu li
   display: inline;
   margin: 0px 4px 0px 2px;
 }
-ul.usermenu li a {color: white;}
+
+ul.usermenu li a, ul.usermenu li a:visited {color: white;}
 
 ul.menu
 {
@@ -95,7 +96,7 @@ ul.menu li
   list-style: none;
 }
 
-ul.menu li a
+ul.menu li a, ul.menu li a:visited
 {
   float: left;
   display: block;
@@ -106,42 +107,6 @@ ul.menu li a
   padding: 0.2em 0.6em;
   border-right:1px solid white;
 }
-ul.menu li a.selected:first-letter {text-decoration: underline;}
-ul.menu li a.selected {color: white; background-color: #036;}
-ul.menu li a:first-letter {text-decoration: underline;}
+
+ul.menu li a.selected, ul.menu li a.selected:visited {color: white; background-color: #036;}
 ul.menu li a:hover {color: white; background-color: #46525E;}
-
-#menu, #menu input, #menu select, #menu button
-{
-  font-size: x-small; 
-}
-
-.details
-{
-  margin: 0px 0px 10px 0px;
-  padding: 0px 5px 0px 5px;
-}
-
-
-
-#menu h2
-{
-  font-size: small; 
-  display: block; 
-  width: 100%;
-  font-weight: bold;
-  padding: 0px 0px 0px 0px;
-  margin: 0px 0px 4px 0px;
-  background-color: #EEE;
-  border-bottom: 1px solid black;
-}
-
-#menu h3
-{
-  font-size: x-small; 
-  display: block; 
-  width: 100%;
-  font-weight: bold;
-  padding: 0px 0px 0px 0px;
-  margin: 0px 0px 0px 0px;
-}
