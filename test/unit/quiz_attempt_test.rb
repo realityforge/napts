@@ -7,7 +7,8 @@ class QuizAttemptTest < Test::Unit::TestCase
   def test_basic_create
     quiz_attempt = QuizAttempt.create( :created_at => Time.now,
                                        :quiz_id => quizzes(:quiz_1).id,
-                                       :user_id => users(:peter_user).id )
+                                       :user_id => users(:peter_user).id,
+				       :computer => '45.6.7.6')
     assert_equal(2, quiz_attempt.quiz_responses.count )
     assert_equal(1, quiz_attempt.quiz_responses[0].position )
     assert_equal(2, quiz_attempt.quiz_responses[1].position )
@@ -18,7 +19,8 @@ class QuizAttemptTest < Test::Unit::TestCase
   def test_next_response_and_completed?
     quiz_attempt = QuizAttempt.create( :created_at => Time.now,
                                        :quiz_id => quizzes(:quiz_1).id,
-                                       :user_id => users(:peter_user).id )
+                                       :user_id => users(:peter_user).id,
+				       :computer => '1.1.1.1')
     assert_equal(2, quiz_attempt.quiz_responses.count )
     assert_equal(1, quiz_attempt.quiz_responses[0].position )
     assert_equal(2, quiz_attempt.quiz_responses[1].position )

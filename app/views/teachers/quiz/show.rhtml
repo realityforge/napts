@@ -31,7 +31,7 @@
     <td><%= @quiz.randomise? %></td>
   </tr>
 </table>
-<%= link_to_button('Show Questions', :controller => 'quiz_item', :action => 'list', :quiz_id => @quiz ) %>
+<%= link_to_button('Show Questions', :controller => 'quiz_item', :action => 'list', :quiz_id => @quiz ) %>&nbsp;
 <%= link_to_button( 'Edit', :action => 'edit', :id => @quiz ) %>
 </div>
 

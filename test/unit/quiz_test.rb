@@ -18,9 +18,9 @@ class QuizTest < Test::Unit::TestCase
 
   def test_quiz_attempt_for_user
     quiz = Quiz.find( quizzes(:quiz_2).id )
-    assert_equal( quiz_attempts(:qa_2).id, quiz.quiz_attempt_for_user( users(:peter_user).id ).id )
-    assert_equal( 0, quiz.quiz_attempt_for_user( users(:admin_user).id ).quiz_responses[0].answers.length )
-    assert_equal( true, quiz.quiz_attempt_for_user( users(:admin_user).id ).quiz_responses[0].input.nil? )
+    assert_equal( quiz_attempts(:qa_2).id, quiz.quiz_attempt_for_user( users(:peter_user).id, '12.23.34.45' ).id )
+    assert_equal( 0, quiz.quiz_attempt_for_user( users(:admin_user).id, '12.23.34.45'  ).quiz_responses[0].answers.length )
+    assert_equal( true, quiz.quiz_attempt_for_user( users(:admin_user).id, '12.23.34.45' ).quiz_responses[0].input.nil? )
   end
   
   def test_completed_attempts
