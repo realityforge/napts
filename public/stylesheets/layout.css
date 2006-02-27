@@ -12,7 +12,7 @@ body
   min-width: 60em;
   background-color: #FFFFFF;
   border: 1px solid black;
-  margin: 10px 10px 10px 10px;
+  margin: 10px 10px 3px 10px;
   padding: 0px 0px 0px 0px;
 }
 
@@ -54,6 +54,15 @@ body
 #flash.alert { color: red; }
 
 #flash { color: green; }
+
+#footer
+{
+  margin: 0;
+  padding: 0;
+  float: bottom;
+  text-align: center;
+  font-size: x-small;
+}
 
 ul.usermenu 
 { 

@@ -88,9 +88,15 @@ private
   
   def authorize
     if session[:user_id]
-      @current_user = User.find(session[:user_id])
+      begin
+        @current_user = User.find(session[:user_id])
+      rescue
+        flash[:alert] = 'User account deleted.'
+        redirect_to(:controller => '/login', :action => 'login')
+        false
+      end
     else 
-      flash[:notice] = 'Please log in'
+      flash[:notice] = 'Please log in.'
       redirect_to(:controller => '/login', :action => 'login')
       false
     end
