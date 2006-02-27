@@ -63,7 +63,7 @@ class Students::QuizAttemptControllerTest < Test::Unit::TestCase
   end
 
   def test_show_question_when_last_question
-    quiz_attempt = quizzes(:quiz_1).quiz_attempt_for_user(users(:peter_user).id)
+    quiz_attempt = quizzes(:quiz_1).quiz_attempt_for_user(users(:peter_user).id, '131.172.40.1')
     quiz_attempt.next_response.update_attribute(:completed, true)
     quiz_attempt.next_response.update_attribute(:completed, true)
     assert_equal(true,quiz_attempt.next_response.nil?)
