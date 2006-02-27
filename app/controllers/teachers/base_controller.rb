@@ -19,6 +19,10 @@ protected
                                   {:controller => '/teachers/resource', :action => 'list'},
                                   {:title => 'Browse Resources'},
 				  {:selected => is_selected}).freeze
+    links << MenuHelper::Link.new('Demonstrators',
+                                  {:controller => '/teachers/user', :action => 'list'},
+                                  {:title => 'Browse Demonstrators'},
+				  {:selected => is_selected}).freeze
     links
   end
 

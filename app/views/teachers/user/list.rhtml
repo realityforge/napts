@@ -1,0 +1,28 @@
+<% @page_title = "Browse Demonstrators" %>
+<div id="lsit_view">
+  <table class="header">
+    <tr>
+      <td class="action">
+        <%= link_to( 'Add Demonstrators', :action => 'list_users' ) %>
+      </td>
+    </tr>
+  </table>
+  <table class="xlist">
+    <colgroup id="name-column"/>
+    <colgroup id="operations-column"/>
+    <thead>
+      <tr>
+        <th>Name</th>
+	<th>Operations</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for demonstrator in @demonstrators %>
+        <tr class="<%= cycle("even", "odd") %>">
+	  <td><%= demonstrator.name %></td>
+	  <td><%= link_to( 'Remove', :action => 'remove_demonstrator', :id => demonstrator.user_id ) %></td>
+	</tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
