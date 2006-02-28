@@ -13,7 +13,7 @@ require 'yaml'
 # Then you could access the config in the following manner. Note that it checks whether the proxy_config
 # method is defined first just in case you elided the section from config file
 #
-# if ApplicationConfig.respond_to?(:proxy_config)
+# if Module.constants.include?("ApplicationConfig") && ApplicationConfig.respond_to?(:proxy_config)
 #    return Net::HTTP::Proxy(ApplicationConfig.proxy_config['host'], ApplicationConfig.proxy_config['port'])
 # else
 #    return Net::HTTP
