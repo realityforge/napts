@@ -56,8 +56,14 @@ end
 require 'redcloth'
 require 'bluecloth'
 require 'rubypants'
+require 'ostruct'
+require 'yaml'
 
 # Include your application configuration below
+ConfigFile = "#{RAILS_ROOT}/config/config.yml"
+if File.exist?(ConfigFile)
+ ::ApplicationConfig = OpenStruct.new(YAML.load_file(ConfigFile))
+end
 
 OrderedTables = [ :users, :rooms, :computers, :subject_groups, :subjects, 
                   :quizzes, :questions, :quiz_items, :answers, :quiz_attempts, 
