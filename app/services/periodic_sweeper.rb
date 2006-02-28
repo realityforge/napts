@@ -17,11 +17,6 @@ class PeriodicSweeper
   end
   
   def self.remove_stale_sessions
-    # Max idle time for session in seconds
-    max_session_time = 60 * 20
-    
-    CGI::Session::ActiveRecordStore::Session.find(:all,
-                                                  :conditions => ['updated_on <?', (Time.now - max_session_time)]
-                                                  ).each { |s| s.destroy }
+    CGI::Session::ActiveRecordStore::Session.destroy_all( ['updated_on <?', 20.minutes.ago] ) 
   end
 end
