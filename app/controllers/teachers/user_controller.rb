@@ -1,4 +1,6 @@
 class Teachers::UserController < Teachers::BaseController
+  verify :method => :post, :only => %w( add_demonstrator remove_demonstrator )
+  verify :method => :get, :only => %w( list list_users )
 
   def list
     @demonstrators = current_subject.demonstrators 
