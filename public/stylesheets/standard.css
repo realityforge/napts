@@ -323,7 +323,7 @@ table.options .arrows:hover { color: #666; background-color: white;}
 
 .first-arrow-greyed
 {
-  color: grey;
+  color: gray;
   background-image: url(../images/icons/first-arrow-greyed.png);
 }
 
@@ -334,7 +334,7 @@ table.options .arrows:hover { color: #666; background-color: white;}
 
 .previous-arrow-greyed
 {
-  color: grey;
+  color: gray;
   background-image: url(../images/icons/previous-arrow-greyed.png);
 }
 
@@ -345,7 +345,7 @@ table.options .arrows:hover { color: #666; background-color: white;}
 
 .last-arrow-greyed
 {
-  color: grey;
+  color: gray;
   background-image: url(../images/icons/last-arrow-greyed.png);
 }
 
@@ -357,7 +357,7 @@ table.options .arrows:hover { color: #666; background-color: white;}
 
 .next-arrow-greyed
 {
-  color: grey;
+  color: gray;
   background-image: url(../images/icons/next-arrow-greyed.png);
 }
 
