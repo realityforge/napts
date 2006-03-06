@@ -5,25 +5,25 @@ protected
   def get_navigation_links
     links = []
     is_selected = controller_name == 'subject' && @action_name == 'list'
-    links << MenuHelper::Link.new('Subjects',
-                                  {:controller => '/admins/subject', :action => 'list'},
-                                  {:title => 'Add, modify or remove subjects'},
-                                  {:selected => is_selected}).freeze
+    links << Link.new('Subjects',
+                      {:controller => '/admins/subject', :action => 'list'},
+                      {:title => 'Add, modify or remove subjects'},
+                      {:selected => is_selected}).freeze
     is_selected = controller_name == 'subject_group' && @action_name == 'list'
-    links << MenuHelper::Link.new('Subject Groups',
-                                  {:controller => '/admins/subject_group', :action => 'list'},
-                                  {:title => 'Add, modify or delete subject groups'},
-                                  {:selected => is_selected}).freeze
+    links << Link.new('Subject Groups',
+                      {:controller => '/admins/subject_group', :action => 'list'},
+                      {:title => 'Add, modify or delete subject groups'},
+                      {:selected => is_selected}).freeze
     is_selected = controller_name == 'user' && @action_name == 'list'
-    links << MenuHelper::Link.new('Users',
-                                  {:controller => '/admins/user', :action => 'list'},
-                                  {:title => 'Add, modify or remove users'},
-                                  {:selected => is_selected}).freeze
+    links << Link.new('Users',
+                      {:controller => '/admins/user', :action => 'list'},
+                      {:title => 'Add, modify or remove users'},
+                      {:selected => is_selected}).freeze
     is_selected = controller_name == 'room' && @action_name == 'list'
-    links << MenuHelper::Link.new('Rooms',
-                                  {:controller => '/admins/room', :action => 'list'},
-                                  {:title => 'Add, modify or remove rooms'},
-                                  {:selected => is_selected}).freeze
+    links << Link.new('Rooms',
+                      {:controller => '/admins/room', :action => 'list'},
+                      {:title => 'Add, modify or remove rooms'},
+                      {:selected => is_selected}).freeze
     links
   end
 

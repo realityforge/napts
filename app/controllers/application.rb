@@ -1,7 +1,6 @@
 # Filters added to this controller will be run for all controllers in the application.
 # Likewise, all the methods added will be available for all controllers.
 class ApplicationController < ActionController::Base
-  helper :menu
   helper :auth
   include AuthHelper
   helper SubjectSystem 
@@ -17,7 +16,10 @@ class ApplicationController < ActionController::Base
 
 protected
 
+  Link = Struct.new( "Link", :name, :link_options, :html_options, :options ) if ! const_defined?(:Link)
+
   def get_navigation_links
+    nil
   end
 
   def is_secure?

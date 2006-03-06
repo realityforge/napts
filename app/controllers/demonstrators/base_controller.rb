@@ -5,13 +5,13 @@ protected
   def get_navigation_links
     links = []
     is_selected = controller_name == 'quiz' && @action_name == 'list'
-    links << MenuHelper::Link.new('Home',
+    links << Link.new('Home',
                       {:controller => '/demonstrators/quiz', :action => 'list'},
                       {:title => 'Browse Quizzes for Subject'},
                       {:selected => is_selected}).freeze
     if @quiz
       is_selected = controller_name == 'quiz' && @action_name == 'show'
-      links << MenuHelper::Link.new('Browse Quiz',
+      links << Link.new('Browse Quiz',
                         {:controller => '/demonstrators/quiz', :action => 'show', :id => @quiz},
                         {:title => 'Browse Quiz'},
                         {:selected => is_selected}).freeze

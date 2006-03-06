@@ -33,7 +33,18 @@
                   {:title => 'Logout', :post => true}) %>
     </li>
   </ul>
-  <%= render_links(get_navigation_links,:class => 'menu') %>
+  <% links = get_navigation_links %>
+  <% if links %>
+  <ul class="menu">
+    <%
+       for link in links
+         html_options = link.html_options.dup
+         html_options['class'] = 'selected' if link.options[:selected]
+    %>
+    <li><%= link_to(link.name, link.link_options, html_options) %></li>
+    <% end %>
+  </ul>
+  <% end %>
 </div>
 <% end %>
 
