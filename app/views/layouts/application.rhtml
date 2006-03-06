@@ -21,7 +21,18 @@
 <div id="main">
 <% if authenticated? %>
 <div id="header">
-  <%= render_links(get_user_links,:class =>'usermenu') %>
+  <ul class="usermenu">
+    <li>User: <%= current_user.name %></li>
+    <% if session[:role] == :teacher ||  session[:role] == :demonstrator %>
+    <li>Subject: <%= current_subject.name %></li>
+    <% end %>
+    <li>Role: <%= session[:role].to_s %></li>
+    <li>
+      <%= link_to('Sign Out', 
+                  {:controller => '/login', :action => 'logout'},
+                  {:title => 'Logout', :post => true}) %>
+    </li>
+  </ul>
   <%= render_links(get_navigation_links,:class => 'menu') %>
 </div>
 <% end %>

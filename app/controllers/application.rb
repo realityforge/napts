@@ -14,32 +14,8 @@ class ApplicationController < ActionController::Base
   before_filter :force_no_cache
 
   helper_method :get_navigation_links
-  helper_method :get_user_links
 
 protected
-
-  def get_user_links
-    links = []
-    links << MenuHelper::Link.new('User: ' + current_user.name,
-                                  nil,
-                                  {:title => 'Currently logged in user'},
-                                  {}).freeze
-    if session[:role] == :teacher ||  session[:role] == :demonstrator
-      links << MenuHelper::Link.new('Subject: ' + current_subject.name,
-                                    nil,
-                                    {:title => 'Currently logged in subject'},
-                                    {}).freeze
-    end
-    links << MenuHelper::Link.new('  Role: ' + session[:role].to_s,
-                                  nil,
-                                  {:title => 'Current Role'},
-                                  {}).freeze
-    links << MenuHelper::Link.new('Sign Out',
-                                  {:controller => '/login', :action => 'logout'},
-                                  {:title => 'Logout', :post => true},
-                                  {}).freeze
-    links
-  end    
 
   def get_navigation_links
   end
