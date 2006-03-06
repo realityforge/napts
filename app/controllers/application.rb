@@ -3,16 +3,14 @@
 class ApplicationController < ActionController::Base
   helper :auth
   include AuthHelper
-  helper SubjectSystem 
-  include SubjectSystem
   
   helper_method :authenticated?
   helper_method :current_user
+  helper_method :current_subject
+  helper_method :get_navigation_links
 
   before_filter :check_authentication
   before_filter :force_no_cache
-
-  helper_method :get_navigation_links
 
 protected
 
@@ -30,6 +28,14 @@ protected
     nil != session[:user_id]
   end
 
+  def current_subject_id
+    session[:subject_id]
+  end
+
+  def current_subject
+    @current_subject = Subject.find(current_subject_id) unless @current_subject
+    @current_subject
+  end
   def current_user
     @current_user
   end
