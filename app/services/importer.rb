@@ -20,7 +20,7 @@ class Importer
     @@test_count += 1
     name = (desc.attributes['SUBJECT'] + '-' + @@test_count.to_s + '-' + desc.attributes['NAME']).slice(0,20)
     STDERR.puts "Importing test #{name}" unless ENV['RAILS_ENV'] == 'test'
-    quiz = Quiz.create(:name => name, 
+    quiz = Quiz.create!(:name => name, 
                         :description => "Imported from #{name}".slice(0,120),
                         :duration => 10,
                         :randomise => true,
@@ -28,8 +28,6 @@ class Importer
                         :created_at => Time.now,
                         :publish_results => false,
                         :preview_enabled => false)
-    STDERR.puts quiz.errors.to_yaml if not quiz.valid?
-    quiz.save!
     test.elements.each('TASK') {|task| Importer.import_question(quiz,task)}
   end
 
