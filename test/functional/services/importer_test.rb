@@ -36,11 +36,11 @@ class ImporterTest < Test::Unit::TestCase
     content += '</TESTSET>'
     subject = init_data(content)
     assert_equal(2,subject.quizzes.length)
-    assert_equal('test-1',subject.quizzes[0].name)
-    assert_equal('Imported from test-1',subject.quizzes[0].description)
+    assert_equal('test-1-1',subject.quizzes[0].name)
+    assert_equal('Imported from test-1-1',subject.quizzes[0].description)
     assert_common_quiz_attributes(subject,subject.quizzes[0])
-    assert_equal('test-2',subject.quizzes[1].name)
-    assert_equal('Imported from test-2',subject.quizzes[1].description)
+    assert_equal('test-2-2',subject.quizzes[1].name)
+    assert_equal('Imported from test-2-2',subject.quizzes[1].description)
     assert_common_quiz_attributes(subject,subject.quizzes[1])
   end
 
@@ -219,8 +219,8 @@ class ImporterTest < Test::Unit::TestCase
 
   def assert_single_quiz(subject)
     assert_equal(1,subject.quizzes.length)
-    assert_equal('test-1',subject.quizzes[0].name)
-    assert_equal('Imported from test-1',subject.quizzes[0].description)
+    assert_equal('test-1-1',subject.quizzes[0].name)
+    assert_equal('Imported from test-1-1',subject.quizzes[0].description)
     assert_common_quiz_attributes(subject,subject.quizzes[0])
     subject.quizzes[0]
   end
