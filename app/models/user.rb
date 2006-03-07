@@ -59,12 +59,13 @@ private
   
   def self.do_authenticate?(name,password)
     if Module.constants.include?("ApplicationConfig") && ApplicationConfig.respond_to?(:auth_config) && ApplicationConfig.auth_config['exe']
-      open("|#{ApplicationConfig.auth_config['exe']}",File::RDWR) do |f|
-        f.write "#{name}:#{password}"
-        result = f.read
-        return "VALID\n" == result
+      output = ''
+      IO.popen(ApplicationConfig.auth_config['exe'],"w+") do |auth|
+        auth.puts "#{name}:#{password}"
+        auth.close_write
+        output = auth.read
       end
-      return false
+      output == "VALID\n"
     else
       name == password
     end
