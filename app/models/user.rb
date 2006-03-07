@@ -58,7 +58,15 @@ class User < ActiveRecord::Base
 private 
   
   def self.do_authenticate?(name,password)
-    # Ben This is where you overide code to provide your own authentication scheme
-    name == password
+    if Module.constants.include?("ApplicationConfig") && ApplicationConfig.respond_to?(:auth_config) && ApplicationConfig.auth_config['exe']
+      open("|#{ApplicationConfig.auth_config['exe']}",File::RDWR) do |f|
+        f.write "#{name}:#{password}"
+        result = f.read
+        return "VALID\n" == result
+      end
+      return false
+    else
+      name == password
+    end
   end  
 end

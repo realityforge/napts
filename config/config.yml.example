@@ -1,4 +1,5 @@
 #proxy_config:
 #  host: proxy.cs.latrobe.edu.au
 #  port: 8080
-
+#auth_config:
+#  exe: /my/auth/exe
