@@ -1,4 +1,3 @@
 * Cache the rendering of the question and answers
 * If a quiz_item is added or removed from quiz then all associated quiz_attempt should be deleted
 * unit test resource viewing from all the different views
-* Password Validator: Pass into stdin "username:password" and return 4 on success, 0 otherwise
