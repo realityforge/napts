@@ -4,7 +4,7 @@ class Quiz < ActiveRecord::Base
   has_and_belongs_to_many( :active_in, :class_name => 'Room', :join_table => 'quizzes_rooms', :uniq => true )
   belongs_to( :subject )
   validates_presence_of( :subject_id )
-  validates_uniqueness_of( :name )
+  validates_uniqueness_of( :name, :scope => 'subject_id' )
   validates_length_of( :name, :within => 1..20 )
   validates_length_of( :description, :within => 1..120 )
   validates_numericality_of( :duration )
