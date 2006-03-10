@@ -19,6 +19,7 @@ protected
                       {:controller => '/teachers/resource', :action => 'list'},
                       {:title => 'Browse Resources'},
                       {:selected => is_selected}).freeze
+    is_selected = controller_name == 'user' && @action_name == 'list'
     links << Link.new('Demonstrators',
                       {:controller => '/teachers/user', :action => 'list'},
                       {:title => 'Browse Demonstrators'},
