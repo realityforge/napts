@@ -234,7 +234,7 @@ class ImporterTest < Test::Unit::TestCase
   end
 
   TestSubject = 'TESTSBJ'
-  TestFilename = "#{RAILS_ROOT}/temp/importer_test.xml"
+  TestFilename = "#{RAILS_ROOT}/tmp/importer_test.xml"
 
   def init_data(content)
     f = File.new(TestFilename, File::CREAT|File::TRUNC|File::RDWR)
