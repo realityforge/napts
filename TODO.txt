@@ -1,3 +1,10 @@
 * Cache the rendering of the question and answers
 * If a quiz_item is added or removed from quiz then all associated quiz_attempt should be deleted
 * unit test resource viewing from all the different views
+
+--- Next Major version
+
+* Remove the concept of subject-groups and just mush everything into subjects.
+* Maybe add ability to copy material between subjects if a teacher in multiple subjects
+
+
