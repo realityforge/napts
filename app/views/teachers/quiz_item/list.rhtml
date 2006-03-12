@@ -52,6 +52,6 @@
   <%= render( :partial => '/pages',
               :locals => {:name => 'Question',
 	                  :object_pages => @quiz_item_pages,
-			  :extra_params => {}} ) %>
+			  :extra_params => {:quiz_id => params[:quiz_id]}} ) %>
 </div>
 
