@@ -7,3 +7,4 @@
 * Remove the concept of subject-groups and just mush everything into subjects.
 * Maybe add ability to copy material between subjects if a teacher in multiple subjects
 * Get test coverage up via http://eigenclass.org/hiki.rb?rcov
+* Separate Login pages for students/teachers/admins/demonstrators
