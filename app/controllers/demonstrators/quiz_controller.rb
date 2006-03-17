@@ -1,5 +1,6 @@
 class Demonstrators::QuizController < Demonstrators::BaseController
-  verify :method => :get, :only => %w( list show )
+  verify :method => :get, :only => %w( list show list_rooms )
+  verify :method => :post, :only => %w( enable_room )
 
   def list
     if params[:q]
@@ -17,17 +18,29 @@ class Demonstrators::QuizController < Demonstrators::BaseController
     @quiz = current_subject.quizzes.find(params[:id], :include => 'subject')
   end
   
-  def enable
+  def list_rooms
     @quiz = current_subject.quizzes.find(params[:id])
-    if request.get?
-      @rooms = Room.find_all_sorted
-    elsif request.post?
-      @quiz.active_in.clear
-      for room_id in params[:room_ids]
-        @quiz.active_in << Room.find(room_id)
-      end if params[:room_ids]
-      flash[:notice] = 'Update of enabled Rooms for Quiz was successful.'
-      redirect_to(:action => 'show', :id => @quiz)
+    if params[:q]
+      conditions = ['name LIKE ?', @quiz.id, "%#{params[:q]}%"]
+    else
+      conditions = ['1 = 1']
     end
+    @room_pages, @rooms = paginate(:room, 
+                                   :select => 'rooms.*',
+                                   :conditions => conditions,
+                                   :order_by => 'name',
+                                   :per_page => 10)
+  end
+
+  def enable_room
+    quiz = current_subject.quizzes.find(params[:id])
+    room = Room.find(params[:room_id])
+    if params[:enable].to_s == 'true'
+      quiz.active_in << room
+    else
+      quiz.active_in.delete(room)
+    end
+    flash[:notice] = 'Update of enabled Rooms for Quiz was successful.'
+    redirect_to(:action => 'list_rooms', :id => quiz.id, :q => params[:q])
   end
 end

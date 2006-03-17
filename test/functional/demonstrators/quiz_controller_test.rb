@@ -59,47 +59,57 @@ class Demonstrators::QuizControllerTest < Test::Unit::TestCase
     assert_nil(flash[:notice])
   end
 
-  def test_enable_get
-    get(:enable,
+  def test_list_rooms
+    get(:list_rooms,
         {:id => quizzes(:quiz_1).id},
         {:user_id => users(:peter_user).id, 
 	 :role => :demonstrator, 
 	 :subject_id => subjects(:subject_1).id} )
     assert_response(:success)
-    assert_template('enable')
+    assert_template('list_rooms')
     assert_valid_markup
     assert_not_nil(assigns(:quiz))
     assert_equal(quizzes(:quiz_1).id,assigns(:quiz).id)
+    assert_not_nil(assigns(:rooms))
+    assert_not_nil(assigns(:room_pages))
     assert_nil(flash[:alert])
     assert_nil(flash[:notice])
   end
 
-  def test_enable_post_with_zero_rooms
-    post(:enable,
-        {:id => quizzes(:quiz_1).id},
+  def test_enable_room_with_false
+    assert_not_nil(quizzes(:quiz_1).active_in.find(:first, :conditions => "id = #{rooms(:room_1).id}"))
+    post(:enable_room,
+        {:id => quizzes(:quiz_1).id, :room_id => rooms(:room_1).id, :enable => false, :q => 'blah'},
         {:user_id => users(:peter_user).id, 
 	 :role => :demonstrator, 
 	 :subject_id => subjects(:subject_1).id} )
-    assert_redirected_to(:action => 'show', :id => quizzes(:quiz_1).id)
+    assert_redirected_to(:action => 'list_rooms', :id => quizzes(:quiz_1).id, :q => 'blah')
     quizzes(:quiz_1).reload
-    assert_equal(0, quizzes(:quiz_1).active_in.length)
+    assert_nil(quizzes(:quiz_1).active_in.find(:first, :conditions => "id = #{rooms(:room_1).id}"))
     assert_nil(flash[:alert])
     assert_equal('Update of enabled Rooms for Quiz was successful.',flash[:notice])
   end
 
-  def test_enable_post_with_multiple_rooms
-    post(:enable,
-        {:id => quizzes(:quiz_1).id, 
-	 :room_ids => [rooms(:room_1).id, rooms(:room_2).id]},
+  def test_enable_room_with_true
+    quizzes(:quiz_1).active_in.clear
+    assert_nil(quizzes(:quiz_1).active_in.find(:first, :conditions => "id = #{rooms(:room_2).id}"))
+    post(:enable_room,
+        {:id => quizzes(:quiz_1).id, :room_id => rooms(:room_2).id, :enable => true, :q => 'blah'},
         {:user_id => users(:peter_user).id, 
 	 :role => :demonstrator, 
 	 :subject_id => subjects(:subject_1).id} )
-    assert_redirected_to(:action => 'show', :id => quizzes(:quiz_1).id)
+    assert_redirected_to(:action => 'list_rooms', :id => quizzes(:quiz_1).id, :q => 'blah')
     quizzes(:quiz_1).reload
-    assert_equal(2, quizzes(:quiz_1).active_in.length)
-    assert_not_nil(quizzes(:quiz_1).active_in.find(:first, :conditions => "id = #{rooms(:room_1).id}"))
     assert_not_nil(quizzes(:quiz_1).active_in.find(:first, :conditions => "id = #{rooms(:room_2).id}"))
     assert_nil(flash[:alert])
     assert_equal('Update of enabled Rooms for Quiz was successful.',flash[:notice])
   end
+
+#    quizzes(:quiz_1).reload
+#    assert_equal(2, quizzes(:quiz_1).active_in.length)
+#    assert_not_nil(quizzes(:quiz_1).active_in.find(:first, :conditions => "id = #{rooms(:room_1).id}"))
+#    assert_not_nil(quizzes(:quiz_1).active_in.find(:first, :conditions => "id = #{rooms(:room_2).id}"))
+#    assert_nil(flash[:alert])
+#    assert_equal('Update of enabled Rooms for Quiz was successful.',flash[:notice])
+#  end
 end

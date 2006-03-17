@@ -4,6 +4,11 @@ class Room < ActiveRecord::Base
   has_many( :computers, :exclusively_dependent => true, :order => 'ip_address' )
   has_and_belongs_to_many( :quizzes, :uniq => true )
 
+  def enabled_for?(quiz_id)
+    conditions = [ 'rooms.id IN (SELECT quizzes_rooms.room_id FROM quizzes_rooms WHERE quizzes_rooms.quiz_id = ?) AND rooms.id = ?', quiz_id, self.id]
+    ! Room.find(:first, :conditions => conditions).nil?
+  end
+
   def self.find_all_sorted
     find(:all, :order => 'name')
   end

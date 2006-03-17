@@ -1,0 +1,44 @@
+<% @page_title = "#{current_subject.name}: #{@quiz.name} Rooms" %>
+<div id="list_view">
+  <table class="header">
+    <tr>
+      <td class="action"><%= link_to('Return to Quiz', :controller => 'quiz', :action => 'show', :id => @quiz ) %></td>
+      <td class="search">
+        <%= start_form_tag({:action => 'list'},{:method => :get}) %>
+          <p><input type="text" name="q" value="<%= params[:q] %>"/>
+          <button type="submit">Search</button></p>
+        <%= end_form_tag %>
+      </td>
+    </tr>
+  </table>
+  <table class="xlist">
+    <colgroup id="name-column"/>
+    <colgroup id="enabled-column"/>
+    <colgroup id="operations-column"/>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Enabled?</th>
+        <th>Operations</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% 
+        for room in @rooms 
+	enabled = room.enabled_for?(@quiz.id)
+      %>
+        <tr class="<%= cycle("even", "odd") %>">
+          <td><%= h(room.name) %></td>
+          <td><%= enabled ? 'Yes' : 'No' %></td>
+          <td><%= link_to( (enabled ? 'Disable' : 'Enable'), 
+	                   {:action => 'enable_room', :id => @quiz.id, :room_id => room.id, :enable => !enabled, :q => params[:q]}, 
+	                   {:post => true} ) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= render( :partial => '/pages',
+              :locals => {:name => 'Room',
+	                  :object_pages => @room_pages, 
+			  :extra_params => {:id => params[:id], :q => params[:q]}} ) %>
+</div>

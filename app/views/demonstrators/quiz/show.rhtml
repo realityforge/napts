@@ -20,14 +20,8 @@
   <td><%= @quiz.duration %> mins</td>
 </tr>
 <tr>
-  <th>Enabled in Rooms</th>
-  <td>
-  <ul>
-  <% for room in @quiz.active_in %>
-    <li><%= h(room.name) %></li>
-  <% end %>
-  </ul>
-  </td>
+  <th>Enabled?</th>
+  <td><%= (@quiz.active_in.size > 0) ? 'Yes' : 'No' %></td>
 </tr>
 <tr>
   <th>Active Attempts</th>
@@ -38,6 +32,6 @@
   <td><%= @quiz.completed_attempts? %></td>
 </tr>
 </table>
-<%= link_to_button('Quiz Attempts', :controller => 'quiz_attempt', :action => 'list', :quiz_id => @quiz) %>&nbsp;
-<%= link_to_button('Enable Quiz', :action => 'enable', :id => @quiz ) %>
+<%= link_to('Quiz Attempts', :controller => 'quiz_attempt', :action => 'list', :quiz_id => @quiz) %>&nbsp;
+<%= link_to('Rooms Enabled In', :action => 'list_rooms', :id => @quiz ) %>
 </div>
