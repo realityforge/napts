@@ -7,7 +7,7 @@ class PeriodicSweeper
 
   def self.update_quiz_attempts
     # Finishes any timed out quizzes
-    QuizAttempt.find(:all).each {|a| a.complete if a.time_up?(Time.now)} 
+    QuizAttempt.find(:all, :conditions => 'end_time IS NULL').each {|a| a.complete if a.time_up?(Time.now)} 
     
     # Scores all unscored but completed quizzes
     quiz_attempts =
