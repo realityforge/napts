@@ -16,7 +16,7 @@
   </tr>
   <tr>
     <th>Content</th>
-    <td><%= @question.content %></td>
+    <td><%= h(@question.content) %></td>
   </tr>
   <% if @question.question_type == Question::NumberType || @question.question_type == Question::TextType %>
     <tr>
