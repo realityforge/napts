@@ -88,7 +88,6 @@ end
 module Napts
   # Security error. Controllers throw these in situations where a user is trying to access a
   # function that he is not authorized to access. 
-  # Normally, RForum does not show URLs that would allow the user to access such features.
   class SecurityError < StandardError
   end
 end
