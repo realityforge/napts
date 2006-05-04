@@ -10,3 +10,4 @@
 * Separate Login pages for students/teachers/admins/demonstrators
 * Replace @content_for_X with yield :X (@content_for_layout => yield)
 * Update to rails 1.1
+* use no-cache plugin
