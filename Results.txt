@@ -1,0 +1,7 @@
+SELECT users.name, subjects.name, quizzes.name, quiz_attempts.score
+FROM quiz_attempts 
+  LEFT OUTER JOIN users ON quiz_attempts.user_id = users.id 
+  LEFT OUTER JOIN quizzes ON quiz_attempts.quiz_id = quizzes.id 
+  LEFT OUTER JOIN subjects ON quizzes.subject_id = subjects.id 
+WHERE quiz_attempts.end_time IS NOT NULL
+ORDER BY users.name, subjects.name, quizzes.name;
