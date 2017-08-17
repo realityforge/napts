@@ -47,9 +47,9 @@ class QuestionTest < Test::Unit::TestCase
   end
 
   def test_create_number_question
-    question = Question.new(:content => 'x', 
-                            :question_type => Question::NumberType, 
-                            :subject_group_id => subject_groups(:sg_1).id, 
+    question = Question.new(:content => 'x',
+                            :question_type => Question::NumberType,
+                            :subject_group_id => subject_groups(:sg_1).id,
                             :corrected_at => Time.now,
                             :text_format => TextFormatter::PlainFormat,
                             :number_answer => '42')
@@ -70,9 +70,9 @@ class QuestionTest < Test::Unit::TestCase
   end
 
   def test_invalid_create_number_question
-    question = Question.new(:content => 'x', 
-                            :question_type => Question::NumberType, 
-                            :subject_group_id => subject_groups(:sg_1).id, 
+    question = Question.new(:content => 'x',
+                            :question_type => Question::NumberType,
+                            :subject_group_id => subject_groups(:sg_1).id,
                             :corrected_at => Time.now,
                             :text_format => TextFormatter::PlainFormat,
                             :number_answer => 'X')
@@ -81,9 +81,9 @@ class QuestionTest < Test::Unit::TestCase
   end
 
   def test_create_text_question
-    question = Question.new(:content => 'What am i?', 
-                            :question_type => Question::TextType, 
-                            :subject_group_id => subject_groups(:sg_1).id, 
+    question = Question.new(:content => 'What am i?',
+                            :question_type => Question::TextType,
+                            :subject_group_id => subject_groups(:sg_1).id,
                             :corrected_at => Time.now,
                             :text_format => TextFormatter::PlainFormat,
                             :text_answer => '^ACE$')
@@ -104,9 +104,9 @@ class QuestionTest < Test::Unit::TestCase
   end
 
   def test_invalid_create_text_question
-    question = Question.new(:content => 'x', 
-                            :question_type => Question::TextType, 
-                            :subject_group_id => subject_groups(:sg_1).id, 
+    question = Question.new(:content => 'x',
+                            :question_type => Question::TextType,
+                            :subject_group_id => subject_groups(:sg_1).id,
                             :corrected_at => Time.now,
                             :text_format => TextFormatter::PlainFormat,
                             :text_answer => '')
@@ -115,9 +115,9 @@ class QuestionTest < Test::Unit::TestCase
   end
 
   def test_create_single_choice_question
-    question = Question.new(:content => 'Should I have 1 or 2 scotch and cokes?', 
-                            :question_type => Question::SingleOptionType, 
-                            :subject_group_id => subject_groups(:sg_1).id, 
+    question = Question.new(:content => 'Should I have 1 or 2 scotch and cokes?',
+                            :question_type => Question::SingleOptionType,
+                            :subject_group_id => subject_groups(:sg_1).id,
                             :corrected_at => Time.now,
                             :text_format => TextFormatter::PlainFormat)
     question.choices = {
@@ -145,9 +145,9 @@ class QuestionTest < Test::Unit::TestCase
 
 
   def test_create_single_choice_question
-    question = Question.new(:content => 'Should I have 1 or 2 scotch and cokes?', 
-                            :question_type => Question::MultiOptionType, 
-                            :subject_group_id => subject_groups(:sg_1).id, 
+    question = Question.new(:content => 'Should I have 1 or 2 scotch and cokes?',
+                            :question_type => Question::MultiOptionType,
+                            :subject_group_id => subject_groups(:sg_1).id,
                             :corrected_at => Time.now,
                             :text_format => TextFormatter::PlainFormat)
     question.choices = {
@@ -174,9 +174,9 @@ class QuestionTest < Test::Unit::TestCase
   end
 
   def test_invalid_create_choice_question_with_no_correct_answer
-    question = Question.new(:content => 'Should I have 1 or 2 scotch and cokes?', 
-                            :question_type => Question::SingleOptionType, 
-                            :subject_group_id => subject_groups(:sg_1).id, 
+    question = Question.new(:content => 'Should I have 1 or 2 scotch and cokes?',
+                            :question_type => Question::SingleOptionType,
+                            :subject_group_id => subject_groups(:sg_1).id,
                             :corrected_at => Time.now,
                             :text_format => TextFormatter::PlainFormat)
     question.choices = {
@@ -188,9 +188,9 @@ class QuestionTest < Test::Unit::TestCase
   end
 
   def test_invalid_create_choice_question_with_empty_content
-    question = Question.new(:content => 'Should I have 1 or 2 scotch and cokes?', 
-                            :question_type => Question::SingleOptionType, 
-                            :subject_group_id => subject_groups(:sg_1).id, 
+    question = Question.new(:content => 'Should I have 1 or 2 scotch and cokes?',
+                            :question_type => Question::SingleOptionType,
+                            :subject_group_id => subject_groups(:sg_1).id,
                             :corrected_at => Time.now,
                             :text_format => TextFormatter::PlainFormat)
     question.choices = {

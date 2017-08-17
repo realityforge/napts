@@ -3,7 +3,7 @@ class QuizResponse < ActiveRecord::Base
   belongs_to( :question )
   has_and_belongs_to_many( :answers, :uniq => true )
   validates_presence_of( :quiz_attempt_id, :question_id )
-  
+
   def correct?
     return true if self.question.corrected_at > self.updated_at
     if self.question.question_type == 1 || self.question.question_type == 2

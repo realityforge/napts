@@ -34,12 +34,12 @@
           <td><%= TextFormatter::TEXT_FORMAT.index( question.text_format ) %></td>
           <td>
 	    <%= link_to( 'Show', :action => 'show', :id => question ) %> |
-            <%= link_to( 'Destroy', {:action => 'destroy', :id => question}, 
+            <%= link_to( 'Destroy', {:action => 'destroy', :id => question},
 	                            {:post => true, :confirm => 'Are you sure?'} ) %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
-  <%= render( :partial => '/pages', 
+  <%= render( :partial => '/pages',
               :locals => {:name => 'Question', :object_pages => @question_pages, :extra_params => {}} ) %>
 </div>

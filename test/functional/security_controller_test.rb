@@ -6,7 +6,7 @@ class SecurityController; def rescue_action(e) raise e end; end
 
 class SecurityControllerTest < Test::Unit::TestCase
   fixtures OrderedTables
-  
+
   def setup
     @controller = SecurityController.new
     @request    = ActionController::TestRequest.new

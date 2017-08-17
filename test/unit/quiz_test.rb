@@ -22,12 +22,12 @@ class QuizTest < Test::Unit::TestCase
     assert_equal( 0, quiz.quiz_attempt_for_user( users(:admin_user).id, '12.23.34.45'  ).quiz_responses[0].answers.length )
     assert_equal( true, quiz.quiz_attempt_for_user( users(:admin_user).id, '12.23.34.45' ).quiz_responses[0].input.nil? )
   end
-  
+
   def test_completed_attempts
     quiz = Quiz.find( quizzes(:quiz_2).id )
     assert_equal( 3, quiz.completed_attempts? )
   end
-  
+
   def test_active_attempts
     quiz = Quiz.find( quizzes(:quiz_3).id )
     assert_equal( 1, quiz.active_attempts? )

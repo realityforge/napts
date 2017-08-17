@@ -11,7 +11,7 @@ qi_2:
   question_id: 2
   position: 2
 
-  
+
 qi_3:
   id: 3
   preview_only: false
@@ -30,8 +30,8 @@ qi_5:
   quiz_id: 2
   question_id: 2
   position: 3
-  
-  
+
+
 qi_6:
   id: 6
   preview_only: false
@@ -50,7 +50,7 @@ qi_8:
   quiz_id: 3
   question_id: 6
   position: 3
-  
+
 qi_10:
   id: 10
   preview_only: true
@@ -63,4 +63,3 @@ qi_11:
   quiz_id: 1
   question_id: 4
   position: 4
-

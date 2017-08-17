@@ -18,17 +18,17 @@ class Teachers::QuizController < Teachers::BaseController
     quiz.update_attribute(:preview_enabled,(params[:preview_status] == 'true'))
     redirect_to(:action => 'list', :q => params[:q], :page => params[:page])
   end
-  
+
   def toggle_results_status
     quiz = current_subject.quizzes.find(params[:id])
     quiz.update_attribute(:publish_results,(params[:results_status] == 'true'))
     redirect_to(:action => 'list')
   end
-  
+
   def show
     @quiz = current_subject.quizzes.find(params[:id])
   end
-  
+
   def new
     @quiz = Quiz.new(params[:quiz])
     if request.get?
@@ -41,7 +41,7 @@ class Teachers::QuizController < Teachers::BaseController
       end
     end
   end
-  
+
   def edit
     @quiz = current_subject.quizzes.find(params[:id])
     if request.post?
@@ -51,7 +51,7 @@ class Teachers::QuizController < Teachers::BaseController
       end
     end
   end
-  
+
   def list_questions
     @quiz = current_subject.quizzes.find(params[:id])
     if params[:q]
@@ -63,14 +63,14 @@ class Teachers::QuizController < Teachers::BaseController
     end
     @question_pages, @questions = paginate( :questions, :conditions => conditions, :per_page => 10 )
   end
-  
+
   def add_item
     quiz = current_subject.quizzes.find(params[:id])
     question = Question.find(params[:question_id], :conditions => ['subject_group_id = ?', current_subject.subject_group_id])
     quiz_item = quiz.quiz_items.create!(:question_id => question.id, :preview_only => false )
     redirect_to(:action => 'list_questions', :id => quiz, :q => params[:q], :page => params[:page])
   end
-  
+
   def destroy
     current_subject.quizzes.find(params[:id]).destroy
     flash[:notice] = 'Quiz was successfully deleted.'

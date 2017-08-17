@@ -20,7 +20,7 @@ class Importer
     @@test_count += 1
     name = (desc.attributes['SUBJECT'] + '-' + @@test_count.to_s + '-' + desc.attributes['NAME']).slice(0,20)
     STDERR.puts "Importing test #{name}" unless ENV['RAILS_ENV'] == 'test'
-    quiz = Quiz.create!(:name => name, 
+    quiz = Quiz.create!(:name => name,
                         :description => "Imported from #{name}".slice(0,120),
                         :duration => 10,
                         :randomise => true,
@@ -51,7 +51,7 @@ class Importer
 	end
       end
     end
-    question = Question.create!(:content => content, 
+    question = Question.create!(:content => content,
                                 :subject_group_id => quiz.subject.subject_group_id,
                                 :question_type => type,
                                 :randomise => true,
@@ -59,8 +59,8 @@ class Importer
                                 :corrected_at => Time.now)
 
     quiz.quiz_items.create(:preview_only => false, :question_id => question.id)
-    if type == Question::MultiOptionType || type == Question::SingleOptionType 
-      choices.elements.each('OPTION') do |option| 
+    if type == Question::MultiOptionType || type == Question::SingleOptionType
+      choices.elements.each('OPTION') do |option|
         Answer.create!(:question_id => question.id, :content => CGI::unescapeHTML(option.text || ''), :is_correct => (option.attributes['CORRECT'] == 'true'))
       end
     elsif type == Question::NumberType

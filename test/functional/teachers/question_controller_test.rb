@@ -196,8 +196,8 @@ class Teachers::QuestionControllerTest < Test::Unit::TestCase
 
   def test_add_resource
     assert_nil(questions(:q2).resources.find(:first, :conditions => ['id = ?', resources(:resource_1).id]))
-    post(:add_resource, 
-         {:id => questions(:q2).id, :resource_id => resources(:resource_1).id}, 
+    post(:add_resource,
+         {:id => questions(:q2).id, :resource_id => resources(:resource_1).id},
          {:user_id => users(:lecturer_user).id, :role => :teacher, :subject_id => subjects(:subject_1).id})
     assert_redirected_to(:action => 'list_resources', :id => questions(:q2).id)
     assert_nil(flash[:alert])
@@ -207,8 +207,8 @@ class Teachers::QuestionControllerTest < Test::Unit::TestCase
 
   def test_remove_resource
     assert_not_nil(questions(:q1).resources.find(:first, :conditions => ['id = ?', resources(:resource_1).id]))
-    post(:remove_resource, 
-         {:id => questions(:q1).id, :resource_id => resources(:resource_1).id}, 
+    post(:remove_resource,
+         {:id => questions(:q1).id, :resource_id => resources(:resource_1).id},
          {:user_id => users(:lecturer_user).id, :role => :teacher, :subject_id => subjects(:subject_1).id})
     assert_redirected_to(:action => 'show', :id => questions(:q1).id)
     assert_nil(flash[:alert])
@@ -218,8 +218,8 @@ class Teachers::QuestionControllerTest < Test::Unit::TestCase
 
   def test_destroy_that_fails
     assert_equal(true, Question.exists?(questions(:q1).id))
-    post(:destroy, 
-         {:id => questions(:q1).id, :q => 'q', :page => '1'}, 
+    post(:destroy,
+         {:id => questions(:q1).id, :q => 'q', :page => '1'},
          {:user_id => users(:lecturer_user).id, :role => :teacher, :subject_id => subjects(:subject_1).id})
     assert_redirected_to(:action => 'list', :q => 'q', :page => '1')
     assert_nil(flash[:notice])
@@ -227,10 +227,10 @@ class Teachers::QuestionControllerTest < Test::Unit::TestCase
     assert_equal(true, Question.exists?(questions(:q1).id))
   end
 
-  def test_destroy 
+  def test_destroy
     assert_equal(true, Question.exists?(questions(:q10).id))
-    post(:destroy, 
-         {:id => questions(:q10).id, :q => 'q', :page => '1'}, 
+    post(:destroy,
+         {:id => questions(:q10).id, :q => 'q', :page => '1'},
          {:user_id => users(:lecturer_user).id, :role => :teacher, :subject_id => subjects(:subject_1).id})
     assert_redirected_to(:action => 'list', :q => 'q', :page => '1')
     assert_nil(flash[:alert])

@@ -145,9 +145,9 @@ class Teachers::ResourceControllerTest < Test::Unit::TestCase
     assert_equal(resources(:resource_2).content_type, @response.headers['Content-Type'])
   end
 
-  def test_destroy 
-    post(:destroy, 
-         {:id => resources(:resource_1).id, :q => 'q', :page => '1'}, 
+  def test_destroy
+    post(:destroy,
+         {:id => resources(:resource_1).id, :q => 'q', :page => '1'},
          {:user_id => users(:lecturer_user).id, :role => :teacher, :subject_id => subjects(:subject_1).id})
     assert_redirected_to(:action => 'list', :q => 'q', :page => '1')
     assert_nil(flash[:alert])

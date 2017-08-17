@@ -40,8 +40,8 @@ body
   margin: 5px 5px 5px 5px;
 }
 
-#flash 
-{ 
+#flash
+{
   margin: 2px 0px 2px 0px;
   font-weight: bold;
   clear: both;
@@ -63,8 +63,8 @@ body
   font-size: x-small;
 }
 
-ul.usermenu 
-{ 
+ul.usermenu
+{
   position: relative;
   display: block;
   text-align: right;
@@ -74,7 +74,7 @@ ul.usermenu
 }
 
 ul.usermenu li
-{ 
+{
   display: inline;
   margin: 0px 4px 0px 2px;
 }
@@ -99,7 +99,7 @@ ul.menu
 }
 
 ul.menu li
-{ 
+{
   display: inline;
   list-style: none;
 }

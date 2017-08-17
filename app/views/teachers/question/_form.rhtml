@@ -32,8 +32,8 @@
     <th><label for="question_question_type">Answers</label></th>
     <td>
       <%= select("question", "question_type", Question::QUESTION_TYPE, {}, :onchange => 'onSelectAnswerType();' ) %>
-      <label for="question_randomise">Randomise Answers</label><%= check_box('question', 'randomise') %> 
-      
+      <label for="question_randomise">Randomise Answers</label><%= check_box('question', 'randomise') %>
+
     </td>
   </tr>
   <tr id="number_answer">
@@ -44,9 +44,9 @@
     <th><label for="question_text_answer">Text</label></th>
     <td><%= text_field('question', 'text_answer') %></td>
   </tr>
-  <% 
+  <%
     key = 0
-    for choice in @question.choices.values 
+    for choice in @question.choices.values
       key += 1
   %>
   <%= render(:partial => 'answer', :locals => {:key => key, :choice => choice}) %>
@@ -71,13 +71,13 @@
 <% end %>
 </div>
 <%= end_form_tag %>
-<script type="text/javascript"><!-- 
-onSelectAnswerType(); 
+<script type="text/javascript"><!--
+onSelectAnswerType();
 onSelectTextFormat();
 --></script>
 <% content_for :head do %>
 <script type="text/javascript">
-<!-- 
+<!--
   function onSelectAnswerType()
   {
     var question_type = $('question_question_type').value;
@@ -106,7 +106,7 @@ onSelectTextFormat();
       $('question_randomise').disabled = true
     }
   }
-  
+
   function onSelectTextFormat()
   {
     var text_format = $('question_text_format').value;

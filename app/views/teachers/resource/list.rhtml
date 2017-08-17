@@ -37,7 +37,7 @@
     <td><%= h(resource.content_type) %></td>
     <td>
     <% for question in resource.questions %>
-      q<%= question.question_id %> 
+      q<%= question.question_id %>
     <% end %>
     </td>
     <td>
@@ -56,8 +56,7 @@
   </tbody>
 </table>
   <%= render( :partial => '/pages',
-              :locals => {:name => 'Resource', 
-	                  :object_pages => @resource_pages, 
+              :locals => {:name => 'Resource',
+	                  :object_pages => @resource_pages,
 			  :extra_params => {}} ) %>
 </div>
-

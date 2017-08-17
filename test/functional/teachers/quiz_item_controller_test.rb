@@ -2,9 +2,9 @@ require File.dirname(__FILE__) + '/../../test_helper'
 require 'teachers/quiz_item_controller'
 
 #Re-raise errors caught by the controller.
-class Teachers::QuizItemController; 
-  def rescue_action(e) raise e end; 
-  def find_quiz_item2 
+class Teachers::QuizItemController;
+  def rescue_action(e) raise e end;
+  def find_quiz_item2
     @quiz_item = find_quiz_item(params[:id])
     redirect_to(:action => 'list', :quiz_id => @quiz_item.quiz_id)
   end;
@@ -55,8 +55,8 @@ class Teachers::QuizItemControllerTest < Test::Unit::TestCase
 
   def test_toggle_quiz_status_off
     assert_equal(false,quiz_items(:qi_1).preview_only?)
-    post(:toggle_quiz_status, 
-         {:id => quiz_items(:qi_1).id, :preview_status => 'false'}, 
+    post(:toggle_quiz_status,
+         {:id => quiz_items(:qi_1).id, :preview_status => 'false'},
          {:user_id => users(:lecturer_user).id, :role => :teacher, :subject_id => subjects(:subject_1).id})
     assert_redirected_to(:action => 'list', :quiz_id => quiz_items(:qi_1).quiz_id)
     assert_nil(flash[:alert])
@@ -67,8 +67,8 @@ class Teachers::QuizItemControllerTest < Test::Unit::TestCase
 
   def test_toggle_quiz_status_on
     assert_equal(true,quiz_items(:qi_2).preview_only?)
-    post(:toggle_quiz_status, 
-         {:id => quiz_items(:qi_2).id, :preview_status => 'true'}, 
+    post(:toggle_quiz_status,
+         {:id => quiz_items(:qi_2).id, :preview_status => 'true'},
          {:user_id => users(:lecturer_user).id, :role => :teacher, :subject_id => subjects(:subject_1).id})
     assert_redirected_to(:action => 'list', :quiz_id => quiz_items(:qi_2).quiz_id)
     assert_nil(flash[:alert])
@@ -79,8 +79,8 @@ class Teachers::QuizItemControllerTest < Test::Unit::TestCase
 
   def test_move_last
     assert_equal(1,quiz_items(:qi_1).position)
-    post(:move_last, 
-         {:id => quiz_items(:qi_1).id}, 
+    post(:move_last,
+         {:id => quiz_items(:qi_1).id},
          {:user_id => users(:lecturer_user).id, :role => :teacher, :subject_id => subjects(:subject_1).id})
     assert_redirected_to(:action => 'list', :quiz_id => quiz_items(:qi_1).quiz_id)
     assert_nil(flash[:alert])
@@ -91,8 +91,8 @@ class Teachers::QuizItemControllerTest < Test::Unit::TestCase
 
   def test_move_down
     assert_equal(1,quiz_items(:qi_1).position)
-    post(:move_down, 
-         {:id => quiz_items(:qi_1).id}, 
+    post(:move_down,
+         {:id => quiz_items(:qi_1).id},
          {:user_id => users(:lecturer_user).id, :role => :teacher, :subject_id => subjects(:subject_1).id})
     assert_redirected_to(:action => 'list', :quiz_id => quiz_items(:qi_1).quiz_id)
     assert_nil(flash[:alert])
@@ -103,8 +103,8 @@ class Teachers::QuizItemControllerTest < Test::Unit::TestCase
 
   def test_move_first
     assert_equal(2,quiz_items(:qi_2).position)
-    post(:move_first, 
-         {:id => quiz_items(:qi_2).id}, 
+    post(:move_first,
+         {:id => quiz_items(:qi_2).id},
          {:user_id => users(:lecturer_user).id, :role => :teacher, :subject_id => subjects(:subject_1).id})
     assert_redirected_to(:action => 'list', :quiz_id => quiz_items(:qi_1).quiz_id)
     assert_nil(flash[:alert])
@@ -115,8 +115,8 @@ class Teachers::QuizItemControllerTest < Test::Unit::TestCase
 
   def test_move_up
     assert_equal(2,quiz_items(:qi_2).position)
-    post(:move_up, 
-         {:id => quiz_items(:qi_2).id}, 
+    post(:move_up,
+         {:id => quiz_items(:qi_2).id},
          {:user_id => users(:lecturer_user).id, :role => :teacher, :subject_id => subjects(:subject_1).id})
     assert_redirected_to(:action => 'list', :quiz_id => quiz_items(:qi_1).quiz_id)
     assert_nil(flash[:alert])
@@ -125,9 +125,9 @@ class Teachers::QuizItemControllerTest < Test::Unit::TestCase
     assert_equal(1,quiz_items(:qi_2).position)
   end
 
-  def test_destroy 
-    post(:destroy, 
-         {:id => quiz_items(:qi_2).id}, 
+  def test_destroy
+    post(:destroy,
+         {:id => quiz_items(:qi_2).id},
          {:user_id => users(:lecturer_user).id, :role => :teacher, :subject_id => subjects(:subject_1).id})
     assert_equal(false, QuizItem.exists?(quiz_items(:qi_2).id))
   end

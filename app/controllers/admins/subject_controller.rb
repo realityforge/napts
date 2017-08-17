@@ -4,12 +4,12 @@ class Admins::SubjectController < Admins::BaseController
 
   def list
     conditions = params[:q] ? ['name LIKE ?', "%#{params[:q]}%"] : '1 = 1'
-    @subject_pages, @subjects = paginate( :subjects, 
+    @subject_pages, @subjects = paginate( :subjects,
                                           :conditions => conditions,
                                           :order_by => 'name',
                                           :per_page => 10 )
   end
-  
+
   def new
     @groups = SubjectGroup.find_all_sorted
     @subject = Subject.new(params[:subject])
@@ -20,7 +20,7 @@ class Admins::SubjectController < Admins::BaseController
       end
     end
   end
-  
+
   def show
     @subject = Subject.find(params[:id])
   end
@@ -39,13 +39,13 @@ class Admins::SubjectController < Admins::BaseController
   def teachers
     @subject = Subject.find(params[:id])
     if params[:q]
-      conditions = 
-        ['id NOT IN (SELECT user_id FROM teachers WHERE subject_id = ?) AND users.name LIKE ?', 
+      conditions =
+        ['id NOT IN (SELECT user_id FROM teachers WHERE subject_id = ?) AND users.name LIKE ?',
         @subject.id, "%#{params[:q]}%"]
     else
       conditions = ['id NOT IN (SELECT user_id FROM teachers WHERE subject_id = ?)', @subject.id]
     end
-    @user_pages, @users = paginate( :users, 
+    @user_pages, @users = paginate( :users,
                                     :conditions => conditions,
                                     :order_by => 'name',
                                     :per_page => 20 )

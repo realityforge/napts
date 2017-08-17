@@ -4,7 +4,7 @@ class TextFormatter
   BlueClothFormat = 2
   RubyPantsFormat = 3
   PlainFormat = 4
-  
+
   TEXT_FORMAT = {
     "RedCloth" => RedClothFormat,
     "BlueCloth" => BlueClothFormat,

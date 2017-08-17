@@ -9,7 +9,7 @@ class Demonstrators::QuizAttemptController < Demonstrators::BaseController
     else
       conditions = ['quiz_attempts.quiz_id = ?', @quiz.id]
     end
-    @quiz_attempt_pages, @quiz_attempts = paginate( :quiz_attempts, 
+    @quiz_attempt_pages, @quiz_attempts = paginate( :quiz_attempts,
                                                     :select => 'quiz_attempts.*',
                                                     :joins => 'LEFT OUTER JOIN users ON users.id = quiz_attempts.user_id',
                                                     :conditions => conditions,

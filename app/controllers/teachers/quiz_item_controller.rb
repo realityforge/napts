@@ -9,8 +9,8 @@ class Teachers::QuizItemController < Teachers::BaseController
     else
       conditions = ['quiz_items.quiz_id = ?', @quiz.id]
     end
-    @quiz_item_pages, @quiz_items = 
-      paginate(:quiz_items, 
+    @quiz_item_pages, @quiz_items =
+      paginate(:quiz_items,
                :select => 'quiz_items.*',
                :joins => 'LEFT OUTER JOIN questions ON questions.id = quiz_items.question_id',
                :conditions => conditions,
@@ -22,26 +22,26 @@ class Teachers::QuizItemController < Teachers::BaseController
     quiz_item = find_quiz_item(params[:id])
     quiz_item.update_attribute(:preview_only,(params[:preview_status] == 'true'))
     redirect_to(:action => 'list', :quiz_id => quiz_item.quiz_id)
-  end  
+  end
 
   def move_up
     quiz_item = find_quiz_item(params[:id])
     quiz_item.move_higher
     redirect_to(:action => 'list', :quiz_id => quiz_item.quiz_id)
   end
-  
+
   def move_down
     quiz_item = find_quiz_item(params[:id])
     quiz_item.move_lower
     redirect_to(:action => 'list', :quiz_id => quiz_item.quiz_id)
   end
-  
+
   def move_first
     quiz_item = find_quiz_item(params[:id])
     quiz_item.move_to_top
     redirect_to(:action => 'list', :quiz_id => quiz_item.quiz_id)
   end
-  
+
   def move_last
     quiz_item = find_quiz_item(params[:id])
     quiz_item.move_to_bottom
@@ -51,7 +51,7 @@ class Teachers::QuizItemController < Teachers::BaseController
   def destroy
     quiz_item = find_quiz_item(params[:id]).destroy
     redirect_to(:action => 'list', :quiz_id => quiz_item.quiz_id)
-  end  
+  end
 
 private
 

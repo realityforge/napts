@@ -28,7 +28,7 @@
     <% end %>
     <li>Role: <%= session[:role].to_s %></li>
     <li>
-      <%= link_to('Sign Out', 
+      <%= link_to('Sign Out',
                   {:controller => '/login', :action => 'logout'},
                   {:title => 'Logout', :post => true}) %>
     </li>

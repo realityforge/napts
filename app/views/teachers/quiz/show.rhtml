@@ -16,13 +16,13 @@
   </tr>
   <tr>
     <th>Questions on Quiz</th>
-    <% 
+    <%
       count = 0
       for qi in @quiz.quiz_items
-        if ! qi.preview_only 
+        if ! qi.preview_only
           count = count + 1
         end
-      end 
+      end
     %>
     <td><%= count %></td>
   </tr>
@@ -34,4 +34,3 @@
 <%= link_to_button('Show Questions', :controller => 'quiz_item', :action => 'list', :quiz_id => @quiz ) %>&nbsp;
 <%= link_to_button( 'Edit', :action => 'edit', :id => @quiz ) %>
 </div>
-

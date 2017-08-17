@@ -29,13 +29,13 @@
           <td><%= h(room.name) %></td>
           <td>
             <%= link_to('Show', :action => 'show', :id => room ) %> |
-            <%= link_to('Delete', {:action => 'destroy', :id => room, :q => params[:q], :page => params[:page]}, 
+            <%= link_to('Delete', {:action => 'destroy', :id => room, :q => params[:q], :page => params[:page]},
                                   {:confirm => 'Are you sure?', :post => true} ) %>
           </td>
         </tr>
       <% end %>
     </tbody>
   </table>
-  <%= render( :partial => '/pages', 
+  <%= render( :partial => '/pages',
               :locals => {:name => 'Room', :object_pages => @room_pages, :extra_params => {} } ) %>
 </div>

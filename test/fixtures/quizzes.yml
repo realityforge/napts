@@ -27,7 +27,7 @@ quiz_3:
   subject_id: 2
   preview_enabled: false
   publish_results: true
-  
+
 #only multiple choice questions
 quiz_4:
   id: 4
@@ -38,4 +38,3 @@ quiz_4:
   subject_id: 3
   preview_enabled: true
   publish_results: true
-

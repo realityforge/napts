@@ -6,18 +6,18 @@ class Teachers::UserController; def rescue_action(e) raise e end; end
 
 class Teachers::UserControllerTest < Test::Unit::TestCase
   fixtures OrderedTables
-  
+
   def setup
     @controller = Teachers::UserController.new
     @request = ActionController::TestRequest.new
     @response = ActionController::TestResponse.new
   end
-  
+
   def test_list
-    get(:list, 
+    get(:list,
         {},
         {:user_id => users(:lecturer_user).id,
-	 :role => :teacher, 
+	 :role => :teacher,
 	 :subject_id => subjects(:subject_2).id})
     assert_response(:success)
     assert_template('list')
@@ -28,7 +28,7 @@ class Teachers::UserControllerTest < Test::Unit::TestCase
     assert_nil(flash[:alert])
     assert_nil(flash[:notice])
   end
-  
+
   def test_list_users
     get(:list_users,
         {},
@@ -48,7 +48,7 @@ class Teachers::UserControllerTest < Test::Unit::TestCase
     assert_nil(flash[:alert])
     assert_nil(flash[:notice])
   end
-  
+
   def test_add_demonstrator
     assert_raise(ActiveRecord::RecordNotFound){subjects(:subject_2).demonstrators.find(users(:peter_user).id)}
     post(:add_demonstrator,
@@ -61,7 +61,7 @@ class Teachers::UserControllerTest < Test::Unit::TestCase
     assert_equal('Demonstrator was successfully created.', flash[:notice])
     assert_not_nil(subjects(:subject_2).demonstrators.find(users(:peter_user).id))
   end
-  
+
   def test_remove_demonstrator
     assert_not_nil(subjects(:subject_2).demonstrators.find(users(:mr_fancy_pants_user).id))
     post(:remove_demonstrator,

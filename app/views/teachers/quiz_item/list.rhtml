@@ -30,7 +30,7 @@
   </tr>
   </thead>
   <tbody>
-  <% 
+  <%
     index = 0
     for quiz_item in @quiz_items
       index += 1
@@ -54,4 +54,3 @@
 	                  :object_pages => @quiz_item_pages,
 			  :extra_params => {:quiz_id => params[:quiz_id]}} ) %>
 </div>
-

@@ -14,7 +14,7 @@ class LoginController; def rescue_action(e) raise e end; end
 
 class LoginControllerTest < Test::Unit::TestCase
   fixtures OrderedTables
-  
+
   def setup
     @controller = LoginController.new
     @request    = ActionController::TestRequest.new

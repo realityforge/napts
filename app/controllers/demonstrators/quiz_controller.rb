@@ -8,7 +8,7 @@ class Demonstrators::QuizController < Demonstrators::BaseController
     else
       conditions = ['subject_id = ?', current_subject.id]
     end
-    @quiz_pages, @quizzes = paginate( :quizzes, 
+    @quiz_pages, @quizzes = paginate( :quizzes,
                                       :conditions => conditions,
                                       :order_by => 'created_at DESC',
                                       :per_page => 10 )
@@ -17,7 +17,7 @@ class Demonstrators::QuizController < Demonstrators::BaseController
   def show
     @quiz = current_subject.quizzes.find(params[:id], :include => 'subject')
   end
-  
+
   def list_rooms
     @quiz = current_subject.quizzes.find(params[:id])
     if params[:q]
@@ -25,7 +25,7 @@ class Demonstrators::QuizController < Demonstrators::BaseController
     else
       conditions = ['1 = 1']
     end
-    @room_pages, @rooms = paginate(:room, 
+    @room_pages, @rooms = paginate(:room,
                                    :select => 'rooms.*',
                                    :conditions => conditions,
                                    :order_by => 'name',

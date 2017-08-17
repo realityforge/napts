@@ -24,14 +24,14 @@
       <th>Operations</th>
     </tr>
     </thead>
-    <tbody>  
+    <tbody>
     <% for user in @users %>
       <tr class="<%= cycle("even", "odd") %>">
         <td><%= h(user.name) %></td>
         <td><%= user.administrator? ? 'Yes' : 'No' %></td>
         <td>
 	    <%= link_to('Show', :action => 'show', :id => user.id ) %> |
-            <%= link_to('Toggle Admin Status', {:action => 'toggle_admin_status', :id => user.id, 
+            <%= link_to('Toggle Admin Status', {:action => 'toggle_admin_status', :id => user.id,
                         :admin_status => !user.administrator?, :q => params[:q], :page => params[:page]},
 		        {:post => true} ) %> |
             <%= link_to( "Delete",
@@ -42,8 +42,7 @@
     <% end %>
     </tbody>
   </table>
-  <%= render( :partial => '/pages', 
+  <%= render( :partial => '/pages',
               :locals => {:name => 'User', :object_pages => @user_pages, :extra_params => {}} ) %>
 
 </div>
-

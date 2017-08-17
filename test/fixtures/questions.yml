@@ -7,7 +7,7 @@ q1:
   corrected_at: '2005-3-14 00:00:00'
   randomise: true
   text_format: 1
-  
+
 #single answer
 q2:
   id: 2
@@ -17,7 +17,7 @@ q2:
   corrected_at: '2005-3-14 00:00:00'
   randomise: true
   text_format: 2
-  
+
 #multiple choice
 q3:
   id: 3
@@ -27,7 +27,7 @@ q3:
   corrected_at: '2005-3-14 00:00:00'
   randomise: true
   text_format: 3
-  
+
 #single answer
 q4:
   id: 4
@@ -37,7 +37,7 @@ q4:
   corrected_at: '2005-3-14 00:00:00'
   randomise: false
   text_format: 4
-  
+
 #multi answer
 q5:
   id: 5
@@ -47,7 +47,7 @@ q5:
   corrected_at: '2005-3-14 00:00:00'
   randomise: false
   text_format: 4
-  
+
 #single answer
 q6:
   id: 6
@@ -57,7 +57,7 @@ q6:
   corrected_at: '2005-3-14 00:00:00'
   randomise: false
   text_format: 4
-  
+
 #multiple choice
 q7:
   id: 7
@@ -67,7 +67,7 @@ q7:
   corrected_at: '2005-3-14 00:00:00'
   randomise: false
   text_format: 4
-  
+
 #single answer
 q8:
   id: 8
@@ -77,7 +77,7 @@ q8:
   corrected_at: '2005-3-14 00:00:00'
   randomise: false
   text_format: 4
-  
+
 #multiple choice
 q9:
   id: 9
@@ -87,7 +87,7 @@ q9:
   corrected_at: '2005-3-14 00:00:00'
   randomise: false
   text_format: 4
-  
+
 q10:
   id: 10
   content: "What am i?"
@@ -105,4 +105,3 @@ q11:
   corrected_at: '2005-3-14 00:00:00'
   randomise: false
   text_format: 4
-

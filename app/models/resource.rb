@@ -4,14 +4,14 @@ class Resource < ActiveRecord::Base
   has_and_belongs_to_many( :questions, :uniq => true )
   validates_presence_of( :content_type, :name )
   attr_accessible :description, :data
-  
+
   def data=(data_field)
     self.name = Resource.base_part_of(data_field.original_filename)
     self.content_type = data_field.content_type.chomp
     self.resource_data =
         ResourceData.new(:resource_id => id, :data => data_field.read)
   end
-  
+
   def self.base_part_of(file_name)
     file_name.gsub(/^.*(\\|\/)/, '').gsub(/[^\w._-]/,'')
   end

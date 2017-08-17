@@ -4,12 +4,12 @@ class Admins::SubjectGroupController < Admins::BaseController
 
   def list
     conditions = params[:q] ? ['name LIKE ?', "%#{params[:q]}%"] : '1 = 1'
-    @subject_group_pages, @subject_groups = paginate( :subject_groups, 
+    @subject_group_pages, @subject_groups = paginate( :subject_groups,
                                                       :conditions => conditions,
                                                       :order_by => 'name',
                                                       :per_page => 10 )
   end
-  
+
   def new
     @subject_group = SubjectGroup.new(params[:subject_group])
     if request.post?
@@ -19,7 +19,7 @@ class Admins::SubjectGroupController < Admins::BaseController
       end
     end
   end
-  
+
   def edit
     @subject_group = SubjectGroup.find(params[:id])
     if request.post?
@@ -29,7 +29,7 @@ class Admins::SubjectGroupController < Admins::BaseController
       end
     end
   end
-  
+
   def destroy
     SubjectGroup.find(params[:id]).destroy
     flash[:notice] = 'Subject group was successfully deleted.'

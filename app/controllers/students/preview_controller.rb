@@ -21,9 +21,9 @@ class Students::PreviewController < Students::BaseController
   def resource
     resource = Resource.find(:first,
                              :select => 'resources.*',
-                             :conditions => ['quizzes.preview_enabled = ? AND quizzes.id = ? AND quiz_items.position = ? AND resources.name = ?', 
+                             :conditions => ['quizzes.preview_enabled = ? AND quizzes.id = ? AND quiz_items.position = ? AND resources.name = ?',
                                true, params[:id], params[:position], params[:name] ],
-                             :joins => 
+                             :joins =>
                                'LEFT OUTER JOIN questions_resources ON resources.id = questions_resources.resource_id ' +
                                'LEFT OUTER JOIN questions ON questions_resources.question_id = questions.id ' +
                                'LEFT OUTER JOIN quiz_items ON questions.id = quiz_items.question_id ' +
@@ -32,8 +32,8 @@ class Students::PreviewController < Students::BaseController
     raise ActiveRecord::RecordNotFound, "Couldn't find Resource named #{params[:name]} for Quiz with preview_enabled = true AND quiz_id = #{params[:id]} AND position = #{params[:position]}" unless resource
 
     disposition = (params[:disposition] == 'download') ? 'download' : 'inline'
-    
-    send_data(resource.resource_data.data, 
+
+    send_data(resource.resource_data.data,
               :filename => resource.name,
 	      :type => resource.content_type,
 	      :disposition => disposition )

@@ -31,8 +31,8 @@ class Demonstrators::QuizControllerTest < Test::Unit::TestCase
   def test_list_with_query
     get(:list,
         {:q => 'oa'},
-        {:user_id => users(:peter_user).id, 
-	 :role => :demonstrator, 
+        {:user_id => users(:peter_user).id,
+	 :role => :demonstrator,
 	 :subject_id => subjects(:subject_1).id} )
     assert_response(:success)
     assert_template('list')
@@ -47,8 +47,8 @@ class Demonstrators::QuizControllerTest < Test::Unit::TestCase
   def test_show
     get(:show,
         {:id => quizzes(:quiz_2).id},
-        {:user_id => users(:peter_user).id, 
-	 :role => :demonstrator, 
+        {:user_id => users(:peter_user).id,
+	 :role => :demonstrator,
 	 :subject_id => subjects(:subject_1).id} )
     assert_response(:success)
     assert_template('show')
@@ -62,8 +62,8 @@ class Demonstrators::QuizControllerTest < Test::Unit::TestCase
   def test_list_rooms
     get(:list_rooms,
         {:id => quizzes(:quiz_1).id},
-        {:user_id => users(:peter_user).id, 
-	 :role => :demonstrator, 
+        {:user_id => users(:peter_user).id,
+	 :role => :demonstrator,
 	 :subject_id => subjects(:subject_1).id} )
     assert_response(:success)
     assert_template('list_rooms')
@@ -80,8 +80,8 @@ class Demonstrators::QuizControllerTest < Test::Unit::TestCase
     assert_not_nil(quizzes(:quiz_1).active_in.find(:first, :conditions => "id = #{rooms(:room_1).id}"))
     post(:enable_room,
         {:id => quizzes(:quiz_1).id, :room_id => rooms(:room_1).id, :enable => false, :q => 'blah'},
-        {:user_id => users(:peter_user).id, 
-	 :role => :demonstrator, 
+        {:user_id => users(:peter_user).id,
+	 :role => :demonstrator,
 	 :subject_id => subjects(:subject_1).id} )
     assert_redirected_to(:action => 'list_rooms', :id => quizzes(:quiz_1).id, :q => 'blah')
     quizzes(:quiz_1).reload
@@ -95,8 +95,8 @@ class Demonstrators::QuizControllerTest < Test::Unit::TestCase
     assert_nil(quizzes(:quiz_1).active_in.find(:first, :conditions => "id = #{rooms(:room_2).id}"))
     post(:enable_room,
         {:id => quizzes(:quiz_1).id, :room_id => rooms(:room_2).id, :enable => true, :q => 'blah'},
-        {:user_id => users(:peter_user).id, 
-	 :role => :demonstrator, 
+        {:user_id => users(:peter_user).id,
+	 :role => :demonstrator,
 	 :subject_id => subjects(:subject_1).id} )
     assert_redirected_to(:action => 'list_rooms', :id => quizzes(:quiz_1).id, :q => 'blah')
     quizzes(:quiz_1).reload

@@ -29,11 +29,11 @@ class Quiz < ActiveRecord::Base
                               :conditions => ['computers.ip_address = ? AND quizzes.id = ?', remote_ip, self.id ] )
     return ! computer.nil?
   end
-  
+
   def completed_attempts?
     QuizAttempt.count(['quiz_id = ? AND end_time IS NOT NULL', self.id])
   end
-  
+
   def active_attempts?
     QuizAttempt.count(['quiz_id = ? AND end_time IS NULL', self.id])
   end

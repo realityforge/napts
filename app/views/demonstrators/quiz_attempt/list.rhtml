@@ -35,8 +35,8 @@
       <% end %>
     </tbody>
   </table>
-  <%= render( :partial => '/pages', 
-              :locals => {:name => 'QuizAttempt', 
-	                  :object_pages => @quiz_attempt_pages, 
+  <%= render( :partial => '/pages',
+              :locals => {:name => 'QuizAttempt',
+	                  :object_pages => @quiz_attempt_pages,
 			  :extra_params => { :quiz_id => params[:quiz_id]}} ) %>
 </div>

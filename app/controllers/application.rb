@@ -2,7 +2,7 @@
 # Likewise, all the methods added will be available for all controllers.
 class ApplicationController < ActionController::Base
   include AuthHelper
-  
+
   helper_method :authenticated?
   helper_method :current_user
   helper_method :current_subject
@@ -39,7 +39,7 @@ protected
     @current_user
   end
 
-  def rescue_action(e) 
+  def rescue_action(e)
     if e.is_a?(Napts::SecurityError)
       redirect_to(:controller => '/security', :action => 'access_denied')
     else
@@ -52,7 +52,7 @@ private
   def force_no_cache
     # set modify date to current timestamp
     response.headers["Last-Modified"] = CGI::rfc1123_date(Time.now)
-    
+
     # set expiry to back in the past (makes us a bad candidate for caching)
     response.headers["Expires"] = 0
 
@@ -67,7 +67,7 @@ private
   def check_authentication
     is_secure? ? authorize : true
   end
-  
+
   def authorize
     if session[:user_id]
       begin
@@ -77,7 +77,7 @@ private
         redirect_to(:controller => '/login', :action => 'login')
         false
       end
-    else 
+    else
       flash[:notice] = 'Please log in.'
       redirect_to(:controller => '/login', :action => 'login')
       false
@@ -87,7 +87,7 @@ end
 
 module Napts
   # Security error. Controllers throw these in situations where a user is trying to access a
-  # function that he is not authorized to access. 
+  # function that he is not authorized to access.
   class SecurityError < StandardError
   end
 end

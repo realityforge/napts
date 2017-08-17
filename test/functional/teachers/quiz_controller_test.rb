@@ -63,7 +63,7 @@ class Teachers::QuizControllerTest < Test::Unit::TestCase
   def test_new_post_with_error
     post(:new,
         {:quiz => {
-             :name => '', :duration => 10, :randomise => true, 
+             :name => '', :duration => 10, :randomise => true,
              :description => 'Y', :preview_enabled => true
            }},
         {:user_id => users(:lecturer_user).id, :role => :teacher, :subject_id => subjects(:subject_1).id})
@@ -111,7 +111,7 @@ class Teachers::QuizControllerTest < Test::Unit::TestCase
   def test_edit_post_with_errors
     post(:edit,
         {:id => quizzes(:quiz_2).id, :quiz => {
-             :name => '', :duration => 10, :randomise => true, 
+             :name => '', :duration => 10, :randomise => true,
              :subject_id => subjects(:subject_2).id, :description => 'Y', :preview_enabled => true
            }},
         {:user_id => users(:lecturer_user).id, :role => :teacher, :subject_id => subjects(:subject_1).id})
@@ -127,7 +127,7 @@ class Teachers::QuizControllerTest < Test::Unit::TestCase
   def test_edit_post
     post(:edit,
         {:id => quizzes(:quiz_2).id, :quiz => {
-             :name => 'X', :duration => 10, :randomise => true, 
+             :name => 'X', :duration => 10, :randomise => true,
              :subject_id => subjects(:subject_2).id, :description => 'Y', :preview_enabled => true
            }},
         {:user_id => users(:lecturer_user).id, :role => :teacher, :subject_id => subjects(:subject_1).id})
@@ -142,7 +142,7 @@ class Teachers::QuizControllerTest < Test::Unit::TestCase
   def test_toggle_preview_status_off
     assert_equal(true, quizzes(:quiz_2).preview_enabled?)
     post(:toggle_preview_status,
-         {:id => quizzes(:quiz_2).id, :preview_status => 'false', :q => 'q', :page => '1'}, 
+         {:id => quizzes(:quiz_2).id, :preview_status => 'false', :q => 'q', :page => '1'},
          {:user_id => users(:lecturer_user).id, :role => :teacher, :subject_id => subjects(:subject_1).id})
     assert_redirected_to(:action => 'list', :q => 'q', :page => '1')
     assert_nil(flash[:alert])
@@ -154,7 +154,7 @@ class Teachers::QuizControllerTest < Test::Unit::TestCase
   def test_toggle_preview_status_on
     assert_equal(false, quizzes(:quiz_3).preview_enabled?)
     post(:toggle_preview_status,
-         {:id => quizzes(:quiz_3).id, :preview_status => 'true', :q => 'q', :page => '1'}, 
+         {:id => quizzes(:quiz_3).id, :preview_status => 'true', :q => 'q', :page => '1'},
          {:user_id => users(:lecturer_user).id, :role => :teacher, :subject_id => subjects(:subject_2).id})
     assert_redirected_to(:action => 'list', :q => 'q', :page => '1')
     assert_nil(flash[:alert])
@@ -210,9 +210,9 @@ class Teachers::QuizControllerTest < Test::Unit::TestCase
     assert_nil(flash[:notice])
   end
 
-  def test_add_item 
+  def test_add_item
     assert_nil(quizzes(:quiz_4).quiz_items.find(:first, :conditions => ['id = ?', questions(:q7).id]))
-    post(:add_item, 
+    post(:add_item,
          {:id => quizzes(:quiz_4).id, :question_id => questions(:q7).id, :q => 'q', :page => '1'},
         {:user_id => users(:admin_user).id, :role => :teacher, :subject_id => subjects(:subject_3).id})
     assert_redirected_to(:action => 'list_questions', :id => quizzes(:quiz_4).id, :q => 'q', :page => '1')
@@ -222,9 +222,9 @@ class Teachers::QuizControllerTest < Test::Unit::TestCase
     assert_not_nil(quizzes(:quiz_4).quiz_items.find(:first, :conditions => ['question_id = ?', questions(:q7).id]))
   end
 
-  def test_destroy 
-    post(:destroy, 
-         {:id => quizzes(:quiz_1).id, :q => 'q', :page => '1'}, 
+  def test_destroy
+    post(:destroy,
+         {:id => quizzes(:quiz_1).id, :q => 'q', :page => '1'},
          {:user_id => users(:lecturer_user).id, :role => :teacher, :subject_id => subjects(:subject_1).id})
     assert_redirected_to(:action => 'list', :q => 'q', :page => '1')
     assert_nil(flash[:alert])

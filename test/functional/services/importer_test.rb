@@ -241,7 +241,7 @@ class ImporterTest < Test::Unit::TestCase
     f.write(content)
     f.close
     subject = Subject.create!(:name => TestSubject, :subject_group_id => subject_groups(:sg_1).id)
-    begin 
+    begin
       Importer.import_file(TestSubject,TestFilename)
     ensure
       File.delete(TestFilename)

@@ -1,7 +1,7 @@
 class Teachers::ResourceController < Teachers::BaseController
   verify :method => :post, :only => %w( destroy )
   verify :method => :get, :only => %w( show list view )
-  
+
   def list
     if params[:q]
       conditions = ['subject_group_id = ? AND name LIKE ?',
@@ -9,14 +9,14 @@ class Teachers::ResourceController < Teachers::BaseController
     else
       conditions = ['subject_group_id = ?', current_subject.subject_group_id ]
     end
-    @resource_pages, @resources = paginate(:resources, 
+    @resource_pages, @resources = paginate(:resources,
                                            :conditions => conditions,
                                            :order_by => 'name',
                                            :per_page => 10 )
   end
-  
+
   def new
-    @resource = Resource.new(params[:resource]) 
+    @resource = Resource.new(params[:resource])
     if request.post?
       @resource.subject_group_id = current_subject.subject_group_id
       if @resource.save
@@ -25,11 +25,11 @@ class Teachers::ResourceController < Teachers::BaseController
       end
     end
   end
-  
+
   def show
     @resource = find_resource(params[:id])
   end
-  
+
   def edit
     @resource = find_resource(params[:id])
     if request.post?
@@ -43,7 +43,7 @@ class Teachers::ResourceController < Teachers::BaseController
   def view
     disposition = (params[:disposition] == 'download') ? 'download' : 'inline'
     resource = find_resource(params[:id])
-    send_data(resource.resource_data.data, 
+    send_data(resource.resource_data.data,
               :filename => resource.name,
 	      :type => resource.content_type,
 	      :disposition => disposition )

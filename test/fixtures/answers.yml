@@ -23,7 +23,7 @@ q1_a4:
   is_correct: false
   position: 4
   question_id: 1
-  
+
 #how many ppl does it take to change a lightbulb?  single answer
 q2_a1:
   id: 5
@@ -50,7 +50,7 @@ q2_a4:
   position: 4
   question_id: 2
 
-#why did the chicken cross the road? multi  
+#why did the chicken cross the road? multi
 q3_a1:
   id: 9
   content: "To 'get' to the other side"
@@ -75,7 +75,7 @@ q3_a4:
   is_correct: false
   position: 4
   question_id: 3
-  
+
 #what did the farmer say when he saw the hay on the roof? single
 q4_a1:
   id: 13
@@ -101,7 +101,7 @@ q4_a4:
   is_correct: false
   position: 4
   question_id: 4
-  
+
 #What day is it?
 q5_a1:
   id: 17
@@ -135,7 +135,7 @@ q6_a2:
   is_correct: false
   position: 2
   question_id: 6
-  
+
 #is chocolate good?   multichoice
 q7_a1:
   id: 22
@@ -161,7 +161,7 @@ q7_a4:
   is_correct: false
   position: 4
   question_id: 7
-  
+
 #how many ppl does it take to change a lightbulb?  single answer
 q8_a1:
   id: 26
@@ -188,7 +188,7 @@ q8_a4:
   position: 4
   question_id: 8
 
-#why did the chicken cross the road? multi  
+#why did the chicken cross the road? multi
 q9_a1:
   id: 30
   content: "To get to the other side"
@@ -227,4 +227,3 @@ q11_a:
   is_correct: true
   position: 1
   question_id: 11
-

@@ -14,7 +14,7 @@ Rails::Initializer.run do |config|
   # Add additional load paths for your own custom dirs
   config.load_paths += %W( #{RAILS_ROOT}/app/services #{RAILS_ROOT}/vendor/rubypants #{RAILS_ROOT}/vendor/bluecloth/lib #{RAILS_ROOT}/vendor/redcloth/lib )
 
-  # Force all environments to use the same logger level 
+  # Force all environments to use the same logger level
   # (by default production uses :info, the others :debug)
   config.log_level = :debug
 
@@ -31,7 +31,7 @@ Rails::Initializer.run do |config|
 
   # Make Active Record use UTC-base instead of local time
   # config.active_record.default_timezone = :utc
-  
+
   # Use Active Record's schema dumper instead of SQL when creating the test database
   # (enables use of different database adapters for development and test environments)
   # config.active_record.schema_format = :ruby
@@ -40,7 +40,7 @@ Rails::Initializer.run do |config|
   # See Rails::Configuration for more options
 end
 
-# Add new inflection rules using the following format 
+# Add new inflection rules using the following format
 # (all these examples are active by default):
 # Inflector.inflections do |inflect|
 #   inflect.plural /^(ox)$/i, '\1en'
@@ -65,8 +65,8 @@ if File.exist?(ConfigFile)
  ::ApplicationConfig = OpenStruct.new(YAML.load_file(ConfigFile))
 end
 
-OrderedTables = [ :users, :rooms, :computers, :subject_groups, :subjects, 
-                  :quizzes, :questions, :quiz_items, :answers, :quiz_attempts, 
-		  :quiz_responses, :answers_quiz_responses, :demonstrators, 
-		  :teachers, :students, :quizzes_rooms, :resources, 
+OrderedTables = [ :users, :rooms, :computers, :subject_groups, :subjects,
+                  :quizzes, :questions, :quiz_items, :answers, :quiz_attempts,
+		  :quiz_responses, :answers_quiz_responses, :demonstrators,
+		  :teachers, :students, :quizzes_rooms, :resources,
 		  :resource_data, :questions_resources ].collect {|x| x.to_s }

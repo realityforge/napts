@@ -36,7 +36,7 @@ class Students::QuizAttemptController < Students::BaseController
         else
           @resource_base = {:action => 'resource', :id => params[:id], :position => @quiz_response.position}
 	end
-	
+
         if request.post?
           type = @quiz_response.question.question_type
           if type == Question::SingleOptionType && params[:answers].nil?
@@ -64,15 +64,15 @@ class Students::QuizAttemptController < Students::BaseController
       if @quiz_attempt.completed?
         redirect_to(:controller => 'results', :action => 'show', :id => @quiz_attempt.id)
       end
-    end    
+    end
   end
 
   def resource
     resource = Resource.find(:first,
                              :select => 'resources.*',
-                             :conditions => ['quiz_attempts.quiz_id = ? AND quiz_attempts.end_time IS NULL AND quiz_attempts.user_id = ? AND quiz_responses.position = ? AND resources.name = ?', 
+                             :conditions => ['quiz_attempts.quiz_id = ? AND quiz_attempts.end_time IS NULL AND quiz_attempts.user_id = ? AND quiz_responses.position = ? AND resources.name = ?',
                                params[:id], current_user.id, params[:position], params[:name] ],
-                             :joins => 
+                             :joins =>
                                'LEFT OUTER JOIN questions_resources ON resources.id = questions_resources.resource_id ' +
                                'LEFT OUTER JOIN questions ON questions_resources.question_id = questions.id ' +
                                'LEFT OUTER JOIN quiz_responses ON questions.id = quiz_responses.question_id ' +
@@ -81,8 +81,8 @@ class Students::QuizAttemptController < Students::BaseController
     raise ActiveRecord::RecordNotFound, "Couldn't find Resource named #{params[:name]} for Quiz.id = #{params[:id]} AND position = #{params[:position]}" unless resource
 
     disposition = (params[:disposition] == 'download') ? 'download' : 'inline'
-    
-    send_data(resource.resource_data.data, 
+
+    send_data(resource.resource_data.data,
               :filename => resource.name,
 	      :type => resource.content_type,
 	      :disposition => disposition )

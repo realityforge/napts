@@ -81,7 +81,7 @@ class QuizAttemptTest < Test::Unit::TestCase
   def test_time_up_exact_timeplusone
     do_time_test('2005-11-7 01:00:00','2005-11-7 01:10:01',true)
   end
-  
+
   def test_calculate_score
     quiz_attempt = QuizAttempt.find( quiz_attempts(:qa_1).id )
     assert_equal( 3, quiz_attempt.quiz_responses.length )

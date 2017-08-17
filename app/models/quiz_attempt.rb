@@ -47,7 +47,7 @@ class QuizAttempt < ActiveRecord::Base
     end
     return results
   end
-  
+
   def calculate_score
     if self.score.nil?
       num_questions = self.quiz_responses.size

@@ -40,7 +40,7 @@
         <ul>
 	<% for resource in @question.resources %>
 	  <li><%= h(resource.name) %> [
-	      <%= link_to('Remove', {:action => 'remove_resource', :id => @question, 
+	      <%= link_to('Remove', {:action => 'remove_resource', :id => @question,
 				     :resource_id => resource},	{:post => true}) %>]</li>
 	<% end %>
         </ul>

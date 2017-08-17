@@ -24,23 +24,23 @@
         <th>Operations</th>
       </tr>
     </thead>
-    <tbody>  
+    <tbody>
       <% for subject in @subjects %>
         <tr class="<%= cycle("even", "odd") %>">
           <td><%= h(subject.name) %></td>
           <td><%= h(subject.subject_group.name) %></td>
           <td>
             <%= link_to( 'Show', :action => 'show', :id => subject ) %> |
-            <%= link_to( 'Destroy', {:action => 'destroy', :id => subject, :q => params[:q], :page => params[:page]}, 
+            <%= link_to( 'Destroy', {:action => 'destroy', :id => subject, :q => params[:q], :page => params[:page]},
                                     {:confirm => 'Are you sure?', :post => true} ) %>
           </td>
         </tr>
       <% end %>
     </tbody>
   </table>
-  <%= render( :partial => '/pages', 
-              :locals => {:name => 'Subject', 
-                          :object_pages => @subject_pages, 
+  <%= render( :partial => '/pages',
+              :locals => {:name => 'Subject',
+                          :object_pages => @subject_pages,
    		          :extra_params => {}} ) %>
-      
+
 </div>

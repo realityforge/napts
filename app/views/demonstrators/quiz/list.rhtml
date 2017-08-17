@@ -18,7 +18,7 @@
     <thead>
       <tr>
         <th>Name</th>
-        <th>Enabled?</th> 
+        <th>Enabled?</th>
         <th>Operations</th>
       </tr>
     </thead>
@@ -26,7 +26,7 @@
       <% for quiz in @quizzes %>
         <tr class="<%= cycle("even", "odd") %>">
           <td><%= h(quiz.name) %></td>
-          <td><%= ( quiz.active_in.size > 0 )? 'Yes' : 'No' %></td> 
+          <td><%= ( quiz.active_in.size > 0 )? 'Yes' : 'No' %></td>
           <td><%= link_to( 'Show', :action => 'show', :id => quiz.id ) %></td>
         </tr>
       <% end %>
@@ -34,6 +34,6 @@
   </table>
   <%= render( :partial => '/pages',
               :locals => {:name => 'Quiz',
-	                  :object_pages => @quiz_pages, 
+	                  :object_pages => @quiz_pages,
 			  :extra_params => {}} ) %>
 </div>

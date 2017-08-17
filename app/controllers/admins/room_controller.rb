@@ -5,10 +5,10 @@ class Admins::RoomController < Admins::BaseController
   def show
     @room = Room.find(params[:id])
   end
-  
+
   def list
     conditions = params[:q] ? ['name LIKE ?', "%#{params[:q]}%"] : '1 = 1'
-    @room_pages, @rooms = paginate( :rooms, 
+    @room_pages, @rooms = paginate( :rooms,
                                     :conditions => conditions,
                                     :order_by => 'name',
                                     :per_page => 20 )
@@ -23,7 +23,7 @@ class Admins::RoomController < Admins::BaseController
       end
     end
   end
-  
+
   def edit
     @room = Room.find(params[:id])
     if request.post?
@@ -34,7 +34,7 @@ class Admins::RoomController < Admins::BaseController
       end
     end
   end
-  
+
   def destroy
     Room.find(params[:id]).destroy
     flash[:notice] = 'Room was successfully deleted.'

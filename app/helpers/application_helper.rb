@@ -13,7 +13,7 @@ module ApplicationHelper
   end
 
   private
-  
+
   def post_process(resource_base, output)
     while output =~ /\$\$resource\:(.*)\$\$/
       resource_base[:name] = $1

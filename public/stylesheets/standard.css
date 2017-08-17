@@ -85,7 +85,7 @@ a:hover { color: #fff; background-color:#000; }
   color: #fff;
 }
 
-#ErrorExplanation p 
+#ErrorExplanation p
 {
   color: #333;
   margin-bottom: 0;
@@ -256,7 +256,7 @@ table.xlist ul
 }
 
 #list_view table.header td.search
-{  
+{
   padding: 0;
   width: 220px;
 }
@@ -352,7 +352,7 @@ table.options .arrows:hover { color: #666; background-color: white;}
 .next-arrow
 {
   background-image: url(../images/icons/next-arrow.png);
-  
+
 }
 
 .next-arrow-greyed
@@ -386,7 +386,7 @@ table.xlist
 
 table.xlist td
 {
-  font-size: small; 
+  font-size: small;
   padding: 2px 4px 1px 6px;
   margin: 0;
 }
@@ -415,13 +415,13 @@ table.xlist a:hover
 }
 
 table.xlist th
-{ 
+{
   margin: 0;
   padding: 4px 4px 4px 4px;
   background-color: #036;
   color: white;
   font-weight: bold;
-  font-size: x-small; 
+  font-size: x-small;
   vertical-align: top;
 }
 
